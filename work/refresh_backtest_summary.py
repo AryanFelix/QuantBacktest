@@ -762,6 +762,53 @@ if sector_tri_path.exists():
     ]
     assert len(tri_keys) == len(set(tri_keys)) == 144
 
+sector_distribution_path = ROOT / "outputs" / "sector_distribution_cashflow_sensitivity.csv"
+if sector_distribution_path.exists():
+    sector_distribution = read_csv(sector_distribution_path)
+    assert len(sector_distribution) == 144, f"Expected 144 secondary-only sector distribution cases; found {len(sector_distribution)}"
+    rows = [row for row in rows if row["simulation_type"] != "etf_sector_distribution_claim_sensitivity"]
+    for result in sector_distribution:
+        rows.append({
+            "simulation_type": "etf_sector_distribution_claim_sensitivity",
+            "strategy": f"{result['strategy']} | {result['cashflow_scenario']}",
+            "universe": "BANKBEES; ITBEES; AUTOBEES; PHARMABEES; PSUBNKBEES",
+            "period": result["period"],
+            "period_start": result["period_start"],
+            "period_end": result["period_end"],
+            "starting_balance_inr": 1_000_000,
+            "ending_balance_inr": 1_000_000 * (1 + float(result["scenario_total_return_pct"]) / 100),
+            "total_return_pct": result["scenario_total_return_pct"],
+            "cagr_pct": "",
+            "max_drawdown_pct": result["scenario_close_mdd_pct"],
+            "sharpe_zero_rf": "",
+            "gross_exposure_cap_pct": result["exposure_cap_pct"],
+            "slippage_bps_per_side": result["slippage_bps_per_side"],
+            "fees_inr": result["fees_inr"],
+            "slippage_cost_inr": result["slippage_cost_inr"],
+            "trade_count": "",
+            "order_count": result["order_count"],
+            "within_20pct": result["within_20pct_under_ohlc"],
+            "selection_or_sizing": (
+                f"{result['signal_source']} signal; top {int(float(result['top_n']))}; "
+                f"{result['exposure_cap_pct']}% gross cap; conditional {result['cashflow_scenario']} event-credit case"
+            ),
+            "source_artifact": (
+                f"{result['source_artifact']};outputs/sector_distribution_cashflow_sensitivity.csv;"
+                "outputs/sector_distribution_cashflow_method.md;work/sensitivity_sector_distribution_cashflow.py"
+            ),
+            "notes": (
+                f"Current modeled ETF charges and {result['slippage_bps_per_side']} bps per-side slippage. "
+                f"Conditional secondary-source-only cash credit of ₹{float(result['total_cash_credited_inr']):.2f}; "
+                f"OHLC bound {float(result['scenario_ohlc_bound_pct']):.2f}%. The claimed distributions remain unverified; "
+                "do not interpret as confirmed ETF total return."
+            ),
+        })
+    distribution_keys = [
+        (row["strategy"], row["period"], row["gross_exposure_cap_pct"], row["slippage_bps_per_side"])
+        for row in rows if row["simulation_type"] == "etf_sector_distribution_claim_sensitivity"
+    ]
+    assert len(distribution_keys) == len(set(distribution_keys)) == 144
+
 walk_forward_path = ROOT / "outputs" / "nifty_gold_walk_forward.csv"
 if walk_forward_path.exists():
     walk_forward = read_csv(walk_forward_path)
@@ -1068,7 +1115,7 @@ for row in manifest:
             "the 140-case single-sleeve deployment screen, the 60-case volatility-throttle screen, "
             "the 90-case India VIX overlay screen, the 130-case joint exposure/throttle screen, "
             "the 125-case execution-cost stress, the 64-case intraday ORB opening-range sensitivity, "
-            "the 144-case NIFTY opening-gap fade sensitivity, the 384-case sector ETF rotation screen with 96 OHLC audits, and the 144-case official-TRI sector signal challenger with 48 OHLC audits; "
+            "the 144-case NIFTY opening-gap fade sensitivity, the 384-case sector ETF rotation screen with 96 OHLC audits, the 144-case official-TRI sector signal challenger with 48 OHLC audits, and 144 secondary-only sector distribution sensitivities with OHLC audits; "
             "14 annual expanding-window NIFTY/Gold parameter-selection replay rows; "
             "47 NIFTY/Gold passive, active, and exposure-sensitivity rows across 2020+, full available history, and a shared 2015+ window, including 30 passive-mix exposure cases; "
             "15 passive drawdown-control cases across 10/50/100 bps; "
@@ -1540,6 +1587,20 @@ for metadata in (
         "cache_paths": "work/research/sector_distribution_primary_source_update_2026-10-27.md;work/data/api_probes/amfi_sector_etf_scheme_dividends_2022_2026.json;work/data/api_probes/sector_etf_corporate_actions_2026-10-26.json",
         "purpose": "Document the exact 2026 cash-event claims and first-party source-verification limits before use in ETF return accounting",
         "notes": "The ₹10.50 AUTOBEES and ₹6.50 PHARMABEES claims are not verified; empty AMFI/Upstox responses and a BSE retrieval failure do not prove that the events did not occur. Keep the base ledger unadjusted and label any credited cash as secondary-source-only.",
+    },
+    {
+        "dataset": "Sector ETF secondary-claim cash-flow sensitivity",
+        "ticker": "BANKBEES; ITBEES; AUTOBEES; PHARMABEES; PSUBNKBEES",
+        "instrument_key": "NSE_EQ sector ETFs; see data manifest and source memo",
+        "bar_interval": "daily close NAV; monthly signals / next-open fills; 50 bps per-side slippage",
+        "first_bar": "2022-01-03",
+        "last_bar": "2026-10-23",
+        "bar_count": "144 conditional cases; all have order-ledger OHLC replays",
+        "file_count": "144 equity/order/summary triplets + sensitivity + method + runner",
+        "empty_files": "0",
+        "cache_paths": "outputs/sector_distribution_cashflow_sensitivity.csv;outputs/sector_distribution_cashflow_method.md;work/sensitivity_sector_distribution_cashflow.py;work/backtests/sector_distribution_cashflow_sensitivity/",
+        "purpose": "Measure the return and OHLC risk sensitivity to disputed AUTOBEES and PHARMABEES cash-payment claims, using prior-close holdings and separate/combined inclusion cases",
+        "notes": "Secondary-source-only, not accepted event cash flows. No tested path held AUTOBEES at its claimed ex-date; all effect came from the unverified PHARMABEES ₹6.50 claim. Conditional PHARMABEES credits ranged from ₹1.2–4.6 lakh; the training-selected official-TRI top-2/75% path still failed the continuous 20% OHLC screen.",
     },
     {
         "dataset": "NIFTY/Gold expanding-window annual walk-forward",
