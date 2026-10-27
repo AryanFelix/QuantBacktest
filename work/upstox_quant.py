@@ -230,9 +230,13 @@ def fetch_expired_candles(instrument_key: str, start: date, end: date, interval:
     return frame
 
 
-def _fee_breakdown(notional: float, side: str, product: str, exchange: str = "NSE") -> dict[str, float]:
+def _fee_breakdown(
+    notional: float, side: str, product: str, exchange: str = "NSE", trade_date: date | None = None,
+) -> dict[str, float]:
     if notional < 0 or side not in {"buy", "sell"}:
         raise ValueError("notional must be non-negative and side must be buy or sell")
+    if trade_date is not None and not isinstance(trade_date, date):
+        raise ValueError("trade_date must be a datetime.date")
     if exchange.upper() != "NSE":
         raise ValueError("The first fee model supports NSE; BSE rates vary by scrip group")
     brokerage_rates = {
@@ -253,7 +257,7 @@ def _fee_breakdown(notional: float, side: str, product: str, exchange: str = "NS
         "equity_delivery": 0.0000307, "equity_fund_delivery": 0.0000307,
         "other_fund_delivery": 0.0000307, "equity_intraday": 0.0000307,
         "equity_fund_intraday": 0.0000307, "other_fund_intraday": 0.0000307,
-        "futures": 0.0000183, "options": 0.0003553,
+        "futures": 0.0000183, "options": 0.0003552,
     }
     exchange_fee = notional * exchange_rates[product]
     stt_rates = {
@@ -266,7 +270,7 @@ def _fee_breakdown(notional: float, side: str, product: str, exchange: str = "NS
         "futures": (0.0, 0.0005),
         "options": (0.0, 0.0015),
     }
-    stt = notional * stt_rates[product][side == "sell"]
+    stt_rate = stt_rates[product][side == "sell"]
     stamp_rates = {
         "equity_delivery": 0.00015, "equity_fund_delivery": 0.00015,
         "other_fund_delivery": 0.00015, "equity_intraday": 0.00003,
@@ -275,7 +279,19 @@ def _fee_breakdown(notional: float, side: str, product: str, exchange: str = "NS
     }
     stamp = notional * stamp_rates[product] if side == "buy" else 0.0
     sebi = notional * 0.000001
-    ipft = notional * 0.000000001
+    ipft_rate = 0.000000001
+    if product == "options":
+        effective_date = trade_date or date(2026, 4, 1)
+        if effective_date < date(2024, 10, 1):
+            raise ValueError("dated NSE options charges are audited here from 2024-10-01 onward")
+        stt_rate = 0.0 if side == "buy" else (0.0015 if effective_date >= date(2026, 4, 1) else 0.001)
+        if effective_date < date(2026, 3, 1):
+            exchange_fee = notional * 0.0003503
+            ipft_rate = 0.000005
+        else:
+            exchange_fee = notional * 0.0003552
+    stt = notional * stt_rate
+    ipft = notional * ipft_rate
     dp = 20.0 if product in {"equity_delivery", "equity_fund_delivery", "other_fund_delivery"} and side == "sell" else 0.0
     gst = 0.18 * (brokerage + exchange_fee + ipft + dp)
     return {
@@ -772,8 +788,8 @@ def _simulate_expiry_spreads(
             qty = event["lot_size"]
             event["long_entry_fill"] = event["long_open"] * (1 + slip)
             event["short_entry_fill"] = event["short_open"] * (1 - slip)
-            event["long_buy_fee"] = _fee_breakdown(qty * event["long_entry_fill"], "buy", "options")
-            event["short_sell_fee"] = _fee_breakdown(qty * event["short_entry_fill"], "sell", "options")
+            event["long_buy_fee"] = _fee_breakdown(qty * event["long_entry_fill"], "buy", "options", trade_date=event["entry_date"])
+            event["short_sell_fee"] = _fee_breakdown(qty * event["short_entry_fill"], "sell", "options", trade_date=event["entry_date"])
             entry_cashflow = -qty * event["long_entry_fill"] - event["long_buy_fee"]["total"] + qty * event["short_entry_fill"] - event["short_sell_fee"]["total"]
             if -entry_cashflow > cash:
                 continue
@@ -794,8 +810,8 @@ def _simulate_expiry_spreads(
             qty = event["lot_size"]
             event["long_exit_fill"] = event["long_close"] * (1 - slip)
             event["short_exit_fill"] = event["short_close"] * (1 + slip)
-            event["long_sell_fee"] = _fee_breakdown(qty * event["long_exit_fill"], "sell", "options")
-            event["short_buy_fee"] = _fee_breakdown(qty * event["short_exit_fill"], "buy", "options")
+            event["long_sell_fee"] = _fee_breakdown(qty * event["long_exit_fill"], "sell", "options", trade_date=event["exit_date"])
+            event["short_buy_fee"] = _fee_breakdown(qty * event["short_exit_fill"], "buy", "options", trade_date=event["exit_date"])
             exit_cashflow = qty * event["long_exit_fill"] - event["long_sell_fee"]["total"] - qty * event["short_exit_fill"] - event["short_buy_fee"]["total"]
             cash += exit_cashflow
             event["net_pnl_inr"] = event["entry_cashflow"] + exit_cashflow
@@ -837,7 +853,7 @@ def _simulate_expiry_spreads(
         "fees_by_component_inr": {key: round(value, 2) for key, value in fees.items()},
         "average_debit_inr": float(np.mean([t["premium_debit_inr"] for t in completed])) if completed else 0.0,
         "first_session": str(equity.index[0]), "last_session": str(equity.index[-1]),
-        "assumptions": {"fee_schedule": "current Upstox/NSE charges applied uniformly to all history",
+        "assumptions": {"fee_schedule": "date-aware NSE options STT and transaction/IPFT rates; 2024-10 onward",
                         "slippage_bps_per_leg_per_side": slippage_bps, "defined_risk": "one NIFTY debit spread per monthly expiry",
                         "cash_interest_pct": 0, "option_mark": "daily close; realized at close 5 sessions before expiry"},
     }
@@ -1069,7 +1085,17 @@ def _self_check() -> None:
     assert math.isclose(_fee_breakdown(100_000, "sell", "equity_fund_intraday")["stt"], 25.0)
     assert _fee_breakdown(100_000, "sell", "other_fund_intraday")["stt"] == 0
     assert _fee_breakdown(100_000, "sell", "options")["stt"] == 150
-    assert math.isclose(_fee_breakdown(100_000, "sell", "options")["exchange"], 35.53)
+    assert math.isclose(_fee_breakdown(100_000, "sell", "options")["exchange"], 35.52)
+    old_option_sell = _fee_breakdown(100_000, "sell", "options", trade_date=date(2025, 10, 1))
+    old_option_buy = _fee_breakdown(100_000, "buy", "options", trade_date=date(2025, 10, 1))
+    march_option_sell = _fee_breakdown(100_000, "sell", "options", trade_date=date(2026, 3, 1))
+    april_option_sell = _fee_breakdown(100_000, "sell", "options", trade_date=date(2026, 4, 1))
+    assert old_option_sell["stt"] == 100 and math.isclose(old_option_sell["exchange"], 35.03)
+    assert old_option_buy["stt"] == 0
+    assert math.isclose(old_option_sell["ipft"], 0.50)
+    assert march_option_sell["stt"] == 100 and math.isclose(march_option_sell["exchange"], 35.52)
+    assert math.isclose(march_option_sell["ipft"], 0.0001)
+    assert april_option_sell["stt"] == 150
     intraday_time = pd.date_range("2024-01-02 09:15", periods=5, freq="30min")
     signal = pd.DataFrame({"time": intraday_time, "open": [100, 101, 103, 104, 105], "high": [102, 103, 104, 105, 111],
                            "low": [98, 100, 102, 103, 104], "close": [101, 103, 104, 105, 110]})
@@ -1094,7 +1120,7 @@ def _self_check() -> None:
     )
     assert regime_filtered_trades.empty and regime_filtered["regime_filtered_sessions"] == 1
     assert regime_filtered["ending_balance_inr"] == 10_000
-    spread_dates = [date(2024, 1, day) for day in (2, 3, 4)]
+    spread_dates = [date(2024, 10, day) for day in (2, 3, 4)]
     spread = {"entry_date": spread_dates[0], "exit_date": spread_dates[-1], "lot_size": 10,
               "long_open": 100, "short_open": 40, "long_close": 120, "short_close": 30,
               "path": {spread_dates[0]: (95, 38), spread_dates[1]: (105, 35), spread_dates[-1]: (120, 30)}}
@@ -1355,7 +1381,7 @@ def main() -> None:
             "cash_proxy": args.cash_proxy,
             "exchange": "NSE",
             "slippage_bps_per_side": args.slippage_bps,
-            "fee_schedule": "current Upstox/NSE charges applied uniformly to all history",
+            "fee_schedule": "date-aware NSE options STT and transaction/IPFT rates; 2024-10 onward",
             "cash_interest_pct": 0,
             "exposure_grid_pct": [10, 25, 50, 75, 95],
         }

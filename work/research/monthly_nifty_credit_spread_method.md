@@ -11,7 +11,7 @@ The strategy skips an expiry when its monthly chain is unavailable, a contract o
 ## Execution and accounting
 
 - Start with ₹10 lakh. Use the cached monthly expiry snapshots from 2024-10 through 2026-09 and the Upstox NIFTY 50 daily series. Signals use only the prior completed close; fills use option-leg daily opens/closes.
-- Charge both option legs on entry and exit with the shared current Upstox/NSE options fee schedule. Apply 25/50/100 bps adverse slippage per leg per side. Cash earns 0%; no investor tax or financing charge is added.
+- Charge both option legs on entry and exit with date-aware NSE options STT and transaction/IPFT rates: 0.10% STT through 2026-03-31, 0.15% thereafter; 0.03503% transaction charge plus ₹0.50/lakh IPFT through 2026-02-28, then 0.03552% plus ₹0.01/crore IPFT. Apply 25/50/100 bps adverse slippage per leg per side. Cash earns 0%; no investor tax or financing charge is added.
 - Credit received, open spread marks, realized P&L, fees, and slippage are accounted in the portfolio NAV. Report close-marked drawdown and a daily option-OHLC adverse envelope: mark the long leg at its low and short leg at its high for the adverse side, clamp the vertical value to its defined payoff width, and allow the favorable daily extremes to precede adverse extremes. This is a stress envelope, not the observed intraday path.
 - Use 2024-10-01–2025-06-30 as training, 2025-07-01–2025-12-31 as validation, 2026-01-01–2026-09-30 as the chronological later segment, and the continuous 2024-10-01–2026-09-30 account. Each split starts with a fresh ₹10 lakh; the continuous account carries cash and NAV across all eligible trades.
 

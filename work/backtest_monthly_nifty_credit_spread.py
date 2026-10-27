@@ -219,10 +219,10 @@ def prepare_events(closes: pd.Series, sessions: list[date]) -> tuple[list[dict],
     return events, audit, manifest_rows
 
 
-def order_fill(raw_price: float, side: str, slip: float, lot: int) -> tuple[float, float, dict]:
+def order_fill(raw_price: float, side: str, slip: float, lot: int, trade_date: date) -> tuple[float, float, dict]:
     fill = raw_price * (1 + slip if side == "buy" else 1 - slip)
     slippage = abs(fill - raw_price) * lot
-    charges = q._fee_breakdown(fill * lot, side, "options")
+    charges = q._fee_breakdown(fill * lot, side, "options", trade_date=trade_date)
     return fill, slippage, charges
 
 
@@ -252,8 +252,8 @@ def simulate(events: list[dict], sessions: list[date], bps: float, label: str) -
                 skipped.append({"expiry": event["expiry"], "reason": "gross spread-width risk exceeds 2% of current NAV"})
                 continue
             lot = event["lot_size"]
-            short_fill, short_slip, short_fee = order_fill(event["entry_short_open"], "sell", slip, lot)
-            long_fill, long_slip, long_fee = order_fill(event["entry_long_open"], "buy", slip, lot)
+            short_fill, short_slip, short_fee = order_fill(event["entry_short_open"], "sell", slip, lot, event["entry_date"])
+            long_fill, long_slip, long_fee = order_fill(event["entry_long_open"], "buy", slip, lot, event["entry_date"])
             entry_fee = short_fee["total"] + long_fee["total"]
             entry_credit_net = (short_fill - long_fill) * lot - entry_fee
             if entry_credit_net <= 0:
@@ -295,8 +295,8 @@ def simulate(events: list[dict], sessions: list[date], bps: float, label: str) -
             if pos is None:
                 continue
             lot = event["lot_size"]
-            long_fill, long_slip, long_fee = order_fill(event["exit_long_close"], "sell", slip, lot)
-            short_fill, short_slip, short_fee = order_fill(event["exit_short_close"], "buy", slip, lot)
+            long_fill, long_slip, long_fee = order_fill(event["exit_long_close"], "sell", slip, lot, day)
+            short_fill, short_slip, short_fee = order_fill(event["exit_short_close"], "buy", slip, lot, day)
             exit_fee = long_fee["total"] + short_fee["total"]
             exit_proceeds = (long_fill - short_fill) * lot
             cash += exit_proceeds - exit_fee
@@ -369,7 +369,7 @@ def simulate(events: list[dict], sessions: list[date], bps: float, label: str) -
                  "total_slippage_inr": float(slippage_total),
                  "fees_by_component_inr": {c: round(v, 2) for c, v in fees.items()},
                  "risk_filter_skips": skipped,
-                 "assumptions": {"fee_schedule": "shared current Upstox/NSE options schedule applied uniformly to all history",
+                 "assumptions": {"fee_schedule": "date-aware NSE options STT and transaction/IPFT rates; 2024-10 onward",
                                  "slippage_bps_per_leg_per_side": bps, "cash_yield_pct": 0,
                                  "risk": "one lot per expiry; open gross spread width limited to 2% of prior close NAV",
                                  "margin": "SPAN/ELM and collateral not modelled",
@@ -428,7 +428,7 @@ def run() -> None:
                "skipped_expiries": [r for r in audit if r["status"] != "eligible"],
                "executed_expiries_at_50bps": sum(r["status_at_50bps"] == "executed" for r in audit),
                "execution_skips_at_50bps": [r for r in audit if r["status"] == "eligible" and r["status_at_50bps"] == "skipped"],
-               "fee_schedule_note": "Current shared fee schedule applied uniformly; sell-side options STT is conservative versus pre-2026-04 historical rate.",
+               "fee_schedule_note": "Date-aware NSE options STT and transaction/IPFT rates are applied from each fill date; slippage is separate.",
                "margin_note": "SPAN/ELM margin, financing, tax and cash yield are not modelled.",
                "mark_note": "OHLC envelope is a mark stress; it does not deduct hypothetical liquidation fees/slippage at each daily extreme.",
                "results": all_stats, "data_cache_not_committed": True,
@@ -443,7 +443,7 @@ def run() -> None:
                           "empty_files": "0",
                           "cache_paths": "outputs/monthly_nifty_credit_spread;work/backtest_monthly_nifty_credit_spread.py;work/research/monthly_nifty_credit_spread_method.md;work/research/monthly_nifty_credit_spread_sources.md",
                           "purpose": "Compare a fixed 200DMA directional monthly credit vertical after option fees and per-leg slippage",
-                          "notes": f"50-bps full-sample net return {base_full['total_return_pct']:.3f}%; current fee rates applied uniformly. Not a live recommendation."})
+                          "notes": f"50-bps full-sample net return {base_full['total_return_pct']:.3f}%; date-aware options tariffs, no margin or cash yield. Not a live recommendation."})
     manifest_path = ROOT / "outputs" / "data_manifest.csv"
     manifest = pd.read_csv(manifest_path, dtype=str).fillna("")
     if manifest_rows:

@@ -1,0 +1,4 @@
+session,expiry,spot_close,contracts_returned,calls_for_expiry,selected_call_key,strike,minute_rows,positive_volume_rows,first_timestamp_ist,last_timestamp_ist,unique_timestamps,coverage_note
+2022-09-01,2022-09-29,17542.8,0,0,,,,,,,0,Expired-contract endpoint returned an empty contract list; 2022-2023 training coverage gate not met
+2024-10-04,2024-10-31,25014.6,230,115,NSE_FO|54774|31-10-2024,25000,375,375,2024-10-04 09:15:00+05:30,2024-10-04 15:29:00+05:30,375,Single nearest-ATM call spot check; does not establish full-day or universe coverage
+2026-09-01,2026-09-29,24055.8,288,144,NSE_FO|74060|29-09-2026,24050,385,351,2026-09-01 09:15:00+05:30,2026-09-01 15:39:00+05:30,385,Single nearest-ATM call spot check; does not establish full-day or universe coverage

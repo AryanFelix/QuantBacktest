@@ -1303,7 +1303,7 @@ for result in credit_costs:
         "selection_or_sizing": "One lot; open gross spread width limited to 2% of prior-close NAV; exit five sessions before expiry",
         "source_artifact": "outputs/monthly_nifty_credit_spread/cost_screen.csv;outputs/monthly_nifty_credit_spread_method.md",
         "notes": (f"Daily OHLC stress envelope {result.get('max_ohlc_envelope_drawdown_pct', 0)}%; "
-                  "current options fees applied uniformly and slippage is per leg/side. "
+                  "date-aware options fees and per-leg/side slippage. "
                   "Margin not reconstructed; 2026 later segment was previously inspected."),
     })
 
@@ -1544,6 +1544,20 @@ for metadata in (
         "notes": "Missing cached option candles still require API access; no token value is stored.",
     },
     {
+        "dataset": "NIFTY intraday option execution coverage gate",
+        "ticker": "NIFTY 50 near-ATM calls",
+        "instrument_key": "NSE_INDEX|Nifty 50; selected NSE_FO option keys in probe ledger",
+        "bar_interval": "1-minute expired option OHLCV/OI",
+        "first_bar": "2022-09-01",
+        "last_bar": "2026-09-01",
+        "bar_count": "3 stratified expiry/date probes",
+        "file_count": "coverage summary CSV + primary-source hypothesis note",
+        "empty_files": 0,
+        "cache_paths": "outputs/nifty_intraday_option_coverage_probe.csv;work/research/nifty_intraday_option_execution_hypothesis.md",
+        "purpose": "Gate a pre-registered NIFTY ORB option execution backtest on historical contract and minute-bar availability",
+        "notes": "The sampled 2022-09-29 expiry returned no contracts, so the frozen 2022-2023 training period is not priceable from this sample. 2024 and 2026 minute-bar successes are spot checks only; they do not prove continuous coverage or executable fills.",
+    },
+    {
         "dataset": "Upstox and NSE fee-model audit",
         "ticker": "ETFs; NIFTY 50 derivatives",
         "instrument_key": "",
@@ -1555,7 +1569,7 @@ for metadata in (
         "empty_files": "0",
         "cache_paths": "work/research/fee_model_audit.md",
         "purpose": "Document charge formulas, primary rate sources, correction, and rerun scope",
-        "notes": "SEBI fee is ₹10/crore. On 2026-10-27 ETF STT was corrected by instrument: equity-fund units nil on buys/0.001% sell, other fund units nil; all saved ETF-dependent screens were replayed. Current derivatives tariffs were rechecked: the NIFTY futures calculator applies dated 2026 STT/transaction changes, while the shared options model applies current rates uniformly as a cost stress.",
+        "notes": "SEBI fee is ₹10/crore. On 2026-10-27 ETF STT was corrected by instrument: equity-fund units nil on buys/0.001% sell, other fund units nil; all saved ETF-dependent screens were replayed. Current derivatives tariffs were rechecked: the NIFTY futures calculator applies dated 2026 STT/transaction changes, and option replays apply dated STT and NSE transaction/IPFT rates from 2024-10 onward.",
     },
     {
         "dataset": "Upstox read-only credential and candle verification",
