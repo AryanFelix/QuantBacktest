@@ -1230,6 +1230,40 @@ for result in ratio_costs:
         "notes": "10/50/100-bps per-side cost sensitivity. Close MDD only; OOS OHLC audits were done at 50 bps. 100-bps close breach, if any, is not replaced by an OHLC audit.",
     })
 
+credit_costs = read_csv(ROOT / "outputs" / "monthly_nifty_credit_spread" / "cost_screen.csv")
+credit_trades = read_csv(ROOT / "outputs" / "monthly_nifty_credit_spread" / "trades_50bps.csv")
+assert len(credit_costs) == 12
+rows = [row for row in rows if row["simulation_type"] != "expired_credit_options_slippage_sensitivity"]
+for result in credit_costs:
+    period = result["period"]
+    trades = [trade for trade in credit_trades if trade["period"] == period]
+    rows.append({
+        "simulation_type": "expired_credit_options_slippage_sensitivity",
+        "strategy": "NIFTY 200DMA monthly 200-point credit vertical",
+        "universe": "NIFTY 50 monthly PE/CE verticals",
+        "period": period,
+        "period_start": min((trade["entry_date"] for trade in trades), default=""),
+        "period_end": max((trade["exit_date"] for trade in trades), default=""),
+        "starting_balance_inr": result["starting_balance_inr"],
+        "ending_balance_inr": result["ending_balance_inr"],
+        "total_return_pct": result["total_return_pct"],
+        "cagr_pct": result.get("cagr_pct", ""),
+        "max_drawdown_pct": result.get("max_close_drawdown_pct", ""),
+        "sharpe_zero_rf": result.get("sharpe_zero_rf", ""),
+        "gross_exposure_cap_pct": "",
+        "slippage_bps_per_side": result["slippage_bps_per_leg_per_side"],
+        "fees_inr": result.get("total_fees_inr", 0),
+        "slippage_cost_inr": result.get("total_slippage_inr", 0),
+        "trade_count": result["trade_count"],
+        "order_count": result["order_count"],
+        "within_20pct": result.get("within_20pct_close_limit", False),
+        "selection_or_sizing": "One lot; open gross spread width limited to 2% of prior-close NAV; exit five sessions before expiry",
+        "source_artifact": "outputs/monthly_nifty_credit_spread/cost_screen.csv;outputs/monthly_nifty_credit_spread_method.md",
+        "notes": (f"Daily OHLC stress envelope {result.get('max_ohlc_envelope_drawdown_pct', 0)}%; "
+                  "current options fees applied uniformly and slippage is per leg/side. "
+                  "Margin not reconstructed; 2026 later segment was previously inspected."),
+    })
+
 write_csv(LEDGER, rows, list(rows[0]))
 
 manifest = read_csv(MANIFEST)
@@ -1249,6 +1283,7 @@ for row in manifest:
             "15 passive drawdown-control cases across 10/50/100 bps; "
             "19 training-selected static-mix exposure cases and 19 chronological test-period sensitivity cases; "
             "990 NIFTY/Gold active-sleeve allocation-ratio rows, 206 order-ledger OHLC audits, and 18 cost-sensitivity rows; "
+            "12 monthly NIFTY credit-spread fee/slippage scenarios across four chronological periods; "
             "method and source artifacts "
             "are linked in the research report."
         )
