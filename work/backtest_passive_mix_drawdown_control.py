@@ -28,14 +28,17 @@ LOW_EXPOSURE = 0.30
 HIGH_EXPOSURE = 0.60
 
 
-def next_exposure(current: float, drawdown: float, trigger_pct: float | None) -> float:
+def next_exposure(
+    current: float, drawdown: float, trigger_pct: float | None,
+    high_exposure: float = HIGH_EXPOSURE, low_exposure: float = LOW_EXPOSURE,
+) -> float:
     if trigger_pct is None:
         return current
     trigger = trigger_pct / 100
-    if math.isclose(current, HIGH_EXPOSURE) and drawdown <= -trigger:
-        return LOW_EXPOSURE
-    if math.isclose(current, LOW_EXPOSURE) and drawdown >= -trigger / 2:
-        return HIGH_EXPOSURE
+    if math.isclose(current, high_exposure) and drawdown <= -trigger:
+        return low_exposure
+    if math.isclose(current, low_exposure) and drawdown >= -trigger / 2:
+        return high_exposure
     return current
 
 
@@ -45,6 +48,8 @@ def _self_check() -> None:
     assert next_exposure(0.30, -0.051, 10.0) == 0.30
     assert next_exposure(0.30, -0.049, 10.0) == 0.60
     assert next_exposure(0.60, -0.20, None) == 0.60
+    assert next_exposure(0.70, -0.08, 8.0, 0.70, 0.35) == 0.35
+    assert next_exposure(0.35, -0.039, 8.0, 0.70, 0.35) == 0.70
 
 
 def simulate(
@@ -55,13 +60,33 @@ def simulate(
     slippage_bps: float,
     start: date = START,
     end: date | None = None,
+    base_targets: pd.DataFrame | None = None,
+    rebalance_events: pd.Series | None = None,
+    lower_exposure: float | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     if not 0 < initial_exposure <= 1 or slippage_bps < 0:
         raise ValueError("exposure must be in (0, 1] and slippage must be non-negative")
     if trigger_pct is not None and not 0 < trigger_pct < 100:
         raise ValueError("drawdown trigger must be between 0 and 100 percent")
+    if lower_exposure is not None and not 0 < lower_exposure <= initial_exposure:
+        raise ValueError("lower exposure must be positive and no greater than the initial cap")
+    if (base_targets is None) != (rebalance_events is None):
+        raise ValueError("active target weights and their rebalance events must be supplied together")
 
     opens, closes = panels["open"], panels["close"]
+    symbols = ["NIFTYBEES", "GOLDBEES"]
+    if base_targets is not None:
+        if not base_targets.index.is_unique or not rebalance_events.index.is_unique:
+            raise ValueError("active targets and rebalance events need unique session indexes")
+        if set(base_targets.columns) != set(symbols):
+            raise ValueError("active targets must contain NIFTYBEES and GOLDBEES weights")
+        active_weights = base_targets.reindex(index=closes.index, columns=symbols).fillna(0.0)
+        if not np.isfinite(active_weights.to_numpy(dtype=float)).all() or (active_weights < 0).any().any():
+            raise ValueError("active target weights must be finite and non-negative")
+        active_events = rebalance_events.reindex(closes.index).fillna(False).astype(bool)
+    else:
+        active_weights = active_events = None
+    low_cap = LOW_EXPOSURE if lower_exposure is None else lower_exposure
     dates = closes.index[[
         timestamp.date() >= start and (end is None or timestamp.date() <= end)
         for timestamp in closes.index
@@ -101,16 +126,31 @@ def simulate(
         cash += distribution_cash
 
         rebalance = step == 0 or pending_exposure is not None
+        if active_events is not None and signal_i >= 0:
+            rebalance = rebalance or bool(active_events.iloc[signal_i])
         if rebalance:
-            target_exposure = initial_exposure if step == 0 else float(pending_exposure)
-            reason = "initial_entry" if step == 0 else pending_reason
+            target_exposure = initial_exposure if step == 0 else (
+                float(pending_exposure) if pending_exposure is not None else current_exposure
+            )
+            reason = "initial_entry" if step == 0 else (pending_reason or "scheduled_rebalance")
             reference_prices = close_marks.iloc[signal_i]
-            desired = {
-                symbol: int(math.floor(
-                    prior_close_nav * target_exposure * 0.5 / float(reference_prices[symbol])
-                ))
-                for symbol in quantity
-            }
+            if active_weights is None:
+                desired = {
+                    symbol: int(math.floor(
+                        prior_close_nav * target_exposure * 0.5 / float(reference_prices[symbol])
+                    ))
+                    for symbol in quantity
+                }
+            else:
+                weights = active_weights.iloc[signal_i].copy()
+                total_weight = float(weights.sum())
+                if total_weight > target_exposure:
+                    weights *= target_exposure / total_weight
+                desired = {
+                    symbol: int(math.floor(prior_close_nav * float(weights[symbol]) / float(reference_prices[symbol])))
+                    if pd.notna(reference_prices[symbol]) and float(reference_prices[symbol]) > 0 else 0
+                    for symbol in quantity
+                }
             executable = opens.loc[timestamp]
             marked_open = open_marks.loc[timestamp]
 
@@ -165,17 +205,24 @@ def simulate(
             pending_reason = ""
 
         close_prices = close_marks.loc[timestamp]
-        nav = cash + sum(quantity[symbol] * float(close_prices[symbol]) for symbol in quantity)
+        nav = cash + sum(
+            quantity[symbol] * float(close_prices[symbol])
+            for symbol in quantity if quantity[symbol] and pd.notna(close_prices[symbol])
+        )
         high_water = max(high_water, nav)
         drawdown = nav / high_water - 1
-        exposure = sum(quantity[symbol] * float(close_prices[symbol]) for symbol in quantity) / nav
+        exposure = sum(
+            quantity[symbol] * float(close_prices[symbol])
+            for symbol in quantity if quantity[symbol] and pd.notna(close_prices[symbol])
+        ) / nav
         equity_rows.append({
             "time": timestamp, "nav": nav, "risky_exposure": exposure, "gross_exposure": exposure,
             "cash_distribution_inr": distribution_cash,
             "close_drawdown_pct": drawdown * 100,
             "target_exposure_after_close_pct": current_exposure * 100,
         })
-        next_target = next_exposure(current_exposure, drawdown, trigger_pct)
+        high_cap = initial_exposure if active_weights is not None else HIGH_EXPOSURE
+        next_target = next_exposure(current_exposure, drawdown, trigger_pct, high_cap, low_cap)
         if next_target != current_exposure:
             pending_exposure = next_target
             pending_reason = "drawdown_cut" if next_target < current_exposure else "drawdown_recovery"

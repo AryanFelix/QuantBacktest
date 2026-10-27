@@ -1,0 +1,107 @@
+{
+  "strategy_family": "quarterly fixed 50/50 NIFTYBEES Donchian 55/20 and GOLDBEES SMA200",
+  "capital_inr": 1000000.0,
+  "slippage_bps_per_side": 50.0,
+  "fees": "Current modeled Upstox/NSE equity delivery charges; 0% cash yield",
+  "training_period": [
+    "2014-01-02",
+    "2022-12-30"
+  ],
+  "holdout_period": [
+    "2023-01-01",
+    "2026-10-23"
+  ],
+  "candidate_rules": [
+    {
+      "name": "fixed_70pct",
+      "high_cap": 0.7,
+      "trigger_pct": null
+    },
+    {
+      "name": "fixed_40pct",
+      "high_cap": 0.4,
+      "trigger_pct": null
+    },
+    {
+      "name": "dd_8pct_cut_70_to_35_recover_4pct",
+      "high_cap": 0.7,
+      "trigger_pct": 8.0
+    },
+    {
+      "name": "dd_10pct_cut_70_to_35_recover_5pct",
+      "high_cap": 0.7,
+      "trigger_pct": 10.0
+    },
+    {
+      "name": "dd_12pct_cut_70_to_35_recover_6pct",
+      "high_cap": 0.7,
+      "trigger_pct": 12.0
+    }
+  ],
+  "selection_rule": "Highest net training return among fixed-70%, fixed-40%, and 70%-to-35% throttle candidates whose simultaneous daily OHLC drawdown bound is no worse than -20%; selected rule is frozen before evaluating the fresh-account 2023+ segment.",
+  "selected_candidate": "fixed_70pct",
+  "selected_training": {
+    "strategy": "fixed_70pct",
+    "period_start": "2014-01-02",
+    "period_end": "2022-12-30",
+    "sessions": 2221,
+    "starting_balance_inr": 1000000.0,
+    "ending_balance_inr": 1311070.1402215827,
+    "total_return_pct": 31.107014022158275,
+    "cagr_pct": 3.1207636357003077,
+    "total_fees_inr": 12085.250928419578,
+    "total_slippage_inr": 249696.91884999757,
+    "order_count": 178,
+    "trigger_count": 0,
+    "recovery_count": 0,
+    "average_exposure_pct": 44.403433482860116,
+    "average_gross_exposure_pct": 44.403433482860116,
+    "max_drawdown_pct": -17.18488607791938,
+    "within_drawdown_limit": true,
+    "slippage_bps_per_side": 50.0,
+    "initial_exposure_pct": 70.0,
+    "drawdown_trigger_pct": "",
+    "candidate": "fixed_70pct",
+    "segment": "training",
+    "close_mdd_pct": -17.184886077919405,
+    "ohlc_drawdown_bound_pct": -19.065443917921353,
+    "within_20pct_ohlc": true,
+    "sharpe_zero_rf": 0.5376553304376054,
+    "max_close_replay_error_inr": 1.6298145055770874e-09,
+    "source_equity": "work/backtests/active_trend_drawdown/training_fixed_70pct/equity.csv",
+    "source_orders": "work/backtests/active_trend_drawdown/training_fixed_70pct/orders.csv"
+  },
+  "selected_holdout": {
+    "strategy": "fixed_70pct",
+    "period_start": "2023-01-02",
+    "period_end": "2026-10-23",
+    "sessions": 944,
+    "starting_balance_inr": 1000000.0,
+    "ending_balance_inr": 1557063.438173726,
+    "total_return_pct": 55.706343817372606,
+    "cagr_pct": 12.547539692399234,
+    "total_fees_inr": 3355.7565262743,
+    "total_slippage_inr": 66488.90529999937,
+    "order_count": 49,
+    "trigger_count": 0,
+    "recovery_count": 0,
+    "average_exposure_pct": 57.89136062910683,
+    "average_gross_exposure_pct": 57.89136062910683,
+    "max_drawdown_pct": -14.240009899713035,
+    "within_drawdown_limit": true,
+    "slippage_bps_per_side": 50.0,
+    "initial_exposure_pct": 70.0,
+    "drawdown_trigger_pct": "",
+    "candidate": "fixed_70pct",
+    "segment": "holdout",
+    "close_mdd_pct": -14.240009899713035,
+    "ohlc_drawdown_bound_pct": -16.81428919848943,
+    "within_20pct_ohlc": true,
+    "sharpe_zero_rf": 1.2310083748110592,
+    "max_close_replay_error_inr": 2.3283064365386963e-10,
+    "source_equity": "work/backtests/active_trend_drawdown/holdout_fixed_70pct/equity.csv",
+    "source_orders": "work/backtests/active_trend_drawdown/holdout_fixed_70pct/orders.csv"
+  },
+  "all_candidates_passed_holdout_20pct": true,
+  "caveat": "The later period and candidate family were already inspected in broader research; this is retrospective pseudo-out-of-sample evidence, not a pristine lockbox or future loss limit."
+}
