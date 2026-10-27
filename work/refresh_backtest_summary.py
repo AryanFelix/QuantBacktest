@@ -1332,18 +1332,31 @@ for row in manifest:
             "are linked in the research report."
         )
     elif row["dataset"] == "Forward paper NIFTY/Gold ETF control plan":
+        paper_status = json.loads((ROOT / "work" / "backtests" / "forward_paper" / "latest_status.json").read_text(encoding="utf-8"))
+        latest_check = max((result.get("retrieved_at_utc", "") for result in paper_status.get("api_results", [])), default="not recorded")
         row.update({
-            "bar_count": "11 paths; 0 post-freeze sessions",
-            "file_count": "plan + 3 output ledgers + revision 1-7 freezes",
-            "purpose": "Freeze and track eleven NIFTY/Gold ETF controls prospectively on new Upstox candles",
+            "bar_count": f"13 paths; {paper_status['new_common_sessions']} post-freeze sessions",
+            "file_count": "plan + 3 output ledgers + revision 1-8 freezes",
+            "purpose": "Freeze and track thirteen NIFTY/Gold ETF controls prospectively on new Upstox candles",
             "cache_paths": (
                 "outputs/forward_paper_plan.md;outputs/forward_paper_ledger.csv;"
                 "outputs/forward_paper_equity.csv;outputs/forward_paper_orders.csv;"
+                "work/backtests/forward_paper/frozen_config.json;"
+                "work/backtests/forward_paper/frozen_config_v2.json;"
+                "work/backtests/forward_paper/frozen_config_v3.json;"
+                "work/backtests/forward_paper/frozen_config_v4.json;"
                 "work/backtests/forward_paper/frozen_config_v5.json;"
                 "work/backtests/forward_paper/frozen_config_v6.json;"
-                "work/backtests/forward_paper/frozen_config_v7.json"
+                "work/backtests/forward_paper/frozen_config_v7.json;"
+                "work/backtests/forward_paper/frozen_config_v8.json"
             ),
-            "notes": "Revision 7 preserves the eight revision-6 paths and adds the 8/10/12% passive drawdown-control threshold frontier, frozen before the 2026-10-27 close. Paper starts 2026-10-28. Revisions 1-6 remain preserved for lineage. Zero paper sessions at freeze; ₹10 lakh per path; paper only, no broker orders.",
+            "notes": (
+                "Revision 8 preserves eleven revision-7 paths and adds the training-selected 70% cap and 40% buffer cap. "
+                "Paper starts 2026-10-28; revisions 1-7 remain preserved for lineage. "
+                f"Latest common bar: {paper_status['latest_common_history_bar']}; "
+                f"post-freeze common sessions: {paper_status['new_common_sessions']}; latest API check UTC: {latest_check}. "
+                "₹10 lakh per path; paper only, no broker orders."
+            ),
         })
     elif row["dataset"] == "Forward paper NIFTY/Gold Upstox seed probe":
         paper_probe = json.loads((ROOT / "work" / "data" / "api_probes" / "forward_paper_latest.json").read_text(encoding="utf-8"))
@@ -1372,7 +1385,7 @@ for row in manifest:
                 "work/data/api_probes/market_session_check_2026-10-26/NSE_EQ_INF204KB14I2-days-1-2026-10-26-2026-10-26.csv;"
                 "work/data/api_probes/market_session_check_2026-10-26/NSE_EQ_INF204KB17I5-days-1-2026-10-26-2026-10-26.csv"
             ),
-            "purpose": "Record completed-session Upstox candle availability for the eleven-path prospective paper test",
+            "purpose": "Record completed-session Upstox candle availability for the thirteen-path prospective paper test",
             "notes": (
                 f"Latest exact-key requests through {paper_end}: {paper_sources}. "
                 f"Latest common history bar: {paper_status['latest_common_history_bar']}; "

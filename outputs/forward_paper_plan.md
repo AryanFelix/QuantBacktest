@@ -46,6 +46,8 @@ At 15:20 IST on 2026-10-27, the incremental runner successfully requested throug
 
 At 15:35 IST, exact-date Upstox V3 requests for Oct 27 returned API success with zero daily candles for both ETFs. At 19:49 IST, after a transient DNS failure, an Oct 24–27 range retry succeeded with one bar per ETF, both dated Oct 26. A 20:06 IST follow-up and a 21:15 IST recheck again returned one Oct 26 bar per ETF; no Oct 27 daily candle was available and the common cache still ends on Oct 26. This is a publication-lag observation, not proof that the session was closed or that the endpoint is complete. The credential-free candle-response records are in `work/data/api_probes/market_session_check_2026-10-27.json` and `work/data/api_probes/market_session_check_2026-10-27_afterclose.json`, with attempts retained in `work/data/api_probes/forward_paper_history.jsonl`; the runner has not added an Oct 27 bar to paper snapshots or NAV.
 
+At 21:34 IST on Oct 27, an exact-window Upstox request through Oct 27 again returned one candle each for NIFTYBEES and GOLDBEES, both dated Oct 26. The status remains zero post-freeze common sessions and zero paper-return rows; the first frozen paper date is Oct 28. This later request is appended to `work/data/api_probes/forward_paper_history.jsonl`, and its credential-free metadata is in `work/data/api_probes/forward_paper_latest.json`.
+
 Daily candles do not provide a realized spread ledger. Fixed 10/50 bps slippage is a sensitivity, not a measured bid/ask spread. Next-open fills are modeled and can differ from executable fills. The 20% drawdown limit is an alert threshold, not a guarantee or automatic stop.
 
 ## Reproduction and files
