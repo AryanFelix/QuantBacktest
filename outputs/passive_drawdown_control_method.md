@@ -27,7 +27,7 @@ At 50 bps, the 8% and 10% rules returned more than the fixed 45% path and had le
 
 ## Conditional bootstrap stress
 
-The 5,000-path stationary bootstrap resamples each already-generated strategy's daily net returns in blocks; it does not rebuild the price path and re-run the drawdown trigger. The percentages are therefore conditional return-process stresses, not policy-level forecasts.
+The legacy 5,000-path stationary bootstrap below resamples each already-generated strategy's daily net returns in blocks; it does not rebuild the price path or re-run the drawdown trigger. Those figures are conditional return-process stresses. A separate stateful paired-OHLC bootstrap now reruns these controls on sampled price paths; it supersedes the legacy bootstrap for policy-level stress comparison. See the [stateful method and results](stateful_drawdown_control_bootstrap_method.md).
 
 | Rule | 10-year drawdown breach at 21 / 63 / 126-session blocks | 5th-percentile MDD at 63 sessions | Median CAGR at 63 sessions |
 |---|---:|---:|---:|

@@ -20,6 +20,8 @@ All saved ETF-dependent screens were regenerated from the existing Upstox/NSE da
 
 The bootstrap was subsequently expanded from 108 to 156 summaries after a 30-case passive-mix exposure sweep added four common-2015+ equity paths (45%, 50%, 55%, and 60% initial exposure) to the 10-year drawdown stress. It was then expanded to 192 summaries to include three common-2015+ drawdown-trigger paths. At 63-session blocks, the 8% and 10% trigger cases have 1.46% and 1.96% breach estimates, while the 12% case is 6.70%. The current summary ledger and data manifest are generated from the expanded output.
 
+On 2026-10-27 a separate 15-case, stateful paired-OHLC bootstrap was added for the two fixed controls and three drawdown triggers. It reruns whole-unit positions, next-open policy transitions, the current fee model, slippage, known NIFTYBEES cash distributions, and terminal liquidation across 5,000 ten-year paths at each of three block lengths. Its historical sequential replay matches the canonical drawdown-control simulator. This price-path stress supersedes the older return-only bootstrap for evaluating the stateful controls; the older 192-row output remains reproducible and unchanged. See outputs/stateful_drawdown_control_bootstrap_method.md.
+
 ## Modeled charges
 
 For modeled NSE cash trades, the runner includes ₹20 brokerage per executed order, instrument-specific STT, the NSE transaction charge, buy-side stamp duty, SEBI ₹10/crore, current IPFT ₹0.01/crore, ₹20 DP per scrip/day on delivery sells, and 18% GST on brokerage, transaction, demat, and IPFT charges. Current fees are applied uniformly over historical samples as a cost stress, not reconstructed historical contract notes. Slippage is modeled separately.
