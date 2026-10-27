@@ -609,6 +609,49 @@ if intraday_range_path.exists():
     ]
     assert len(intraday_range_keys) == len(set(intraday_range_keys)) == 64
 
+intraday_orb_short_path = ROOT / "outputs" / "intraday_orb_short_side_sensitivity.csv"
+if intraday_orb_short_path.exists():
+    intraday_orb_short = read_csv(intraday_orb_short_path)
+    assert len(intraday_orb_short) == 32
+    rows = [row for row in rows if row["simulation_type"] != "intraday_orb_short_side_sensitivity"]
+    for result in intraday_orb_short:
+        rows.append({
+            "simulation_type": "intraday_orb_short_side_sensitivity",
+            "strategy": f"NIFTY 30m ORB {result['mode']}",
+            "universe": "NIFTY 50 signal; NIFTYBEES intraday execution",
+            "period": result["period"],
+            "period_start": result["period_start"],
+            "period_end": result["period_end"],
+            "starting_balance_inr": result["starting_balance_inr"],
+            "ending_balance_inr": result["ending_balance_inr"],
+            "total_return_pct": result["total_return_pct"],
+            "cagr_pct": result["cagr_pct"],
+            "max_drawdown_pct": result["max_drawdown_pct"],
+            "sharpe_zero_rf": result["sharpe_zero_rf"],
+            "gross_exposure_cap_pct": "95",
+            "slippage_bps_per_side": result["slippage_bps_per_side"],
+            "fees_inr": result["fees_inr"],
+            "slippage_cost_inr": result["slippage_cost_inr"],
+            "trade_count": result["trade_count"],
+            "order_count": result["order_count"],
+            "within_20pct": result["within_20pct"],
+            "selection_or_sizing": f"{result['mode']}; 0.5% NAV stop risk; 95% gross cap",
+            "source_artifact": (
+                f"{result['source_artifact']};outputs/intraday_orb_short_side_sensitivity.csv;"
+                "outputs/intraday_orb_short_side_method.md;work/sensitivity_intraday_orb_short_side.py"
+            ),
+            "notes": (
+                "Current NSE equity-fund intraday charges; fixed 10/25/50/100 bps adverse slippage per side. "
+                "Symmetric short extension assumes intraday ETF shorting without borrow/margin costs or fill failures. "
+                "Retrospective 30-minute OHLC; 2025+ was already inspected; see method for limits."
+            ),
+        })
+    intraday_orb_short_keys = [
+        (row["strategy"], row["period"], row["slippage_bps_per_side"])
+        for row in rows if row["simulation_type"] == "intraday_orb_short_side_sensitivity"
+    ]
+    assert len(intraday_orb_short_keys) == len(set(intraday_orb_short_keys)) == 32
+
 gap_fade_path = ROOT / "outputs" / "intraday_gap_fade_sensitivity.csv"
 if gap_fade_path.exists():
     gap_fade = read_csv(gap_fade_path)
@@ -1276,7 +1319,8 @@ for row in manifest:
             "six price-only plus six distribution-adjusted NIFTYBEES/GOLDBEES momentum cases, "
             "the 140-case single-sleeve deployment screen, the 60-case volatility-throttle screen, "
             "the 90-case India VIX overlay screen, the 130-case joint exposure/throttle screen, "
-            "the 125-case execution-cost stress, the 64-case intraday ORB opening-range sensitivity, "
+            "the 125-case execution-cost stress, the 64-case long-only intraday ORB range screen, "
+            "the 32-case symmetric ORB short-side screen, "
             "the 144-case NIFTY opening-gap fade sensitivity, the 384-case sector ETF rotation screen with 96 OHLC audits, the 144-case official-TRI sector signal challenger with 48 OHLC audits, and 144 secondary-only sector distribution sensitivities with OHLC audits; "
             "14 annual expanding-window NIFTY/Gold parameter-selection replay rows; "
             "47 NIFTY/Gold passive, active, and exposure-sensitivity rows across 2020+, full available history, and a shared 2015+ window, including 30 passive-mix exposure cases; "
@@ -1555,6 +1599,20 @@ for metadata in (
         "cache_paths": "outputs/intraday_orb_range_sensitivity.csv;outputs/intraday_orb_range_method.md;work/sensitivity_intraday_orb_range.py;work/backtests/intraday_orb_range_sensitivity/",
         "purpose": "Test whether a minimum opening-range width filter improves NIFTY intraday ORB net returns under realistic fee and slippage scenarios",
         "notes": "Long-only, 0.5% risk per trade, 95% exposure cap; four predeclared width thresholds and 10/25/50/100 bps per-side slippage. No continuous path was profitable; holdout history was already inspected. Slippage is not measured spread.",
+    },
+    {
+        "dataset": "NIFTY 30-minute ORB symmetric short-side screen",
+        "ticker": "NIFTY 50; NIFTYBEES",
+        "instrument_key": "NSE_INDEX|Nifty 50; NSE_EQ|INF204KB14I2",
+        "bar_interval": "30 minutes",
+        "first_bar": "2022-01-03T09:15:00+05:30",
+        "last_bar": "2026-10-23T15:15:00+05:30",
+        "bar_count": "32 cases; 8 continuous paths",
+        "file_count": "32 equity/trade/summary triplets + sensitivity CSV + method + runner",
+        "empty_files": "0",
+        "cache_paths": "outputs/intraday_orb_short_side_sensitivity.csv;outputs/intraday_orb_short_side_method.md;work/sensitivity_intraday_orb_short_side.py;work/backtests/intraday_orb_short_side/",
+        "purpose": "Screen the previously untested symmetric short side of the NIFTY 30-minute opening-range breakout without changing its long-side rule",
+        "notes": "0.5% NAV stop risk; 95% exposure cap; 10/25/50/100 bps per-side slippage. Long-short extension lost 46.60% at 10 bps and 96.38% at 50 bps on the full path, with drawdowns of 47.22% and 96.38%. Historical 30-minute bars, no observed spreads or borrow/margin charges; not deployable.",
     },
     {
         "dataset": "Upstox authenticated read-only candle probe",
