@@ -32,30 +32,44 @@
   ],
   "state": "waiting_for_first_post_freeze_common_bar",
   "post_close_probe": {
-    "retrieved_at_utc": "2026-10-27T10:05:23.429246+00:00",
+    "retrieved_at_utc": "2026-10-27T14:18:54.695807+00:00",
+    "retrieved_at_ist": "2026-10-27T19:48:54.695807+05:30",
     "request_window": [
-      "2026-10-27",
+      "2026-10-24",
       "2026-10-27"
     ],
+    "endpoint_family": "Upstox v3 historical candles",
     "results": [
       {
         "symbol": "NIFTYBEES",
         "instrument_key": "NSE_EQ|INF204KB14I2",
-        "status": "success_no_bars",
-        "bars_received": 0,
-        "last_bar": null,
-        "token_value_saved": false
+        "request_start": "2026-10-24",
+        "request_end": "2026-10-27",
+        "retrieved_at_utc": "2026-10-27T14:18:53.463774+00:00",
+        "token_value_saved": false,
+        "status": "success_with_bars",
+        "bars_received": 1,
+        "cached_incremental_bars": 1,
+        "last_bar": "2026-10-26 00:00:00+05:30"
       },
       {
         "symbol": "GOLDBEES",
         "instrument_key": "NSE_EQ|INF204KB17I5",
-        "status": "success_no_bars",
-        "bars_received": 0,
-        "last_bar": null,
-        "token_value_saved": false
+        "request_start": "2026-10-24",
+        "request_end": "2026-10-27",
+        "retrieved_at_utc": "2026-10-27T14:18:54.226150+00:00",
+        "token_value_saved": false,
+        "status": "success_with_bars",
+        "bars_received": 1,
+        "cached_incremental_bars": 1,
+        "last_bar": "2026-10-26 00:00:00+05:30"
       }
     ],
     "latest_common_history_bar": "2026-10-26",
-    "interpretation": "Upstox returned success with no Oct 27 daily candles at the 15:35 IST probe; this does not establish a holiday or data completeness."
+    "oct27_bar_available": false,
+    "paper_state": "waiting_for_first_post_freeze_common_bar",
+    "performance_rows_written": 0,
+    "interpretation": "The successful after-close range query returned one candle per ETF, both dated Oct 26; Upstox had not published an Oct 27 daily candle at this check.",
+    "prior_exact_date_probe": "market_session_check_2026-10-27.json"
   }
 }
