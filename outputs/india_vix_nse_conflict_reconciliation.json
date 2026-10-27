@@ -1,0 +1,53 @@
+{
+  "source_page": "https://www.nseindia.com/reports-indices-historical-vix",
+  "records": [
+    {
+      "query": "/api/historicalOR/vixhistory?from=29-06-2015&to=29-06-2015",
+      "status": 200,
+      "record": {
+        "EOD_TIMESTAMP": "29-JUN-2015",
+        "EOD_INDEX_NAME": "INDIA VIX",
+        "EOD_OPEN_INDEX_VAL": 15.76,
+        "EOD_HIGH_INDEX_VAL": 18.775,
+        "EOD_LOW_INDEX_VAL": 15.76,
+        "EOD_CLOSE_INDEX_VAL": 17.2975,
+        "EOD_PREV_CLOSE": 15.76,
+        "VIX_PTS_CHG": 1.54,
+        "VIX_PERC_CHG": 9.76,
+        "HI_TIMESTAMP_ORDER": "2015-06-28T18:30:00.000Z"
+      }
+    },
+    {
+      "query": "/api/historicalOR/vixhistory?from=02-07-2015&to=02-07-2015",
+      "status": 200,
+      "record": {
+        "EOD_TIMESTAMP": "02-JUL-2015",
+        "EOD_INDEX_NAME": "INDIA VIX",
+        "EOD_OPEN_INDEX_VAL": 15.845,
+        "EOD_HIGH_INDEX_VAL": 16.0775,
+        "EOD_LOW_INDEX_VAL": 15.1625,
+        "EOD_CLOSE_INDEX_VAL": 15.5575,
+        "EOD_PREV_CLOSE": 15.845,
+        "VIX_PTS_CHG": -0.29,
+        "VIX_PERC_CHG": -1.81,
+        "HI_TIMESTAMP_ORDER": "2015-07-01T18:30:00.000Z"
+      }
+    },
+    {
+      "query": "/api/historicalOR/vixhistory?from=10-08-2015&to=10-08-2015",
+      "status": 200,
+      "record": {
+        "EOD_TIMESTAMP": "10-AUG-2015",
+        "EOD_INDEX_NAME": "INDIA VIX",
+        "EOD_OPEN_INDEX_VAL": 14.91,
+        "EOD_HIGH_INDEX_VAL": 15.6225,
+        "EOD_LOW_INDEX_VAL": 14.2425,
+        "EOD_CLOSE_INDEX_VAL": 15.465,
+        "EOD_PREV_CLOSE": 14.91,
+        "VIX_PTS_CHG": 0.56,
+        "VIX_PERC_CHG": 3.72,
+        "HI_TIMESTAMP_ORDER": "2015-08-09T18:30:00.000Z"
+      }
+    }
+  ]
+}

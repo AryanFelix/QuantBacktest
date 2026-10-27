@@ -1,0 +1,19 @@
+{
+  "freeze_date": "2026-10-26",
+  "history_cutoff": "2026-10-23",
+  "paper_start": "2026-10-26",
+  "capital_inr": 1000000,
+  "gross_exposure_cap_pct": 100.0,
+  "max_drawdown_alert_pct": 20.0,
+  "slippage_bps_per_side": [
+    10,
+    50
+  ],
+  "portfolios": {
+    "monthly_fixed_50_50": "50% NIFTYBEES Donchian 55/20 + 50% GOLDBEES SMA200; signal changes and month-end; next-session open",
+    "quarterly_fixed_50_50": "same sleeves and weights; signal changes and quarter-end; next-session open",
+    "quarterly_inverse_vol_63d": "same active sleeves; inverse 63-session realized-vol split when both active, 50% when one active; signal changes and quarter-end; next-session open"
+  },
+  "fees": "current Upstox/NSE delivery schedule; zero cash interest",
+  "execution": "paper only; no broker order placement; next-open and fixed-slippage fills are modeled"
+}

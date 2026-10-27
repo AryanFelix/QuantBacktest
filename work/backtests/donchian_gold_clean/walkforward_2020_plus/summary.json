@@ -1,0 +1,96 @@
+{
+  "capital_inr": 1000000,
+  "drawdown_limit_pct": 20,
+  "cash_proxy": null,
+  "periods": {
+    "train_start": "2014-01-01",
+    "train_end": "2017-12-31",
+    "validation_start": "2018-01-01",
+    "validation_end": "2019-12-31",
+    "test_start": "2020-01-01",
+    "test_end": "2026-10-23"
+  },
+  "exposure_grid_pct": [
+    10.0,
+    25.0,
+    50.0,
+    75.0,
+    95.0
+  ],
+  "selection_rule": "highest validation CAGR among exposures within the drawdown limit in train, validation, and the continuous train-plus-validation account",
+  "selected_exposure_pct": 95.0,
+  "selection_positive_validation_cagr": true,
+  "test_result": {
+    "starting_balance_inr": 1000000,
+    "ending_balance_inr": 2518965.825829363,
+    "total_return_pct": 151.89658258293628,
+    "cagr_pct": 14.75100798854989,
+    "annualized_volatility_pct": 10.180943364121838,
+    "sharpe_zero_rf": 1.4027397572101603,
+    "sortino_zero_rf": 1.8271590396006205,
+    "max_drawdown_pct": -13.6025595222536,
+    "drawdown_limit_pct": 20,
+    "within_drawdown_limit": true,
+    "drawdown_budget_used_pct": 68.012797611268,
+    "calmar": 1.0844288506451634,
+    "average_exposure_pct": 68.26395615762468,
+    "average_gross_exposure_pct": 68.26395615762468,
+    "order_count": 201,
+    "turnover_inr": 43013061.048609994,
+    "turnover_to_starting_capital": 43.01306104860999,
+    "total_fees_inr": 12080.929060638393,
+    "cash_distributions_inr": 0.0,
+    "cash_distribution_events": [],
+    "fees_by_component_inr": {
+      "brokerage": 4020.0,
+      "stt": 52.52,
+      "exchange": 1320.5,
+      "stamp_duty": 3111.15,
+      "sebi": 43.01,
+      "ipft": 0.04,
+      "dp": 2180.0,
+      "gst": 1353.7
+    },
+    "first_bar": "2020-01-01 00:00:00+05:30",
+    "last_bar": "2026-10-23 00:00:00+05:30",
+    "assumptions": {
+      "product": "equity_delivery",
+      "exchange": "NSE",
+      "slippage_bps_per_side": 10,
+      "max_gross_exposure": 0.95,
+      "max_drawdown_limit_pct": 20,
+      "cash_proxy": null,
+      "cash_distributions_credited_on_ex_date": false,
+      "fee_schedule": "current Upstox/NSE charges applied uniformly to all history; fund-unit STT is classified by instrument",
+      "instrument_fee_products": {
+        "GOLDBEES": "other_fund_delivery",
+        "NIFTYBEES": "equity_fund_delivery"
+      },
+      "cash_interest_pct": 0,
+      "terminal_liquidation": true
+    },
+    "total_slippage_inr": 43014.63510999772
+  },
+  "strategy": "NIFTYBEES Donchian 55/20 + GOLDBEES 200DMA",
+  "symbols": [
+    "GOLDBEES",
+    "NIFTYBEES"
+  ],
+  "assumptions": {
+    "strategy": "NIFTYBEES Donchian 55/20 + GOLDBEES 200DMA",
+    "sleeve_weights": {
+      "NIFTYBEES": 0.5,
+      "GOLDBEES": 0.5
+    },
+    "rebalance": "signal changes and each month-end close; execute at next session open",
+    "capital_inr": 1000000,
+    "drawdown_limit_pct": 20,
+    "slippage_bps_per_side": 10,
+    "cash_return_pct": 0,
+    "data_end": "2026-10-23",
+    "source_data": {
+      "NIFTYBEES": "2014-01-01 to 2026-10-23",
+      "GOLDBEES": "2015-01-01 to 2026-10-23"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "training_period": [
+    "2015-01-02",
+    "2019-12-31"
+  ],
+  "candidate_gross_exposure_caps_pct": [
+    10.0,
+    15.0,
+    20.0,
+    25.0,
+    30.0,
+    35.0,
+    40.0,
+    45.0,
+    50.0,
+    55.00000000000001,
+    60.0,
+    65.0,
+    70.0,
+    75.0,
+    80.0,
+    85.0,
+    90.0,
+    95.0,
+    100.0
+  ],
+  "selection_rule": "Highest net training return among candidates with conservative same-day OHLC drawdown bound no worse than -20%",
+  "selected_cap_pct": 100.0,
+  "selected_training_return_pct": 45.98211444659541,
+  "selected_training_ohlc_bound_pct": -18.618793398908117,
+  "training_candidates": 19,
+  "cash_distributions_inr": 4651.2,
+  "test_period": [
+    "2020-01-01",
+    "2026-10-23"
+  ],
+  "test_was_inspected_before_selection": true,
+  "selected_cap_test_return_pct": 169.21871483009218,
+  "selected_cap_test_ohlc_bound_pct": -26.021696327605127,
+  "selected_cap_test_passed_20pct": false,
+  "highest_return_test_candidate_passing_screen_pct": 70.0,
+  "test_sensitivity_is_post_hoc": true,
+  "status": "historical pseudo-out-of-sample; not an untouched holdout",
+  "artifacts": {
+    "training_summary": "outputs\\static_mix_exposure_training.csv",
+    "training_runs": "work\\backtests\\static_mix_exposure_training",
+    "test_summary": "outputs\\static_mix_exposure_oos_test.csv",
+    "test_runs": "work\\backtests\\static_mix_exposure_test"
+  }
+}

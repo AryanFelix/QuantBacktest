@@ -1,0 +1,24 @@
+.env
+.env.*
+*.pem
+*.key
+__pycache__/
+*.py[cod]
+/.playwright-mcp/
+/2026-10-26/
+/work/data/
+
+# Keep the public repository compact; retain the audited NIFTY/Gold holdouts and frozen paper rules.
+/work/backtests/*
+!/work/backtests/donchian_gold_clean/
+!/work/backtests/forward_paper/
+/work/backtests/donchian_gold_clean/*
+!/work/backtests/donchian_gold_clean/strategy.json
+!/work/backtests/donchian_gold_clean/fixed_exposure_cost_screen.csv
+!/work/backtests/donchian_gold_clean/walkforward_2020_plus/
+!/work/backtests/donchian_gold_clean/walkforward_recent/
+!/work/backtests/donchian_gold_clean/holdout_2020_plus_95cap_50bps/
+!/work/backtests/donchian_gold_clean/holdout_recent_95cap_50bps/
+/work/backtests/forward_paper/*
+!/work/backtests/forward_paper/frozen_config*.json
+!/work/backtests/forward_paper/latest_status.json

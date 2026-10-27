@@ -1,0 +1,2 @@
+session_date,issue,raw_rows,raw_close_values,carried_value,carried_from_session,treatment
+2019-07-02,no Upstox VIX row on NIFTY/ETF session,0,,14.6,2019-07-01,Use prior confirmed VIX close; no same-day ambiguous or future value is used.

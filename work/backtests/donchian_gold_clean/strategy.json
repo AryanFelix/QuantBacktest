@@ -1,0 +1,17 @@
+{
+  "strategy": "NIFTYBEES Donchian 55/20 + GOLDBEES 200DMA",
+  "sleeve_weights": {
+    "NIFTYBEES": 0.5,
+    "GOLDBEES": 0.5
+  },
+  "rebalance": "signal changes and each month-end close; execute at next session open",
+  "capital_inr": 1000000,
+  "drawdown_limit_pct": 20,
+  "slippage_bps_per_side": 10,
+  "cash_return_pct": 0,
+  "data_end": "2026-10-23",
+  "source_data": {
+    "NIFTYBEES": "2014-01-01 to 2026-10-23",
+    "GOLDBEES": "2015-01-01 to 2026-10-23"
+  }
+}

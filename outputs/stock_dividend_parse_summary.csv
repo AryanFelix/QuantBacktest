@@ -1,0 +1,15 @@
+scope,metric,value,notes
+overall,dividend rows from ever-member universe symbols 2020-01-01 to 2026-10-23,646,A symbol is included if it appears in any monthly snapshot; this is not an as-of-date membership filter.
+overall,rows with parsed nominal per-share amount,645,
+overall,rows with unresolved dividend amount,1,
+overall,exact ex-date stock bars present,646,Price-date coverage only; no assertion that the feed is complete.
+overall,rows in same-symbol/ex-date multi-row groups,10,Separate notices are retained; reconcile before aggregating cash flows.
+overall,same-symbol/ex-date multi-row groups,5,
+overall,parsed nominal amounts needing price-series share-unit alignment,645,Upstox stock prices appear share-unit adjusted after some bonus/split events; this audit does not convert historical dividend units.
+2020,ever-member symbol dividend rows / parsed,81 / 81,Unadjusted nominal per-share amounts; membership is not checked on each event date.
+2021,ever-member symbol dividend rows / parsed,96 / 96,Unadjusted nominal per-share amounts; membership is not checked on each event date.
+2022,ever-member symbol dividend rows / parsed,92 / 91,Unadjusted nominal per-share amounts; membership is not checked on each event date.
+2023,ever-member symbol dividend rows / parsed,97 / 97,Unadjusted nominal per-share amounts; membership is not checked on each event date.
+2024,ever-member symbol dividend rows / parsed,93 / 93,Unadjusted nominal per-share amounts; membership is not checked on each event date.
+2025,ever-member symbol dividend rows / parsed,99 / 99,Unadjusted nominal per-share amounts; membership is not checked on each event date.
+2026,ever-member symbol dividend rows / parsed,88 / 88,Unadjusted nominal per-share amounts; membership is not checked on each event date.

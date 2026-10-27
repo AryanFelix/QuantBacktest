@@ -1,0 +1,27 @@
+# Indian Market Quant Research
+
+Research and backtests for Indian index, sector, stock, ETF, derivatives, swing, and intraday strategies using Upstox history plus official NSE/AMFI cross-checks.
+
+## Research status
+
+The account reference is ₹10 lakh with a 20% peak-to-trough risk screen. No strategy is established as a reliable winner. The latest report compares strategy families, realistic modeled fees and slippage, chronological holdouts, and drawdown limits: [quant research report](outputs/quant_research_report.md).
+
+The monthly NIFTYBEES Donchian 55/20 + GOLDBEES 200DMA blend is under prospective paper observation at several frozen settings. Its selected 95% exposure setting returned +63.69% on the inspected 2023–2026 holdout at 50 bps per-side slippage and passed the conservative daily OHLC envelope at -16.28%; the same rule failed the 2020+ envelope at -24.41%. It is a challenger, not a validated winner. See the [OHLC audit](outputs/etf_daily_timestamp_and_intraday_risk_audit.md) and [paper protocol](outputs/forward_paper_plan.md).
+
+## Reproducing the main research
+
+The scripts are under `work/`; summary tables and methods are under `outputs/`.
+
+```powershell
+python work/replay_donchian_gold_blend.py
+python work/audit_etf_intraday_drawdown.py
+python work/refresh_backtest_summary.py
+```
+
+For live candle refreshes, `work/upstox_quant.py` reads `UPSTOX_ANALYTICS_TOKEN` from the process environment or the current user's `HKCU\Environment` registry value. Keep the token out of source files, logs, commits, and issue reports. The forward-paper runner is read-only and never sends broker orders.
+
+## Data and repository contents
+
+This is a public repository. Raw Upstox/market-data caches, API probe responses, and most per-run equity/order histories are kept out of Git; they remain in the local `work/data/` and `work/backtests/` directories. `outputs/data_manifest.csv` records their local source paths and coverage. The repository tracks code, methods, aggregate results, frozen paper configurations, and the two OHLC-audited holdout ledgers. Reproducing the full results requires obtaining and placing the source data locally according to the manifest.
+
+Historical results use modeled current fees and stated slippage, zero cash yield in most ETF simulations, and next-open fills. Historical drawdown screens and resampled return stresses are not guarantees of future loss limits. No live orders are placed by this research project.

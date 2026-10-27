@@ -1,0 +1,26 @@
+{
+  "freeze_revision": 6,
+  "freeze_date": "2026-10-27",
+  "amendment": "Added the passive NIFTY/Gold 22.5% each initial-allocation benchmark after it led the corrected full-history 50 bps risk-screen comparison and passed the added stationary-bootstrap stress. Revision 5 had zero post-freeze common sessions. Revision 6 freezes all eight paths before the 2026-10-27 close, with paper execution beginning 2026-10-28.",
+  "history_cutoff": "2026-10-23",
+  "paper_start": "2026-10-28",
+  "capital_inr": 1000000,
+  "gross_exposure_cap_pct": 100.0,
+  "max_drawdown_alert_pct": 20.0,
+  "slippage_bps_per_side": [
+    10,
+    50
+  ],
+  "portfolios": {
+    "passive_nifty_gold_22_5_each": "Buy 22.5% NAV of NIFTYBEES and 22.5% NAV of GOLDBEES at the first paper-session next-open fill; hold the units without rebalancing; initial gross exposure 45%, allowed cap 100% as exposure drifts",
+    "monthly_fixed_50_50_100pct": "50% NIFTYBEES Donchian 55/20 + 50% GOLDBEES SMA200; signal changes and month-end; next-session open; 100% gross cap",
+    "monthly_fixed_50_50_95pct": "same monthly fixed sleeves and weights; 95% gross cap provides a cash-buffer control",
+    "quarterly_fixed_50_50_100pct": "same sleeves and weights; signal changes and quarter-end; next-session open; 100% gross cap",
+    "quarterly_inverse_vol_63d_100pct": "same active sleeves; inverse 63-session realized-vol split when both active, 50% when one active; signal changes and quarter-end; 100% gross cap",
+    "quarterly_inverse_vol_63d_single65_100pct": "same quarterly inverse-vol rule when both sleeves are active; 65% NAV when only one is active; signal changes and quarter-end; 100% gross cap",
+    "quarterly_inverse_vol_63d_single65_vol16_100pct": "same quarterly 65% solo-sleeve rule; at signal-change or quarter-end rebalance, scale base weights by min(1, 16% / trailing 63-session annualized volatility of lagged base-portfolio returns); next-session open; 100% gross cap",
+    "quarterly_inverse_vol_63d_single80_vol16_100pct": "same quarterly inverse-vol split when both sleeves are active; 80% NAV when one is active; at signal-change or quarter-end rebalance, scale base weights by min(1, 16% / trailing 63-session annualized volatility of the lagged unthrottled 80%-sleeve portfolio); next-session open; 100% gross cap"
+  },
+  "fees": "current Upstox/NSE delivery schedule; zero cash interest",
+  "execution": "paper only; no broker order placement; next-open and fixed-slippage fills are modeled"
+}
