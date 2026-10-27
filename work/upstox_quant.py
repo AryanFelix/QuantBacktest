@@ -626,6 +626,7 @@ def _intraday_orb(
     min_opening_range_pct: float = 0.0,
     max_opening_range_pct: float | None = None,
     fee_product: str = "equity_intraday",
+    allowed_sessions: set[date] | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     if (starting_balance <= 0 or not 0 < risk_fraction <= 1 or not 0 < max_exposure <= 1
             or slippage_bps < 0 or drawdown_limit_pct <= 0 or mode not in {"long", "long_short"}
@@ -648,6 +649,7 @@ def _intraday_orb(
     turnover = slippage_cost = 0.0
     rows, trades = [], []
     range_filtered_sessions = 0
+    regime_filtered_sessions = 0
     eligible_sessions = 0
     sessions = bars.groupby(bars["time"].dt.date, sort=True)
     for session, day in sessions:
@@ -655,6 +657,10 @@ def _intraday_orb(
             continue
         day = day.reset_index(drop=True)
         eligible_sessions += 1
+        if allowed_sessions is not None and session not in allowed_sessions:
+            regime_filtered_sessions += 1
+            rows.append({"time": day.loc[len(day) - 1, "time"], "nav": cash, "trade_exposure_pct": 0.0})
+            continue
         if len(day) < 4:
             rows.append({"time": day.loc[len(day) - 1, "time"], "nav": cash, "trade_exposure_pct": 0.0})
             continue
@@ -734,6 +740,7 @@ def _intraday_orb(
         "average_trade_exposure_pct": float(equity.loc[equity["trade_exposure_pct"] > 0, "trade_exposure_pct"].mean()) if equity["trade_exposure_pct"].gt(0).any() else 0.0,
         "first_bar": str(equity.index[0]), "last_bar": str(equity.index[-1]),
         "range_filter_sessions": range_filtered_sessions, "eligible_sessions": eligible_sessions,
+        "regime_filtered_sessions": regime_filtered_sessions,
         "assumptions": {"signal": "30-minute opening-range close breakout", "entry": "next 30-minute bar open",
                         "stop": "opposite side of first 30-minute traded-ETF range; gap-through fills at bar open",
                         "exit": "stop or final bar close, flat by session end", "mode": mode,
@@ -1081,6 +1088,12 @@ def _self_check() -> None:
         slippage_bps=0, max_opening_range_pct=3.9,
     )
     assert upper_filtered_trades.empty and upper_filtered_intraday["range_filter_sessions"] == 1
+    _, regime_filtered_trades, regime_filtered = _intraday_orb(
+        signal.set_index("time"), traded.set_index("time"), 10_000, risk_fraction=0.05,
+        slippage_bps=0, allowed_sessions=set(),
+    )
+    assert regime_filtered_trades.empty and regime_filtered["regime_filtered_sessions"] == 1
+    assert regime_filtered["ending_balance_inr"] == 10_000
     spread_dates = [date(2024, 1, day) for day in (2, 3, 4)]
     spread = {"entry_date": spread_dates[0], "exit_date": spread_dates[-1], "lot_size": 10,
               "long_open": 100, "short_open": 40, "long_close": 120, "short_close": 30,
