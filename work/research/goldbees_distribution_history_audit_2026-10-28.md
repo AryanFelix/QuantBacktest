@@ -1,0 +1,43 @@
+# GOLDBEES cash-distribution history audit — 2026-10-28
+
+## Finding
+
+No GOLDBEES cash distribution was identified in the official records reviewed. That is **not enough to certify a distribution-free history from the fund's 2007 inception through today**. Keep GoldBeES cash distributions unresolved in strategy return accounting; do not invent an adjustment, and do not interpret the absence of a record in one source as proof that no payout occurred.
+
+The issuer's dedicated [GoldBeES corporate-action page](https://investeasy.nipponindiaim.com/rmfGsamnew/Products/GoldBeES/CorporateAction.aspx) currently lists one action: the 1:100 split with record date 20 December 2019. It displays no dividend rows. This is the strongest scheme-specific source located, but the page does not state that its displayed history is exhaustive. The same page explains the face-value basis used for dividends, which makes its lack of dividend rows relevant but not conclusive.
+
+**Correction:** I retract any inference that the “Nil” entries for GoldBeES in an SAI table establish zero dividends. The table is headed “Complaints Received / Complaints Redressed / Complaints Pending”; those entries are complaint counts, not distribution data. They provide no evidence for or against a cash distribution.
+
+The official [NSE-hosted half-yearly portfolio report for 31 March 2026](https://nsearchives.nseindia.com/corporate/NIPPONAMC_10042026130156_NIMF_HY_PORTFOLIO_REPORT_31_Mar26.pdf) states that the dividend declared for the half-year ended that date was nil. This establishes a nil declaration only for that reporting period. It does not establish the scheme's full history.
+
+## Source review and limits
+
+| Primary source | Observation | Limit |
+|---|---|---|
+| [Nippon GoldBeES corporate actions](https://investeasy.nipponindiaim.com/rmfGsamnew/Products/GoldBeES/CorporateAction.aspx) | One 1:100 split is listed; no cash distribution rows are shown. | No completeness statement or explicit start/end coverage is provided. |
+| [Nippon GoldBeES product page](https://mf.nipponindiaim.com/FundsAndPerformance/Pages/NipponIndia-ETF-Gold-BeES.aspx) and its [August 2021 product note](https://mf.nipponindiaim.com/FundsAndPerformance/ProductNotes/NipponIndia-ETF-Gold-BeES-Aug-2021.pdf) | The scheme has no separate plan/option; scheme performance uses dividend-reinvestment NAVs, and the standard disclosure says IDCW, if any, is assumed reinvested. | This describes the return convention; it does not say whether or when an IDCW was declared. |
+| [Nippon dividend-notice archive](https://mf.nipponindiaim.com/investor-service/downloads/dividend-notice) | The indexed current archive contains no GoldBeES-named declaration notice. | The archive's historical retention/completeness for this ETF was not established. |
+| [AMFI scheme-dividend lookup](https://www.amfiindia.com/otherdata/scheme-dividends) | AMFI provides a scheme/year dividend lookup and notes that entries through 6 April 2009 use percentage units, with later entries in rupees. | This audit did not extract and reconcile every scheme/year result from inception; the selector page alone is not a negative result. |
+| [NSE security page](https://www.nseindia.com/get-quote/equity/GOLDBEES/Nippon-India-Gold-Bees) | The currently rendered corporate-actions area shows no records. | The page is dynamic and does not establish historical completeness. |
+
+The AMC's August 2021 product note reports GoldBeES performance using dividend-reinvestment NAVs and says IDCW, if any, is assumed reinvested. This is consistent with a growth-return convention that would incorporate any declared distribution; it is not evidence that a distribution actually occurred. The current product page uses the same general convention.
+
+## Scheme lineage and SAI discrepancy
+
+The contemporaneous AMC record supports the lineage **R*Shares Gold ETF → Goldman Sachs Gold Exchange Traded Scheme (GS Gold BeES) → Reliance/Nippon Gold BeES**. The first-party [notice dated August 29, 2016](https://mf.nipponindiaim.com/InvestorServices/Addenda/Intimation-letter-BSE-NSE.pdf) explicitly labels R*Shares Gold ETF the transferor and Goldman Sachs Gold Exchange Traded Scheme the transferee/surviving scheme; the transferee's post-merger name was R*Shares Gold BeES. The same terms appear in the [AMC's notice to Goldman schemeholders](https://investeasy.nipponindiaim.com/rmfGsamnew/Documents/NoticetoUnitholdersforTransferofGoldmanSachsMutualFundSchemestoRelianceMutualFund.pdf). I found no separate July 2016 merger notice; the July date in the existing NAV-lineage note should be corrected to August 29, 2016.
+
+The separate [Notice No. 127, dated October 28, 2016](https://mf.nipponindiaim.com/InvestorServices/Addenda/Notice-No-127-W12xH16.pdf), sets November 5, 2016 as the effective date for completion of the Goldman Sachs-to-Reliance scheme transfer and states that the previously announced scheme mergers also take effect that day. Nippon's [2021 SAI](https://api.amfiindia.com/spages/sai21.pdf) independently records the trustee and management transfer on November 5, 2016 and lists the Goldman Sachs Gold ETF among Goldman-launched schemes later merged into Nippon India ETF Gold BeES. The official [AMFI NAV-history records](https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=49&frmdt=17-Sep-2016&todt=03-Nov-2016) identify Goldman scheme code **115744**, ISIN **INF732E01102**, through its last NAV on November 3; the [successor AMFI history query](https://portal.amfiindia.com/DownloadNAVHistoryReport_Po.aspx?mf=21&frmdt=04-Nov-2016&todt=10-Nov-2016) identifies Nippon scheme code **140088**, ISIN **INF204KB17I5**, from November 7. The current code/ISIN is also published in this [NSE scheme summary document](https://nsearchives.nseindia.com/trading_security/mf/pdf/Nippon_08052026180119_NipponMutualFund.pdf). These NAV dates are consistent with the merger/management-transfer lineage; they are not themselves the legal effective date.
+
+There is a real source discrepancy: the indexed copy of the [AMFI SAI dated October 14, 2025](https://portal.amfiindia.com/spages/sai21.pdf) says GoldBeES was formerly R*Shares Gold BeES, but also says “GS Gold BeES merged with R*Share Gold ETF w.e.f. Sep'16”—the reverse direction and an inconsistent month. The live AMFI URL has since rolled forward to a newer SAI. The same reversed footnote appears in the official [SEBI-hosted February 2025 SAI](https://www.sebi.gov.in/sebi_data/mutualfundfile/feb-2025/1740378244723.pdf), while the contemporaneous AMC notices, the November 5 effective-date notice, and the SAI's own Goldman acquisition description support the opposite direction and November 5, 2016. The footnote is therefore very likely a copy-forward error; its exact origin is not established.
+
+The [AMFI SAI dated December 14, 2021](https://api.amfiindia.com/spages/sai21.pdf), relevant to FY 2021-22, gives GoldBeES “Nil” entries for FY 2018-19, 2019-20, 2020-21, and 2021-22. Because the surrounding column headings explicitly say “Complaints Received,” “Complaints Redressed,” and “Complaints Pending,” these Nil entries mean complaint counts only. They must not be treated as evidence of a distribution-free history.
+
+## Backtest treatment
+
+- Continue to use the split-normalized NAV only as a price-basis cross-check. It is not a reconstructed cash-flow-adjusted total-return series.
+- Do not add a GoldBeES cash payout unless an official declaration/record date and amount are found.
+- Preserve the return limitation in any strategy comparison that holds GOLDBEES over a possible ex-distribution date. The current evidence does not quantify a correction or justify changing existing performance estimates.
+
+**Confidence:** High that the reviewed issuer page currently lists no GoldBeES dividend and that the cited 2026 half-year report declares none for that period; low that these records prove a complete zero-distribution history from 2007. A complete audit would require a scheme-specific annual AMFI dividend extraction or a dated issuer distribution ledger reconciled to NAV/ex-date jumps.
+
+**Lineage confidence:** High that R*Shares Gold ETF was merged into Goldman Sachs Gold BeES and that the subsequent scheme transfer/merger into Reliance became effective November 5, 2016. The Oct 2025 AMFI SAI's contrary footnote remains an unresolved documentary inconsistency, but is outweighed by the contemporaneous transaction notice and its explicit effective-date follow-up. Scheme lineage and distributions are separate questions: this lineage reconciliation does not resolve GoldBeES cash-distribution history.
