@@ -1,6 +1,6 @@
 # Indian sector ETF rotation sensitivity
 
-**2026-10-27 fee-model correction:** This static result snapshot predates the instrument-specific ETF STT replay. Use the current sensitivity CSV and consolidated ledger for numeric results; older figures below are superseded where they differ. See the [fee-model audit](../work/research/fee_model_audit.md).
+**2026-10-27 fee-model correction:** The current 384-case replay applies instrument-specific ETF STT. Results below reflect the corrected sensitivity CSV and consolidated ledger. See the [fee-model audit](../work/research/fee_model_audit.md).
 
 
 **As of:** 2026-10-27  
@@ -19,11 +19,17 @@ Each of six portfolios is replayed at 50/75/95/100% maximum gross exposure, 10/2
 
 ## Results at 50 bps per side
 
-The training-only screen selected the top-one sector momentum rule at a 75% exposure cap, because it had the highest training CAGR among rows with training drawdown no worse than 20%. It returned +56.97% / -19.31% in training, then -1.55% / -19.75% in 2024, and -9.99% / -21.50% in 2025+. The continuous account returned +44.97% and reached -30.20% close-marked drawdown. This selection fails the later drawdown screen and is rejected.
+The original close-MDD training screen selected top-one sector momentum at a 75% exposure cap. With the corrected fees it returned +58.19% / -19.18% close drawdown in training, -0.95% / -19.63% in 2024, and -8.62% / -20.97% in 2025+. The continuous account returned +48.76% but reached -29.77% close drawdown, so this selected rule fails the 20% risk screen.
 
-The post-hoc 25/50/25 NIFTY/sector/Gold mix at a 100% gross cap returned +71.02% with -12.52% maximum drawdown over 2022–2026, compared with +61.26% / -14.62% for the 100% NIFTY/Gold control. At 100 bps the respective full-period results were +61.62% / -12.57% and +47.50% / -16.58%. The mixed rule lagged the control in 2025+: +16.51% versus +31.41% at 50 bps, while drawdown was lower (-12.53% versus -14.63%). The apparent full-period improvement is therefore concentrated earlier in the sample.
+The post-hoc 25/50/25 NIFTY/sector/Gold mix at a 100% gross cap returned +72.92% / -12.51% close drawdown over 2022–2026, compared with +64.18% / -14.22% for the 100% NIFTY/Gold control. At 100 bps the respective full-period results were +63.48% / -12.56% and +50.15% / -16.20%. The mixed rule lagged the control in 2025+: +17.05% versus +32.24% at 50 bps and +14.37% versus +28.13% at 100 bps. This is a post-hoc mix, and the full-period gain does not establish a durable advantage.
 
-The sector-only equal-weight control returned +80.98% / -17.11% at 50 bps and 100% exposure, but gained only +3.37% in 2025+. The top-three momentum rule at 75% exposure returned +38.34% / -19.99% continuously, then lost 17.33% in 2025+. It uses almost all the requested drawdown budget. Neither standalone rotation nor the mixed portfolio is a validated winner; the mixed portfolio is a candidate for prospective paper comparison only after return-data checks.
+The sector-only equal-weight control returned +81.67% / -17.08% close drawdown at 50 bps and 100% exposure, but gained only +3.66% in 2025+. The price-signal top-three momentum rule at 75% returned +41.16% continuously; order-by-order risk re-marking puts its conservative OHLC bound at -19.67%, while its 2025+ return was -16.37% and the bound was -19.25%. It has little room under the 20% screen and loses in the holdout.
+
+## Risk-aware training selection and official-TRI signal challenger
+
+The same three top-N price-signal rules were screened using the conservative daily high-before-low OHLC bound, not close drawdown alone. At 50 bps, top-three at 75% was the training choice (+37.43%, -18.75% OHLC). It returned +17.46% / -9.59% in 2024, then -16.37% / -19.25% in 2025+, and +41.16% / -19.67% continuously. The full run passes the historical bound by only 0.33 percentage points; the later return is negative. See `outputs/sector_rotation_ohlc_audit.csv` and `outputs/sector_rotation_ohlc_training_selection.json`.
+
+The 2014–2026 official sector TRI histories supply a complete signal warm-up before the ETFs' common live history. The separate 144-case challenger uses those TRI values for 12–1 momentum and a 200-session trend gate, but uses Upstox ETF market prices for fills and NAV. Its 50-bps training selector picked top-two at 75% (+42.37%, -17.22% OHLC); the 2025+ return was -15.49% / -19.23% OHLC, and the continuous OHLC bound was -22.86%, so the selected path fails the full-period limit. Matching top-three at 75% returned +45.96% continuously with a -19.90% bound, only 0.10 percentage points of headroom; it lost 15.37% in 2025+ with a -19.93% bound. At 50% exposure, TRI top-three returned +29.80% with a -13.54% full bound and lost 10.16% in 2025+. The signal-source improvement is small relative to the sample and risk limits; it does not establish a winner. See [TRI signal methods/results](sector_tri_signal_momentum_method.md), [selection](sector_tri_signal_momentum_selection.json), and [primary distribution-source update](../work/research/sector_distribution_primary_source_update_2026-10-27.md).
 
 ## Official sector index return cross-check
 
@@ -57,14 +63,17 @@ These are unlevered, no-fee NAV and index comparisons, not a cash-distribution-a
 
 ## Data and risk limitations
 
-All signal and portfolio-return series in the 384-case strategy screen use saved Upstox ETF market-price candles; they are not official total-return series. Official sector PR/TR and AMFI scheme NAV histories are now available for cross-checking, but the AMFI NAV window begins in Apr 2023, has date mismatches, and is not itself proof of reinvested ETF distributions. NTR is unavailable and the actual ETF action ledger remains incomplete: Upstox's exact-ISIN action calls and AMFI's selected event queries returned empty records, with no completeness guarantee. The [primary-source memo](sector_rotation_primary_sources.md) documents the source limits. The BANKBEES action row in the older sector audit was corrected there: NSE reports ₹11/unit in 2014 and ₹13/unit in 2015; the ₹7/₹8 figures belong to NIFTYBEES. These BANKBEES events predate the 2022 test and did not change its returns.
+The original 384-case signal and all strategy NAV series use saved Upstox ETF market-price candles; the separate 144-case challenger uses official sector TRI only for signal ranking and still books ETF market-price P&L. Neither is a complete ETF total-return reconstruction. Official sector PR/TR and AMFI scheme NAV histories are available for cross-checking, but the AMFI NAV window begins in Apr 2023, has date mismatches, and is not itself proof of reinvested ETF distributions. NTR is unavailable and the actual ETF action ledger remains incomplete. Primary checks still do not confirm secondary claims of ₹10.50 AUTOBEES cash on 2026-06-09 or ₹6.50 PHARMABEES cash on 2026-06-11; the base P&L omits both. See the [sector source memo](sector_rotation_primary_sources.md) and [distribution-source update](../work/research/sector_distribution_primary_source_update_2026-10-27.md). The BANKBEES action row in the older audit was corrected: NSE reports ₹11/unit in 2014 and ₹13/unit in 2015; the ₹7/₹8 figures belong to NIFTYBEES. Those BANKBEES events predate the 2022 test.
 
-Maximum drawdown uses daily closing NAV and can understate intraday losses. Fixed slippage is a stress assumption, not measured historical bid/ask spread. The 20% historical screen is not a future loss limit. Before promoting the mixed portfolio, reconcile official ETF distributions against these sector TRI histories, save reproducible AMC/AMFI records through the data end, and freeze it for new forward-paper observations.
+The 50-bps sector grids have order-ledger OHLC audits; their same-day high-before-low envelopes are conservative but can still understate gaps, slippage, and execution failures. The 10/25/100-bps rows use close drawdown only. Fixed slippage is a stress assumption, not measured historical bid/ask spread. The 20% historical screen is not a future loss limit. Before promoting any portfolio, reconcile official ETF distributions against sector TRI histories, save reproducible AMC/AMFI records through the data end, and freeze the candidate for new forward-paper observations.
 
 ## Reproducibility
 
 - Sensitivity output: `outputs/sector_rotation_sensitivity.csv`.
 - Training-only selection record: `outputs/sector_rotation_training_selection.json`.
+- Training selection after the 50-bps OHLC screen: `outputs/sector_rotation_ohlc_training_selection.json`.
+- 50-bps price-signal OHLC audit: `outputs/sector_rotation_ohlc_audit.csv`; reproduction: `work/audit_sector_rotation_ohlc.py` and `work/select_sector_rotation_ohlc.py`.
+- Official-TRI signal challenger outputs and reproduction: `outputs/sector_tri_signal_momentum_sensitivity.csv`, `outputs/sector_tri_signal_momentum_ohlc_audit.csv`, `outputs/sector_tri_signal_momentum_selection.json`, and `work/sensitivity_sector_tri_signal.py`.
 - Runner and assert-based data/target checks: `work/sensitivity_sector_rotation.py`.
 - Official Nifty sector PR/TR source capture and alignment: `work/data/index_daily/sector_price_index_raw_2022_2026.json`, `work/data/index_daily/sector_tri_raw_2022_2026.json`, and `work/normalize_sector_index_history.py`.
 - Official AMFI ETF NAV capture and comparison: `work/data/api_probes/amfi_sector_etf_nav_2023_2026.json`, `work/capture_amfi_sector_etf_nav.py`, `outputs/sector_etf_nav_price_tri_comparison.csv`, and `work/data/index_daily/sector_etf_nav_price_tri_panel_2023_2026.csv`.

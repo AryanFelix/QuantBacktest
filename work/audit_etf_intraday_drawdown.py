@@ -15,6 +15,11 @@ LIMIT_PCT = 20.0
 BARS = {
     "NIFTYBEES": "work/data/etf_daily/NSE_EQ_INF204KB14I2-days-1-2014-01-01-2026-10-23.csv",
     "GOLDBEES": "work/data/etf_daily/GOLDBEES-days-1-2014-01-01-2026-10-23.csv",
+    "BANKBEES": "work/data/etf_daily/NSE_EQ_INF204KB15I9-days-1-2014-01-01-2026-10-23.csv",
+    "ITBEES": "work/data/etf_daily/NSE_EQ_INF204KB15V2-days-1-2014-01-01-2026-10-23.csv",
+    "AUTOBEES": "work/data/etf_daily/NSE_EQ_INF204KC1337-days-1-2014-01-01-2026-10-23.csv",
+    "PHARMABEES": "work/data/etf_daily/NSE_EQ_INF204KC1089-days-1-2014-01-01-2026-10-23.csv",
+    "PSUBNKBEES": "work/data/etf_daily/NSE_EQ_INF204KB16I7-days-1-2014-01-01-2026-10-23.csv",
 }
 CASES = (
     ("Quarterly fixed 50/50 control", "work/backtests/volatility_weighted_blend/fixed_50_50_quarterly__full_2014_plus__50bps"),

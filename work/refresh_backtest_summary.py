@@ -652,8 +652,16 @@ sector_rotation_path = ROOT / "outputs" / "sector_rotation_sensitivity.csv"
 if sector_rotation_path.exists():
     sector_rotation = read_csv(sector_rotation_path)
     assert len(sector_rotation) == 384, f"Expected 384 sector-rotation cases; found {len(sector_rotation)}"
+    sector_rotation_ohlc = read_csv(ROOT / "outputs" / "sector_rotation_ohlc_audit.csv")
+    assert len(sector_rotation_ohlc) == 96, f"Expected 96 sector OHLC audits; found {len(sector_rotation_ohlc)}"
+    sector_ohlc = {
+        (row["strategy"], row["period"], float(row["exposure_cap_pct"])): row
+        for row in sector_rotation_ohlc
+    }
+    assert len(sector_ohlc) == 96
     rows = [row for row in rows if row["simulation_type"] != "etf_sector_rotation_sensitivity"]
     for result in sector_rotation:
+        risk = sector_ohlc.get((result["strategy"], result["period"], float(result["exposure_cap_pct"]))) if int(float(result["slippage_bps_per_side"])) == 50 else None
         sizing = (
             f"Top {int(float(result['top_n']))} monthly sector ETFs by 12–1 momentum with positive return and above-200DMA"
             if result["top_n"] else
@@ -680,20 +688,79 @@ if sector_rotation_path.exists():
             "slippage_cost_inr": result["slippage_cost_inr"],
             "trade_count": "",
             "order_count": result["order_count"],
-            "within_20pct": result["within_20pct"],
+            "within_20pct": risk["within_20pct_under_bound"] if risk else result["within_20pct"],
             "selection_or_sizing": sizing,
             "source_artifact": (
                 f"{result['source_artifact']};outputs/sector_rotation_sensitivity.csv;"
                 "outputs/sector_rotation_training_selection.json;outputs/sector_rotation_method.md;"
-                "outputs/sector_rotation_primary_sources.md;work/sensitivity_sector_rotation.py"
+                "outputs/sector_rotation_primary_sources.md;outputs/sector_rotation_ohlc_audit.csv;"
+                "work/sensitivity_sector_rotation.py;work/audit_sector_rotation_ohlc.py"
             ),
-            "notes": "Current NSE equity-delivery charges; 10/25/50/100 bps per-side slippage. Sector history is price-only, launch dates differ, and the 2025+ window was previously inspected. See method and primary-source memo before interpreting as total return.",
+            "notes": (
+                f"Current modeled ETF charges; {result['slippage_bps_per_side']} bps per-side slippage. "
+                + (f"Conservative same-day OHLC bound {float(risk['simultaneous_ohlc_drawdown_bound_pct']):.2f}%; " if risk else "Close drawdown only; OHLC audit is at 50 bps. ")
+                + "ETF histories are price-only, launch dates differ, and later periods were inspected. Distributions remain incomplete; see the method and primary-source memos."
+            ),
         })
     sector_rotation_keys = [
         (row["strategy"], row["period"], row["gross_exposure_cap_pct"], row["slippage_bps_per_side"])
         for row in rows if row["simulation_type"] == "etf_sector_rotation_sensitivity"
     ]
     assert len(sector_rotation_keys) == len(set(sector_rotation_keys)) == 384
+
+sector_tri_path = ROOT / "outputs" / "sector_tri_signal_momentum_sensitivity.csv"
+if sector_tri_path.exists():
+    sector_tri = read_csv(sector_tri_path)
+    assert len(sector_tri) == 144, f"Expected 144 TRI-signal sector cases; found {len(sector_tri)}"
+    sector_tri_ohlc_rows = read_csv(ROOT / "outputs" / "sector_tri_signal_momentum_ohlc_audit.csv")
+    assert len(sector_tri_ohlc_rows) == 48, f"Expected 48 TRI-signal sector OHLC audits; found {len(sector_tri_ohlc_rows)}"
+    sector_tri_ohlc = {
+        (row["strategy"], row["period"], float(row["exposure_cap_pct"])): row
+        for row in sector_tri_ohlc_rows
+    }
+    rows = [row for row in rows if row["simulation_type"] != "etf_sector_tri_signal_momentum"]
+    for result in sector_tri:
+        risk = sector_tri_ohlc.get((result["strategy"], result["period"], float(result["exposure_cap_pct"]))) if int(float(result["slippage_bps_per_side"])) == 50 else None
+        rows.append({
+            "simulation_type": "etf_sector_tri_signal_momentum",
+            "strategy": result["strategy"],
+            "universe": "BANKBEES; ITBEES; AUTOBEES; PHARMABEES; PSUBNKBEES",
+            "period": result["period"],
+            "period_start": result["period_start"],
+            "period_end": result["period_end"],
+            "starting_balance_inr": result["starting_balance_inr"],
+            "ending_balance_inr": result["ending_balance_inr"],
+            "total_return_pct": result["total_return_pct"],
+            "cagr_pct": result["cagr_pct"],
+            "max_drawdown_pct": result["max_drawdown_pct"],
+            "sharpe_zero_rf": result["sharpe_zero_rf"],
+            "gross_exposure_cap_pct": result["exposure_cap_pct"],
+            "slippage_bps_per_side": result["slippage_bps_per_side"],
+            "fees_inr": result["fees_inr"],
+            "slippage_cost_inr": result["slippage_cost_inr"],
+            "trade_count": "",
+            "order_count": result["order_count"],
+            "within_20pct": risk["within_20pct_under_bound"] if risk else result["within_20pct_close"],
+            "selection_or_sizing": (
+                f"Top {int(float(result['top_n']))} by official gross sector TRI 12–1 momentum; positive score and above 200-session TRI average; "
+                f"next-open ETF fills; {result['exposure_cap_pct']}% gross cap"
+            ),
+            "source_artifact": (
+                f"{result['source_artifact']};outputs/sector_tri_signal_momentum_sensitivity.csv;"
+                "outputs/sector_tri_signal_momentum_selection.json;outputs/sector_tri_signal_momentum_method.md;"
+                "outputs/sector_tri_signal_momentum_ohlc_audit.csv;work/sensitivity_sector_tri_signal.py"
+            ),
+            "notes": (
+                f"Current modeled ETF charges; {result['slippage_bps_per_side']} bps per-side slippage. "
+                + (f"Conservative same-day OHLC bound {float(risk['simultaneous_ohlc_drawdown_bound_pct']):.2f}%; " if risk else "Close drawdown only; OHLC audit is at 50 bps. ")
+                + "Official TRI is a ranking signal only; simulated P&L uses ETF prices and credits no cash distributions. Unequal ETF inception dates and prior inspection prevent an investable winner claim."
+            ),
+        })
+    tri_keys = [
+        (row["strategy"], row["period"], row["gross_exposure_cap_pct"], row["slippage_bps_per_side"])
+        for row in rows if row["simulation_type"] == "etf_sector_tri_signal_momentum"
+    ]
+    assert len(tri_keys) == len(set(tri_keys)) == 144
 
 walk_forward_path = ROOT / "outputs" / "nifty_gold_walk_forward.csv"
 if walk_forward_path.exists():
@@ -1001,7 +1068,7 @@ for row in manifest:
             "the 140-case single-sleeve deployment screen, the 60-case volatility-throttle screen, "
             "the 90-case India VIX overlay screen, the 130-case joint exposure/throttle screen, "
             "the 125-case execution-cost stress, the 64-case intraday ORB opening-range sensitivity, "
-            "the 144-case NIFTY opening-gap fade sensitivity, and the 384-case sector ETF rotation screen; "
+            "the 144-case NIFTY opening-gap fade sensitivity, the 384-case sector ETF rotation screen with 96 OHLC audits, and the 144-case official-TRI sector signal challenger with 48 OHLC audits; "
             "14 annual expanding-window NIFTY/Gold parameter-selection replay rows; "
             "47 NIFTY/Gold passive, active, and exposure-sensitivity rows across 2020+, full available history, and a shared 2015+ window, including 30 passive-mix exposure cases; "
             "15 passive drawdown-control cases across 10/50/100 bps; "
@@ -1369,12 +1436,40 @@ for metadata in (
         "bar_interval": "daily; month-end signals / next-open execution",
         "first_bar": "2022-01-03",
         "last_bar": "2026-10-23",
-        "bar_count": "1,176 common five-sector sessions; 384 scenarios",
-        "file_count": "384 equity/order/summary triplets + sensitivity + training selection + method + source memo + runner",
+        "bar_count": "1,176 common five-sector sessions; 384 scenarios + 96 OHLC audits",
+        "file_count": "384 equity/order/summary triplets + sensitivity + training selection + method + source memo + runner + OHLC audit",
         "empty_files": "0",
-        "cache_paths": "outputs/sector_rotation_sensitivity.csv;outputs/sector_rotation_training_selection.json;outputs/sector_rotation_method.md;outputs/sector_rotation_primary_sources.md;work/sensitivity_sector_rotation.py;work/backtests/sector_rotation/",
+        "cache_paths": "outputs/sector_rotation_sensitivity.csv;outputs/sector_rotation_training_selection.json;outputs/sector_rotation_method.md;outputs/sector_rotation_primary_sources.md;outputs/sector_rotation_ohlc_audit.csv;work/sensitivity_sector_rotation.py;work/audit_sector_rotation_ohlc.py;work/backtests/sector_rotation/",
         "purpose": "Compare monthly 12–1 sector momentum, equal-weight sector exposure, a NIFTY/sector/Gold mix, and the frozen NIFTY/Gold control under fees, slippage, and the 20% historical drawdown screen",
-        "notes": "Five current sector ETFs; unequal inceptions and survivor bias. At 50 bps the 25/50/25 NIFTY/sector/Gold mix returned +71.0% / -12.5% drawdown in 2022–2026, versus +61.3% / -14.6% for NIFTY/Gold, but lagged it in 2025+. Price-only ETF series and unresolved distribution evidence prevent a total-return or winner claim.",
+        "notes": "Five current sector ETFs; unequal inceptions and survivor bias. At 50 bps the 25/50/25 NIFTY/sector/Gold mix returned +72.92% / -12.51% close drawdown in 2022–2026, versus +64.18% / -14.22% for NIFTY/Gold; in 2025+ it returned +17.05% versus +32.24%. Price-signal top-3 at 75% returned +41.16% continuously with -19.67% conservative OHLC bound; price-only ETF P&L and incomplete distributions prevent a total-return or winner claim.",
+    },
+    {
+        "dataset": "Official NSE sector gross TRI signal history",
+        "ticker": "Nifty Bank; Nifty IT; Nifty Auto; Nifty Pharma; Nifty PSU Bank",
+        "instrument_key": "NSE Indices historical-data report page-backed route; not a documented public API",
+        "bar_interval": "daily total returns index values",
+        "first_bar": "2014-01-01",
+        "last_bar": "2026-10-23",
+        "bar_count": "5 indexes × 3,170 rows; 65 one-year-or-shorter queries",
+        "file_count": "raw JSON capture + capture script + signal comparison method",
+        "empty_files": "0",
+        "cache_paths": "work/data/index_daily/sector_tri_raw_2014_2026.json;work/capture_sector_tri_signal_history.py;outputs/sector_tri_signal_momentum_method.md",
+        "purpose": "Supply pre-2022 warm-up for official gross TRI momentum and 200-session trend signals on actual sector ETF launch dates",
+        "notes": "All five official TRI series cover 3,170 daily dates. Four NSE special sessions in 2015–2018 have no corresponding saved ETF panel date and are omitted when aligned to the execution panel. Historical-data page route observed in first-party JavaScript; no stable API contract or NTR claim is made.",
+    },
+    {
+        "dataset": "Sector ETF rotation with official TRI signals",
+        "ticker": "BANKBEES; ITBEES; AUTOBEES; PHARMABEES; PSUBNKBEES",
+        "instrument_key": "NSE_EQ|INF204KB15I9; NSE_EQ|INF204KB15V2; NSE_EQ|INF204KC1337; NSE_EQ|INF204KC1089; NSE_EQ|INF204KB16I7",
+        "bar_interval": "daily; month-end TRI signals / next-open ETF fills; 10/50/100 bps",
+        "first_bar": "2022-01-03",
+        "last_bar": "2026-10-23",
+        "bar_count": "144 sensitivity cases; 48 order-ledger OHLC audits at 50 bps",
+        "file_count": "144 equity/order/summary triplets + sensitivity + selection + method + OHLC audit + runner",
+        "empty_files": "0",
+        "cache_paths": "outputs/sector_tri_signal_momentum_sensitivity.csv;outputs/sector_tri_signal_momentum_selection.json;outputs/sector_tri_signal_momentum_method.md;outputs/sector_tri_signal_momentum_ohlc_audit.csv;work/sensitivity_sector_tri_signal.py;work/backtests/sector_tri_signal_momentum/",
+        "purpose": "Compare official gross TRI 12–1 momentum and 200-session trend signals with actual ETF prices for fills, NAV, modeled fees, slippage, and conservative daily OHLC drawdown bounds",
+        "notes": "The training-only 50-bps/OHLC selector chose TRI top-2 at 75%: +42.37% training / -17.22% OHLC, then -15.49% in 2025+ and -22.86% OHLC continuously, so it fails the 20% full-period screen. The highest full-period tested TRI return that passed OHLC was top-3 at 75% (+45.96%, -19.90% bound), with negligible headroom; all returns omit ETF distributions and all periods were previously inspected.",
     },
     {
         "dataset": "Indian sector ETF rotation primary-source memo",
@@ -1426,11 +1521,25 @@ for metadata in (
         "first_bar": "2022",
         "last_bar": "2026",
         "bar_count": "25 HTTP 200 responses; all data arrays empty",
-        "file_count": "25 query records + scheme-ID mapping + corporate-action audit updates",
+        "file_count": "25 query records + scheme-ID mapping + corporate-action audit + primary-source update",
         "empty_files": "0",
-        "cache_paths": "work/data/api_probes/amfi_sector_etf_scheme_dividends_2022_2026.json;work/data/api_probes/amfi_nippon_sector_scheme_ids.json;outputs/sector_etf_corporate_action_audit.csv;outputs/sector_rotation_primary_sources.md",
+        "cache_paths": "work/data/api_probes/amfi_sector_etf_scheme_dividends_2022_2026.json;work/data/api_probes/amfi_nippon_sector_scheme_ids.json;outputs/sector_etf_corporate_action_audit.csv;outputs/sector_rotation_primary_sources.md;work/research/sector_distribution_primary_source_update_2026-10-27.md",
         "purpose": "Check AMFI's selected scheme-dividend records for five sector ETFs and assess disputed third-party distribution claims",
-        "notes": "Empty first-party responses do not prove that no distributions occurred; the 2026 AUTOBEES/PHARMABEES vendor claims remain unverified and are not inserted into strategy P&L.",
+        "notes": "Empty first-party responses do not prove that no distributions occurred. AUTOBEES ₹10.50 (ex 2026-06-09) and PHARMABEES ₹6.50 (ex 2026-06-11) secondary claims lack matching primary event notices and remain outside the base strategy P&L.",
+    },
+    {
+        "dataset": "Sector ETF distribution primary-source update",
+        "ticker": "AUTOBEES; PHARMABEES",
+        "instrument_key": "NSE ISIN INF204KC1337; INF204KC1089",
+        "bar_interval": "cash-distribution event-source review",
+        "first_bar": "2026-06-09",
+        "last_bar": "2026-06-11",
+        "bar_count": "2 secondary event claims reviewed; 0 matched primary notices found",
+        "file_count": "1 source memo; AMFI/Upstox probes cross-referenced",
+        "empty_files": "0",
+        "cache_paths": "work/research/sector_distribution_primary_source_update_2026-10-27.md;work/data/api_probes/amfi_sector_etf_scheme_dividends_2022_2026.json;work/data/api_probes/sector_etf_corporate_actions_2026-10-26.json",
+        "purpose": "Document the exact 2026 cash-event claims and first-party source-verification limits before use in ETF return accounting",
+        "notes": "The ₹10.50 AUTOBEES and ₹6.50 PHARMABEES claims are not verified; empty AMFI/Upstox responses and a BSE retrieval failure do not prove that the events did not occur. Keep the base ledger unadjusted and label any credited cash as secondary-source-only.",
     },
     {
         "dataset": "NIFTY/Gold expanding-window annual walk-forward",

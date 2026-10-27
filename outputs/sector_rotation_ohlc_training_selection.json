@@ -1,0 +1,62 @@
+{
+  "selection_cost_bps_per_side": 50,
+  "training_period": "2022-01-03 through 2023-12-29",
+  "selection_universe": "three 12\u20131 momentum top-N rules; 50/75/95/100% exposure caps",
+  "criterion": "highest net CAGR among top-N sector momentum candidates passing the conservative daily OHLC drawdown screen",
+  "selected_strategy": "sector_momentum12_1_top3",
+  "selected_top_n": 3,
+  "selected_exposure_cap_pct": 75.0,
+  "training_return_pct": 37.42730086423494,
+  "training_cagr_pct": 17.607226593599524,
+  "training_close_drawdown_pct": -17.1235621943005,
+  "training_ohlc_bound_pct": -18.749996847854234,
+  "training_within_20pct": true,
+  "same_rule_results": [
+    {
+      "period": "validation_2024",
+      "etf_price_signal": {
+        "total_return_pct": 17.46369524414697,
+        "close_max_drawdown_pct": -7.169809188493758,
+        "ohlc_bound_pct": -9.588650620476724,
+        "within_20pct": true
+      },
+      "official_tri_signal_same_top_n_and_cap": {
+        "total_return_pct": 17.46369524414697,
+        "close_max_drawdown_pct": -7.169809188493758,
+        "ohlc_bound_pct": -9.588650620476724,
+        "within_20pct": true
+      }
+    },
+    {
+      "period": "holdout_2025_plus",
+      "etf_price_signal": {
+        "total_return_pct": -16.37117734461334,
+        "close_max_drawdown_pct": -18.835305770208233,
+        "ohlc_bound_pct": -19.247704759204687,
+        "within_20pct": true
+      },
+      "official_tri_signal_same_top_n_and_cap": {
+        "total_return_pct": -15.365731431765106,
+        "close_max_drawdown_pct": -19.517339498688212,
+        "ohlc_bound_pct": -19.926824094834984,
+        "within_20pct": true
+      }
+    },
+    {
+      "period": "continuous_2022_plus",
+      "etf_price_signal": {
+        "total_return_pct": 41.15963010198209,
+        "close_max_drawdown_pct": -19.049924381950756,
+        "ohlc_bound_pct": -19.668597147947953,
+        "within_20pct": true
+      },
+      "official_tri_signal_same_top_n_and_cap": {
+        "total_return_pct": 45.961126194903045,
+        "close_max_drawdown_pct": -19.491187350257235,
+        "ohlc_bound_pct": -19.902727264144193,
+        "within_20pct": true
+      }
+    }
+  ],
+  "caveat": "Although the rule is selected from the training split, the later periods and broad research history were already inspected; this is not an untouched lockbox."
+}
