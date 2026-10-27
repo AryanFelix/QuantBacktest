@@ -66,6 +66,23 @@ The quarterly 50/50 trend rule was reselected at each cost level using the 2014�
 
 This cost-only stress keeps the 50-bps candidate's base metrics aligned with the prior frozen test. The 100-bps scenario selects a much smaller exposure and the 200-bps scenario rejects the family under the training risk rule. Even the positive later-period returns are pseudo-OOS on repeatedly inspected data; GoldBeES cash distributions, tax, cash yield, live market impact, and future drawdowns remain unresolved. See the [frozen method](etf_exposure_cap_cost_stress_method.md), [eight screen results](etf_exposure_cap_cost_stress.csv), and [64-case training grid](etf_exposure_cap_cost_stress_training_grid.csv).
 
+### Passive drawdown-trigger walk-forward
+
+The 8/10/12% controls were selected only on 2015–2019 at 50 bps, then replayed on independent ₹10 lakh accounts in 2020–2022 and 2023–October 2026. All three training paths returned +27.39% with a -11.44% OHLC bound because none of the triggers fired; the 8% rule won only by the pre-set lower-trigger tie-break. The training segment therefore did not identify a useful trigger threshold.
+
+| Period | Trigger | Net return at 50 bps | Close MDD | OHLC bound | Cuts / recoveries |
+|---|---:|---:|---:|---:|---:|
+| Validation 2020–2022 | 8% | +23.51% | -10.72% | -16.63% | 1 / 1 |
+| Validation 2020–2022 | 10% | +23.20% | -11.38% | -16.77% | 1 / 1 |
+| Validation 2020–2022 | 12% | +23.64% | -12.62% | -16.84% | 1 / 1 |
+| Validation 2020–2022 | Fixed 60% | +25.72% | -12.62% | -16.88% | — |
+| Pseudo-holdout 2023–2026 | 8% | +55.93% | -12.09% | -13.07% | 1 / 0 |
+| Pseudo-holdout 2023–2026 | 10% | +55.88% | -12.13% | -13.73% | 1 / 0 |
+| Pseudo-holdout 2023–2026 | 12% | +49.75% | -15.79% | -17.65% | 1 / 0 |
+| Pseudo-holdout 2023–2026 | Fixed 60% | +51.52% | -15.79% | -17.65% | — |
+
+The 8% selection's pseudo-holdout return was +56.64% at 10 bps and +55.05% at 100 bps, with OHLC bounds of -12.89% and -13.29%. Each segment starts from fresh capital and resets its high-water mark; these are not a continuous compounded account. The threshold family and later dates have already been examined, only one cut occurred in each later segment, and GoldBeES distributions remain incomplete. Keep all three frozen thresholds in forward paper; this split is descriptive, not independent validation. See the [frozen protocol](passive_drawdown_control_walkforward_method.md), [19-case ledger](passive_drawdown_control_walkforward.csv), and [training selection record](passive_drawdown_control_walkforward_selection.json).
+
 ## Expanding-window parameter selection
 
 The 2020–2026 pseudo-out-of-sample sequence selected the highest net-return rule from seven fixed NIFTY/Gold parameter settings using only data through the prior December. Training candidates had to pass both the 20% close-drawdown screen and conservative OHLC bound at a 45% gross cap and 50 bps per-side slippage. All seven candidates passed in every training fold. The selector chose D55/30 + Gold SMA200 for 2020–2025, then D40/20 + SMA200 for the partial 2026 fold. The 45% cap itself came from an earlier full-history risk screen, so exposure selection was not nested inside this walk-forward.
@@ -361,3 +378,4 @@ The independent source review confirms that Upstox’s candle contract does not 
 - **2026-10-27 — NIFTY intraday symmetric ORB short-side screen:** replayed the previously untested short breakout side with the same 30-minute signals, 0.5% stop risk, 95% cap, and current fee/slippage model. At 10 bps, long-short returned -46.60% with -47.22% drawdown over 2022–2026; at 50 bps it returned -96.38% / -96.38%. It also lost money in train, validation, and the already-inspected 2025–2026 segment. The existing long-only 10-bps rows reproduced exactly. Reject the symmetric extension; no 1-minute history pull was made because the screen showed no edge. See [method](intraday_orb_short_side_method.md) and [32-case ledger](intraday_orb_short_side_sensitivity.csv).
 - **2026-10-27 — NIFTY/Gold cost stress:** reselected the quarterly 50/50 Donchian 55/20 + SMA200 exposure cap on 2014–2022 under 10/50/100/200 bps per-side slippage, then froze eligible caps on 2023–2026. The 20% screen selected 70%, 70%, 30%, then none; the 15% buffer selected 45%, 40%, then none at 100 and 200 bps. Positive later-period cases remain pseudo-OOS, price-only ETF evidence. See the [method](etf_exposure_cap_cost_stress_method.md), [selected results](etf_exposure_cap_cost_stress.csv), and [training grid](etf_exposure_cap_cost_stress_training_grid.csv).
 - **2026-10-27 — forward-paper pre-start API check:** the 21:34 IST Upstox V3 range query through Oct 27 succeeded for both ETF instruments but returned only the Oct 26 candle. No post-freeze common session exists yet; no paper return row was created. See the [paper status notes](forward_paper_plan.md) and credential-free request log in the ignored local API-probe cache.
+- **2026-10-27 — passive drawdown-trigger walk-forward:** the 2015–2019 training segment never activated the 8/10/12% controls, so all candidates tied and the lower-trigger tie-break selected 8% without identifying a superior threshold. At 50 bps, validation and pseudo-holdout all passed the historical 20% OHLC screen; 8% returned +23.51%/-16.63% and +55.93%/-13.07%, respectively. The later period was previously inspected and had one trigger event. Keep all three controls in prospective paper; do not promote the 8% rule from this split. See the [method](passive_drawdown_control_walkforward_method.md) and [results](passive_drawdown_control_walkforward.csv).
