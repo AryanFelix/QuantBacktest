@@ -13,7 +13,7 @@ Costs use current modeled equity-fund delivery charges uniformly across historic
 
 ## Walk-forward-style selection result
 
-Selected sector_tri_momentum12_1_top2 at 75% exposure. Training return was +42.37% and its conservative OHLC bound was -17.22%. The selected rule, its 2024 validation, 2025+ holdout, continuous replay, and OHLC bounds are in `outputs/sector_tri_signal_momentum_selection.json`; all 144 strategy/cost/period rows are in `outputs/sector_tri_signal_momentum_sensitivity.csv`. The 48 50-bps paths have conservative same-day high-before-low replays in `outputs/sector_tri_signal_momentum_ohlc_audit.csv`; every order ledger reconciled to saved close NAV within ₹0.03.
+Selected sector_tri_momentum12_1_top2 at 75% exposure. Training returned +42.37% with a conservative OHLC bound of -17.22%. In 2024 the rule returned +8.91% / -12.42% OHLC; in 2025+ it returned -15.49% / -19.23% OHLC. Continuous ETF-price return was +36.87%, but the bound was -22.86%, failing the 20% screen. The 2024 validation, 2025+ holdout, continuous replay, and other tested cases are in `outputs/sector_tri_signal_momentum_selection.json`; all 144 strategy/cost/period rows are in `outputs/sector_tri_signal_momentum_sensitivity.csv`. The 48 50-bps paths have conservative same-day high-before-low replays in `outputs/sector_tri_signal_momentum_ohlc_audit.csv`; every order ledger reconciled to saved close NAV within ₹0.03.
 
 ## Limits
 
