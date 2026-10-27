@@ -37,6 +37,8 @@ PORTFOLIOS = {
     "monthly_fixed_50_50_100pct": ("fixed_50_50", 1.0),
     "monthly_fixed_50_50_95pct": ("fixed_50_50", 0.95),
     "quarterly_fixed_50_50_100pct": ("fixed_50_50_quarterly", 1.0),
+    "quarterly_fixed_50_50_train_selected_70pct": ("fixed_50_50_quarterly", 0.70),
+    "quarterly_fixed_50_50_train_selected_40pct_buffer": ("fixed_50_50_quarterly", 0.40),
     "quarterly_inverse_vol_63d_100pct": ("inverse_vol_63d_quarterly", 1.0),
     "quarterly_inverse_vol_63d_single65_100pct": ("inverse_vol_63d_quarterly_single65", 1.0),
     "quarterly_inverse_vol_63d_single65_vol16_100pct": ("inverse_vol_63d_quarterly_single65_vol16", 1.0),
@@ -53,13 +55,13 @@ DRAWDOWN_THRESHOLDS = {
 LEDGER = OUT / "forward_paper_ledger.csv"
 EQUITY = OUT / "forward_paper_equity.csv"
 ORDERS = OUT / "forward_paper_orders.csv"
-CONFIG = STATE / "frozen_config_v7.json"
-PRIOR_CONFIG = STATE / "frozen_config_v6.json"
+CONFIG = STATE / "frozen_config_v8.json"
+PRIOR_CONFIG = STATE / "frozen_config_v7.json"
 STATUS = STATE / "latest_status.json"
 CONFIG_VALUE = {
-    "freeze_revision": 7,
+    "freeze_revision": 8,
     "freeze_date": "2026-10-27",
-    "amendment": "Preserves revision 6 and adds three passive NIFTY/Gold drawdown-control frontiers: 8%, 10%, and 12% close triggers cut exposure from 60% to 30%, with recovery at half the trigger, all at the next open. All thresholds are observed prospectively; no threshold is selected from the inspected historical sample. Frozen before the 2026-10-27 close; paper execution begins 2026-10-28.",
+    "amendment": "Preserves revision 7 and adds two quarterly fixed 50/50 NIFTY/Gold exposure-cap paths. A 70% cap was selected on 2014-2022 training under the user 20% OHLC screen; a 40% cap was selected under a 15% safety-buffer screen. The later 2023+ history was already inspected, so those results are pseudo-out-of-sample. Frozen before the first post-freeze paper session; paper execution begins 2026-10-28.",
     "history_cutoff": HISTORY_CUTOFF.isoformat(),
     "paper_start": PAPER_START.isoformat(),
     "capital_inr": CAPITAL,
@@ -74,6 +76,8 @@ CONFIG_VALUE = {
         "monthly_fixed_50_50_100pct": "50% NIFTYBEES Donchian 55/20 + 50% GOLDBEES SMA200; signal changes and month-end; next-session open; 100% gross cap",
         "monthly_fixed_50_50_95pct": "same monthly fixed sleeves and weights; 95% gross cap provides a cash-buffer control",
         "quarterly_fixed_50_50_100pct": "same sleeves and weights; signal changes and quarter-end; next-session open; 100% gross cap",
+        "quarterly_fixed_50_50_train_selected_70pct": "same quarterly fixed 50/50 sleeves; 70% gross exposure cap selected using 2014-2022 training under a 20% daily OHLC screen; next-session open",
+        "quarterly_fixed_50_50_train_selected_40pct_buffer": "same quarterly fixed 50/50 sleeves; 40% gross exposure cap selected using 2014-2022 training under a 15% daily OHLC safety buffer; next-session open",
         "quarterly_inverse_vol_63d_100pct": "same active sleeves; inverse 63-session realized-vol split when both active, 50% when one active; signal changes and quarter-end; 100% gross cap",
         "quarterly_inverse_vol_63d_single65_100pct": "same quarterly inverse-vol rule when both sleeves are active; 65% NAV when only one is active; signal changes and quarter-end; 100% gross cap",
         "quarterly_inverse_vol_63d_single65_vol16_100pct": "same quarterly 65% solo-sleeve rule; at signal-change or quarter-end rebalance, scale base weights by min(1, 16% / trailing 63-session annualized volatility of lagged base-portfolio returns); next-session open; 100% gross cap",
