@@ -1,0 +1,422 @@
+{
+  "as_of": "2026-10-27",
+  "primary_slippage_bps_per_side": 50,
+  "capital_inr": 1000000,
+  "training_period": "2015-01-02 through 2019-12-31",
+  "candidate_count": 198,
+  "eligible_training_candidates": 180,
+  "selection_rule": "Among training rules passing the -20% order-ledger OHLC bound, maximize net return; tie-break by shallower OHLC bound, lower cap, allocation closest to 50/50, then quarterly schedule.",
+  "selected": {
+    "rule_id": "quarterly__nifty100__cap030",
+    "rebalance_frequency": "quarterly",
+    "nifty_share_pct": 100.0,
+    "gold_share_pct": 0.0,
+    "gross_exposure_cap_pct": 30.0,
+    "training_return_pct": -0.5993783765132377,
+    "training_close_mdd_pct": -4.736360774474213,
+    "training_ohlc_bound_pct": -5.7597771291983175,
+    "training_ohlc_pass": true,
+    "oos_results": {
+      "validation_2020_2022": {
+        "return_pct": 15.678633219439808,
+        "close_mdd_pct": -4.159237550078321,
+        "ohlc_bound_pct": -9.971875906415528,
+        "within_20pct_ohlc": true
+      },
+      "holdout_2023_plus": {
+        "return_pct": 5.860897894271844,
+        "close_mdd_pct": -2.365718769516212,
+        "ohlc_bound_pct": -3.206866352182014,
+        "within_20pct_ohlc": true
+      },
+      "test_2020_plus": {
+        "return_pct": 23.40892763821385,
+        "close_mdd_pct": -4.159237550078321,
+        "ohlc_bound_pct": -9.971875906415528,
+        "within_20pct_ohlc": true
+      },
+      "continuous_2015_plus": {
+        "return_pct": 22.99442487058343,
+        "close_mdd_pct": -6.055322057931423,
+        "ohlc_bound_pct": -9.971934590369214,
+        "within_20pct_ohlc": true
+      }
+    }
+  },
+  "fixed_50_50_monthly_45pct_reference": {
+    "rule_id": "monthly__nifty050__cap045",
+    "oos_results": {
+      "validation_2020_2022": {
+        "return_pct": 23.185704496421412,
+        "close_mdd_pct": -6.73558733869003,
+        "ohlc_bound_pct": -13.772523809822147,
+        "within_20pct_ohlc": true
+      },
+      "holdout_2023_plus": {
+        "return_pct": 42.45468686579168,
+        "close_mdd_pct": -12.979470457036236,
+        "ohlc_bound_pct": -14.829149011707754,
+        "within_20pct_ohlc": true
+      },
+      "test_2020_plus": {
+        "return_pct": 77.52263905519644,
+        "close_mdd_pct": -12.972839450244223,
+        "ohlc_bound_pct": -14.8287503616362,
+        "within_20pct_ohlc": true
+      },
+      "continuous_2015_plus": {
+        "return_pct": 65.18502350901585,
+        "close_mdd_pct": -15.192010776965803,
+        "ohlc_bound_pct": -15.817481899816887,
+        "within_20pct_ohlc": true
+      }
+    }
+  },
+  "top_10_training_candidates": [
+    {
+      "rule_id": "quarterly__nifty100__cap030",
+      "rebalance_frequency": "quarterly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 30.0,
+      "total_return_pct": -0.5993783765132377,
+      "max_drawdown_pct": -4.736360774474213,
+      "simultaneous_ohlc_drawdown_bound_pct": -5.7597771291983175
+    },
+    {
+      "rule_id": "monthly__nifty100__cap030",
+      "rebalance_frequency": "monthly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 30.0,
+      "total_return_pct": -0.6401785557311079,
+      "max_drawdown_pct": -4.681681196597431,
+      "simultaneous_ohlc_drawdown_bound_pct": -5.627446242248235
+    },
+    {
+      "rule_id": "quarterly__nifty100__cap040",
+      "rebalance_frequency": "quarterly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 40.0,
+      "total_return_pct": -0.7910283921223393,
+      "max_drawdown_pct": -6.256327890732627,
+      "simultaneous_ohlc_drawdown_bound_pct": -7.6025016507321075
+    },
+    {
+      "rule_id": "monthly__nifty100__cap040",
+      "rebalance_frequency": "monthly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 40.0,
+      "total_return_pct": -0.8287771997569804,
+      "max_drawdown_pct": -6.191810519429508,
+      "simultaneous_ohlc_drawdown_bound_pct": -7.450908029329028
+    },
+    {
+      "rule_id": "quarterly__nifty100__cap045",
+      "rebalance_frequency": "quarterly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 45.0,
+      "total_return_pct": -0.8947825995303971,
+      "max_drawdown_pct": -7.008307355000176,
+      "simultaneous_ohlc_drawdown_bound_pct": -8.512592564716748
+    },
+    {
+      "rule_id": "monthly__nifty100__cap045",
+      "rebalance_frequency": "monthly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 45.0,
+      "total_return_pct": -0.9303501131308956,
+      "max_drawdown_pct": -6.940301974491203,
+      "simultaneous_ohlc_drawdown_bound_pct": -8.355961217904373
+    },
+    {
+      "rule_id": "quarterly__nifty100__cap050",
+      "rebalance_frequency": "quarterly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 50.0,
+      "total_return_pct": -1.0038982093078297,
+      "max_drawdown_pct": -7.755422932228662,
+      "simultaneous_ohlc_drawdown_bound_pct": -9.415810147904935
+    },
+    {
+      "rule_id": "monthly__nifty100__cap050",
+      "rebalance_frequency": "monthly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 50.0,
+      "total_return_pct": -1.0418849439915223,
+      "max_drawdown_pct": -7.6855858914440915,
+      "simultaneous_ohlc_drawdown_bound_pct": -9.25613233515592
+    },
+    {
+      "rule_id": "quarterly__nifty100__cap060",
+      "rebalance_frequency": "quarterly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 60.0,
+      "total_return_pct": -1.2386262810516135,
+      "max_drawdown_pct": -9.233856507211192,
+      "simultaneous_ohlc_drawdown_bound_pct": -11.199625262618163
+    },
+    {
+      "rule_id": "monthly__nifty100__cap060",
+      "rebalance_frequency": "monthly",
+      "nifty_share_pct": 100.0,
+      "gross_exposure_cap_pct": 60.0,
+      "total_return_pct": -1.2827466813582378,
+      "max_drawdown_pct": -9.162647660932821,
+      "simultaneous_ohlc_drawdown_bound_pct": -11.04264070582751
+    }
+  ],
+  "oos_ohlc_audits": [
+    {
+      "role": "train_selected",
+      "rule_id": "quarterly__nifty100__cap030",
+      "period": "validation_2020_2022",
+      "risk": {
+        "portfolio": "quarterly__nifty100__cap030",
+        "start_date": "2020-01-01",
+        "end_date": "2022-12-30",
+        "sessions": 748,
+        "starting_balance_inr": 1000000,
+        "ending_balance_inr": 1156786.3321943982,
+        "total_fees_inr": 1915.874855602139,
+        "close_max_drawdown_pct": -4.159237550078321,
+        "simultaneous_ohlc_drawdown_bound_pct": -9.971875906415528,
+        "fold_ohlc_drawdown_bound_pct": -9.971875906415528,
+        "bound_peak_date": "2021-09-28",
+        "bound_trough_date": "2022-08-22",
+        "running_peak_nav_inr": 1226057.9176164563,
+        "running_peak_date": "2021-09-28",
+        "running_close_peak_nav_inr": 1179985.1710340644,
+        "running_close_peak_date": "2021-10-18",
+        "close_drawdown_since_prior_peak_pct": -4.159237550078321,
+        "close_bound_peak_date": "2021-10-18",
+        "close_bound_trough_date": "2022-03-07",
+        "headroom_to_20pct_bound_pp": 10.028124093584472,
+        "within_20pct_under_bound": true,
+        "max_close_replay_error_inr": 2.3283064365386963e-10,
+        "cash_distributions_credited_inr": 0.0,
+        "slippage_bps_per_side": 50.0
+      }
+    },
+    {
+      "role": "train_selected",
+      "rule_id": "quarterly__nifty100__cap030",
+      "period": "holdout_2023_plus",
+      "risk": {
+        "portfolio": "quarterly__nifty100__cap030",
+        "start_date": "2023-01-02",
+        "end_date": "2026-10-23",
+        "sessions": 944,
+        "starting_balance_inr": 1000000,
+        "ending_balance_inr": 1058608.9789427184,
+        "total_fees_inr": 973.7597072817283,
+        "close_max_drawdown_pct": -2.365718769516212,
+        "simultaneous_ohlc_drawdown_bound_pct": -3.206866352182014,
+        "fold_ohlc_drawdown_bound_pct": -3.206866352182014,
+        "bound_peak_date": "2023-09-21",
+        "bound_trough_date": "2023-12-21",
+        "running_peak_nav_inr": 1073689.7817026046,
+        "running_peak_date": "2024-09-30",
+        "running_close_peak_nav_inr": 1071328.4017026047,
+        "running_close_peak_date": "2024-09-27",
+        "close_drawdown_since_prior_peak_pct": -2.365718769516212,
+        "close_bound_peak_date": "2024-09-27",
+        "close_bound_trough_date": "2025-05-09",
+        "headroom_to_20pct_bound_pp": 16.793133647817985,
+        "within_20pct_under_bound": true,
+        "max_close_replay_error_inr": 2.3283064365386963e-10,
+        "cash_distributions_credited_inr": 0.0,
+        "slippage_bps_per_side": 50.0
+      }
+    },
+    {
+      "role": "train_selected",
+      "rule_id": "quarterly__nifty100__cap030",
+      "period": "test_2020_plus",
+      "risk": {
+        "portfolio": "quarterly__nifty100__cap030",
+        "start_date": "2020-01-01",
+        "end_date": "2026-10-23",
+        "sessions": 1692,
+        "starting_balance_inr": 1000000,
+        "ending_balance_inr": 1234089.2763821385,
+        "total_fees_inr": 2807.3510678622956,
+        "close_max_drawdown_pct": -4.159237550078321,
+        "simultaneous_ohlc_drawdown_bound_pct": -9.971875906415528,
+        "fold_ohlc_drawdown_bound_pct": -9.971875906415528,
+        "bound_peak_date": "2021-09-28",
+        "bound_trough_date": "2022-08-22",
+        "running_peak_nav_inr": 1251641.729778734,
+        "running_peak_date": "2024-09-30",
+        "running_close_peak_nav_inr": 1248888.469778734,
+        "running_close_peak_date": "2024-09-27",
+        "close_drawdown_since_prior_peak_pct": -4.159237550078321,
+        "close_bound_peak_date": "2021-10-18",
+        "close_bound_trough_date": "2022-03-07",
+        "headroom_to_20pct_bound_pp": 10.028124093584472,
+        "within_20pct_under_bound": true,
+        "max_close_replay_error_inr": 2.3283064365386963e-10,
+        "cash_distributions_credited_inr": 0.0,
+        "slippage_bps_per_side": 50.0
+      }
+    },
+    {
+      "role": "train_selected",
+      "rule_id": "quarterly__nifty100__cap030",
+      "period": "continuous_2015_plus",
+      "risk": {
+        "portfolio": "quarterly__nifty100__cap030",
+        "start_date": "2015-01-02",
+        "end_date": "2026-10-23",
+        "sessions": 2921,
+        "starting_balance_inr": 1000000,
+        "ending_balance_inr": 1229944.2487058344,
+        "total_fees_inr": 5031.764594165775,
+        "close_max_drawdown_pct": -6.055322057931445,
+        "simultaneous_ohlc_drawdown_bound_pct": -9.971934590369214,
+        "fold_ohlc_drawdown_bound_pct": -9.971934590369214,
+        "bound_peak_date": "2021-09-28",
+        "bound_trough_date": "2022-08-22",
+        "running_peak_nav_inr": 1247420.3384417072,
+        "running_peak_date": "2024-09-30",
+        "running_close_peak_nav_inr": 1244677.1784417073,
+        "running_close_peak_date": "2024-09-27",
+        "close_drawdown_since_prior_peak_pct": -6.055322057931423,
+        "close_bound_peak_date": "2017-08-01",
+        "close_bound_trough_date": "2020-02-28",
+        "headroom_to_20pct_bound_pp": 10.028065409630786,
+        "within_20pct_under_bound": true,
+        "max_close_replay_error_inr": 4.656612873077393e-10,
+        "cash_distributions_credited_inr": 0.0,
+        "slippage_bps_per_side": 50.0
+      }
+    },
+    {
+      "role": "fixed_50_50_45pct_reference",
+      "rule_id": "monthly__nifty050__cap045",
+      "period": "validation_2020_2022",
+      "risk": {
+        "portfolio": "monthly__nifty050__cap045",
+        "start_date": "2020-01-01",
+        "end_date": "2022-12-30",
+        "sessions": 748,
+        "starting_balance_inr": 1000000,
+        "ending_balance_inr": 1231857.044964214,
+        "total_fees_inr": 6238.795835786126,
+        "close_max_drawdown_pct": -6.73558733869003,
+        "simultaneous_ohlc_drawdown_bound_pct": -13.772523809822147,
+        "fold_ohlc_drawdown_bound_pct": -13.772523809822147,
+        "bound_peak_date": "2021-03-08",
+        "bound_trough_date": "2021-04-20",
+        "running_peak_nav_inr": 1319383.0607404811,
+        "running_peak_date": "2022-04-29",
+        "running_close_peak_nav_inr": 1262805.8184774118,
+        "running_close_peak_date": "2021-11-15",
+        "close_drawdown_since_prior_peak_pct": -6.735587338690074,
+        "close_bound_peak_date": "2021-11-15",
+        "close_bound_trough_date": "2022-10-11",
+        "headroom_to_20pct_bound_pp": 6.227476190177853,
+        "within_20pct_under_bound": true,
+        "max_close_replay_error_inr": 6.984919309616089e-10,
+        "cash_distributions_credited_inr": 0.0,
+        "slippage_bps_per_side": 50.0
+      }
+    },
+    {
+      "role": "fixed_50_50_45pct_reference",
+      "rule_id": "monthly__nifty050__cap045",
+      "period": "holdout_2023_plus",
+      "risk": {
+        "portfolio": "monthly__nifty050__cap045",
+        "start_date": "2023-01-02",
+        "end_date": "2026-10-23",
+        "sessions": 944,
+        "starting_balance_inr": 1000000,
+        "ending_balance_inr": 1424546.8686579168,
+        "total_fees_inr": 4713.493292083928,
+        "close_max_drawdown_pct": -12.979470457036236,
+        "simultaneous_ohlc_drawdown_bound_pct": -14.829149011707754,
+        "fold_ohlc_drawdown_bound_pct": -14.829149011707754,
+        "bound_peak_date": "2026-01-29",
+        "bound_trough_date": "2026-03-04",
+        "running_peak_nav_inr": 1646398.9324511904,
+        "running_peak_date": "2026-01-29",
+        "running_close_peak_nav_inr": 1637023.9024511906,
+        "running_close_peak_date": "2026-01-29",
+        "close_drawdown_since_prior_peak_pct": -12.979470457036225,
+        "close_bound_peak_date": "2026-01-29",
+        "close_bound_trough_date": "2026-09-29",
+        "headroom_to_20pct_bound_pp": 5.170850988292246,
+        "within_20pct_under_bound": true,
+        "max_close_replay_error_inr": 6.984919309616089e-10,
+        "cash_distributions_credited_inr": 0.0,
+        "slippage_bps_per_side": 50.0
+      }
+    },
+    {
+      "role": "fixed_50_50_45pct_reference",
+      "rule_id": "monthly__nifty050__cap045",
+      "period": "test_2020_plus",
+      "risk": {
+        "portfolio": "monthly__nifty050__cap045",
+        "start_date": "2020-01-01",
+        "end_date": "2026-10-23",
+        "sessions": 1692,
+        "starting_balance_inr": 1000000,
+        "ending_balance_inr": 1775226.3905519643,
+        "total_fees_inr": 11059.853098037202,
+        "close_max_drawdown_pct": -12.972839450244223,
+        "simultaneous_ohlc_drawdown_bound_pct": -14.8287503616362,
+        "fold_ohlc_drawdown_bound_pct": -14.8287503616362,
+        "bound_peak_date": "2026-01-29",
+        "bound_trough_date": "2026-03-04",
+        "running_peak_nav_inr": 2051535.4418234592,
+        "running_peak_date": "2026-01-29",
+        "running_close_peak_nav_inr": 2039853.281823459,
+        "running_close_peak_date": "2026-01-29",
+        "close_drawdown_since_prior_peak_pct": -12.972839450244223,
+        "close_bound_peak_date": "2026-01-29",
+        "close_bound_trough_date": "2026-09-29",
+        "headroom_to_20pct_bound_pp": 5.1712496383638005,
+        "within_20pct_under_bound": true,
+        "max_close_replay_error_inr": 9.313225746154785e-10,
+        "cash_distributions_credited_inr": 0.0,
+        "slippage_bps_per_side": 50.0
+      }
+    },
+    {
+      "role": "fixed_50_50_45pct_reference",
+      "rule_id": "monthly__nifty050__cap045",
+      "period": "continuous_2015_plus",
+      "risk": {
+        "portfolio": "monthly__nifty050__cap045",
+        "start_date": "2015-01-02",
+        "end_date": "2026-10-23",
+        "sessions": 2921,
+        "starting_balance_inr": 1000000,
+        "ending_balance_inr": 1651850.2350901584,
+        "total_fees_inr": 17738.45725984317,
+        "close_max_drawdown_pct": -15.192010776965803,
+        "simultaneous_ohlc_drawdown_bound_pct": -15.817481899816887,
+        "fold_ohlc_drawdown_bound_pct": -15.817481899816887,
+        "bound_peak_date": "2017-08-02",
+        "bound_trough_date": "2020-03-19",
+        "running_peak_nav_inr": 1908990.210801103,
+        "running_peak_date": "2026-01-29",
+        "running_close_peak_nav_inr": 1898119.490801103,
+        "running_close_peak_date": "2026-01-29",
+        "close_drawdown_since_prior_peak_pct": -15.19201077696578,
+        "close_bound_peak_date": "2017-08-01",
+        "close_bound_trough_date": "2020-03-17",
+        "headroom_to_20pct_bound_pp": 4.182518100183113,
+        "within_20pct_under_bound": true,
+        "max_close_replay_error_inr": 6.984919309616089e-10,
+        "cash_distributions_credited_inr": 0.0,
+        "slippage_bps_per_side": 50.0
+      }
+    }
+  ],
+  "limitations": [
+    "All inspected historical windows were previously viewed; chronological tests are not a fresh lockbox.",
+    "ETF cash distributions, Gold ETF event completeness, tax, cash yield, live spread, and market impact remain unresolved.",
+    "The daily OHLC bound is conservative by construction but does not guarantee a future 20% maximum drawdown."
+  ]
+}

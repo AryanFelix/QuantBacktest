@@ -1102,6 +1102,134 @@ drawdown_control_keys = [
 ]
 assert len(drawdown_control_keys) == len(set(drawdown_control_keys)) == 15
 
+ratio_path = "outputs/nifty_gold_allocation_ratio_sensitivity.csv"
+ratio_type = "nifty_gold_allocation_ratio_sensitivity"
+ratio_grid = read_csv(ROOT / ratio_path)
+ratio_selection_path = "outputs/nifty_gold_allocation_ratio_selection.json"
+ratio_selection = json.loads((ROOT / ratio_selection_path).read_text(encoding="utf-8"))
+selected_ratio_rule = ratio_selection["selected"]["rule_id"]
+ratio_ohlc_path = "outputs/nifty_gold_allocation_ratio_training_ohlc.csv"
+ratio_oos_ohlc_path = "outputs/nifty_gold_allocation_ratio_oos_ohlc.csv"
+ratio_cost_path = "outputs/nifty_gold_allocation_ratio_cost_sensitivity.csv"
+ratio_types = {ratio_type, "nifty_gold_allocation_ratio_ohlc_audit", "nifty_gold_allocation_ratio_cost_sensitivity"}
+rows = [row for row in rows if row["simulation_type"] not in ratio_types]
+ratio_by_key = {(row["rule_id"], row["period"]): row for row in ratio_grid}
+assert len(ratio_grid) == 990 and len(ratio_by_key) == 990
+for result in ratio_grid:
+    training_bound = float(result["training_ohlc_bound_pct"])
+    rows.append({
+        "simulation_type": ratio_type,
+        "strategy": result["rule_id"],
+        "universe": "NIFTYBEES + GOLDBEES",
+        "period": result["period"],
+        "period_start": result["period_start"],
+        "period_end": result["period_end"],
+        "starting_balance_inr": result["starting_balance_inr"],
+        "ending_balance_inr": result["ending_balance_inr"],
+        "total_return_pct": result["total_return_pct"],
+        "cagr_pct": result["cagr_pct"],
+        "max_drawdown_pct": result["max_drawdown_pct"],
+        "sharpe_zero_rf": result["sharpe_zero_rf"],
+        "gross_exposure_cap_pct": result["gross_exposure_cap_pct"],
+        "slippage_bps_per_side": result["slippage_bps_per_side"],
+        "fees_inr": result["fees_inr"],
+        "slippage_cost_inr": result["slippage_cost_inr"],
+        "trade_count": "",
+        "order_count": result["order_count"],
+        "within_20pct": result["within_20pct_close"],
+        "selection_or_sizing": (
+            f"{result['rebalance_frequency']}; {float(result['nifty_share_pct']):.0f}% NIFTY / "
+            f"{float(result['gold_share_pct']):.0f}% Gold active-sleeve shares; "
+            f"{float(result['gross_exposure_cap_pct']):.0f}% exposure cap; 50 bps per-side slippage; "
+            f"{'training-selected' if result['rule_id'] == selected_ratio_rule else 'grid sensitivity'}"
+        ),
+        "source_artifact": (
+            f"{ratio_path};outputs/nifty_gold_allocation_ratio_method.md;"
+            "work/sensitivity_nifty_gold_allocation_ratio.py"
+        ),
+        "notes": (
+            f"Close MDD only in this row. Training OHLC bound was {training_bound:.2f}% "
+            f"({'pass' if result['training_pass_20pct_ohlc'] == 'True' else 'fail'}); only the frozen "
+            "selection and monthly 50/50 reference have later-window OHLC audits. Post-hoc history, "
+            "50-bps primary cost, zero cash yield, and incomplete ETF distribution coverage."
+        ),
+    })
+
+ratio_ohlc_rows = []
+for risk_path, period, training in (
+    (ratio_ohlc_path, "train_2015_2019", True),
+    (ratio_oos_ohlc_path, None, False),
+):
+    for risk in read_csv(ROOT / risk_path):
+        period_name = period or risk["period"]
+        result = ratio_by_key[(risk["rule_id"], period_name)]
+        run_subdir = (
+            f"training/{risk['rule_id']}__{period_name}__50bps" if training else
+            f"{risk['role']}/{risk['rule_id']}__{period_name}__50bps"
+        )
+        ratio_ohlc_rows.append({
+            "simulation_type": "nifty_gold_allocation_ratio_ohlc_audit",
+            "strategy": risk["rule_id"],
+            "universe": "NIFTYBEES + GOLDBEES",
+            "period": period_name,
+            "period_start": result["period_start"],
+            "period_end": result["period_end"],
+            "starting_balance_inr": risk["starting_balance_inr"],
+            "ending_balance_inr": risk["ending_balance_inr"],
+            "total_return_pct": (float(risk["ending_balance_inr"]) / float(risk["starting_balance_inr"]) - 1) * 100,
+            "cagr_pct": result["cagr_pct"],
+            "max_drawdown_pct": risk["simultaneous_ohlc_drawdown_bound_pct"],
+            "sharpe_zero_rf": result["sharpe_zero_rf"],
+            "gross_exposure_cap_pct": result["gross_exposure_cap_pct"],
+            "slippage_bps_per_side": risk["slippage_bps_per_side"],
+            "fees_inr": risk["total_fees_inr"],
+            "slippage_cost_inr": result["slippage_cost_inr"],
+            "trade_count": "",
+            "order_count": result["order_count"],
+            "within_20pct": risk["within_20pct_under_bound"],
+            "selection_or_sizing": "Training-only OHLC screen" if training else f"Frozen {risk['role']} path; 50-bps OHLC audit",
+            "source_artifact": (
+                f"{risk_path};outputs/nifty_gold_allocation_ratio_selection.json;"
+                f"work/backtests/nifty_gold_allocation_ratio/{run_subdir}/orders.csv;"
+                "work/audit_etf_intraday_drawdown.py"
+            ),
+            "notes": (
+                f"Conservative same-session high-before-low OHLC envelope {float(risk['simultaneous_ohlc_drawdown_bound_pct']):.2f}%; "
+                f"saved close NAV replay error ₹{float(risk['max_close_replay_error_inr']):.6g}. "
+                "Historical envelope is not a future loss limit."
+            ),
+        })
+rows.extend(ratio_ohlc_rows)
+assert len(ratio_ohlc_rows) == 206
+
+ratio_costs = read_csv(ROOT / ratio_cost_path)
+assert len(ratio_costs) == 18
+for result in ratio_costs:
+    rows.append({
+        "simulation_type": "nifty_gold_allocation_ratio_cost_sensitivity",
+        "strategy": f"{result['role']} | {result['rule_id']}",
+        "universe": "NIFTYBEES + GOLDBEES",
+        "period": result["period"],
+        "period_start": result["period_start"],
+        "period_end": result["period_end"],
+        "starting_balance_inr": 1_000_000,
+        "ending_balance_inr": 1_000_000 * (1 + float(result["total_return_pct"]) / 100),
+        "total_return_pct": result["total_return_pct"],
+        "cagr_pct": "",
+        "max_drawdown_pct": result["max_drawdown_pct"],
+        "sharpe_zero_rf": "",
+        "gross_exposure_cap_pct": result["gross_exposure_cap_pct"],
+        "slippage_bps_per_side": result["slippage_bps_per_side"],
+        "fees_inr": result["fees_inr"],
+        "slippage_cost_inr": result["slippage_cost_inr"],
+        "trade_count": "",
+        "order_count": result["order_count"],
+        "within_20pct": float(result["max_drawdown_pct"]) >= -20,
+        "selection_or_sizing": f"{float(result['nifty_share_pct']):.0f}% NIFTY / {100-float(result['nifty_share_pct']):.0f}% Gold; close-drawdown cost sensitivity",
+        "source_artifact": f"{ratio_cost_path};outputs/nifty_gold_allocation_ratio_method.md",
+        "notes": "10/50/100-bps per-side cost sensitivity. Close MDD only; OOS OHLC audits were done at 50 bps. 100-bps close breach, if any, is not replaced by an OHLC audit.",
+    })
+
 write_csv(LEDGER, rows, list(rows[0]))
 
 manifest = read_csv(MANIFEST)
@@ -1120,6 +1248,7 @@ for row in manifest:
             "47 NIFTY/Gold passive, active, and exposure-sensitivity rows across 2020+, full available history, and a shared 2015+ window, including 30 passive-mix exposure cases; "
             "15 passive drawdown-control cases across 10/50/100 bps; "
             "19 training-selected static-mix exposure cases and 19 chronological test-period sensitivity cases; "
+            "990 NIFTY/Gold active-sleeve allocation-ratio rows, 206 order-ledger OHLC audits, and 18 cost-sensitivity rows; "
             "method and source artifacts "
             "are linked in the research report."
         )
@@ -1671,6 +1800,20 @@ for metadata in (
         "cache_paths": "work/research/etf_total_return_source_audit.md",
         "purpose": "Document primary-source coverage, NIFTYBEES distributions/split, GoldBeES corporate-action limits, AMFI NAV extraction, and official NIFTY TRI availability",
         "notes": "NSE TRI reinvests index constituent dividends; that index is not an ETF cash-flow reconstruction. AMFI requests are limited to 90-day windows. Upstox candles provide OHLC but do not guarantee dividend-adjusted returns. The GoldBeES event list's lack of cash rows is not proof of complete event history.",
+    },
+    {
+        "dataset": "NIFTY/Gold active-sleeve allocation-ratio sensitivity",
+        "ticker": "NIFTYBEES; GOLDBEES",
+        "instrument_key": "NSE_EQ|INF204KB14I2; NSE_EQ|INF204KB17I5",
+        "bar_interval": "daily; close signals / next-open fills; monthly or quarterly; 50 bps per-side slippage",
+        "first_bar": "2015-01-02",
+        "last_bar": "2026-10-23",
+        "bar_count": "198 rules × 5 windows = 990; 198 training and 8 frozen/reference OOS OHLC audits; 18 cost cases",
+        "file_count": "198 training equity/order/summary triplets + 8 OOS triplets + 4 CSVs + selection JSON + method + results note + runner",
+        "empty_files": "0",
+        "cache_paths": "outputs/nifty_gold_allocation_ratio_sensitivity.csv;outputs/nifty_gold_allocation_ratio_training_ohlc.csv;outputs/nifty_gold_allocation_ratio_oos_ohlc.csv;outputs/nifty_gold_allocation_ratio_cost_sensitivity.csv;outputs/nifty_gold_allocation_ratio_selection.json;outputs/nifty_gold_allocation_ratio_method.md;outputs/nifty_gold_allocation_ratio_results.md;work/sensitivity_nifty_gold_allocation_ratio.py;work/backtests/nifty_gold_allocation_ratio/",
+        "purpose": "Select NIFTY versus Gold active-sleeve weights, rebalance frequency, and exposure cap on 2015–2019, then measure the frozen rule against a fixed 50/50 reference",
+        "notes": "All 198 2015–2019 training returns were negative. The least-negative OHLC-passing rule was quarterly NIFTY-only at a 30% cap (-0.60% training), but it returned +23.41% in 2020+ versus +77.52% for the 50/50 monthly 45% reference. Both passed the historical 50-bps OHLC screen. Results are post-hoc price-based ETF evidence; Gold distributions, cash yield, tax, and market impact are unresolved. Not a strategy recommendation or future drawdown guarantee.",
     },
 ):
     matches = [row for row in manifest if row["dataset"] == metadata["dataset"]]
