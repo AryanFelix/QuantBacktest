@@ -48,6 +48,8 @@ At 15:35 IST, exact-date Upstox V3 requests for Oct 27 returned API success with
 
 At 21:34 IST on Oct 27, an exact-window Upstox request through Oct 27 again returned one candle each for NIFTYBEES and GOLDBEES, both dated Oct 26. The status remains zero post-freeze common sessions and zero paper-return rows; the first frozen paper date is Oct 28. This later request is appended to `work/data/api_probes/forward_paper_history.jsonl`, and its credential-free metadata is in `work/data/api_probes/forward_paper_latest.json`.
 
+At 21:58 IST, the paper runner retried after a transient DNS failure and successfully fetched through Oct 26; each ETF again returned one candle dated Oct 26. There are still zero post-freeze common sessions and zero paper-return rows. `UPSTOX_ANALYTICS_TOKEN` is visible to the current execution process, and the successful authenticated fetch confirms the current runner can use it without restarting this task; the token value is never written to the repo. Both the failed attempt and successful retry remain in the append-only probe history.
+
 Daily candles do not provide a realized spread ledger. Fixed 10/50 bps slippage is a sensitivity, not a measured bid/ask spread. Next-open fills are modeled and can differ from executable fills. The 20% drawdown limit is an alert threshold, not a guarantee or automatic stop.
 
 ## Reproduction and files

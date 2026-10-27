@@ -691,6 +691,46 @@ if gap_fade_path.exists():
     ]
     assert len(gap_fade_keys) == len(set(gap_fade_keys)) == 144
 
+gap_continuation_path = ROOT / "outputs" / "intraday_gap_continuation_sensitivity.csv"
+if gap_continuation_path.exists():
+    gap_continuation = read_csv(gap_continuation_path)
+    assert len(gap_continuation) == 48, f"Expected 48 gap-continuation cases; found {len(gap_continuation)}"
+    rows = [row for row in rows if row["simulation_type"] != "intraday_gap_continuation_sensitivity"]
+    for result in gap_continuation:
+        threshold = float(result["gap_threshold_pct"])
+        rows.append({
+            "simulation_type": "intraday_gap_continuation_sensitivity",
+            "strategy": f"NIFTY gap continuation long {threshold:.2f}%",
+            "universe": "NIFTY 50 signal; NIFTYBEES intraday execution",
+            "period": result["period"],
+            "period_start": result["period_start"],
+            "period_end": result["period_end"],
+            "starting_balance_inr": result["starting_balance_inr"],
+            "ending_balance_inr": result["ending_balance_inr"],
+            "total_return_pct": result["total_return_pct"],
+            "cagr_pct": result["cagr_pct"],
+            "max_drawdown_pct": result["max_drawdown_pct"],
+            "sharpe_zero_rf": result["sharpe_zero_rf"],
+            "gross_exposure_cap_pct": "100",
+            "slippage_bps_per_side": result["slippage_bps_per_side"],
+            "fees_inr": result["fees_inr"],
+            "slippage_cost_inr": result["slippage_cost_inr"],
+            "trade_count": result["trade_count"],
+            "order_count": result["order_count"],
+            "within_20pct": result["within_20pct"],
+            "selection_or_sizing": f"long gap-up continuation; {threshold:.2f}% threshold; 1R target; 0.5% NAV stop risk; 100% gross cap",
+            "source_artifact": (
+                f"{result['source_artifact']};outputs/intraday_gap_continuation_sensitivity.csv;"
+                "work/research/intraday_gap_continuation_method.md;work/backtest_intraday_gap_continuation.py"
+            ),
+            "notes": "Current NSE equity-intraday charges; fixed 10/25/50/100 bps adverse slippage per side. One-R target, stop first when both levels trade in one 30-minute bar; alignment and retrospective sample limits are documented in the method.",
+        })
+    gap_continuation_keys = [
+        (row["strategy"], row["period"], row["slippage_bps_per_side"])
+        for row in rows if row["simulation_type"] == "intraday_gap_continuation_sensitivity"
+    ]
+    assert len(gap_continuation_keys) == len(set(gap_continuation_keys)) == 48
+
 sector_rotation_path = ROOT / "outputs" / "sector_rotation_sensitivity.csv"
 if sector_rotation_path.exists():
     sector_rotation = read_csv(sector_rotation_path)
@@ -1724,6 +1764,20 @@ for metadata in (
         "cache_paths": "outputs/intraday_gap_fade_sensitivity.csv;outputs/intraday_gap_fade_method.md;work/backtest_intraday_gap_fade.py;work/backtests/intraday_gap_fade/",
         "purpose": "Test first-30-minute opening-gap reversal signals on NIFTY 50 with same-day NIFTYBEES execution, fees, stops, targets, and slippage stress",
         "notes": "Long, short, and combined modes; 0.30/0.50/0.75% gap thresholds; 10/25/50/100 bps adverse slippage per side; 0.5% stop risk and 100% gross cap. All 36 continuous cases lost money. Eleven special/misaligned sessions excluded from signal generation; stop-first OHLC assumption; not a validated strategy.",
+    },
+    {
+        "dataset": "NIFTY opening-gap continuation sensitivity",
+        "ticker": "NIFTY 50; NIFTYBEES",
+        "instrument_key": "NSE_INDEX|Nifty 50; NSE_EQ|INF204KB14I2",
+        "bar_interval": "30 minutes; first-bar signal / same-day execution",
+        "first_bar": "2022-01-03T09:15:00+05:30",
+        "last_bar": "2026-10-23T15:15:00+05:30",
+        "bar_count": "1,181 complete aligned sessions; 48 cases",
+        "file_count": "48 equity/trade/summary triplets + sensitivity CSV + method + runner",
+        "empty_files": "0",
+        "cache_paths": "outputs/intraday_gap_continuation_sensitivity.csv;work/research/intraday_gap_continuation_method.md;work/backtest_intraday_gap_continuation.py;work/backtests/intraday_gap_continuation/",
+        "purpose": "Test a long-only NIFTY opening-gap continuation signal with a fixed 1R target, intraday fees, slippage stress, and 20% drawdown screen",
+        "notes": "0.30/0.50/0.75% gap thresholds; 10/25/50/100 bps adverse slippage per side; 0.5% NAV stop risk and 100% gross cap. At 50 bps every full-period case lost money; the 0.50% case returned -8.04% with -8.04% max drawdown and 31 trades. At 100 bps, most signals fail target-feasibility checks, so less-negative results do not imply better economics. Eleven special/misaligned sessions excluded; OHLC stop-first assumption; not a validated strategy.",
     },
     {
         "dataset": "Indian sector ETF rotation sensitivity",

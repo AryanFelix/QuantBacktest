@@ -9,8 +9,8 @@
       "symbol": "NIFTYBEES",
       "instrument_key": "NSE_EQ|INF204KB14I2",
       "request_start": "2026-10-24",
-      "request_end": "2026-10-27",
-      "retrieved_at_utc": "2026-10-27T16:04:52.949241+00:00",
+      "request_end": "2026-10-26",
+      "retrieved_at_utc": "2026-10-27T16:28:53.181305+00:00",
       "token_value_saved": false,
       "status": "success_with_bars",
       "bars_received": 1,
@@ -21,8 +21,8 @@
       "symbol": "GOLDBEES",
       "instrument_key": "NSE_EQ|INF204KB17I5",
       "request_start": "2026-10-24",
-      "request_end": "2026-10-27",
-      "retrieved_at_utc": "2026-10-27T16:04:53.135282+00:00",
+      "request_end": "2026-10-26",
+      "retrieved_at_utc": "2026-10-27T16:28:53.355593+00:00",
       "token_value_saved": false,
       "status": "success_with_bars",
       "bars_received": 1,
@@ -30,45 +30,5 @@
       "last_bar": "2026-10-26 00:00:00+05:30"
     }
   ],
-  "state": "waiting_for_first_post_freeze_common_bar",
-  "post_close_probe": {
-    "retrieved_at_utc": "2026-10-27T16:04:54.131554+00:00",
-    "retrieved_at_ist": "2026-10-27T21:34:54.131554+05:30",
-    "request_window": [
-      "2026-10-24",
-      "2026-10-27"
-    ],
-    "endpoint_family": "Upstox v3 historical candles",
-    "results": [
-      {
-        "symbol": "NIFTYBEES",
-        "instrument_key": "NSE_EQ|INF204KB14I2",
-        "request_start": "2026-10-24",
-        "request_end": "2026-10-27",
-        "retrieved_at_utc": "2026-10-27T16:04:52.949241+00:00",
-        "token_value_saved": false,
-        "status": "success_with_bars",
-        "bars_received": 1,
-        "cached_incremental_bars": 1,
-        "last_bar": "2026-10-26 00:00:00+05:30"
-      },
-      {
-        "symbol": "GOLDBEES",
-        "instrument_key": "NSE_EQ|INF204KB17I5",
-        "request_start": "2026-10-24",
-        "request_end": "2026-10-27",
-        "retrieved_at_utc": "2026-10-27T16:04:53.135282+00:00",
-        "token_value_saved": false,
-        "status": "success_with_bars",
-        "bars_received": 1,
-        "cached_incremental_bars": 1,
-        "last_bar": "2026-10-26 00:00:00+05:30"
-      }
-    ],
-    "latest_common_history_bar": "2026-10-26",
-    "oct27_bar_available": false,
-    "paper_state": "waiting_for_first_post_freeze_common_bar",
-    "performance_rows_written": 0,
-    "interpretation": "The 21:34 IST Oct 27 exact-date range query again returned one candle per ETF, both dated Oct 26; no post-freeze common session exists yet."
-  }
+  "state": "waiting_for_first_post_freeze_common_bar"
 }
