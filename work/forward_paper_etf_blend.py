@@ -34,6 +34,8 @@ INSTRUMENTS = {
 }
 PORTFOLIOS = {
     "passive_nifty_gold_22_5_each": ("passive_nifty_gold_22_5_each", 1.0),
+    "passive_nifty_gold_13_5_31_5": ("passive_nifty_gold_13_5_31_5", 1.0),
+    "passive_nifty_gold_18_27": ("passive_nifty_gold_18_27", 1.0),
     "monthly_fixed_50_50_100pct": ("fixed_50_50", 1.0),
     "monthly_fixed_50_50_95pct": ("fixed_50_50", 0.95),
     "quarterly_fixed_50_50_100pct": ("fixed_50_50_quarterly", 1.0),
@@ -55,13 +57,13 @@ DRAWDOWN_THRESHOLDS = {
 LEDGER = OUT / "forward_paper_ledger.csv"
 EQUITY = OUT / "forward_paper_equity.csv"
 ORDERS = OUT / "forward_paper_orders.csv"
-CONFIG = STATE / "frozen_config_v8.json"
-PRIOR_CONFIG = STATE / "frozen_config_v7.json"
+CONFIG = STATE / "frozen_config_v9.json"
+PRIOR_CONFIG = STATE / "frozen_config_v8.json"
 STATUS = STATE / "latest_status.json"
 CONFIG_VALUE = {
-    "freeze_revision": 8,
+    "freeze_revision": 9,
     "freeze_date": "2026-10-27",
-    "amendment": "Preserves revision 7 and adds two quarterly fixed 50/50 NIFTY/Gold exposure-cap paths. A 70% cap was selected on 2014-2022 training under the user 20% OHLC screen; a 40% cap was selected under a 15% safety-buffer screen. The later 2023+ history was already inspected, so those results are pseudo-out-of-sample. Frozen before the first post-freeze paper session; paper execution begins 2026-10-28.",
+    "amendment": "Preserves all 13 revision-8 paths and adds two no-rebalance passive NIFTY/Gold initial-composition challengers at the same 45% initial exposure: 13.5%/31.5% NAV and 18%/27% NAV. These ratios were chosen after inspecting the full historical composition frontier; 30/70's OHLC result is only 0.07 percentage points inside the 20% screen. They are explicitly post-hoc shadow challengers, not validated selections. Frozen before the first post-freeze paper session; paper execution begins 2026-10-28.",
     "history_cutoff": HISTORY_CUTOFF.isoformat(),
     "paper_start": PAPER_START.isoformat(),
     "capital_inr": CAPITAL,
@@ -70,6 +72,8 @@ CONFIG_VALUE = {
     "slippage_bps_per_side": list(SLIPPAGE),
     "portfolios": {
         "passive_nifty_gold_22_5_each": "Buy 22.5% NAV of NIFTYBEES and 22.5% NAV of GOLDBEES at the first paper-session next-open fill; hold the units without rebalancing; initial gross exposure 45%, allowed cap 100% as exposure drifts",
+        "passive_nifty_gold_13_5_31_5": "Post-hoc composition challenger: buy 13.5% NAV of NIFTYBEES and 31.5% NAV of GOLDBEES at the first paper-session next-open fill; hold units without rebalancing; initial gross exposure 45%, allowed cap 100% as exposure drifts",
+        "passive_nifty_gold_18_27": "Post-hoc composition challenger: buy 18% NAV of NIFTYBEES and 27% NAV of GOLDBEES at the first paper-session next-open fill; hold units without rebalancing; initial gross exposure 45%, allowed cap 100% as exposure drifts",
         "passive_drawdown_8pct_cut_60_to_30": "Start at 60% gross exposure in equal NIFTYBEES and GOLDBEES; after close NAV drawdown reaches 8%, cut to 30% at the next open; recover at -4% close drawdown, at the next open",
         "passive_drawdown_10pct_cut_60_to_30": "Start at 60% gross exposure in equal NIFTYBEES and GOLDBEES; after close NAV drawdown reaches 10%, cut to 30% at the next open; recover at -5% close drawdown, at the next open",
         "passive_drawdown_12pct_cut_60_to_30": "Start at 60% gross exposure in equal NIFTYBEES and GOLDBEES; after close NAV drawdown reaches 12%, cut to 30% at the next open; recover at -6% close drawdown, at the next open",
@@ -205,13 +209,18 @@ def main() -> None:
         portfolios["inverse_vol_63d_quarterly"], 0.65,
     )
     close = panels["close"]
-    passive_name = "passive_nifty_gold_22_5_each"
-    passive_targets = pd.DataFrame(0.0, index=close.index, columns=close.columns)
-    passive_targets[["NIFTYBEES", "GOLDBEES"]] = 0.225
-    passive_events = pd.Series(False, index=close.index, dtype=bool)
-    assert (passive_targets.sum(axis=1) - 0.45).abs().lt(1e-12).all() and not passive_events.any()
-    portfolios[passive_name] = passive_targets
-    portfolio_events[passive_name] = passive_events
+    for passive_name, nifty_weight, gold_weight in (
+        ("passive_nifty_gold_22_5_each", 0.225, 0.225),
+        ("passive_nifty_gold_13_5_31_5", 0.135, 0.315),
+        ("passive_nifty_gold_18_27", 0.18, 0.27),
+    ):
+        passive_targets = pd.DataFrame(0.0, index=close.index, columns=close.columns)
+        passive_targets["NIFTYBEES"] = nifty_weight
+        passive_targets["GOLDBEES"] = gold_weight
+        passive_events = pd.Series(False, index=close.index, dtype=bool)
+        assert (passive_targets.sum(axis=1) - 0.45).abs().lt(1e-12).all() and not passive_events.any()
+        portfolios[passive_name] = passive_targets
+        portfolio_events[passive_name] = passive_events
     base_returns = (
         close.pct_change(fill_method=None).fillna(0.0)
         * portfolios["inverse_vol_63d_quarterly_single65"].shift(1).fillna(0.0)

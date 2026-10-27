@@ -32,6 +32,9 @@ CASES = [
     ("Passive NIFTY/Gold; DD8% cut 60 to 30; 2015 common", 50, "work/backtests/passive_drawdown_control/dd_8pct_cut_60_to_30_recover_4pct__50bps/equity.csv"),
     ("Passive NIFTY/Gold; DD10% cut 60 to 30; 2015 common", 50, "work/backtests/passive_drawdown_control/dd_10pct_cut_60_to_30_recover_5pct__50bps/equity.csv"),
     ("Passive NIFTY/Gold; DD12% cut 60 to 30; 2015 common", 50, "work/backtests/passive_drawdown_control/dd_12pct_cut_60_to_30_recover_6pct__50bps/equity.csv"),
+    # Keep new cases last so adding a candidate does not change existing bootstrap seeds.
+    ("Passive NIFTY/Gold; 13.5%/31.5% initial; 2015 common", 50, "work/backtests/passive_mix_composition/continuous_2015_plus/passive_45pct_nifty_030_gold_070_continuous_2015_plus/equity.csv"),
+    ("Passive NIFTY/Gold; 18%/27% initial; 2015 common", 50, "work/backtests/passive_mix_composition/continuous_2015_plus/passive_45pct_nifty_040_gold_060_continuous_2015_plus/equity.csv"),
 ]
 
 

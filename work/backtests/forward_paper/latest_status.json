@@ -1,6 +1,6 @@
 {
   "freeze_date": "2026-10-27",
-  "freeze_revision": 8,
+  "freeze_revision": 9,
   "paper_start": "2026-10-28",
   "latest_common_history_bar": "2026-10-26",
   "new_common_sessions": 0,
@@ -10,24 +10,20 @@
       "instrument_key": "NSE_EQ|INF204KB14I2",
       "request_start": "2026-10-24",
       "request_end": "2026-10-26",
-      "retrieved_at_utc": "2026-10-27T16:28:53.181305+00:00",
+      "retrieved_at_utc": "2026-10-27T17:39:15.232459+00:00",
       "token_value_saved": false,
-      "status": "success_with_bars",
-      "bars_received": 1,
-      "cached_incremental_bars": 1,
-      "last_bar": "2026-10-26 00:00:00+05:30"
+      "status": "request_error",
+      "error": "Upstox request failed: <urlopen error [Errno 11001] getaddrinfo failed>"
     },
     {
       "symbol": "GOLDBEES",
       "instrument_key": "NSE_EQ|INF204KB17I5",
       "request_start": "2026-10-24",
       "request_end": "2026-10-26",
-      "retrieved_at_utc": "2026-10-27T16:28:53.355593+00:00",
+      "retrieved_at_utc": "2026-10-27T17:39:22.351251+00:00",
       "token_value_saved": false,
-      "status": "success_with_bars",
-      "bars_received": 1,
-      "cached_incremental_bars": 1,
-      "last_bar": "2026-10-26 00:00:00+05:30"
+      "status": "request_error",
+      "error": "Upstox request failed: <urlopen error [Errno 11001] getaddrinfo failed>"
     }
   ],
   "state": "waiting_for_first_post_freeze_common_bar"

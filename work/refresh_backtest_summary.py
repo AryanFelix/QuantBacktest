@@ -1375,9 +1375,9 @@ for row in manifest:
         paper_status = json.loads((ROOT / "work" / "backtests" / "forward_paper" / "latest_status.json").read_text(encoding="utf-8"))
         latest_check = max((result.get("retrieved_at_utc", "") for result in paper_status.get("api_results", [])), default="not recorded")
         row.update({
-            "bar_count": f"13 paths; {paper_status['new_common_sessions']} post-freeze sessions",
-            "file_count": "plan + 3 output ledgers + revision 1-8 freezes",
-            "purpose": "Freeze and track thirteen NIFTY/Gold ETF controls prospectively on new Upstox candles",
+            "bar_count": f"15 paths; {paper_status['new_common_sessions']} post-freeze sessions",
+            "file_count": "plan + 3 output ledgers + revision 1-9 freezes",
+            "purpose": "Freeze and track fifteen NIFTY/Gold ETF controls prospectively on new Upstox candles",
             "cache_paths": (
                 "outputs/forward_paper_plan.md;outputs/forward_paper_ledger.csv;"
                 "outputs/forward_paper_equity.csv;outputs/forward_paper_orders.csv;"
@@ -1388,11 +1388,12 @@ for row in manifest:
                 "work/backtests/forward_paper/frozen_config_v5.json;"
                 "work/backtests/forward_paper/frozen_config_v6.json;"
                 "work/backtests/forward_paper/frozen_config_v7.json;"
-                "work/backtests/forward_paper/frozen_config_v8.json"
+                "work/backtests/forward_paper/frozen_config_v8.json;"
+                "work/backtests/forward_paper/frozen_config_v9.json"
             ),
             "notes": (
-                "Revision 8 preserves eleven revision-7 paths and adds the training-selected 70% cap and 40% buffer cap. "
-                "Paper starts 2026-10-28; revisions 1-7 remain preserved for lineage. "
+                "Revision 9 preserves all thirteen revision-8 paths and adds two post-hoc 45%-initial NIFTY/Gold compositions (13.5/31.5 and 18/27 NAV). "
+                "Paper starts 2026-10-28; revisions 1-8 remain preserved for lineage. "
                 f"Latest common bar: {paper_status['latest_common_history_bar']}; "
                 f"post-freeze common sessions: {paper_status['new_common_sessions']}; latest API check UTC: {latest_check}. "
                 "₹10 lakh per path; paper only, no broker orders."
@@ -1425,7 +1426,7 @@ for row in manifest:
                 "work/data/api_probes/market_session_check_2026-10-26/NSE_EQ_INF204KB14I2-days-1-2026-10-26-2026-10-26.csv;"
                 "work/data/api_probes/market_session_check_2026-10-26/NSE_EQ_INF204KB17I5-days-1-2026-10-26-2026-10-26.csv"
             ),
-            "purpose": "Record completed-session Upstox candle availability for the thirteen-path prospective paper test",
+            "purpose": "Record completed-session Upstox candle availability for the fifteen-path prospective paper test",
             "notes": (
                 f"Latest exact-key requests through {paper_end}: {paper_sources}. "
                 f"Latest common history bar: {paper_status['latest_common_history_bar']}; "
@@ -1702,12 +1703,12 @@ for metadata in (
         "bar_interval": "daily net NAV returns",
         "first_bar": "2014-01-02",
         "last_bar": "2026-10-23",
-        "bar_count": "5,000 bootstrap paths per scenario; 192 horizon/cost/block-length summaries",
-        "file_count": "16 corrected source equity paths + runner + output CSV + method note",
+        "bar_count": "5,000 bootstrap paths per scenario; 216 horizon/cost/block-length summaries",
+        "file_count": "18 source equity/cost paths (16 labels) + runner + output CSV + method note",
         "empty_files": "0",
-        "cache_paths": "outputs/etf_drawdown_bootstrap.csv;outputs/etf_drawdown_bootstrap_method.md;work/bootstrap_etf_drawdown_risk.py;work/backtests/volatility_weighted_blend/fixed_50_50_quarterly__full_2014_plus__50bps/equity.csv;work/backtests/intraday_ohlc_exposure/gross_cap_45pct__50bps/equity.csv;work/backtests/intraday_ohlc_exposure/gross_cap_70pct__50bps/equity.csv;work/backtests/cost_stress_sensitivity/solo65_vol16__full_2014_plus__50bps/equity.csv;work/backtests/cost_stress_sensitivity/solo80_vol16__full_2014_plus__50bps/equity.csv;work/backtests/cost_stress_sensitivity/solo65_vol16__full_2014_plus__100bps/equity.csv;work/backtests/cost_stress_sensitivity/solo80_vol16__full_2014_plus__100bps/equity.csv;work/backtests/volatility_weighted_blend/inverse_vol_63d_quarterly__full_2014_plus__50bps/equity.csv;work/backtests/nifty_gold_full_history_benchmarks/passive_NIFTY_Gold_22_5pct_each/equity.csv;work/backtests/passive_mix_exposure/continuous_2015_plus/passive_equal_045_continuous_2015_plus/equity.csv;work/backtests/passive_mix_exposure/continuous_2015_plus/passive_equal_050_continuous_2015_plus/equity.csv;work/backtests/passive_mix_exposure/continuous_2015_plus/passive_equal_055_continuous_2015_plus/equity.csv;work/backtests/passive_mix_exposure/continuous_2015_plus/passive_equal_060_continuous_2015_plus/equity.csv;work/backtests/passive_drawdown_control/dd_8pct_cut_60_to_30_recover_4pct__50bps/equity.csv;work/backtests/passive_drawdown_control/dd_10pct_cut_60_to_30_recover_5pct__50bps/equity.csv;work/backtests/passive_drawdown_control/dd_12pct_cut_60_to_30_recover_6pct__50bps/equity.csv",
+        "cache_paths": "outputs/etf_drawdown_bootstrap.csv;outputs/etf_drawdown_bootstrap_method.md;work/bootstrap_etf_drawdown_risk.py;work/backtests/volatility_weighted_blend/fixed_50_50_quarterly__full_2014_plus__50bps/equity.csv;work/backtests/intraday_ohlc_exposure/gross_cap_45pct__50bps/equity.csv;work/backtests/intraday_ohlc_exposure/gross_cap_70pct__50bps/equity.csv;work/backtests/cost_stress_sensitivity/solo65_vol16__full_2014_plus__50bps/equity.csv;work/backtests/cost_stress_sensitivity/solo80_vol16__full_2014_plus__50bps/equity.csv;work/backtests/cost_stress_sensitivity/solo65_vol16__full_2014_plus__100bps/equity.csv;work/backtests/cost_stress_sensitivity/solo80_vol16__full_2014_plus__100bps/equity.csv;work/backtests/volatility_weighted_blend/inverse_vol_63d_quarterly__full_2014_plus__50bps/equity.csv;work/backtests/nifty_gold_full_history_benchmarks/passive_NIFTY_Gold_22_5pct_each/equity.csv;work/backtests/passive_mix_exposure/continuous_2015_plus/passive_equal_045_continuous_2015_plus/equity.csv;work/backtests/passive_mix_exposure/continuous_2015_plus/passive_equal_050_continuous_2015_plus/equity.csv;work/backtests/passive_mix_exposure/continuous_2015_plus/passive_equal_055_continuous_2015_plus/equity.csv;work/backtests/passive_mix_exposure/continuous_2015_plus/passive_equal_060_continuous_2015_plus/equity.csv;work/backtests/passive_drawdown_control/dd_8pct_cut_60_to_30_recover_4pct__50bps/equity.csv;work/backtests/passive_drawdown_control/dd_10pct_cut_60_to_30_recover_5pct__50bps/equity.csv;work/backtests/passive_drawdown_control/dd_12pct_cut_60_to_30_recover_6pct__50bps/equity.csv;work/backtests/passive_mix_composition/continuous_2015_plus/passive_45pct_nifty_030_gold_070_continuous_2015_plus/equity.csv;work/backtests/passive_mix_composition/continuous_2015_plus/passive_45pct_nifty_040_gold_060_continuous_2015_plus/equity.csv",
         "purpose": "Stress maximum drawdown and terminal-return distributions for leading NIFTY/Gold ETF rules by resampling historical net return blocks",
-        "notes": "ETF-unit STT-corrected source paths were regenerated after session-date normalization. Passive NIFTY/Gold mix 10-year 20% breach frequency is 1.62–3.40% across block lengths (2.40% at 63 sessions); passive mix OHLC bound is -17.36% but exposure drifts from 45% initial. Common 2015+ 45/50/55/60% initial exposure variants have 63-session breach estimates of 3.58/4.90/7.28/10.00%, while historical OHLC bounds are -17.37/-18.04/-18.63/-19.23%. Drawdown-triggered 60-to-30% paths at 8/10/12% triggers have 63-session 10-year breach estimates 1.46/1.96/6.70%, fifth-percentile drawdowns -17.36/-17.83/-20.83%, and historical OHLC bounds -16.83/-16.83/-17.97%. At 50 bps, other 10-year frequencies: fixed 100% gross 7.82–10.66%, inverse-vol 50/50 7.58–10.66%, fixed 45% cap 3.12–3.86%, fixed 70% cap 5.80–7.92%, 65%/16% throttle 20.32–25.66%, 80%/16% throttle 34.94–43.60%. At 100 bps, throttle cases were 51.12–68.16% and 71.30–86.64%. Inverse-vol OHLC bound is -25.55%. Conditional historical-return resampling, not a forecast or strategy re-simulation.",
+        "notes": "ETF-unit STT-corrected source paths were regenerated after session-date normalization. Passive NIFTY/Gold mix 10-year 20% breach frequency is 1.62–3.40% across block lengths (2.40% at 63 sessions); passive mix OHLC bound is -17.36% but exposure drifts from 45% initial. Common 2015+ 45/50/55/60% initial exposure variants have 63-session breach estimates of 3.58/4.90/7.28/10.00%, while historical OHLC bounds are -17.37/-18.04/-18.63/-19.23%. Fixed-45%-initial 13.5%/31.5% and 18%/27% NIFTY/Gold mixes have 63-session ten-year breach estimates of 4.76% and 3.40%, with fifth-percentile drawdowns of -19.93% and -19.09%. Drawdown-triggered 60-to-30% paths at 8/10/12% triggers have 63-session 10-year breach estimates 1.46/1.96/6.70%, fifth-percentile drawdowns -17.36/-17.83/-20.83%, and historical OHLC bounds -16.83/-16.83/-17.97%. At 50 bps, other 10-year frequencies: fixed 100% gross 7.82–10.66%, inverse-vol 50/50 7.58–10.66%, fixed 45% cap 3.12–3.86%, fixed 70% cap 5.80–7.92%, 65%/16% throttle 20.32–25.66%, 80%/16% throttle 34.94–43.60%. At 100 bps, throttle cases were 51.12–68.16% and 71.30–86.64%. Inverse-vol OHLC bound is -25.55%. Conditional historical-return resampling, not a forecast or strategy re-simulation; the composition paths were selected post-hoc and bootstrap omits holdings/OHLC rebuild.",
     },
     {
         "dataset": "Upstox daily session timestamp integrity audit",

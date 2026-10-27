@@ -1,6 +1,6 @@
 # Forward paper test: NIFTY/Gold ETF controls
 
-**Rules frozen:** 2026-10-27, revision 8<br>
+**Rules frozen:** 2026-10-27, revision 9<br>
 **Backtest selection cutoff:** 2026-10-23  
 **Paper warm-up available at freeze:** 2026-10-26  
 **Paper start:** first completed common NIFTYBEES/GOLDBEES session on or after 2026-10-28  
@@ -8,13 +8,15 @@
 **Exposure ceiling:** 100%; no leverage  
 **Historical drawdown alert:** 20%
 
-Revision 1 froze three paths. Revision 2 added the 95% monthly cash-buffer control; revision 3 added the 65% solo-sleeve path after the 140-case deployment screen; revision 4 added its 16% trailing-volatility throttle; revision 5 added an 80% solo-sleeve / 16% throttle challenger after the 130-case joint sizing screen. Revision 6 added the passive NIFTY/Gold 22.5%/22.5% initial allocation. Revision 7 preserved all eight revision-6 paths and added three passive drawdown-control thresholds. Revision 8 preserves those eleven paths and adds the 70% gross cap selected under the user 20% training OHLC screen plus the 40% cap selected with a 15% safety buffer. The 2023+ backtest was already inspected, so these are historical pseudo-out-of-sample results; the new paths are included for genuinely prospective observation after the freeze. Revision 8 was frozen before the first post-freeze paper session, and paper observation starts 2026-10-28. Earlier immutable configurations remain available for lineage.
+Revision 1 froze three paths. Revision 2 added the 95% monthly cash-buffer control; revision 3 added the 65% solo-sleeve path after the 140-case deployment screen; revision 4 added its 16% trailing-volatility throttle; revision 5 added an 80% solo-sleeve / 16% throttle challenger after the 130-case joint sizing screen. Revision 6 added the passive NIFTY/Gold 22.5%/22.5% initial allocation. Revision 7 preserved all eight revision-6 paths and added three passive drawdown-control thresholds. Revision 8 preserved those eleven paths and added the 70% gross cap selected under the user 20% training OHLC screen plus the 40% cap selected with a 15% safety buffer. Revision 9 preserves all 13 revision-8 paths and adds two fixed-45%-exposure passive compositions: 13.5% NIFTY / 31.5% Gold and 18% / 27%. The full historical composition frontier had already been inspected; these are explicitly post-hoc shadow challengers. Revision 9 was frozen before the first post-freeze paper session, and paper observation starts 2026-10-28. Earlier immutable configurations remain available for lineage.
 
 ## Rules under prospective observation
 
 | Path | Frozen rule | Costs |
 |---|---|---|
 | Passive NIFTY/Gold mix | At the first paper-session next-open fill, buy NIFTYBEES and GOLDBEES to 22.5% of NAV each; hold units without rebalancing. Initial gross exposure is 45%; exposure may drift. | Current Upstox/NSE delivery charges; 10 and 50 bps per side |
+| Passive composition challenger, 30/70 within risky sleeve | Post-hoc: buy 13.5% NAV in NIFTYBEES and 31.5% in GOLDBEES at the first paper-session next-open fill; hold units without rebalancing. Initial gross exposure is 45%; exposure may drift. The historical OHLC bound was -19.93%, only 0.07 points inside the screen. | Same |
+| Passive composition challenger, 40/60 within risky sleeve | Post-hoc: buy 18% NAV in NIFTYBEES and 27% in GOLDBEES at the first paper-session next-open fill; hold units without rebalancing. Initial gross exposure is 45%; exposure may drift. | Same |
 | Passive drawdown control, 8% trigger | Start with 30% NAV in each ETF; after close-NAV drawdown reaches 8%, reduce total exposure to 30% at the next open; restore 60% when drawdown recovers to -4%, at the next open. | Same |
 | Passive drawdown control, 10% trigger | Same 60% start and 30% reduced exposure; trigger at -10% close drawdown and recover at -5%. | Same |
 | Passive drawdown control, 12% trigger | Same 60% start and 30% reduced exposure; trigger at -12% close drawdown and recover at -6%. | Same |
@@ -40,7 +42,9 @@ The monthly fixed 95% trend path is the same rule as the training-selected NIFTY
 
 The revision-8 exposure study selects a 70% cap on 2014–2022 under the exact 20% OHLC screen; its training bound is -19.07%, leaving 0.93 points of room. The fresh-capital 2023+ replay returned +55.71% / -16.81% OHLC at 50 bps. A 40% cap selected under a 15% buffer returned +37.80% / -13.86%. Both later periods were previously inspected; the separate 70% control bootstrap estimated a 7.30% ten-year close-drawdown breach frequency at 63-session blocks. These are research candidates, not proven risk caps. See the [selection method and results](etf_exposure_cap_oos_method.md).
 
-At the revision-8 freeze, the latest common completed candle remains 2026-10-26; the 20:06 IST Oct 27 range recheck returned one bar per ETF, both dated Oct 26. NSE's official 2026 calendar lists Oct 26 as an open session ([NSE trading holidays](https://www.nseindia.com/resources/exchange-communication-holidays)). Raw responses are saved under `work/data/api_probes/`. The paper runner requests only through the prior calendar date, so an unfinished current-day candle cannot enter its snapshots or paper NAV. No Oct 27 candle has been used, and the paper ledgers remain empty because the frozen start is Oct 28. No synthetic return or broker order has been recorded. Latest request metadata is in `work/data/api_probes/forward_paper_latest.json`; every runner request attempt is retained in `work/data/api_probes/forward_paper_history.jsonl`.
+The revision-9 composition study held initial exposure at 45% and compared 11 NIFTY/Gold ratios. The 30/70 ratio returned +143.55% with a -19.93% historical OHLC envelope; 40/60 returned +136.27% / -18.70%; the equal mix returned +129.00% / -17.37%. At 63-session bootstrap blocks, the 40/60 mix had a 3.40% ten-year close-drawdown breach estimate and -19.09% fifth-percentile drawdown, versus 3.58% / -19.16% for equal mix; 30/70 was 4.76% / -19.93%. Since these ratios were identified after viewing the full history, all three passive compositions remain comparative paper paths. The close-return bootstrap does not rebuild positions or same-day OHLC paths. See the [composition method](passive_mix_composition_method.md) and [bootstrap results](etf_drawdown_bootstrap_method.md).
+
+At the revision-9 freeze, the latest common completed candle remains 2026-10-26; the 20:06 IST Oct 27 range recheck returned one bar per ETF, both dated Oct 26. NSE's official 2026 calendar lists Oct 26 as an open session ([NSE trading holidays](https://www.nseindia.com/resources/exchange-communication-holidays)). Raw responses are saved under `work/data/api_probes/`. The paper runner requests only through the prior calendar date, so an unfinished current-day candle cannot enter its snapshots or paper NAV. No Oct 27 candle has been used, and the paper ledgers remain empty because the frozen start is Oct 28. No synthetic return or broker order has been recorded. Latest request metadata is in `work/data/api_probes/forward_paper_latest.json`; every runner request attempt is retained in `work/data/api_probes/forward_paper_history.jsonl`.
 
 At 15:20 IST on 2026-10-27, the incremental runner successfully requested through Oct 26 and cached one completed daily bar for each ETF. The first attempt had received the bars but failed while comparing the fetched timezone-aware timestamps with strings read from the incremental CSV; `work/forward_paper_etf_blend.py` now parses the combined timestamp column before deduplication and sorting. The successful retry confirms Oct 26 as the latest common bar. Oct 27 remains excluded until a later completed-session fetch, and no post-freeze session or paper return row exists yet. The runner reads the registered token from HKCU, so this workflow did not require restarting Codex.
 
@@ -49,6 +53,8 @@ At 15:35 IST, exact-date Upstox V3 requests for Oct 27 returned API success with
 At 21:34 IST on Oct 27, an exact-window Upstox request through Oct 27 again returned one candle each for NIFTYBEES and GOLDBEES, both dated Oct 26. The status remains zero post-freeze common sessions and zero paper-return rows; the first frozen paper date is Oct 28. This later request is appended to `work/data/api_probes/forward_paper_history.jsonl`, and its credential-free metadata is in `work/data/api_probes/forward_paper_latest.json`.
 
 At 21:58 IST, the paper runner retried after a transient DNS failure and successfully fetched through Oct 26; each ETF again returned one candle dated Oct 26. There are still zero post-freeze common sessions and zero paper-return rows. `UPSTOX_ANALYTICS_TOKEN` is visible to the current execution process, and the successful authenticated fetch confirms the current runner can use it without restarting this task; the token value is never written to the repo. Both the failed attempt and successful retry remain in the append-only probe history.
+
+The revision-9 pre-start refresh on 2026-10-27 encountered DNS-resolution errors for both Upstox requests before authentication. It retained the existing common cache through Oct 26, created no paper performance row, and saved only redacted request metadata. This network error does not indicate an expired token; the earlier successful registered-token fetch remains the restart check.
 
 Daily candles do not provide a realized spread ledger. Fixed 10/50 bps slippage is a sensitivity, not a measured bid/ask spread. Next-open fills are modeled and can differ from executable fills. The 20% drawdown limit is an alert threshold, not a guarantee or automatic stop.
 
@@ -66,7 +72,8 @@ Run `python work/forward_paper_etf_blend.py` after the Upstox feed publishes com
 - `work/backtests/forward_paper/frozen_config_v5.json`: prior seven-path freeze, including the 80% / 16% challenger.
 - `work/backtests/forward_paper/frozen_config_v6.json`: prior eight-path freeze, including the passive NIFTY/Gold mix.
 - `work/backtests/forward_paper/frozen_config_v7.json`: prior eleven-path freeze, adding the 8/10/12% drawdown-trigger frontier.
-- `work/backtests/forward_paper/frozen_config_v8.json`: current thirteen-path freeze, adding the training-selected 70% cap and 40% safety-buffer comparison.
+- `work/backtests/forward_paper/frozen_config_v8.json`: immutable thirteen-path freeze, adding the training-selected 70% cap and 40% safety-buffer comparison.
+- `work/backtests/forward_paper/frozen_config_v9.json`: current fifteen-path freeze, adding two post-hoc passive NIFTY/Gold composition challengers while preserving revision 8.
 - `work/backtests/forward_paper/latest_status.json`: latest run state and API outcomes.
 - `work/data/api_probes/forward_paper_history.jsonl`: append-only, credential-free record of every incremental request attempt.
 - `work/data/forward_paper/incremental/`: new candle additions; historical source files remain unchanged.

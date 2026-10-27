@@ -27,7 +27,7 @@ Five candidates were compared: fixed 70%, fixed 40%, and 70%-to-35% caps trigger
 | 70%-to-35%, trigger 10% / recover 5% | 2023+ replay | +57.60% | -13.20% | -14.96% | ₹3,185 | ₹56,821 | 1 / 0 |
 | 70%-to-35%, trigger 12% / recover 6% | 2023+ replay | +55.97% | -14.10% | -16.81% | ₹3,179 | ₹56,499 | 1 / 0 |
 
-Fixed 70% wins the frozen training selector, so the drawdown throttle is not promoted as the selected strategy. The 8% throttle has a better return and smaller OHLC bound in the later slice, but that result is retrospective: the broader 2023+ history was already inspected. It does not warrant changing the already frozen forward-paper revision 8.
+Fixed 70% wins the frozen training selector, so the drawdown throttle is not promoted as the selected strategy. The 8% throttle has a better return and smaller OHLC bound in the later slice, but that result is retrospective: the broader 2023+ history was already inspected. It remains a non-selected comparator in paper revision 9.
 
 ## Accounting and limits
 
