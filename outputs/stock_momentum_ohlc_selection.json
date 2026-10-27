@@ -509,7 +509,7 @@
   ],
   "audit_limitations": [
     "OHLC drawdown is a conservative simultaneous portfolio envelope, not observed intraday sequence.",
-    "NIFTYBEES benchmark candles include isolated 11.8\u201313.0% opening gaps against prior closes in 2022; its -30.76% OHLC bound is diagnostic until exchange-level OHLC is checked.",
+    "NSE Security-wise Archives (Equities) confirms the 2022-01-17 and 2022-05-11 NIFTYBEES OHLCV bars exactly; the -30.76% benchmark value remains a conservative all-high-before-low envelope rather than an observed intraday portfolio path.",
     "Point-in-time NIFTY membership and action event feeds remain incomplete; the restored-universe series is still diagnostic.",
     "The histories and strategy variants were inspected already; chronological validation and holdout are not pristine lockboxes.",
     "Historical pass does not guarantee future drawdown stays below 20%."

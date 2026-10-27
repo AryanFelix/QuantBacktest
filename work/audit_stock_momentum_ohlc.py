@@ -236,9 +236,9 @@ def window_rows(name: str, run: tuple[pd.DataFrame, pd.DataFrame, int, str], res
             "selected_on_ohlc_training_only": selected,
             "max_close_replay_error_inr": result["details"]["max_close_replay_error_inr"],
             "selection_or_sizing": "Same saved strategy; OHLC audit only. Candidate selection uses train window only." if selected else "Saved strategy replay; diagnostic, not selected.",
-            "source_artifact": "work/audit_stock_momentum_ohlc.py;outputs/stock_momentum_ohlc_audit.csv;outputs/stock_momentum_ohlc_selection.json;outputs/stock_momentum_ohlc_audit_method.md",
-            "notes": "Conservative same-day portfolio OHLC envelope (all held highs before lows); closes reconciled to saved ledger. Historical estimate, not a future loss limit." + (" NIFTYBEES has isolated 2022 open prices 11.8–13.0% from the prior close; benchmark OHLC bound needs an independent exchange-price check." if group == "benchmark" else ""),
-            "ohlc_data_quality_flag": "NIFTYBEES has isolated 2022 open prices 11.8–13.0% from the prior close; benchmark OHLC bound needs an independent exchange-price check." if group == "benchmark" else "",
+            "source_artifact": "work/audit_stock_momentum_ohlc.py;outputs/stock_momentum_ohlc_audit.csv;outputs/stock_momentum_ohlc_selection.json;outputs/stock_momentum_ohlc_audit_method.md" + (";outputs/niftybees_2022_ohlc_source_crosscheck.csv" if group == "benchmark" else ""),
+            "notes": "Conservative same-day portfolio OHLC envelope (all held highs before lows); closes reconciled to saved ledger. Historical estimate, not a future loss limit." + (" NSE EQ archive confirms both flagged 2022 OHLCV rows exactly; the envelope remains a high-before-low bound, not observed intraday path." if group == "benchmark" else ""),
+            "ohlc_data_quality_flag": "",
         })
     return rows
 
@@ -288,7 +288,7 @@ def main() -> None:
             [results[name]["details"] for name, _ in primary], key=lambda row: row["total_return_pct"], reverse=True),
         "audit_limitations": [
             "OHLC drawdown is a conservative simultaneous portfolio envelope, not observed intraday sequence.",
-            "NIFTYBEES benchmark candles include isolated 11.8–13.0% opening gaps against prior closes in 2022; its -30.76% OHLC bound is diagnostic until exchange-level OHLC is checked.",
+            "NSE Security-wise Archives (Equities) confirms the 2022-01-17 and 2022-05-11 NIFTYBEES OHLCV bars exactly; the -30.76% benchmark value remains a conservative all-high-before-low envelope rather than an observed intraday portfolio path.",
             "Point-in-time NIFTY membership and action event feeds remain incomplete; the restored-universe series is still diagnostic.",
             "The histories and strategy variants were inspected already; chronological validation and holdout are not pristine lockboxes.",
             "Historical pass does not guarantee future drawdown stays below 20%.",
@@ -315,7 +315,7 @@ def register_outputs(rows: list[dict]) -> None:
             if field in row:
                 out[field] = str(row[field])
         out["universe"] = {
-            "benchmark": "NIFTYBEES price-only benchmark; distribution and OHLC source issues remain",
+            "benchmark": "NIFTYBEES price-only benchmark; historical ETF distributions remain unreconciled",
             "restored_universe": "Point-in-time NIFTY 50; 13 prior action-source exclusions restored; exploratory accounting",
             "restricted_baseline": "Provisional point-in-time NIFTY 50 with 13 action-source exclusions",
             "diagnostic_stress": "Restricted-universe top-10 stress path",
@@ -350,9 +350,9 @@ def register_outputs(rows: list[dict]) -> None:
         "dataset": name, "ticker": "NIFTY 50 stocks and NIFTYBEES benchmark", "instrument_key": "",
         "bar_interval": "daily OHLC; monthly trades", "first_bar": "2021-02-01", "last_bar": "2026-10-23",
         "bar_count": str(len(rows)), "file_count": "28 strategy paths; 4 windows each", "empty_files": "0",
-        "cache_paths": "work/audit_stock_momentum_ohlc.py;outputs/stock_momentum_ohlc_audit.csv;outputs/stock_momentum_ohlc_selection.json;outputs/stock_momentum_ohlc_audit_method.md",
+        "cache_paths": "work/audit_stock_momentum_ohlc.py;outputs/stock_momentum_ohlc_audit.csv;outputs/stock_momentum_ohlc_selection.json;outputs/stock_momentum_ohlc_audit_method.md;outputs/niftybees_2022_ohlc_source_crosscheck.csv",
         "purpose": "Replay saved stock-momentum orders against daily OHLC and select a candidate using the training OHLC drawdown bound",
-        "notes": "Orders and fees reconcile to saved close NAV within ₹0.03. Envelope assumes all holdings reach daily highs before lows; NIFTYBEES benchmark has isolated open-price quality flags.",
+        "notes": "Orders and fees reconcile to saved close NAV within ₹0.03. Envelope assumes all holdings reach daily highs before lows. NSE EQ archive confirms the two flagged NIFTYBEES 2022 OHLCV bars exactly; see outputs/niftybees_2022_ohlc_source_crosscheck.csv.",
     })
     stock.atomic_csv(manifest_path, manifest, manifest_fields)
 
