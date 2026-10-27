@@ -36,23 +36,28 @@ def select_cap(rows: pd.DataFrame, risk_limit_pct: float) -> int:
     return int(winner["gross_exposure_cap_pct"])
 
 
-def run_case(panels, targets, events, segment: str, cap: int, start: date, end: date) -> dict:
+def run_case(
+    panels, targets, events, segment: str, cap: int, start: date, end: date,
+    slippage_bps: float = SLIPPAGE_BPS, run_root: Path | None = None,
+) -> dict:
     equity, orders, stats = q._simulate(
-        panels, targets, events, CAPITAL, cap / 100, SLIPPAGE_BPS,
+        panels, targets, events, CAPITAL, cap / 100, slippage_bps,
         "equity_delivery", start, end, 20,
     )
-    run = OUT / f"{segment}_cap_{cap:02d}"
+    run = (run_root or OUT) / f"{segment}_cap_{cap:02d}"
     run.mkdir(parents=True, exist_ok=True)
     equity.to_csv(run / "equity.csv", index_label="time")
     orders.to_csv(run / "orders.csv", index=False)
     risk = audit.run_case(
         f"Quarterly fixed 50/50 trend; {cap}% exposure cap; {segment}",
         str(run.relative_to(ROOT)),
+        slippage_bps=slippage_bps,
     )
     return {
         "segment": segment,
         "period_start": start.isoformat(),
         "period_end": end.isoformat(),
+        "slippage_bps_per_side": slippage_bps,
         "gross_exposure_cap_pct": cap,
         "starting_balance_inr": stats["starting_balance_inr"],
         "ending_balance_inr": stats["ending_balance_inr"],

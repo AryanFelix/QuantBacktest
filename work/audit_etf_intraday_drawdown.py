@@ -70,10 +70,13 @@ def run_case(
     prior_close_peak_nav: float | None = None,
     prior_peak_date: str | None = None,
     prior_close_peak_date: str | None = None,
+    slippage_bps: float = SLIPPAGE_BPS,
 ) -> dict:
     run = ROOT / relative
     if not np.isfinite(starting_balance) or starting_balance <= 0:
         raise ValueError("starting balance must be finite and positive")
+    if not np.isfinite(slippage_bps) or slippage_bps < 0:
+        raise ValueError("slippage must be finite and nonnegative")
     if prior_peak_nav is not None and (not np.isfinite(prior_peak_nav) or prior_peak_nav <= 0):
         raise ValueError("prior OHLC peak must be finite and positive")
     if prior_close_peak_nav is not None and (not np.isfinite(prior_close_peak_nav) or prior_close_peak_nav <= 0):
@@ -87,7 +90,7 @@ def run_case(
     orders = pd.read_csv(run / "orders.csv")
     orders["date"] = orders["time"].astype(str).str[:10]
     order_groups = {key: part for key, part in orders.groupby("date", sort=False)}
-    slip = SLIPPAGE_BPS / 10_000
+    slip = slippage_bps / 10_000
     cash = starting_balance
     quantity = dict.fromkeys(BARS, 0)
     if prior_peak_nav is not None and prior_peak_nav >= starting_balance:
@@ -213,7 +216,7 @@ def run_case(
         "within_20pct_under_bound": bool(worst_dd >= -LIMIT_PCT / 100),
         "max_close_replay_error_inr": replay_error,
         "cash_distributions_credited_inr": float(equity.get("cash_distribution_inr", pd.Series(0.0, index=equity.index)).sum()),
-        "slippage_bps_per_side": SLIPPAGE_BPS,
+        "slippage_bps_per_side": slippage_bps,
     }
 
 

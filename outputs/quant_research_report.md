@@ -49,6 +49,23 @@ At 50 bps per-side slippage, all returns below are net of the corrected modeled 
 
 The passive mix is the return leader in this tested full-history table, with an initial 45% allocation that drifted to about 79.45% peak exposure. Among the managed/rebalanced rules, 70% is the higher-return risk-screen candidate with modest historical OHLC headroom; the 45% cap has lower return and better envelope/bootstrap risk. The 74% grid maximum is too close to -20% to treat as a meaningful buffer. No row establishes an enforceable 20% future drawdown.
 
+### Exposure-cap cost stress
+
+The quarterly 50/50 trend rule was reselected at each cost level using the 2014–2022 training grid, then frozen on 2023–2026. Fees use the same current modeled delivery schedule; the table varies only adverse per-side slippage. At 200 bps, no tested cap passed even the 20% training envelope, so no later-period selection was run.
+
+| Training OHLC screen | Slippage per side | Selected cap | Training OHLC bound | 2023+ net return | 2023+ OHLC bound |
+|---|---:|---:|---:|---:|---:|
+| 20% | 10 bps | 70% | -19.07% | +62.01% | -16.81% |
+| 15% | 10 bps | 45% | -13.85% | +48.41% | -15.36% |
+| 20% | 50 bps | 70% | -19.07% | +55.71% | -16.81% |
+| 15% | 50 bps | 40% | -14.50% | +37.80% | -13.86% |
+| 20% | 100 bps | 30% | -18.01% | +23.64% | -10.72% |
+| 15% | 100 bps | None | — | Not run | — |
+| 20% | 200 bps | None | — | Not run | — |
+| 15% | 200 bps | None | — | Not run | — |
+
+This cost-only stress keeps the 50-bps candidate's base metrics aligned with the prior frozen test. The 100-bps scenario selects a much smaller exposure and the 200-bps scenario rejects the family under the training risk rule. Even the positive later-period returns are pseudo-OOS on repeatedly inspected data; GoldBeES cash distributions, tax, cash yield, live market impact, and future drawdowns remain unresolved. See the [frozen method](etf_exposure_cap_cost_stress_method.md), [eight screen results](etf_exposure_cap_cost_stress.csv), and [64-case training grid](etf_exposure_cap_cost_stress_training_grid.csv).
+
 ## Expanding-window parameter selection
 
 The 2020–2026 pseudo-out-of-sample sequence selected the highest net-return rule from seven fixed NIFTY/Gold parameter settings using only data through the prior December. Training candidates had to pass both the 20% close-drawdown screen and conservative OHLC bound at a 45% gross cap and 50 bps per-side slippage. All seven candidates passed in every training fold. The selector chose D55/30 + Gold SMA200 for 2020–2025, then D40/20 + SMA200 for the partial 2026 fold. The 45% cap itself came from an earlier full-history risk screen, so exposure selection was not nested inside this walk-forward.
@@ -342,3 +359,4 @@ The independent source review confirms that Upstox’s candle contract does not 
 - Fee and reorganization bridge builders contain assert-based data checks. The runner’s self-check passes with SEBI at ₹10/crore and NSE options transaction charges at 0.03553%.
 - **2026-10-27 — NIFTY intraday ORB prior-day SMA200 filter:** compared the long-only NIFTY 30-minute opening-range breakout with a causal filter requiring the prior daily close above its 200-session average. At 10 bps, the gate reduced the 2025+ loss to -8.51% from -13.79%, but training fell to -11.40% and the continuous return/drawdown were -21.11% / -21.56%, still breaching the 20% screen. All tested cost paths remained unprofitable; reject this ORB family on current evidence. See [method and limits](intraday_orb_daily_regime_method.md) and the [32-row sensitivity](intraday_orb_daily_regime.csv).
 - **2026-10-27 — NIFTY intraday symmetric ORB short-side screen:** replayed the previously untested short breakout side with the same 30-minute signals, 0.5% stop risk, 95% cap, and current fee/slippage model. At 10 bps, long-short returned -46.60% with -47.22% drawdown over 2022–2026; at 50 bps it returned -96.38% / -96.38%. It also lost money in train, validation, and the already-inspected 2025–2026 segment. The existing long-only 10-bps rows reproduced exactly. Reject the symmetric extension; no 1-minute history pull was made because the screen showed no edge. See [method](intraday_orb_short_side_method.md) and [32-case ledger](intraday_orb_short_side_sensitivity.csv).
+- **2026-10-27 — NIFTY/Gold cost stress:** reselected the quarterly 50/50 Donchian 55/20 + SMA200 exposure cap on 2014–2022 under 10/50/100/200 bps per-side slippage, then froze eligible caps on 2023–2026. The 20% screen selected 70%, 70%, 30%, then none; the 15% buffer selected 45%, 40%, then none at 100 and 200 bps. Positive later-period cases remain pseudo-OOS, price-only ETF evidence. See the [method](etf_exposure_cap_cost_stress_method.md), [selected results](etf_exposure_cap_cost_stress.csv), and [training grid](etf_exposure_cap_cost_stress_training_grid.csv).
