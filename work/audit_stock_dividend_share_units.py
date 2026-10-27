@@ -146,7 +146,7 @@ def main() -> None:
     write_csv(SUMMARY, summary, ["metric", "value", "notes"])
     NOTE.write_text(
         "# Stock dividend amounts in Upstox candle share units\n\n"
-        "**Checked:** 2026-10-26\n\n"
+        f"**Checked:** {date.today().isoformat()}\n\n"
         "## Method\n\n"
         "The dividend-event input is the corrected `outputs/stock_dividend_parse_audit.csv`; its earlier broad `div` filter matched `Sub-Division` split labels, and the first strict filter missed the feed typo `Dividned`. For each parsed dividend, the script finds later bonus/split factors for that symbol from `outputs/upstox_split_bonus_adjustment_audit.csv` and divides the nominal per-historical-share cash amount by their product. SEBI defines a bonus ratio A:B as A new shares for each B held and the share-count factor as (A+B)/B; it also describes split price/share changes as proportional. This supports the arithmetic, not Upstox's history convention.\n\n"
         f"The saved feed contains {len(candidate_pairs)} ever-member bonus/split symbol-date candidates in 2020-2026; every candidate is present in the {len(split_rows)}-row price-adjustment audit. {len(adjusted)} parsed dividend rows have a later parsed share factor; {len(parsed) - len(adjusted)} have no later factor in this saved feed. No parsed dividend ex-date coincides with one of these split/bonus dates. Examples: Bajaj Finance ₹44 divided by factor 10 becomes ₹4.40; Nestlé ₹140 divided by factor 20 becomes ₹7; Reliance ₹9 divided by factor 2 becomes ₹4.50. `outputs/stock_dividend_share_unit_alignment.csv` lists each event, the nominal amount, factor, candidate candle-unit amount, and action terms.\n\n"

@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import json
 import sys
+from datetime import date
 from pathlib import Path
 
 import pandas as pd
@@ -122,9 +123,14 @@ def main() -> None:
         )
     momentum_hits = [row for row in rank_audit if row["saved_nondividend_action_events_in_12_1_window"]]
     trend_hits = [row for row in rank_audit if row["saved_nondividend_action_events_in_200dma_window"]]
+    by_case = {(int(row["slippage_bps_per_side"]), row["period"]): row for row in summary_rows}
+    full_10 = by_case[(10, "full_2021_2026")]
+    recent_10 = by_case[(10, "holdout_2025_plus")]
+    full_50 = by_case[(50, "full_2021_2026")]
+    recent_50 = by_case[(50, "holdout_2025_plus")]
     method = f'''# Restored-universe NIFTY 50 momentum sensitivity
 
-**Run date:** 2026-10-26  
+**Run date:** {date.today().isoformat()}
 **Data:** Upstox stock daily bars and dividend notices through 2026-10-23; official NSE HDFC history through 2023-07-12  
 **Capital:** ₹10,00,000 at the start of the continuous run  
 **Risk screen:** maximum historical drawdown 20%  
@@ -144,7 +150,7 @@ Results include the current NSE/Upstox cash-delivery fee model plus 10/20/50 bps
 
 {chr(10).join(table)}
 
-At 10 bps, restoring the excluded names lowered the full-period return from +131.04% to +122.63% and changed maximum drawdown from -13.96% to -15.23%. In the 2025–October 2026 slice it raised return from +4.27% to +5.74%, a 1.46-point difference. At 50 bps the full-period return was +95.08% versus +103.80% for the restricted version; recent return was +1.84% versus +0.99%. This sensitivity shows the stock result depends on universe treatment; it does not establish that either variant is reliable.
+At 10 bps, restoring the excluded names changed the full-period return from {float(full_10['restricted_universe_return_pct']):+.2f}% to {float(full_10['total_return_pct']):+.2f}% ({float(full_10['return_delta_vs_restricted_pp']):+.2f} pp); the 2025–October 2026 return changed from {float(recent_10['restricted_universe_return_pct']):+.2f}% to {float(recent_10['total_return_pct']):+.2f}%. At 50 bps the full-period return changed from {float(full_50['restricted_universe_return_pct']):+.2f}% to {float(full_50['total_return_pct']):+.2f}%, and the recent return from {float(recent_50['restricted_universe_return_pct']):+.2f}% to {float(recent_50['total_return_pct']):+.2f}%. This sensitivity shows the stock result depends on universe treatment; it does not establish that either variant is reliable.
 
 The market gate itself was added after earlier results were inspected. The train, 2024 validation, and 2025+ slices are retrospective comparisons, not untouched out-of-sample evidence. The existing 20% screen is not a bound on future losses.
 

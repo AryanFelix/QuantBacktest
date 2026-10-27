@@ -1,6 +1,6 @@
 # Restored-universe NIFTY 50 momentum sensitivity
 
-**Run date:** 2026-10-26  
+**Run date:** 2026-10-27
 **Data:** Upstox stock daily bars and dividend notices through 2026-10-23; official NSE HDFC history through 2023-07-12  
 **Capital:** ₹10,00,000 at the start of the continuous run  
 **Risk screen:** maximum historical drawdown 20%  
@@ -33,7 +33,7 @@ Results include the current NSE/Upstox cash-delivery fee model plus 10/20/50 bps
 | holdout_2025_plus | 50 | ₹1,915,518 | ₹1,950,820 | +1.84% | 1.02% | -16.54% | ₹24,996 | ₹89,920 | 143 | Pass |
 | full_2021_2026 | 50 | ₹1,000,000 | ₹1,950,820 | +95.08% | 12.39% | -17.32% | ₹78,957 | ₹252,689 | 642 | Pass |
 
-At 10 bps, restoring the excluded names lowered the full-period return from +131.04% to +122.63% and changed maximum drawdown from -13.96% to -15.23%. In the 2025–October 2026 slice it raised return from +4.27% to +5.74%, a 1.46-point difference. At 50 bps the full-period return was +95.08% versus +103.80% for the restricted version; recent return was +1.84% versus +0.99%. This sensitivity shows the stock result depends on universe treatment; it does not establish that either variant is reliable.
+At 10 bps, restoring the excluded names changed the full-period return from +131.04% to +122.63% (-8.41 pp); the 2025–October 2026 return changed from +4.27% to +5.74%. At 50 bps the full-period return changed from +103.80% to +95.08%, and the recent return from +0.99% to +1.84%. This sensitivity shows the stock result depends on universe treatment; it does not establish that either variant is reliable.
 
 The market gate itself was added after earlier results were inspected. The train, 2024 validation, and 2025+ slices are retrospective comparisons, not untouched out-of-sample evidence. The existing 20% screen is not a bound on future losses.
 

@@ -23,6 +23,18 @@ ALIASES = {"TATAMOTORS": "TMPV", "ZOMATO": "ETERNAL", "LTIM": "LTM", "INFRATEL":
 RUPEE_AMOUNT = re.compile(r"(?:₹|\bRs\.?|\bRe\.?)\s*([0-9][0-9,]*(?:\.[0-9]+)?)", re.I)
 PERCENT = re.compile(r"([0-9]+(?:\.[0-9]+)?)\s*%")
 DIVIDEND_EVENT = re.compile(r"\bdiv(?:idend|idned)?(?=[^a-z]|$)", re.I)
+VERIFIED_DIVIDEND_OVERRIDES = {
+    ("VEDL", "2022-03-09"): {
+        "record_date": "10-Mar-2022",
+        "face_value": "1",
+        "amount": 13.0,
+        "method": "primary-source override: FY2021-22 third interim dividend; record date matched",
+        "urls": (
+            "https://www.vedantalimited.com/eng/investor-relations-shareholder-information.php",
+            "https://www.bseindia.com/bseplus/AnnualReport/500295/73739500295.pdf",
+        ),
+    },
+}
 
 
 def _amount(value: str) -> float:
@@ -41,6 +53,21 @@ def parse_dividend(subject: str, face_value: str | None) -> tuple[float | None, 
     if percentages and face is not None:
         return sum(percentages) * face / 100.0, "percent of stated face value"
     return None, "unparsed dividend amount"
+
+
+def resolve_dividend_amount(symbol: str, ex_date: date, event: dict) -> tuple[float | None, str, str]:
+    subject = str(event.get("subject", ""))
+    value, method = parse_dividend(subject, event.get("faceVal"))
+    source_urls = ""
+    override = VERIFIED_DIVIDEND_OVERRIDES.get((symbol, ex_date.isoformat()))
+    if value is None and override:
+        assert event.get("recDate") == override["record_date"]
+        assert str(event.get("faceVal")) == override["face_value"]
+        assert subject == "Interim Dividend"
+        value = override["amount"]
+        method = override["method"]
+        source_urls = ";".join(override["urls"])
+    return value, method, source_urls
 
 
 def _atomic_csv(path: Path, rows: list[dict], fields: list[str]) -> None:
@@ -75,6 +102,10 @@ def main() -> None:
     assert parse_dividend("AGM/Dividend-40%", "10")[0] == 4
     assert parse_dividend("Final Dividend Rs.25 and Special Dividend Rs.10 Per Share", "10")[0] == 35
     assert parse_dividend("Dividend declared; amount not stated", "10")[0] is None
+    override_event = {"subject": "Interim Dividend", "faceVal": "1", "recDate": "10-Mar-2022"}
+    resolved = resolve_dividend_amount("VEDL", date(2022, 3, 9), override_event)
+    assert resolved[0] == 13.0 and "primary-source override" in resolved[1] and "vedantalimited.com" in resolved[2]
+    assert resolve_dividend_amount("VEDL", date(2022, 3, 8), override_event)[0] is None
     assert DIVIDEND_EVENT.search("Interim Div70%")
     assert DIVIDEND_EVENT.search("Interim Dividned - Rs 135 Per Share")
     assert not DIVIDEND_EVENT.search("Face Value Split (Sub-Division) - From Rs 10 To Re 1")
@@ -98,7 +129,9 @@ def main() -> None:
                 continue
             if not START <= ex_date <= END:
                 continue
-            value, parse_method = parse_dividend(subject, event.get("faceVal"))
+            value, parse_method, amount_source_urls = resolve_dividend_amount(
+                symbol, ex_date, event,
+            )
             path, sessions = histories.get(symbol, (None, []))
             pos = bisect_left(sessions, ex_date)
             prior_date = sessions[pos - 1] if pos else None
@@ -109,6 +142,7 @@ def main() -> None:
                 "face_value_inr": event.get("faceVal", ""), "subject": subject,
                 "dividend_per_share_inr_unadjusted": value if value is not None else "",
                 "parse_method": parse_method, "exact_price_bar": exact_bar,
+                "amount_source_urls": amount_source_urls,
                 "prior_price_bar_date": prior_date.isoformat() if prior_date else "",
                 "price_cache_path": path.relative_to(ROOT).as_posix() if path else "",
             })
@@ -152,8 +186,10 @@ def main() -> None:
     note_path = ROOT / "work" / "research" / "stock_dividend_parse_audit.md"
     note_path.write_text(
         "# NSE stock dividend terms: parse and price-date audit\n\n"
-        "**Checked:** 2026-10-26\n\n"
-        "This audit filters the saved NSE corporate-actions page feed to dividend-labelled events for symbols appearing in at least one reconstructed monthly NIFTY 50 snapshot, with ex-dates from 2020-01-01 through 2026-10-23. This is an ever-member symbol filter, not proof that a symbol belonged to NIFTY 50 on that event date. It parses explicit Rs/Re/₹ amounts as rupees per share; percent-only announcements are converted using the feed's stated face value. Multiple explicit amounts in one subject are summed. Unparsed labels and same-symbol/ex-date multi-row groups remain visible for review; separate notices are not silently deduplicated or aggregated.\n\n"
+        f"**Checked:** {date.today().isoformat()}\n\n"
+        "This audit filters the saved NSE corporate-actions page feed to dividend-labelled events for symbols appearing in at least one reconstructed monthly NIFTY 50 snapshot, with ex-dates from 2020-01-01 through 2026-10-23. This is an ever-member symbol filter, not proof that a symbol belonged to NIFTY 50 on that event date. It parses explicit Rs/Re/₹ amounts as rupees per share; percent-only announcements are converted using the feed's stated face value. Multiple explicit amounts in one subject are summed. A verified VEDL event override is keyed by ex-date, record date, face value, and exact subject; its primary-source URLs are stored on that event row. Other unparsed labels and same-symbol/ex-date multi-row groups remain visible for review; separate notices are not silently deduplicated or aggregated.\n\n"
+        "## Primary-source reconciliation\n\n"
+        "The NSE page feed labels VEDL's 2022-03-09 ex-date and 10-Mar-2022 record date only as Interim Dividend. Vedanta's shareholder dividend history identifies a third interim dividend of ₹13 per ₹1 share paid on 23-Mar-2022; the BSE-hosted FY2021-22 annual report matches the 10-Mar record date and ₹13 amount. The event-level amount_source_urls field retains both documents. This resolves the amount for this row only; it does not establish completeness of the NSE event feed.\n\n"
         "Revision note (2026-10-26): the earlier broad `div` filter also matched `Sub-Division` split notices; the first strict filter then missed the NSE feed typo `Dividned`. The current rule excludes the split labels and retains that dividend spelling. Earlier counts are superseded.\n\n"
         f"The event-level output is `outputs/stock_dividend_parse_audit.csv`; counts by parse status and year are in `outputs/stock_dividend_parse_summary.csv`. In this run, {event_count} event rows were found, {parsed_count} amounts parsed, {unresolved_count} amounts remained unstated, {exact_bar_count} ex-dates matched a cached price bar, and {multirow_count} rows belonged to {multirow_group_count} same-symbol/ex-date multi-row groups. The join checks price-date coverage only. This is not proof that the NSE page feed is complete. It also does not reconcile revised notices, same-day cash aggregation, taxes, rights, or merger/demerger entitlements.\n\n"
         "Amounts are nominal at the historical share unit. Upstox price history appears adjusted for some later bonus/split events; dividend amounts must be converted into the same share units before adding cash to a simulated position. No stock total-return backtest is authorized by this parser audit alone.\n\n"
@@ -168,7 +204,7 @@ def main() -> None:
     manifest_rows = [
         {"dataset": "NSE member dividend term parse audit", "ticker": "symbols appearing in monthly NIFTY 50 snapshots", "instrument_key": "", "bar_interval": "event-level",
          "first_bar": START.isoformat(), "last_bar": END.isoformat(), "bar_count": str(len(rows)), "file_count": "1", "empty_files": "0",
-         "cache_paths": audit_path.relative_to(ROOT).as_posix(), "purpose": "Stock total-return input and corporate-action QA", "notes": "Nominal rupee/share parsing and price-date join only; symbol membership is ever-member. Candidate share-unit alignment and same-date aggregation are recorded separately."},
+         "cache_paths": audit_path.relative_to(ROOT).as_posix(), "purpose": "Stock total-return input and corporate-action QA", "notes": "NSE label amounts plus event-level source-linked overrides and price-date join; symbol membership is ever-member. Candidate share-unit alignment and same-date aggregation are recorded separately."},
         {"dataset": "NSE member dividend parse summary", "ticker": "symbols appearing in monthly NIFTY 50 snapshots", "instrument_key": "", "bar_interval": "summary",
          "first_bar": START.isoformat(), "last_bar": END.isoformat(), "bar_count": str(len(summaries)), "file_count": "1", "empty_files": "0",
          "cache_paths": summary_path.relative_to(ROOT).as_posix(), "purpose": "Dividend parse coverage report", "notes": "Year and parse-status counts; source completeness is not guaranteed."},

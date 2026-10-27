@@ -1,8 +1,8 @@
 metric,value,notes
 ever-member symbol dividend rows,646,Event-date membership is not checked.
-rows with parsed nominal amounts,645,Parsed from the corrected dividend-only event audit.
+rows with parsed nominal amounts,646,Parsed from the corrected dividend-only event audit.
 rows with a subsequent split/bonus factor,120,Historical cash amounts divided by the cumulative share factor.
-rows without a parsed subsequent split/bonus factor,525,No matching later event found in the saved NSE feed.
-rows with unresolved dividend amount,1,No candidate adjusted amount is emitted.
+rows without a parsed subsequent split/bonus factor,526,No matching later event found in the saved NSE feed.
+rows with unresolved dividend amount,0,No candidate adjusted amount is emitted.
 dividend rows sharing an ex-date with a split/bonus action,0,Any such row is withheld for manual review.
 ever-member split/bonus symbol-date candidates,21,All 21 candidates are covered by the 21-row Upstox price-adjustment audit.
