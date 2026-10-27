@@ -134,6 +134,7 @@ def _fetch_incremental(today: date) -> list[dict]:
                 path.parent.mkdir(parents=True, exist_ok=True)
                 prior = pd.read_csv(path) if path.exists() else pd.DataFrame(columns=q.BAR_COLUMNS)
                 combined = pd.concat([prior, fetched], ignore_index=True)
+                combined["time"] = pd.to_datetime(combined["time"], errors="raise")
                 combined = combined.drop_duplicates("time", keep="last").sort_values("time")
                 combined.to_csv(path, index=False)
                 outcome["cached_incremental_bars"] = int(len(combined))
