@@ -1,12 +1,12 @@
 # Demerger ex-date valuation and data availability
 
-**Checked:** 2026-10-26
+**Checked:** 2026-10-27
 
 ## Official valuation method
 
 NSE's June 2026 Nifty equity-index methodology sets a temporary dummy successor value to the prior close of the parent minus the parent's ex-date SPOS-discovered price, floored at zero. That is an index valuation rule, not a separately traded successor price. When one new company is issued, dividing this residual by the shareholder's entitlement ratio gives a per-new-share proxy. When several companies are issued, the parent price alone gives only their aggregate residual.
 
-NSE SPOS guidance says the equilibrium price is the opening price. The official Security-wise Archives page contains the daily OHLC and `Open Price` field, so the parent ex-date `Open` is the price input to this residual calculation when the event is confirmed as SPOS. The archive is a daily price record, not a separate SPOS order/trade tape. ITC and HINDUNILVR ex-date opens are included as official archive observations, but an event-specific SPOS circular or auction confirmation was not found for those two events in this pass.
+NSE SPOS guidance says the equilibrium price is the opening price. The official Security-wise Archives page contains the daily OHLC and `Open Price` field, so the parent ex-date `Open` is the price input to this residual calculation when the event is confirmed as SPOS. The archive is a daily price record, not a separate SPOS order/trade tape. Event-specific scheduling circulars are now located for ITC ([CMTR/65845](https://nsearchives.nseindia.com/content/circulars/CMTR65845.pdf)) and HINDUNILVR ([CMTR/71508](https://nsearchives.nseindia.com/content/circulars/CMTR71508.pdf)); they establish the SPOS scheduling and process but do not publish a numeric final auction result. Their official archive opens are therefore the best supported daily inputs to the index residual, not standalone auction-result records. See the [ITC/HUL source audit](spos_itc_hul_auction_result_audit_2026-10-27.md) for the caveat and entitlement ratios.
 
 ## Retrieved parent opens and residuals
 
