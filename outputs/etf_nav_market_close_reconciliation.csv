@@ -1,0 +1,3 @@
+etf,market_sessions,nav_sessions,matched_sessions,first_matched_date,last_matched_date,split_factor,market_sessions_without_nav,nav_dates_without_market,median_market_premium_pct,p05_market_premium_pct,p95_market_premium_pct
+NIFTYBEES,3166,3158,3153,2014-01-01,2026-10-23,10,13,5,0.030360464190870573,-0.24526944165729203,0.30378584329102676
+GOLDBEES,2921,3157,2910,2015-01-01,2026-10-23,100,11,247,-0.2688412535483631,-2.8042852663317075,0.4796664388257543

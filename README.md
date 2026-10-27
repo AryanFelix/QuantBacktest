@@ -16,7 +16,10 @@ The scripts are under `work/`; summary tables and methods are under `outputs/`.
 python work/replay_donchian_gold_blend.py
 python work/audit_etf_intraday_drawdown.py
 python work/refresh_backtest_summary.py
+python work/capture_amfi_goldman_etf_nav.py
 ```
+
+The AMFI/Nippon capture verifies the NIFTYBEES/GOLDBEES historical NAV lineage and split-normalized price basis. Its public aggregate is `outputs/etf_nav_market_close_reconciliation.csv`; raw NAV responses are ignored under `work/data/api_probes/`.
 
 For live candle refreshes, `work/upstox_quant.py` reads `UPSTOX_ANALYTICS_TOKEN` from the process environment or the current user's `HKCU\Environment` registry value. Keep the token out of source files, logs, commits, and issue reports. The forward-paper runner is read-only and never sends broker orders.
 
