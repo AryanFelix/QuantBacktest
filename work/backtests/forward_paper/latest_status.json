@@ -30,5 +30,32 @@
       "last_bar": "2026-10-26 00:00:00+05:30"
     }
   ],
-  "state": "waiting_for_first_post_freeze_common_bar"
+  "state": "waiting_for_first_post_freeze_common_bar",
+  "post_close_probe": {
+    "retrieved_at_utc": "2026-10-27T10:05:23.429246+00:00",
+    "request_window": [
+      "2026-10-27",
+      "2026-10-27"
+    ],
+    "results": [
+      {
+        "symbol": "NIFTYBEES",
+        "instrument_key": "NSE_EQ|INF204KB14I2",
+        "status": "success_no_bars",
+        "bars_received": 0,
+        "last_bar": null,
+        "token_value_saved": false
+      },
+      {
+        "symbol": "GOLDBEES",
+        "instrument_key": "NSE_EQ|INF204KB17I5",
+        "status": "success_no_bars",
+        "bars_received": 0,
+        "last_bar": null,
+        "token_value_saved": false
+      }
+    ],
+    "latest_common_history_bar": "2026-10-26",
+    "interpretation": "Upstox returned success with no Oct 27 daily candles at the 15:35 IST probe; this does not establish a holiday or data completeness."
+  }
 }
