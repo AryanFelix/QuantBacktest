@@ -1,6 +1,6 @@
 # Cash-proxy and token-access audit
 
-**Checked:** 2026-10-26  
+**Checked:** 2026-10-27
 **Scope:** Determine whether LIQUIDBEES or an overnight-rate index can represent idle cash in the current backtests. No strategy return was recalculated in this audit.
 
 ## Findings
@@ -10,11 +10,14 @@
 - The sampled Upstox LIQUIDBEES corporate-actions response contains zero records. That response is not evidence that no IDCW was declared.
 - As a benchmark check, the official NSE Indices history page returned 2,993 unique Nifty 1D Rate Index closes from 2014-01-01 through 2026-10-23. The index measures overnight TREPS lending returns; it is a benchmark, not an investable LIQUIDBEES return after fund expenses, tracking, execution, and tax. [NSE Indices historical data](https://www.niftyindices.com/reports/historical-data), [index factsheet](https://www.niftyindices.com/Factsheet/Factsheet_Nifty_1D_Rate.pdf), [methodology](https://www.niftyindices.com/Methodology/Method_Nifty_1D_Rate.pdf).
 - The official history response has a material 2020 gap. Its 2020 annual query returned 115 records, with observations on 2020-01-27 and then 2020-08-13, leaving no returned records from 2020-01-28 through 2020-08-12. A separate 2020-01-01 to 2020-06-30 query returned only 19 records, ending on 2020-01-27. This is a gap in the retrieved history; it does not establish whether the index itself was or was not calculated during those dates.
+- A public Nippon issuer web-service request to `FetchDividendDetails` for scheme `LB` returned 2,012 daily-IDCW records from 2019-06-09 through 2026-07-31. The payload ends two months before the issuer's latest page data. It contains 104 repeated-date extra rows, all in 2019-2020; 2021 onward has one row per effective date. The endpoint is visible in the issuer site code but is not a documented public developer API.
+- Compounding each 2021-2026 dividend as `1 + DividendRetail / 1000` (rupees per unit divided by the ₹1,000 face value) gives ₹10,430.27, ₹11,432.71, and ₹12,395.37 per ₹10,000 over the issuer-page July 2026 1/3/5-year horizons. The contemporaneous Nippon page snapshot reported ₹10,451, ₹11,587, and ₹12,426, so the reconstruction trails by ₹20.73, ₹154.29, and ₹30.63. The 3-year mismatch is material; do not use this candidate as validated cash P&L. The current issuer page now reports September 2026 figures, which cannot be aligned because the downloaded dividend feed is stale. [Current Nippon product/performance page](https://mf.nipponindiaim.com/FundsAndPerformance/Pages/NipponIndia-ETF-Nifty-1D-Rate-Liquid-BeES.aspx?rmfsource=corporate).
+- Nifty 1D Rate Index returned 248, 241, 246, 249, 249, and 200 observations for 2021 through 2026 (through October 23), respectively, with no apparent missing trading-week block. It can support a gross benchmark sensitivity after 2020, but it is not an investable LIQUIDBEES return after fund tracking, execution, and tax. The retrieval gap in early 2020 remains unresolved.
 - The raw annual-window responses and the gap probe are saved in `work/data/index_daily/`. The first test save accidentally captured the previous page’s 2026 rows; validation caught it, that temporary file was removed, and it was not used in analysis.
 
 ## Backtest treatment
 
-No cash-return series is substituted into historical strategy returns. Existing backtests retain their documented 0% cash-yield assumption. The LIQUIDBEES price series is excluded as a cash proxy, and the incomplete 1D Rate history is retained only as source evidence until the gap is reconciled. No missing dates were interpolated or assigned synthetic returns.
+No cash-return series is substituted into historical strategy returns. Existing backtests retain their documented 0% cash-yield assumption. LIQUIDBEES exchange closes remain excluded, the dividend reconstruction is held out pending reconciliation, and the 1D Rate history is retained only as a gross benchmark sensitivity. No missing dates were interpolated or assigned synthetic returns.
 
 ## Upstox token discovery
 
