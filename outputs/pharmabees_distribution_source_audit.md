@@ -7,6 +7,8 @@
 
 The reported ₹6.50/unit event with an 11 June 2026 ex-date is **not confirmed by the primary records reviewed**. Keep it out of ETF total-return adjustments and portfolio cash flows. This is an evidence limit, not a finding that the ETF paid zero distributions.
 
+The follow-up [primary-source review](../work/research/pharmabees_june_2026_primary_event_update.md) checked the AMC notice archive and exchange corporate-action pages. It reached the same unresolved conclusion; no backtest cash-flow adjustment was made.
+
 The lead is a third-party ATS dividend-history page, which labels ₹6.50 as a final dividend, gives 11 June 2026 as the ex-date and 13 June 2026 as the record date, and says the data came from BSE. Its displayed 1.20% yield is internally inconsistent with ₹6.50 divided by its stated ₹26.65 close (about 24.4%). The page provides no BSE notice number or primary filing link for this row. Treat it as an unverified lead only.
 
 ## Primary-source checks
