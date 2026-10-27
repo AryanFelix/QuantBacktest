@@ -119,7 +119,7 @@ def register_outputs(rows: list[dict], selected_pct: float) -> None:
     stock.atomic_csv(manifest_path, manifest, manifest_fields)
 
 
-def run_weight(stock_weight: float, context: dict) -> dict:
+def run_weight(stock_weight: float, context: dict, slippage_bps: int = SLIPPAGE_BPS) -> dict:
     stock_capital = CAPITAL * stock_weight
     etf_capital = CAPITAL - stock_capital
     stock_equity = stock_orders = stock_stats = stock_result = None
@@ -129,13 +129,13 @@ def run_weight(stock_weight: float, context: dict) -> dict:
         stock_ohlc.CAPITAL = stock_capital
         stock_equity, stock_orders, stock_stats = stock.simulate(
             STOCK_RULE, context["stock_bars"], context["dividends"], context["scheduled"][STOCK_RULE],
-            STOCK_CAP, SLIPPAGE_BPS, start=START, end=END,
+            STOCK_CAP, slippage_bps, start=START, end=END,
         )
         stock_equity = stock_equity.copy()
         stock_equity.index = blend_run.daily_index(stock_equity.index)
         stock_panels = stock_ohlc.price_panels(stock_equity.index, context["stock_bars"], context["etf_bars"])
         stock_result = stock_ohlc.replay(
-            "stock sleeve", (stock_equity, stock_orders, SLIPPAGE_BPS, "restored_universe"),
+            "stock sleeve", (stock_equity, stock_orders, slippage_bps, "restored_universe"),
             stock_panels, context["dividends"],
         )
         dates = stock_equity.index
@@ -147,7 +147,7 @@ def run_weight(stock_weight: float, context: dict) -> dict:
         etf_equity, etf_orders, etf_stats = q._simulate(
             context["panels"], context["portfolios"]["fixed_50_50_quarterly"],
             context["events"]["fixed_50_50_quarterly"], etf_capital, ETF_CAP,
-            SLIPPAGE_BPS, "equity_delivery", START.date(), END.date(), 20.0,
+            slippage_bps, "equity_delivery", START.date(), END.date(), 20.0,
         )
         etf_result = blend_run.replay_etf_ohlc(etf_equity, etf_orders, context["files"], etf_capital)
         dates = etf_result["dates"]
@@ -178,7 +178,7 @@ def run_weight(stock_weight: float, context: dict) -> dict:
             "stock_initial_capital_pct": stock_weight * 100,
             "etf_initial_capital_pct": (1 - stock_weight) * 100,
             "initial_gross_target_pct": (stock_weight * STOCK_CAP + (1 - stock_weight) * ETF_CAP) * 100,
-            "period": label, "slippage_bps_per_side": SLIPPAGE_BPS,
+            "period": label, "slippage_bps_per_side": slippage_bps,
             "fees_inr": "", "slippage_cost_inr": "", "order_count": "",
         })
         if label == "full_2021_2026":
@@ -202,7 +202,7 @@ def run_weight(stock_weight: float, context: dict) -> dict:
     }
 
 
-def main() -> None:
+def load_context() -> dict:
     stock.ACTION_EXCLUSIONS = set()
     stock.START, stock.END = START, END
     stock_bars, tri, dividends = stock.load_prices()
@@ -216,11 +216,15 @@ def main() -> None:
     if STOCK_RULE not in scheduled:
         raise ValueError(f"Frozen stock rule is missing: {STOCK_RULE}")
     files, panels, portfolios, events = blend.make_portfolios()
-    context = {
+    return {
         "stock_bars": stock_bars, "dividends": dividends, "etf_bars": etf_bars,
         "scheduled": scheduled, "files": files, "panels": panels,
         "portfolios": portfolios, "events": events,
     }
+
+
+def main() -> None:
+    context = load_context()
     runs = [run_weight(weight, context) for weight in WEIGHTS]
     all_rows = [row for run in runs for row in run["rows"]]
     base_half = next(row for row in all_rows if row["stock_initial_capital_pct"] == 50 and row["period"] == "full_2021_2026")
