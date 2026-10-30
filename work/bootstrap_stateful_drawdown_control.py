@@ -33,6 +33,7 @@ POLICIES = (
     ("dd_12pct_cut_60_to_30_recover_6pct", 0.60, 12.0),
 )
 NIFTY_SLEEVE_WEIGHT_BY_POLICY: dict[str, float] = {}
+EXPOSURE_BANDS_BY_POLICY: dict[str, tuple[float, float]] = {}
 ASSETS = ("NIFTYBEES", "GOLDBEES")
 FEE_PRODUCTS = (q.FUND_FEE_PRODUCTS[ASSETS[0]], q.FUND_FEE_PRODUCTS[ASSETS[1]])
 
@@ -97,6 +98,16 @@ def simulate(indices: np.ndarray, source: dict[str, np.ndarray], initial_prices:
     shape = (path_count, policy_count)
     initials = np.array([policy[1] for policy in POLICIES], dtype=float)
     triggers = np.array([np.nan if policy[2] is None else policy[2] / 100.0 for policy in POLICIES])
+    bands = [EXPOSURE_BANDS_BY_POLICY.get(policy[0], (0.60, 0.30)) for policy in POLICIES]
+    high_exposures = np.array([band[0] for band in bands], dtype=float)
+    low_exposures = np.array([band[1] for band in bands], dtype=float)
+    triggered = np.isfinite(triggers)
+    if not np.isfinite(high_exposures).all() or not np.isfinite(low_exposures).all():
+        raise ValueError("drawdown exposure bands must be finite")
+    if ((low_exposures <= 0) | (low_exposures >= high_exposures)).any():
+        raise ValueError("drawdown exposure bands must satisfy 0 < lower < upper")
+    if (np.abs(high_exposures[triggered] - initials[triggered]) > 1e-12).any():
+        raise ValueError("triggered policies must start at their upper exposure")
     nifty_weights = np.array([NIFTY_SLEEVE_WEIGHT_BY_POLICY.get(policy[0], 0.5) for policy in POLICIES])
     if not np.isfinite(nifty_weights).all() or ((nifty_weights < 0) | (nifty_weights > 1)).any():
         raise ValueError("NIFTY sleeve weights must be between 0 and 1")
@@ -229,9 +240,9 @@ def simulate(indices: np.ndarray, source: dict[str, np.ndarray], initial_prices:
         worst_ohlc = np.minimum(worst_ohlc, ohlc_dd)
 
         if step < steps - 1:
-            cut = np.isfinite(triggers)[None, :] & (current >= 0.60 - 1e-12) & (close_dd <= -triggers[None, :])
-            recover = np.isfinite(triggers)[None, :] & (current <= 0.30 + 1e-12) & (close_dd >= -triggers[None, :] / 2.0)
-            pending = np.where(cut, 0.30, np.where(recover, 0.60, pending))
+            cut = triggered[None, :] & (current >= high_exposures[None, :] - 1e-12) & (close_dd <= -triggers[None, :])
+            recover = triggered[None, :] & (current <= low_exposures[None, :] + 1e-12) & (close_dd >= -triggers[None, :] / 2.0)
+            pending = np.where(cut, low_exposures[None, :], np.where(recover, high_exposures[None, :], pending))
             trigger_count += cut
             recovery_count += recover
 

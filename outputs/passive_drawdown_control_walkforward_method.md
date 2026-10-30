@@ -27,3 +27,18 @@ A separate 30/70 composition extension found +93.33% return and -17.04% historic
 The 2026 official-fee audit found that the shared helper omitted 18% GST on SEBI turnover fees. The helper is corrected and the passive-control sensitivity and 50/200-bps stateful bootstraps were regenerated. This adds less than ₹0.60 in charges to each of the three 200-bps full-period paths and does not change the rounded return or risk conclusion. A scan of stored scenario ledgers found a maximum ₹41.34 adjustment per ledger; those outputs overlap across parameter grids and must not be summed. Other strategy tables have not all been regenerated. See [the source and fee-model audit](../work/research/cash_etf_delivery_cost_sources_2026-10-30.md); actual spreads and market impact are still unmeasured.
 
 Runner: `work/select_passive_drawdown_control_walkforward.py`. Results: `outputs/passive_drawdown_control_walkforward.csv`; frozen rule record: `outputs/passive_drawdown_control_walkforward_selection.json`. Reproduce the 200-bps exposure/trigger stress with `python work/stress_passive_drawdown_control_200bps.py` and paired-OHLC bootstrap with `python work/bootstrap_passive_drawdown_control_200bps.py`; outputs contain 24 replays and 24 bootstrap summaries in `outputs/passive_drawdown_control_200bps_stress.csv` and `outputs/stateful_drawdown_control_200bps_bootstrap.csv`.
+
+## 20%-to-10% trigger comparison at 200 bps
+
+As a post-hoc sizing comparison, the 20% initial 30/70 NIFTY/Gold mix cuts its target exposure to 10% after close-NAV drawdown reaches 8%, then restores 20% after drawdown recovers to -4%; changes fill at the next open. This reuses the earlier 8/4 threshold and does not retune it on the low-exposure sample. All periods were already inspected.
+
+| Period | Net return | Close MDD | OHLC bound | Trigger / recovery |
+|---|---:|---:|---:|---:|
+| Continuous 2015–2026 | +66.12% | -9.61% | -11.46% | 1 / 0 |
+| Training 2015–2019 | +7.72% | -2.84% | -3.32% | 0 / 0 |
+| Validation 2020–2022 | +7.09% | -3.37% | -6.46% | 0 / 0 |
+| Pseudo-holdout 2023–2026 | +20.00% | -8.99% | -10.10% | 1 / 0 |
+
+Against the fixed 20% initial 30/70 path, the trigger version had a higher continuous historical return (+66.12% vs +62.21%) and smaller OHLC envelope (-11.46% vs -13.96%). The stateful 5,000-path bootstrap, using the same sampled paths for both, estimated zero -20% envelope breaches for the trigger version at 21/63/126-session mean blocks; fifth-percentile envelopes were -14.38/-13.96/-13.62%. Fixed 20% had estimated breaches of 0.42/0.56/0.92% and fifth percentiles -16.25/-16.35/-16.80%. The trigger version's 126-block median CAGR was lower, 3.54% vs 4.06%, showing the risk/return tradeoff. Zero of 5,000 sampled breaches is not zero true risk; a rule-of-three 95% upper bound is about 0.06% per estimate.
+
+This result is not independent validation: the continuous and later periods were inspected and the pseudo-holdout had the sole historical trigger. The 20% is an initial target, not a maintained gross exposure cap; it drifted to 56.72% peak exposure before the cut. Fees use the corrected current model, 200 bps per-side slippage is assumed rather than observed, cash yield is zero, and Gold distributions remain incomplete. It remains paper-only. Reproduce with `work/stress_passive_exposure_trigger_20_to_10_200bps.py` and `work/bootstrap_passive_exposure_trigger_20_to_10_200bps.py`; the four replay rows and three stateful summaries are in `outputs/passive_exposure_trigger_20_to_10_200bps.csv` and `outputs/passive_exposure_trigger_20_to_10_200bps_bootstrap.csv`.
