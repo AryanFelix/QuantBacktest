@@ -1,4 +1,4 @@
-"""Bootstrap passive NIFTY/Gold 30/70 allocations and a 45% anchor at 200 bps."""
+"""Bootstrap low-exposure NIFTY/Gold allocations at 200 bps."""
 
 from pathlib import Path
 
@@ -16,30 +16,37 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs" / "passive_mix_composition_lower_exposure_200bps_bootstrap.csv"
 STRESS = ROOT / "outputs" / "passive_mix_composition_lower_exposure_200bps.csv"
 SLIPPAGE_BPS = 200.0
-NIFTY_SHARE = 0.30
 EXPOSURES = (0.10, 0.15, 0.20, 0.25, 0.30, 0.45)
 POLICIES = tuple(
     (f"initial_{int(exposure * 100)}pct_nifty_30_gold_70", exposure, None)
     for exposure in EXPOSURES
+) + (
+    ("initial_20pct_nifty_50_gold_50", 0.20, None),
+    ("initial_20pct_nifty_70_gold_30", 0.20, None),
 )
+NIFTY_SHARE_BY_POLICY = {
+    **{name: 0.30 for name, _, _ in POLICIES[:len(EXPOSURES)]},
+    POLICIES[-2][0]: 0.50,
+    POLICIES[-1][0]: 0.70,
+}
 
 
 def main() -> None:
     stateful.SLIPPAGE_BPS = SLIPPAGE_BPS
     stateful.POLICIES = POLICIES
-    stateful.NIFTY_SLEEVE_WEIGHT_BY_POLICY = {name: NIFTY_SHARE for name, _, _ in POLICIES}
+    stateful.NIFTY_SLEEVE_WEIGHT_BY_POLICY = NIFTY_SHARE_BY_POLICY
     source, dates, initial_prices = stateful.load_source()
     bootstrap.check_sampler()
     _, panels, _, _ = blend.make_portfolios()
-    targets, events = benchmark._passive_targets(panels, {
-        "NIFTYBEES": NIFTY_SHARE,
-        "GOLDBEES": 1.0 - NIFTY_SHARE,
-    })
-
     historical = np.arange(len(dates), dtype=np.int32)[None, :]
     replay = stateful.simulate(historical, source, initial_prices)
     stress = pd.read_csv(STRESS)
     for column, (name, exposure, trigger) in enumerate(POLICIES):
+        nifty_share = NIFTY_SHARE_BY_POLICY[name]
+        targets, events = benchmark._passive_targets(panels, {
+            "NIFTYBEES": nifty_share,
+            "GOLDBEES": 1.0 - nifty_share,
+        })
         _, _, canonical = control.simulate(
             panels, name, exposure, trigger, SLIPPAGE_BPS,
             start=stateful.START, end=stateful.END,
@@ -64,6 +71,7 @@ def main() -> None:
         )
         result = stateful.simulate(indices, source, initial_prices)
         for column, (name, exposure, _) in enumerate(POLICIES):
+            nifty_share = NIFTY_SHARE_BY_POLICY[name]
             close_dd = result["close_mdd_pct"][:, column]
             ohlc_dd = result["ohlc_bound_pct"][:, column]
             terminal = result["ending_balance_inr"][:, column]
@@ -72,8 +80,8 @@ def main() -> None:
             rows.append({
                 "strategy": name,
                 "initial_exposure_pct": exposure * 100,
-                "nifty_sleeve_pct": NIFTY_SHARE * 100,
-                "gold_sleeve_pct": (1.0 - NIFTY_SHARE) * 100,
+                "nifty_sleeve_pct": nifty_share * 100,
+                "gold_sleeve_pct": (1.0 - nifty_share) * 100,
                 "slippage_bps_per_side": SLIPPAGE_BPS,
                 "source_start": dates[0].isoformat(),
                 "source_end": dates[-1].isoformat(),
@@ -95,10 +103,10 @@ def main() -> None:
         print(f"finished 200-bps 30/70 stateful {mean_block}-session blocks", flush=True)
 
     table = pd.DataFrame(rows)
-    assert len(table) == len(POLICIES) * len(stateful.BLOCK_LENGTHS) == 18
+    assert len(table) == len(POLICIES) * len(stateful.BLOCK_LENGTHS) == 24
     assert table["ohlc_bound_breach_probability_pct"].between(0, 100).all()
     table.to_csv(OUT, index=False)
-    print(f"wrote {len(table)} 30/70 composition bootstrap summaries")
+    print(f"wrote {len(table)} low-exposure composition bootstrap summaries")
 
 
 if __name__ == "__main__":
