@@ -16,6 +16,10 @@ Upstox returned four daily candles per ETF through 2026-10-29. The common paper 
 
 ## Rules under prospective observation
 
+### Post-revision-9 research candidate
+
+The 2026-10-30 quarterly cap/mix/cost study identifies a 55% total cap with a 40/60 NIFTY/Gold risky sleeve (22% NIFTYBEES, 33% GOLDBEES, 45% cash at quarterly targets) as the current risk-screened paper candidate. It was selected after revision 9 had already collected Oct 28–29 observations, so those sessions cannot count as prospective results. It is not in the frozen revision-9 set. If added, freeze it under a new version with a forward-only start after the amendment, preserve the existing 15 paths, and use the same delivery-fee model and 10/50-bps-per-side paper-cost settings. Its historical/bootstrap evidence and limits are in the [cap/mix/cost method](quarterly_static_mix_cost_method.md); it has no forward-paper performance yet.
+
 | Path | Frozen rule | Costs |
 |---|---|---|
 | Passive NIFTY/Gold mix | At the first paper-session next-open fill, buy NIFTYBEES and GOLDBEES to 22.5% of NAV each; hold units without rebalancing. Initial gross exposure is 45%; exposure may drift. | Current Upstox/NSE delivery charges; 10 and 50 bps per side |

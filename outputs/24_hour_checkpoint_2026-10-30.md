@@ -8,7 +8,19 @@
 
 ## What the research established
 
-The most defensible current research set is passive NIFTY/Gold ETF allocation under explicit exposure limits. It is a candidate set for continued paper observation, not a deployment recommendation. A 20% initial 30/70 NIFTY/Gold mix is the more conservative return/risk reference. A 30% initial 40/60 mix produced more historical return with a tighter but still sub-20% fifth-percentile envelope in this conditional bootstrap. A 30% initial 50/50 mix had a slightly lower 126-session breach estimate. These are initial weights that drift as the assets move.
+The strongest current **paper candidate** in the tested quarterly static grid is a 55% total cap with a 40/60 NIFTY/Gold risky sleeve: rebalance targets are 22% NIFTYBEES, 33% GOLDBEES, and 45% zero-yield cash. At 200 bps per-side assumed slippage, it returned +115.29% (6.84% CAGR) across 2015–2026, with a -15.33% historical daily OHLC envelope; the already-inspected 2023–2026 pseudo-holdout returned +40.66%. A 5,000-path, 10-year close-return bootstrap using 126-session blocks estimated a 0.56% probability of crossing -20% (±0.11 percentage-point Monte Carlo error), with a -16.16% p05 drawdown. The candidate is post-hoc and selected under a researcher-chosen bootstrap screen after inspecting the full history; it is not a proven winner or a hard 20% loss cap. Exposure is reset only quarterly and can drift between rebalances.
+
+| Quarterly target, 200 bps/side | 2015–2026 return / CAGR | Historical OHLC | 10-year 126-block bootstrap: p05 / breach |
+|---:|---:|---:|---:|
+| 45% | +84.77% / 5.44% | -12.92% | -13.58% / 0.04% |
+| 50% | +97.51% / 6.05% | -14.20% | -14.96% / 0.16% |
+| 55% cap, equal 50/50 sleeve | +111.05% / 6.66% | -15.46% | -16.33% / 0.66% |
+| 60% higher-return challenger | +125.42% / 7.26% | -16.69% | -17.69% / 1.86% |
+| 65% | +140.68% / 7.87% | -17.89% | -19.03% / 3.48% |
+
+At the 55% cap, the 40/60 sleeve mix improved return and reduced the estimated breach rate relative to equal sleeves (0.56% ± 0.11 pp versus 0.66% ± 0.11 pp). Its breach estimate plus 1.96 Monte Carlo standard errors is about 0.78%, below the researcher-set 1% triage threshold; 30/70 is higher-return but about 1.19% on that calculation. The targeted 60% mixes exceed the threshold. This threshold only reflects bootstrap sampling error, not model uncertainty. See the [cap/mix/cost method and reproduction files](quarterly_static_mix_cost_method.md).
+
+Other passive NIFTY/Gold allocations remain comparative references. The 20% initial 30/70 mix is a lower-risk return/risk reference; 30% initial 40/60 produced more historical return with a tighter but still sub-20% fifth-percentile envelope than the equal-ratio mix. These are initial weights that drift as the assets move.
 
 | ₹10 lakh policy, 200 bps assumed slippage per side | End value | Net return / CAGR | Modeled fees / slippage | Historical daily OHLC bound | 10-year paired-OHLC estimate |
 |---|---:|---:|---:|---:|---|
@@ -49,8 +61,8 @@ An 8%/4% drawdown trigger that cut the 20% 30/70 policy to 10% returned +66.12% 
 
 ## Recommended next research phase
 
-1. Keep the 20% initial 30/70 and 30% initial 40/60 mixes as passive paper references; retain the 20% 50/50 and 30% 50/50 mixes as lower-tail comparisons. Preserve parameters before collecting new prospective observations.
-2. Continue the frozen forward-paper ledger, verify each session's candle completeness, and record observed bid/ask, fills, and actual personal fees when available. Reconcile total-return series and dividends before comparing stock and ETF candidates.
+1. Continue the frozen revision-9 forward-paper ledger. If the 55% quarterly target cap is added, freeze it as a new, forward-only paper path after the amendment; do not count the two earlier Oct 28–29 sessions as prospective evidence. Keep the 20% initial 30/70 and 30% initial 40/60 mixes as passive references, with 20% 50/50 and 30% 50/50 as lower-tail comparisons.
+2. Verify each paper session's candle completeness, and record observed bid/ask, fills, and actual personal fees when available. Reconcile total-return series and distributions before comparing stock and ETF candidates.
 3. Test a maintained gross-exposure cap and operational drawdown stop with next-open execution and fees. Track cash yield, spreads, sizing drift, missing sessions, and monitor failures.
 4. Revisit derivatives only after a continuous, point-in-time expired-contract source is available; revisit individual stocks after point-in-time membership and corporate actions are audited.
 5. Promote nothing to live trading on this checkpoint alone. A live decision needs fresh out-of-sample paper evidence and explicit execution/risk controls.
