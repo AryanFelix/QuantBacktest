@@ -6,6 +6,22 @@
 - **Research capital:** ₹10,00,000
 - **Requested maximum peak-to-trough drawdown:** 20% (₹2,00,000 from starting capital; measured from a later peak, rupee loss can be larger)
 
+## Top 5 research leaders
+
+**Current lead:** the 65% quarterly exposure cap with a 30/70 NIFTY/Gold sleeve, conditional on earning the RBI 91-day T-bill proxy rate on cash. It is the highest-return tested configuration that passes the current research-only bootstrap screen. All five rows below are variants of the same quarterly capped ETF-allocation rule, not five independent signal families.
+
+Ranked by 2015-01-02–2026-10-23 net return among tested configurations whose 10-year, 126-session close-return bootstrap breach estimate plus 1.96 Monte Carlo standard errors is below 1%. Each starts with ₹10 lakh and includes current modeled fees plus 200 bps adverse slippage per side. “OHLC” is the historical high-before-low envelope; bootstrap results resample the inspected close-return series. Every row is post-hoc, the later period was already inspected, and the 1% triage screen is not a 20% loss guarantee.
+
+| Rank and rebalance targets (NIFTY / Gold / cash) | 2015–2026 net return / CAGR; ending balance | Fees / assumed slippage | Historical OHLC bound | 10-year, 126-session bootstrap (p05; breach ± MCSE; screen) | 2023–2026 pseudo-holdout |
+|---|---:|---:|---:|---:|---:|
+| **1. Lead — 65% cap; 30/70 sleeve (19.5% / 45.5% / 35%)**; synthetic cash-yield proxy | **+219.46% / 10.54%; ₹31.95L** | ₹4,067 / ₹99,835 | -17.57% | -16.35%; 0.60% ± 0.11 pp; **0.81% pass** | +68.81% |
+| 2. 60% cap; 20/80 sleeve (12% / 48% / 40%); synthetic cash-yield proxy | +214.62% / 10.39%; ₹31.46L | ₹4,020 / ₹86,604 | -16.53% | -15.48%; 0.50% ± 0.10 pp; **0.70% pass** | +71.65% |
+| 3. 65% cap; 40/60 sleeve (26% / 39% / 35%); synthetic cash-yield proxy | +212.36% / 10.33%; ₹31.24L | ₹4,117 / ₹102,884 | -17.70% | -16.13%; 0.62% ± 0.11 pp; **0.84% pass** | +61.91% |
+| 4. 55% cap; 10/90 sleeve (5.5% / 49.5% / 45%); synthetic cash-yield proxy | +208.51% / 10.21%; ₹30.85L | ₹3,928 / ₹73,591 | -16.67% | -14.99%; 0.20% ± 0.06 pp; **0.32% pass** | +73.40% |
+| 5. 60% cap; 30/70 sleeve (18% / 42% / 40%); synthetic cash-yield proxy | +208.48% / 10.21%; ₹30.85L | ₹4,053 / ₹91,129 | -16.37% | -14.53%; 0.24% ± 0.07 pp; **0.38% pass** | +65.22% |
+
+**Interpret the lead conditionally:** the proxy credits the whole cash balance continuously at the previous session’s known RBI auction yield on actual/365; no executable T-bill ladder, taxes, or reinvestment costs are modeled. Without an investable cash-yield instrument, use the zero-yield baseline results later in this report. GoldBeES distributions are incomplete. Do not treat these retrospective results as proof of a winner or as a hard drawdown control.
+
 ## Data integrity correction — 2026-10-27
 
 Upstox daily ETF bars sometimes carried within-session timestamps, so the previous multi-ETF exact-timestamp join created extra rows for the same trading date. The quarterly NIFTY/Gold control had 3,232 rows for 3,166 unique NIFTY sessions. The daily loader now keys `-days-1-` files by local session date, deduplicates only identical same-day OHLCV rows, and stops on conflicting daily records. The official [Upstox Historical Candle V3 documentation](https://upstox.com/developer/api-documentation/v3/get-historical-candle-data/) defines the timestamp as the candle-period start and illustrates daily candles at 00:00 IST.
