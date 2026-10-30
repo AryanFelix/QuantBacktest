@@ -1,0 +1,59 @@
+{
+  "capital_inr": 1000000,
+  "slippage_bps_per_side": 150,
+  "exposure_grid_pct": [
+    25.0,
+    30.0,
+    35.0,
+    40.0,
+    45.0,
+    50.0,
+    55.00000000000001,
+    60.0,
+    65.0,
+    70.0,
+    75.0,
+    80.0,
+    85.0,
+    90.0,
+    95.0
+  ],
+  "selection_rule": "Highest validation CAGR among caps passing the 20% OHLC bound in training, validation, and continuous development; ties prefer more risk headroom then lower exposure.",
+  "eligible_caps": [
+    {
+      "exposure_pct": 25.0,
+      "validation_cagr_pct": 2.1233244900432657,
+      "worst_development_ohlc_pct": -15.294730165136238
+    },
+    {
+      "exposure_pct": 30.0,
+      "validation_cagr_pct": 2.5482037791691337,
+      "worst_development_ohlc_pct": -18.048197431632985
+    }
+  ],
+  "selected": {
+    "exposure_pct": 30.0,
+    "validation_cagr_pct": 2.5482037791691337,
+    "worst_development_ohlc_pct": -18.048197431632985
+  },
+  "pseudo_holdout": {
+    "weighting": "12_1_momentum_strength_weighted",
+    "slippage_bps_per_side": 150,
+    "period": "pseudo_holdout_2023_plus",
+    "period_start": "2023-01-01",
+    "period_end": "2026-10-23",
+    "gross_exposure_cap_pct": 30.0,
+    "starting_balance_inr": 1000000,
+    "ending_balance_inr": 1067960.659585077,
+    "total_return_pct": 6.796065958507702,
+    "cagr_pct": 1.7707092331950003,
+    "close_max_drawdown_pct": -12.985477984494375,
+    "ohlc_drawdown_bound_pct": -13.352348297342164,
+    "within_20pct_ohlc": true,
+    "total_fees_inr": 6488.948464923311,
+    "order_count": 161,
+    "max_close_replay_error_inr": 2.3283064365386963e-10,
+    "run_artifact": "work/backtests/cross_asset_momentum_strength_150bps/pseudo_holdout_2023_plus__cap30"
+  },
+  "limit": "150 bps per-side is a cost assumption, not a measured spread; all historical windows have been inspected."
+}
