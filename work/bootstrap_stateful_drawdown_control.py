@@ -32,6 +32,7 @@ POLICIES = (
     ("dd_10pct_cut_60_to_30_recover_5pct", 0.60, 10.0),
     ("dd_12pct_cut_60_to_30_recover_6pct", 0.60, 12.0),
 )
+NIFTY_SLEEVE_WEIGHT_BY_POLICY: dict[str, float] = {}
 ASSETS = ("NIFTYBEES", "GOLDBEES")
 FEE_PRODUCTS = (q.FUND_FEE_PRODUCTS[ASSETS[0]], q.FUND_FEE_PRODUCTS[ASSETS[1]])
 
@@ -96,6 +97,9 @@ def simulate(indices: np.ndarray, source: dict[str, np.ndarray], initial_prices:
     shape = (path_count, policy_count)
     initials = np.array([policy[1] for policy in POLICIES], dtype=float)
     triggers = np.array([np.nan if policy[2] is None else policy[2] / 100.0 for policy in POLICIES])
+    nifty_weights = np.array([NIFTY_SLEEVE_WEIGHT_BY_POLICY.get(policy[0], 0.5) for policy in POLICIES])
+    if not np.isfinite(nifty_weights).all() or ((nifty_weights < 0) | (nifty_weights > 1)).any():
+        raise ValueError("NIFTY sleeve weights must be between 0 and 1")
     cash = np.full(shape, CAPITAL, dtype=float)
     qty_n = np.zeros(shape, dtype=np.int64)
     qty_g = np.zeros(shape, dtype=np.int64)
@@ -130,8 +134,8 @@ def simulate(indices: np.ndarray, source: dict[str, np.ndarray], initial_prices:
 
         rebalance = np.ones(shape, dtype=bool) if step == 0 else np.isfinite(pending)
         target = np.where(step == 0, initials[None, :], np.where(rebalance, pending, current))
-        desired_n = np.floor(prior_nav * target * 0.5 / prev_n[:, None]).astype(np.int64)
-        desired_g = np.floor(prior_nav * target * 0.5 / prev_g[:, None]).astype(np.int64)
+        desired_n = np.floor(prior_nav * target * nifty_weights[None, :] / prev_n[:, None]).astype(np.int64)
+        desired_g = np.floor(prior_nav * target * (1.0 - nifty_weights[None, :]) / prev_g[:, None]).astype(np.int64)
         desired_n = np.where(rebalance, desired_n, qty_n)
         desired_g = np.where(rebalance, desired_g, qty_g)
 

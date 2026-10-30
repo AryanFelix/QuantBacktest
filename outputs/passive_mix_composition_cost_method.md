@@ -40,3 +40,15 @@ For the 30/70 path, modeled fees are approximately ₹302 at each cost level; mo
 These are assumed slippage levels, not measured bid/ask spreads. Costs apply only to the initial purchase and terminal sale because the strategy holds units without rebalancing; actual spread, market impact, partial fills, dividend reinvestment, cash interest, capital-gains tax, and future drawdowns can change results. The cost grid does not make the full-history frontier independent. The historical OHLC envelope is a conservative bound, not a future loss guarantee.
 
 Reproduce with `python work/sensitivity_passive_mix_composition_cost.py`. It writes the [88-row cost ledger](passive_mix_composition_cost_sensitivity.csv), per-cost training and descriptive full-history choices ([selection JSON](passive_mix_composition_cost_selection.json)), and local equity/order ledgers under `work/backtests/passive_mix_composition_cost/`. The base [composition study](passive_mix_composition_method.md) describes the 50-bps construction and known event coverage.
+
+## Lower initial exposure extension at 200 bps
+
+The extension replays 25% and 30% initial exposure at 30/70, 50/50, and 70/30 NIFTY/Gold weights over training, validation, the already-inspected pseudo-holdout, and continuous history. It writes 24 rows via `work/stress_passive_composition_lower_exposure_200bps.py`. A separate 5,000-path stateful paired-OHLC bootstrap covers the 25% and 30% 30/70 cases across 21/63/126-session mean blocks; deterministic replay is asserted against the canonical simulator.
+
+| Initial exposure and sleeve mix | Continuous 2015–2026 return / OHLC | 63-block 10-year breach estimate | Fifth-percentile OHLC envelope |
+|---|---:|---:|---:|
+| 25%, 30/70 NIFTY/Gold | +77.77% / -15.66% | 1.94% | -18.22% |
+| 30%, 30/70 NIFTY/Gold | +93.33% / -17.04% | 4.34% | -19.78% |
+| 30%, 50/50 NIFTY/Gold | +83.78% / -14.66% | 3.18% | -19.06% |
+
+At 126-session blocks, the 30% 30/70 case's fifth-percentile envelope was -20.27% and its breach estimate 5.60%, so it fails that coarse tail screen. The 25% 30/70 case stayed above -20% in all tested bootstrap blocks, with a -18.69% fifth percentile and 2.78% breach estimate at 126 sessions. These are initial holdings that drift, not maintained exposure caps. This composition grid was formed after examining the full history; resampling cannot promise a future loss ceiling. See the [replay ledger](passive_mix_composition_lower_exposure_200bps.csv), [bootstrap summary](passive_mix_composition_lower_exposure_200bps_bootstrap.csv), and both reproduction scripts.

@@ -1,4 +1,4 @@
-"""Statefully bootstrap paired ETF OHLC paths for passive controls at 200 bps."""
+"""Statefully bootstrap passive ETF exposures and controls at 200 bps."""
 
 from pathlib import Path
 
@@ -12,7 +12,10 @@ import bootstrap_stateful_drawdown_control as stateful
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs" / "stateful_drawdown_control_200bps_bootstrap.csv"
 SLIPPAGE_BPS = 200.0
-POLICIES = stateful.POLICIES[:1] + stateful.POLICIES[2:4]
+POLICIES = tuple(
+    (f"fixed_{int(exposure * 100)}pct", exposure, None)
+    for exposure in (0.20, 0.25, 0.30, 0.35, 0.40, 0.45)
+) + stateful.POLICIES[2:4]
 
 
 def main() -> None:
@@ -86,7 +89,7 @@ def main() -> None:
         print(f"finished 200-bps stateful {mean_block}-session blocks", flush=True)
 
     table = pd.DataFrame(rows)
-    assert len(table) == len(POLICIES) * len(stateful.BLOCK_LENGTHS)
+    assert len(table) == len(POLICIES) * len(stateful.BLOCK_LENGTHS) == 24
     assert table["ohlc_bound_breach_probability_pct"].between(0, 100).all()
     OUT.parent.mkdir(parents=True, exist_ok=True)
     table.to_csv(OUT, index=False)
