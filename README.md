@@ -8,6 +8,8 @@ The account reference is ₹10 lakh with a 20% peak-to-trough risk screen. No st
 
 The monthly NIFTYBEES Donchian 55/20 + GOLDBEES 200DMA blend is under prospective paper observation at several frozen settings. Its selected 95% exposure setting returned +63.69% on the inspected 2023–2026 holdout at 50 bps per-side slippage and passed the conservative daily OHLC envelope at -16.28%; the same rule failed the 2020+ envelope at -24.41%. It is a challenger, not a validated winner. See the [OHLC audit](outputs/etf_daily_timestamp_and_intraday_risk_audit.md) and [paper protocol](outputs/forward_paper_plan.md).
 
+The corrected cross-asset ETF 12–1 momentum replay selected 45% exposure at 50 bps and returned +20.85% with a -13.56% historical OHLC envelope on the already-inspected 2023–2026 segment. It is not a validated winner; the [method and fee-corrected frontier](outputs/cross_asset_momentum_ohlc_method.md) supersede the older ETF-unit STT results.
+
 ## Reproducing the main research
 
 The scripts are under `work/`; summary tables and methods are under `outputs/`.
