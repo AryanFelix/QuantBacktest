@@ -75,10 +75,12 @@ def _run(
     cash_distributions: list[tuple[str, date, float]] | None = None,
     exposure_cap: float = EXPOSURE_CAP,
     slippage_bps: float = SLIPPAGE_BPS,
+    cash_yield_series: pd.Series | None = None,
 ) -> dict:
     equity, orders, stats = q._simulate(
         panels, targets, events, CAPITAL, exposure_cap, slippage_bps,
         "equity_delivery", start, end, 20.0, cash_distributions=cash_distributions,
+        cash_yield_series=cash_yield_series,
     )
     stats["total_slippage_inr"] = blend.modeled_slippage(orders, panels)
     relative = _save_run(run_dir / name, equity, orders)
@@ -99,6 +101,7 @@ def _run(
         "total_fees_inr": stats["total_fees_inr"],
         "total_slippage_inr": stats["total_slippage_inr"],
         "cash_distributions_inr": stats["cash_distributions_inr"],
+        "cash_yield_inr": stats["cash_yield_inr"],
         "order_count": stats["order_count"],
         "max_close_replay_error_inr": risk["max_close_replay_error_inr"],
         "gross_exposure_cap_pct": exposure_cap * 100,

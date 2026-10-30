@@ -112,6 +112,7 @@ def run_case(
     close_nav = []
 
     for date_key, saved in equity.iterrows():
+        cash += float(saved.get("cash_yield_inr", 0.0) or 0.0)
         cash += float(saved.get("cash_distribution_inr", 0.0) or 0.0)
         for symbol, amount in quantity.items():
             if amount and (bars[symbol].loc[date_key, ["open", "high", "low", "close"]] <= 0).any():

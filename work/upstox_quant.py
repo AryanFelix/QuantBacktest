@@ -430,6 +430,7 @@ def _simulate(
     cash_proxy: str | None = None,
     cash_distributions: list[tuple[str, date, float]] | None = None,
     fee_product_by_symbol: dict[str, str] | None = None,
+    cash_yield_series: pd.Series | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     if starting_balance <= 0 or not 0 < max_exposure <= 1 or slippage_bps < 0 or drawdown_limit_pct <= 0:
         raise ValueError("capital must be positive, exposure in (0, 1], slippage non-negative, and drawdown limit positive")
@@ -459,6 +460,15 @@ def _simulate(
     run_dates = [timestamp for timestamp in closes.index if (start is None or timestamp.date() >= start) and (end is None or timestamp.date() <= end)]
     if not run_dates:
         raise ValueError("the selected run period contains no common bars")
+    cash_yields = None
+    if cash_yield_series is not None:
+        if cash_yield_series.index.has_duplicates or not cash_yield_series.index.is_monotonic_increasing:
+            raise ValueError("cash-yield dates must be unique and increasing")
+        cash_yields = pd.to_numeric(cash_yield_series, errors="coerce").reindex(closes.index).ffill()
+        if cash_yields.loc[run_dates].isna().any() or not np.isfinite(cash_yields.loc[run_dates].to_numpy(dtype=float)).all():
+            raise ValueError("cash-yield series must cover the run with finite rates")
+        if (cash_yields.loc[run_dates] <= -100).any():
+            raise ValueError("cash-yield rates must exceed -100 percent")
     cash = float(starting_balance)
     quantity = {name: 0 for name in names}
     slip = slippage_bps / 10_000
@@ -467,6 +477,7 @@ def _simulate(
     turnover = 0.0
     equity = []
     daily_distributions = []
+    daily_cash_yields = []
     applied_distributions = []
     risky_exposures = []
     gross_exposures = []
@@ -477,6 +488,12 @@ def _simulate(
         open_prices = open_marks.loc[timestamp]
         close_prices = close_marks.loc[timestamp]
         executable_prices = opens.loc[timestamp]
+        cash_yield = 0.0
+        if cash_yields is not None and step:
+            prior_timestamp = run_dates[step - 1]
+            days_held = (timestamp.date() - prior_timestamp.date()).days
+            cash_yield = cash * float(cash_yields.loc[prior_timestamp]) / 100 * days_held / 365
+            cash += cash_yield
         distribution_cash = 0.0
         for name, amount_per_share in distribution_by_date.get(timestamp.date(), []):
             eligible_quantity = quantity[name]
@@ -557,6 +574,7 @@ def _simulate(
         invested_risk = sum(quantity[name] * float(close_prices[name]) for name in risk_names if quantity[name] and pd.notna(close_prices[name]))
         equity.append(nav_close)
         daily_distributions.append(distribution_cash)
+        daily_cash_yields.append(cash_yield)
         risky_exposures.append(invested_risk / nav_close if nav_close > 0 else 0.0)
         gross_exposures.append(invested / nav_close if nav_close > 0 else 0.0)
         prior_close_nav = nav_close
@@ -579,7 +597,8 @@ def _simulate(
         orders.append({"time": last_trade_time, "symbol": name, "side": "sell", "quantity": amount, "fill_price": fill, "notional": notional, "terminal_liquidation": True, **charges})
     equity[-1] = cash
     equity_frame = pd.DataFrame({"nav": equity, "risky_exposure": risky_exposures, "gross_exposure": gross_exposures,
-                                 "cash_distribution_inr": daily_distributions}, index=run_dates)
+                                 "cash_distribution_inr": daily_distributions,
+                                 "cash_yield_inr": daily_cash_yields}, index=run_dates)
     trades = pd.DataFrame(orders)
     daily_returns = equity_frame["nav"].pct_change().replace([np.inf, -np.inf], np.nan).fillna(0)
     daily_returns.iloc[0] = equity_frame["nav"].iloc[0] / starting_balance - 1
@@ -612,6 +631,7 @@ def _simulate(
         "turnover_to_starting_capital": float(turnover / starting_balance),
         "total_fees_inr": float(sum(totals.values())),
         "cash_distributions_inr": float(sum(event["cash_inr"] for event in applied_distributions)),
+        "cash_yield_inr": float(sum(daily_cash_yields)),
         "cash_distribution_events": applied_distributions,
         "fees_by_component_inr": {key: round(value, 2) for key, value in totals.items()},
         "first_bar": str(run_dates[0]),
