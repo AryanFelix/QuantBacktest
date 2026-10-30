@@ -1,0 +1,81 @@
+{
+  "strategy": "monthly top-three 12-1 momentum above 200-session SMA; selected weights proportional to positive 12-1 scores",
+  "capital_inr": 1000000,
+  "slippage_bps_per_side": 50,
+  "exposure_grid_pct": [
+    25.0,
+    30.0,
+    35.0,
+    40.0,
+    45.0,
+    50.0,
+    55.00000000000001,
+    60.0,
+    65.0,
+    70.0,
+    75.0,
+    80.0,
+    85.0,
+    90.0,
+    95.0
+  ],
+  "selection_rule": "Highest validation CAGR among caps passing the 20% OHLC bound in training, validation, and continuous development; ties prefer more risk headroom then lower exposure.",
+  "eligible_caps": [
+    {
+      "exposure_pct": 25.0,
+      "validation_cagr_pct": 3.8338217944919206,
+      "worst_development_ohlc_pct": -10.959921977264708
+    },
+    {
+      "exposure_pct": 30.0,
+      "validation_cagr_pct": 4.614118630679309,
+      "worst_development_ohlc_pct": -12.974976287950257
+    },
+    {
+      "exposure_pct": 35.0,
+      "validation_cagr_pct": 5.3803959706930415,
+      "worst_development_ohlc_pct": -14.959465553218386
+    },
+    {
+      "exposure_pct": 40.0,
+      "validation_cagr_pct": 6.146879332644217,
+      "worst_development_ohlc_pct": -16.905169999889523
+    },
+    {
+      "exposure_pct": 45.0,
+      "validation_cagr_pct": 6.906017278602183,
+      "worst_development_ohlc_pct": -18.816801107495216
+    }
+  ],
+  "selected": {
+    "exposure_pct": 45.0,
+    "validation_cagr_pct": 6.906017278602183,
+    "worst_development_ohlc_pct": -18.816801107495216
+  },
+  "pseudo_holdout": {
+    "weighting": "12_1_momentum_strength_weighted",
+    "slippage_bps_per_side": 50,
+    "period": "pseudo_holdout_2023_plus",
+    "period_start": "2023-01-01",
+    "period_end": "2026-10-23",
+    "gross_exposure_cap_pct": 45.0,
+    "starting_balance_inr": 1000000,
+    "ending_balance_inr": 1225057.9637184525,
+    "total_return_pct": 22.505796371845243,
+    "cagr_pct": 5.568254237929193,
+    "close_max_drawdown_pct": -15.66742128415225,
+    "ohlc_drawdown_bound_pct": -16.244756663518867,
+    "within_20pct_ohlc": true,
+    "total_fees_inr": 6991.103681548007,
+    "cash_distributions_inr": 0.0,
+    "order_count": 160,
+    "max_close_replay_error_inr": 9.313225746154785e-10,
+    "run_artifact": "work/backtests/cross_asset_momentum_strength_weighted/pseudo_holdout_2023_plus__cap45"
+  },
+  "limits": [
+    "All windows have been inspected; 2023+ is a retrospective pseudo-holdout.",
+    "The price-signal ETF universe has unequal inception histories and no point-in-time constituent archive.",
+    "Gold and sector ETF distributions are incomplete; only verified NIFTYBEES payouts are credited.",
+    "OHLC envelope assumes same-day held-asset highs precede lows and is not a future loss limit."
+  ]
+}
