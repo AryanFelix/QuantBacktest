@@ -1,4 +1,4 @@
-"""Bootstrap low-exposure NIFTY/Gold allocations at 200 bps."""
+"""Bootstrap low-exposure and 45% NIFTY/Gold mixes at 200 bps."""
 
 from pathlib import Path
 
@@ -17,17 +17,32 @@ OUT = ROOT / "outputs" / "passive_mix_composition_lower_exposure_200bps_bootstra
 STRESS = ROOT / "outputs" / "passive_mix_composition_lower_exposure_200bps.csv"
 SLIPPAGE_BPS = 200.0
 EXPOSURES = (0.10, 0.15, 0.20, 0.25, 0.30, 0.45)
-POLICIES = tuple(
+LOW_EXPOSURE_POLICIES = tuple(
     (f"initial_{int(exposure * 100)}pct_nifty_30_gold_70", exposure, None)
     for exposure in EXPOSURES
 ) + (
     ("initial_20pct_nifty_50_gold_50", 0.20, None),
     ("initial_20pct_nifty_70_gold_30", 0.20, None),
 )
+COMPOSITION_CHALLENGERS = (
+    ("initial_30pct_nifty_40_gold_60", 0.30, None),
+    ("initial_30pct_nifty_50_gold_50", 0.30, None),
+    ("initial_30pct_nifty_70_gold_30", 0.30, None),
+    ("initial_45pct_nifty_40_gold_60", 0.45, None),
+    ("initial_45pct_nifty_50_gold_50", 0.45, None),
+    ("initial_45pct_nifty_70_gold_30", 0.45, None),
+)
+POLICIES = LOW_EXPOSURE_POLICIES + COMPOSITION_CHALLENGERS
 NIFTY_SHARE_BY_POLICY = {
-    **{name: 0.30 for name, _, _ in POLICIES[:len(EXPOSURES)]},
-    POLICIES[-2][0]: 0.50,
-    POLICIES[-1][0]: 0.70,
+    **{name: 0.30 for name, _, _ in LOW_EXPOSURE_POLICIES[:len(EXPOSURES)]},
+    "initial_20pct_nifty_50_gold_50": 0.50,
+    "initial_20pct_nifty_70_gold_30": 0.70,
+    "initial_30pct_nifty_40_gold_60": 0.40,
+    "initial_30pct_nifty_50_gold_50": 0.50,
+    "initial_30pct_nifty_70_gold_30": 0.70,
+    "initial_45pct_nifty_40_gold_60": 0.40,
+    "initial_45pct_nifty_50_gold_50": 0.50,
+    "initial_45pct_nifty_70_gold_30": 0.70,
 }
 
 
@@ -100,13 +115,13 @@ def main() -> None:
                 "mean_fees_inr": float(result["total_fees_inr"][:, column].mean()),
                 "mean_slippage_inr": float(result["total_slippage_inr"][:, column].mean()),
             })
-        print(f"finished 200-bps 30/70 stateful {mean_block}-session blocks", flush=True)
+        print(f"finished 200-bps composition stateful {mean_block}-session blocks", flush=True)
 
     table = pd.DataFrame(rows)
-    assert len(table) == len(POLICIES) * len(stateful.BLOCK_LENGTHS) == 24
+    assert len(table) == len(POLICIES) * len(stateful.BLOCK_LENGTHS) == 42
     assert table["ohlc_bound_breach_probability_pct"].between(0, 100).all()
     table.to_csv(OUT, index=False)
-    print(f"wrote {len(table)} low-exposure composition bootstrap summaries")
+    print(f"wrote {len(table)} composition bootstrap summaries")
 
 
 if __name__ == "__main__":
