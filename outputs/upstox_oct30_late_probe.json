@@ -1,0 +1,25 @@
+{
+  "retrieved_at_utc": "2026-10-30T14:24:19Z",
+  "request_window": [
+    "2026-10-30",
+    "2026-10-30"
+  ],
+  "endpoint_family": "Upstox v3 historical candles",
+  "results": [
+    {
+      "symbol": "NIFTYBEES",
+      "instrument_key": "NSE_EQ|INF204KB14I2",
+      "status": "success_no_bars",
+      "bars_received": 0
+    },
+    {
+      "symbol": "GOLDBEES",
+      "instrument_key": "NSE_EQ|INF204KB17I5",
+      "status": "success_no_bars",
+      "bars_received": 0
+    }
+  ],
+  "token_value_saved": false,
+  "paper_cache_or_nav_updated": false,
+  "interpretation": "Exact-date query returned no completed daily candles at 19:54 IST; not evidence of a holiday or feed completeness."
+}
