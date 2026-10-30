@@ -1,4 +1,4 @@
-"""Bootstrap lower-exposure passive NIFTY/Gold 30/70 allocations at 200 bps."""
+"""Bootstrap passive NIFTY/Gold 30/70 allocations and a 45% anchor at 200 bps."""
 
 from pathlib import Path
 
@@ -17,7 +17,7 @@ OUT = ROOT / "outputs" / "passive_mix_composition_lower_exposure_200bps_bootstra
 STRESS = ROOT / "outputs" / "passive_mix_composition_lower_exposure_200bps.csv"
 SLIPPAGE_BPS = 200.0
 NIFTY_SHARE = 0.30
-EXPOSURES = (0.25, 0.30)
+EXPOSURES = (0.10, 0.15, 0.20, 0.25, 0.30, 0.45)
 POLICIES = tuple(
     (f"initial_{int(exposure * 100)}pct_nifty_30_gold_70", exposure, None)
     for exposure in EXPOSURES
@@ -95,7 +95,7 @@ def main() -> None:
         print(f"finished 200-bps 30/70 stateful {mean_block}-session blocks", flush=True)
 
     table = pd.DataFrame(rows)
-    assert len(table) == len(POLICIES) * len(stateful.BLOCK_LENGTHS) == 6
+    assert len(table) == len(POLICIES) * len(stateful.BLOCK_LENGTHS) == 18
     assert table["ohlc_bound_breach_probability_pct"].between(0, 100).all()
     table.to_csv(OUT, index=False)
     print(f"wrote {len(table)} 30/70 composition bootstrap summaries")

@@ -13,7 +13,7 @@ import select_passive_drawdown_control_walkforward as walkforward
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs" / "passive_mix_composition_lower_exposure_200bps.csv"
 RUNS = ROOT / "work" / "backtests" / "passive_mix_composition_lower_exposure_200bps"
-EXPOSURES = (0.25, 0.30)
+EXPOSURES = (0.10, 0.15, 0.20, 0.25, 0.30, 0.45)
 NIFTY_SHARES = (30, 50, 70)
 SLIPPAGE_BPS = 200.0
 
@@ -50,7 +50,7 @@ def main() -> None:
                     "gold_share_of_risky_sleeve_pct": gold_pct,
                 })
     table = pd.DataFrame(rows)
-    assert len(table) == len(EXPOSURES) * len(NIFTY_SHARES) * len(periods) == 24
+    assert len(table) == len(EXPOSURES) * len(NIFTY_SHARES) * len(periods) == 72
     assert not table.duplicated(["initial_exposure_pct", "nifty_share_of_risky_sleeve_pct", "period"]).any()
     assert table["slippage_bps_per_side"].eq(SLIPPAGE_BPS).all()
     assert table["max_close_replay_error_inr"].max() <= 0.03
