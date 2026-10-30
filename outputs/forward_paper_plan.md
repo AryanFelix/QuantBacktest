@@ -10,6 +10,10 @@
 
 Revision 1 froze three paths. Revision 2 added the 95% monthly cash-buffer control; revision 3 added the 65% solo-sleeve path after the 140-case deployment screen; revision 4 added its 16% trailing-volatility throttle; revision 5 added an 80% solo-sleeve / 16% throttle challenger after the 130-case joint sizing screen. Revision 6 added the passive NIFTY/Gold 22.5%/22.5% initial allocation. Revision 7 preserved all eight revision-6 paths and added three passive drawdown-control thresholds. Revision 8 preserved those eleven paths and added the 70% gross cap selected under the user 20% training OHLC screen plus the 40% cap selected with a 15% safety buffer. Revision 9 preserves all 13 revision-8 paths and adds two fixed-45%-exposure passive compositions: 13.5% NIFTY / 31.5% Gold and 18% / 27%. The full historical composition frontier had already been inspected; these are explicitly post-hoc shadow challengers. Revision 9 was frozen before the first post-freeze paper session, and paper observation starts 2026-10-28. Earlier immutable configurations remain available for lineage.
 
+## Latest status — 2026-10-30
+
+Upstox returned four daily candles per ETF through 2026-10-29. The common paper window now contains two sessions, Oct 28–29, and the runner refreshed 30 combinations of 15 frozen paths and two slippage assumptions. This is only a smoke-sized forward window, not evidence of strategy performance; no live broker orders were placed. The first network attempt failed at DNS. After network access was available, the replay exposed a missing event-series mapping for the transformed single-sleeve paths; they now use the base quarterly rebalance schedule, and the runner asserts that every simulated path has both targets and an event series. Latest API outcomes are in `work/backtests/forward_paper/latest_status.json`; generated paper ledgers are under `outputs/forward_paper_*.csv`.
+
 ## Rules under prospective observation
 
 | Path | Frozen rule | Costs |

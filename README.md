@@ -18,11 +18,14 @@ python work/audit_etf_intraday_drawdown.py
 python work/refresh_backtest_summary.py
 python work/capture_amfi_goldman_etf_nav.py
 python work/capture_amfi_liquidbees_nav.py
+python work/probe_nifty_expired_option_coverage.py
 ```
 
 The AMFI/Nippon capture verifies the NIFTYBEES/GOLDBEES historical NAV lineage and split-normalized price basis. Its public aggregate is `outputs/etf_nav_market_close_reconciliation.csv`; raw NAV responses are ignored under `work/data/api_probes/`.
 
 The separate LIQUIDBEES capture records official AMFI daily-IDCW payout NAVs from 2019 through 2026. Those NAVs stay near ₹1,000 and are not total returns; cash yield remains excluded until the issuer dividend feed reconciles to reported reinvestment performance. See `work/research/liquidbees_nav_source_review.md` and `outputs/liquidbees_amfi_nav_2019_2026.csv`.
+
+The expired-option preflight found empty contract lists at six sampled 2022–2023 NIFTY monthly expiries, so the frozen intraday-options training window still fails its data gate. It saves contract counts and local raw responses; no option strategy P&L is claimed from these probes.
 
 For live candle refreshes, `work/upstox_quant.py` reads `UPSTOX_ANALYTICS_TOKEN` from the process environment or the current user's `HKCU\Environment` registry value. Keep the token out of source files, logs, commits, and issue reports. The forward-paper runner is read-only and never sends broker orders.
 

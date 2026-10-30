@@ -205,9 +205,11 @@ def main() -> None:
     outcomes = _fetch_incremental(fetch_through)
     specs = _build_snapshots()
     _, panels, portfolios, portfolio_events = blend.make_portfolios(specs)
+    quarterly_events = portfolio_events["inverse_vol_63d_quarterly"]
     portfolios["inverse_vol_63d_quarterly_single65"] = blend.single_sleeve_weight_targets(
         portfolios["inverse_vol_63d_quarterly"], 0.65,
     )
+    portfolio_events["inverse_vol_63d_quarterly_single65"] = quarterly_events
     close = panels["close"]
     for passive_name, nifty_weight, gold_weight in (
         ("passive_nifty_gold_22_5_each", 0.225, 0.225),
@@ -227,10 +229,11 @@ def main() -> None:
     ).sum(axis=1)
     portfolios["inverse_vol_63d_quarterly_single65_vol16"] = blend.trailing_volatility_throttle_targets(
         portfolios["inverse_vol_63d_quarterly_single65"],
-        portfolio_events["inverse_vol_63d_quarterly"],
+        quarterly_events,
         base_returns,
         0.16,
     )
+    portfolio_events["inverse_vol_63d_quarterly_single65_vol16"] = quarterly_events
     portfolios["inverse_vol_63d_quarterly_single80"] = blend.single_sleeve_weight_targets(
         portfolios["inverse_vol_63d_quarterly"], 0.80,
     )
@@ -240,10 +243,11 @@ def main() -> None:
     ).sum(axis=1)
     portfolios["inverse_vol_63d_quarterly_single80_vol16"] = blend.trailing_volatility_throttle_targets(
         portfolios["inverse_vol_63d_quarterly_single80"],
-        portfolio_events["inverse_vol_63d_quarterly"],
+        quarterly_events,
         base_returns80,
         0.16,
     )
+    portfolio_events["inverse_vol_63d_quarterly_single80_vol16"] = quarterly_events
     common = close.dropna(subset=["NIFTYBEES", "GOLDBEES"]).index
     paper_sessions = common[common.date >= PAPER_START]
     latest_history = common[-1].date().isoformat()
@@ -272,6 +276,7 @@ def main() -> None:
                     start=PAPER_START, end=as_of,
                 )
             else:
+                assert portfolio_name in portfolios and portfolio_name in portfolio_events, f"Missing paper portfolio schedule: {portfolio_name}"
                 equity, orders, stats = q._simulate(
                     panels, portfolios[portfolio_name], portfolio_events[portfolio_name],
                     CAPITAL, exposure_cap, slip, "equity_delivery", PAPER_START, as_of,
