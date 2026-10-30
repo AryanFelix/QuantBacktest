@@ -41,6 +41,19 @@ These are assumed slippage levels, not measured bid/ask spreads. Costs apply onl
 
 Reproduce with `python work/sensitivity_passive_mix_composition_cost.py`. It writes the [88-row cost ledger](passive_mix_composition_cost_sensitivity.csv), per-cost training and descriptive full-history choices ([selection JSON](passive_mix_composition_cost_selection.json)), and local equity/order ledgers under `work/backtests/passive_mix_composition_cost/`. The base [composition study](passive_mix_composition_method.md) describes the 50-bps construction and known event coverage.
 
+## 30% initial-exposure cost extension
+
+The four 30% initial NIFTY/Gold compositions (30/70, 40/60, 50/50, and 70/30) were replayed at 10/50/100/200 bps per-side slippage across training, validation, the already-inspected 2023+ pseudo-holdout, and continuous 2015–2026 history. This adds 64 exact-fee replays; 200-bps rows reconcile against the expanded 80-row ledger within ₹0.03. `work/sensitivity_passive_mix_30pct_composition_cost.py` adds these rows to the consolidated backtest ledger and data manifest.
+
+| Slippage per side | 30/70 continuous return / OHLC | 40/60 continuous return / OHLC | 50/50 continuous return / OHLC | 40/60 inspected 2023+ return / OHLC |
+|---:|---:|---:|---:|---:|
+| 10 bps | +96.31% / -17.00% | +91.44% / -15.85% | +86.58% / -14.62% | +29.63% / -12.35% |
+| 50 bps | +95.68% / -17.01% | +90.84% / -15.86% | +85.99% / -14.63% | +29.26% / -12.36% |
+| 100 bps | +94.90% / -17.02% | +90.08% / -15.87% | +85.25% / -14.64% | +28.81% / -12.37% |
+| 200 bps | +93.33% / -17.04% | +88.56% / -15.89% | +83.78% / -14.66% | +27.91% / -12.40% |
+
+The return ranking is unchanged across the cost grid, but the 30/70 mix's 126-session bootstrap p05 envelope is -20.27% at 200 bps and crosses the coarse risk screen. The 40/60 30% mix remains inside that p05 screen at -19.13% (3.34% estimated breach), while the 50/50 mix has a slightly lower 126-session breach estimate of 2.68% and p05 of -18.98%. These probability estimates come from the 200-bps conditional bootstrap; the cost sweep does not independently validate the strategy. The 2023+ segment has already been inspected and is not a fresh holdout.
+
 ## Lower initial exposure extension at 200 bps
 
 The extension replays 10%, 15%, 20%, 25%, and 30% initial exposure at 30/70, 50/50, and 70/30 NIFTY/Gold weights; it adds 30% 40/60 and, at 45%, 30/70, 40/60, 50/50, and 70/30. Training, validation, the already-inspected pseudo-holdout, and continuous history produce 80 rows via `work/stress_passive_composition_lower_exposure_200bps.py`. A separate 5,000-path stateful paired-OHLC bootstrap covers each exposure's 30/70 case, the 20% 50/50 and 70/30 alternatives, all four 30% mixes, and all four 45% mixes across 21/63/126-session mean blocks (42 summaries). Deterministic historical replays are asserted against the canonical simulator.
