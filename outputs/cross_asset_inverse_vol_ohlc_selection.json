@@ -1,0 +1,46 @@
+{
+  "strategy": "monthly top-three 12-1 momentum above 200-session SMA; inverse 63-session volatility weights",
+  "capital_inr": 1000000,
+  "gross_exposure_cap_pct": 45,
+  "slippage_bps_per_side": 50,
+  "development_ohlc_eligible": true,
+  "development_windows": [
+    {
+      "period": "train_2014_2019",
+      "ohlc_drawdown_bound_pct": -16.93456229547573,
+      "within_20pct_ohlc": true
+    },
+    {
+      "period": "validation_2020_2022",
+      "ohlc_drawdown_bound_pct": -15.437342484345473,
+      "within_20pct_ohlc": true
+    },
+    {
+      "period": "train_plus_validation_2014_2022",
+      "ohlc_drawdown_bound_pct": -18.57620604183685,
+      "within_20pct_ohlc": true
+    }
+  ],
+  "pseudo_holdout": {
+    "weighting": "inverse_volatility_63_sessions",
+    "volatility_lookback_sessions": 63,
+    "slippage_bps_per_side": 50,
+    "period": "pseudo_holdout_2023_plus",
+    "period_start": "2023-01-01",
+    "period_end": "2026-10-23",
+    "gross_exposure_cap_pct": 45,
+    "starting_balance_inr": 1000000,
+    "ending_balance_inr": 1204618.849705081,
+    "total_return_pct": 20.461884970508095,
+    "cagr_pct": 5.0951675232063565,
+    "close_max_drawdown_pct": -12.57544105719397,
+    "ohlc_drawdown_bound_pct": -12.869542721468875,
+    "within_20pct_ohlc": true,
+    "total_fees_inr": 7531.512494919828,
+    "cash_distributions_inr": 0.0,
+    "order_count": 160,
+    "max_close_replay_error_inr": 6.984919309616089e-10,
+    "run_artifact": "work/backtests/cross_asset_inverse_vol/pseudo_holdout_2023_plus__cap45"
+  },
+  "limit": "The 45% cap was frozen from the equal-weight audit; this is a fixed-cap weighting comparison, not a reselected inverse-volatility frontier."
+}
