@@ -1,4 +1,4 @@
-"""Statefully bootstrap paired ETF OHLC paths for 8%/10% controls at 200 bps."""
+"""Statefully bootstrap paired ETF OHLC paths for passive controls at 200 bps."""
 
 from pathlib import Path
 
@@ -12,7 +12,7 @@ import bootstrap_stateful_drawdown_control as stateful
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "outputs" / "stateful_drawdown_control_200bps_bootstrap.csv"
 SLIPPAGE_BPS = 200.0
-POLICIES = stateful.POLICIES[2:4]
+POLICIES = stateful.POLICIES[:1] + stateful.POLICIES[2:4]
 
 
 def main() -> None:
@@ -60,8 +60,8 @@ def main() -> None:
             rows.append({
                 "strategy": name,
                 "initial_exposure_pct": exposure * 100,
-                "drawdown_trigger_pct": trigger,
-                "recovery_pct": trigger / 2,
+                "drawdown_trigger_pct": trigger if trigger is not None else "",
+                "recovery_pct": trigger / 2 if trigger is not None else "",
                 "slippage_bps_per_side": SLIPPAGE_BPS,
                 "source_start": dates[0].isoformat(),
                 "source_end": dates[-1].isoformat(),
