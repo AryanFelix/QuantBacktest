@@ -10,13 +10,13 @@
 
 The most defensible current research set is passive NIFTY/Gold ETF allocation under explicit exposure limits. It is a candidate set for continued paper observation, not a deployment recommendation. A 20% initial 30/70 NIFTY/Gold mix is the more conservative return/risk reference. A 30% initial 40/60 mix produced more historical return with a tighter but still sub-20% fifth-percentile envelope in this conditional bootstrap. A 30% initial 50/50 mix had a slightly lower 126-session breach estimate. These are initial weights that drift as the assets move.
 
-| ₹10 lakh policy, 200 bps assumed slippage per side | End value | Net return / CAGR | Historical daily OHLC bound | 10-year paired-OHLC estimate |
-|---|---:|---:|---:|---|
-| 20% initial exposure, 30/70 NIFTY/Gold | ₹16.22 lakh | +62.21% / 4.26% | -13.96% | 0.92% breach at 126-session blocks; p05 -16.80% |
-| 20% initial exposure, 50/50 NIFTY/Gold | ₹15.59 lakh | +55.86% / 3.90% | -11.86% | 0.22% breach at 126-session blocks; p05 -15.42% |
-| 30% initial exposure, 40/60 NIFTY/Gold | ₹18.86 lakh | +88.56% / 5.62% | -15.89% | 3.34% breach at 126-session blocks; p05 -19.13% |
-| 30% initial exposure, 50/50 NIFTY/Gold | ₹18.38 lakh | +83.78% / 5.39% | -14.66% | 2.68% breach at 126-session blocks; p05 -18.98% |
-| 45% initial exposure, 40/60 NIFTY/Gold | ₹23.29 lakh | +132.85% / 7.56% | -18.75% | 19.68% breach at 126-session blocks; p05 -22.76% |
+| ₹10 lakh policy, 200 bps assumed slippage per side | End value | Net return / CAGR | Modeled fees / slippage | Historical daily OHLC bound | 10-year paired-OHLC estimate |
+|---|---:|---:|---:|---:|---|
+| 20% initial exposure, 30/70 NIFTY/Gold | ₹16.22 lakh | +62.21% / 4.26% | ₹213 / ₹20,938 | -13.96% | 0.92% breach at 126-session blocks; p05 -16.80% |
+| 20% initial exposure, 50/50 NIFTY/Gold | ₹15.59 lakh | +55.86% / 3.90% | ₹212 / ₹19,608 | -11.86% | 0.22% breach at 126-session blocks; p05 -15.42% |
+| 30% initial exposure, 40/60 NIFTY/Gold | ₹18.86 lakh | +88.56% / 5.62% | ₹248 / ₹30,409 | -15.89% | 3.34% breach at 126-session blocks; p05 -19.13% |
+| 30% initial exposure, 50/50 NIFTY/Gold | ₹18.38 lakh | +83.78% / 5.39% | ₹247 / ₹29,407 | -14.66% | 2.68% breach at 126-session blocks; p05 -18.98% |
+| 45% initial exposure, 40/60 NIFTY/Gold | ₹23.29 lakh | +132.85% / 7.56% | ₹301 / ₹45,618 | -18.75% | 19.68% breach at 126-session blocks; p05 -22.76% |
 
 At 30% initial exposure, 40/60 returned more historically than 50/50 (+88.56% versus +83.78%). Their 126-session breach estimates were 3.34% versus 2.68%, with p05 envelopes -19.13% versus -18.98%; the 40/60 mix had lower estimated breach at 63 sessions (2.70% versus 3.06%). The 30/70 mix returned +93.33% but its 126-session p05 was -20.27%, crossing the coarse tail screen. The 30% initial paths can drift materially as asset prices move; the equal-sleeve strategy reached about 67% gross exposure. The 20% 30/70 and 50/50 paths reached about 56.72% and 54.16%. A maintained exposure ceiling requires a separately simulated and costed rebalancing policy.
 
