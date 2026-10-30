@@ -46,7 +46,10 @@ def _fees(notional: float, side: str, on: date) -> dict[str, float]:
     stamp = notional * 0.00002 if side == "buy" else 0.0
     sebi = notional * 0.000001
     ipft = notional * 0.000000001
-    gst = 0.18 * (brokerage + exchange + ipft)
+    gst_base = brokerage + exchange + ipft
+    if on >= date(2022, 7, 18):
+        gst_base += sebi
+    gst = 0.18 * gst_base
     parts = {"brokerage": brokerage, "stt": stt, "exchange": exchange, "stamp_duty": stamp, "sebi": sebi, "ipft": ipft, "gst": gst}
     parts["total"] = sum(parts.values())
     return parts

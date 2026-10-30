@@ -253,6 +253,8 @@ def _fee_breakdown(
         raise ValueError("unsupported NSE fee product")
     cap, rate = brokerage_rates[product]
     brokerage = min(cap, notional * rate) if rate else cap
+    # shortcut: undated calls use the frozen current tariff; date all fee components when historical schedules are available.
+    fee_date = trade_date or date(2026, 4, 1)
     exchange_rates = {
         "equity_delivery": 0.0000307, "equity_fund_delivery": 0.0000307,
         "other_fund_delivery": 0.0000307, "equity_intraday": 0.0000307,
@@ -281,7 +283,7 @@ def _fee_breakdown(
     sebi = notional * 0.000001
     ipft_rate = 0.000000001
     if product == "options":
-        effective_date = trade_date or date(2026, 4, 1)
+        effective_date = fee_date
         if effective_date < date(2024, 10, 1):
             raise ValueError("dated NSE options charges are audited here from 2024-10-01 onward")
         stt_rate = 0.0 if side == "buy" else (0.0015 if effective_date >= date(2026, 4, 1) else 0.001)
@@ -293,7 +295,10 @@ def _fee_breakdown(
     stt = notional * stt_rate
     ipft = notional * ipft_rate
     dp = 20.0 if product in {"equity_delivery", "equity_fund_delivery", "other_fund_delivery"} and side == "sell" else 0.0
-    gst = 0.18 * (brokerage + exchange_fee + ipft + dp)
+    gst_base = brokerage + exchange_fee + ipft + dp
+    if fee_date >= date(2022, 7, 18):
+        gst_base += sebi
+    gst = 0.18 * gst_base
     return {
         "brokerage": brokerage,
         "stt": stt,
@@ -1075,6 +1080,10 @@ def _self_check() -> None:
     assert all((b - a).days < 32 for a, b in windows)
     cash_buy = _fee_breakdown(100_000, "buy", "equity_delivery")
     cash_sell = _fee_breakdown(100_000, "sell", "equity_delivery")
+    sebi_gst_before = _fee_breakdown(100_000, "buy", "equity_fund_delivery", trade_date=date(2022, 7, 17))
+    sebi_gst_after = _fee_breakdown(100_000, "buy", "equity_fund_delivery", trade_date=date(2022, 7, 18))
+    assert math.isclose(sebi_gst_after["gst"] - sebi_gst_before["gst"], 0.18 * sebi_gst_after["sebi"])
+    assert math.isclose(_fee_breakdown(100_000, "buy", "equity_fund_delivery")["gst"], sebi_gst_after["gst"])
     assert cash_buy["total"] > 0 and cash_sell["total"] > cash_buy["total"]
     assert math.isclose(cash_buy["sebi"], 0.10)
     assert math.isclose(cash_buy["stt"], 100.0) and math.isclose(cash_sell["stt"], 100.0)

@@ -47,7 +47,7 @@ def fee_total(notional: np.ndarray, side: str, product: str) -> np.ndarray:
     sebi = amount * 0.000001
     ipft = amount * 0.000000001
     dp = np.where(active & (side == "sell"), 20.0, 0.0)
-    gst = 0.18 * (brokerage + exchange + ipft + dp)
+    gst = 0.18 * (brokerage + exchange + sebi + ipft + dp)
     return brokerage + stt + exchange + stamp + sebi + ipft + dp + gst
 
 
