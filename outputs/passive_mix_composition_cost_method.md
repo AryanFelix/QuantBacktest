@@ -52,7 +52,22 @@ The four 30% initial NIFTY/Gold compositions (30/70, 40/60, 50/50, and 70/30) we
 | 100 bps | +94.90% / -17.02% | +90.08% / -15.87% | +85.25% / -14.64% | +28.81% / -12.37% |
 | 200 bps | +93.33% / -17.04% | +88.56% / -15.89% | +83.78% / -14.66% | +27.91% / -12.40% |
 
-The return ranking is unchanged across the cost grid, but the 30/70 mix's 126-session bootstrap p05 envelope is -20.27% at 200 bps and crosses the coarse risk screen. The 40/60 30% mix remains inside that p05 screen at -19.13% (3.34% estimated breach), while the 50/50 mix has a slightly lower 126-session breach estimate of 2.68% and p05 of -18.98%. These probability estimates come from the 200-bps conditional bootstrap; the cost sweep does not independently validate the strategy. The 2023+ segment has already been inspected and is not a fresh holdout.
+The return ranking is unchanged across the cost grid, but the 30/70 mix's 126-session bootstrap p05 envelope is -20.27% at 200 bps and crosses the coarse risk screen. The 40/60 30% mix remains inside that p05 screen at -19.13% (3.34% estimated breach), while the 50/50 mix has a slightly lower 126-session breach estimate of 2.68% and p05 of -18.98%. The 2023+ segment has already been inspected and is not a fresh holdout.
+
+The 30% 30/70, 40/60, 50/50, and 70/30 mixes also received matched 5,000-path, 10-year paired-OHLC bootstraps at 50 and 200 bps, using the same sampled blocks for both costs. At 126-session mean blocks:
+
+| Per-side slippage | NIFTY/Gold mix | Estimated -20% breach | p05 OHLC envelope |
+|---:|---:|---:|---:|
+| 50 bps | 30/70 | 5.48% | -20.23% |
+| 50 bps | 40/60 | 3.32% | -19.09% |
+| 50 bps | 50/50 | 2.60% | -18.93% |
+| 50 bps | 70/30 | 8.22% | -21.46% |
+| 200 bps | 30/70 | 5.60% | -20.27% |
+| 200 bps | 40/60 | 3.34% | -19.13% |
+| 200 bps | 50/50 | 2.68% | -18.98% |
+| 200 bps | 70/30 | 8.40% | -21.51% |
+
+Across these cost assumptions, 40/60 retains more return than 50/50 while 50/50 has slightly lower breach estimates. Both 30/70 and 70/30 cross the p05 screen. This is a conditional risk comparison on inspected history, not an enforceable drawdown cap. The [24-row paired-cost bootstrap](passive_mix_30pct_composition_cost_bootstrap.csv) is reproduced by `work/bootstrap_passive_mix_30pct_composition_cost.py`.
 
 ## Lower initial exposure extension at 200 bps
 
