@@ -6,21 +6,23 @@
 - **Research capital:** ₹10,00,000
 - **Requested maximum peak-to-trough drawdown:** 20% (₹2,00,000 from starting capital; measured from a later peak, rupee loss can be larger)
 
-## Top 5 research leaders
+## Top 5 cross-family candidates — CAGR reanalysis, 2026-10-30
 
-**Current lead:** the 65% quarterly exposure cap with a 30/70 NIFTY/Gold sleeve, conditional on earning the RBI 91-day T-bill proxy rate on cash. It is the highest-return tested configuration that passes the current research-only bootstrap screen. All five rows below are variants of the same quarterly capped ETF-allocation rule, not five independent signal families.
+**Highest observed CAGR that passes the tested historical OHLC screen:** the 95%-cap equal-weight sector ETF basket at **12.79%**. Its conservative OHLC drawdown is **-19.69%**, leaving just 0.31 percentage points under the requested limit. The more balanced growth candidate is the 25% NIFTY trend / 50% sector basket / 25% Gold trend mix: **11.92% CAGR** with a **-14.72%** OHLC bound.
 
-Ranked by 2015-01-02–2026-10-23 net return among tested configurations whose 10-year, 126-session close-return bootstrap breach estimate plus 1.96 Monte Carlo standard errors is below 1%. Each starts with ₹10 lakh and includes current modeled fees plus 200 bps adverse slippage per side. “OHLC” is the historical high-before-low envelope; bootstrap results resample the inspected close-return series. Every row is post-hoc, the later period was already inspected, and the 1% triage screen is not a 20% loss guarantee.
+The highest headline result, 14.35% CAGR for the quarterly 30/70 NIFTY/Gold active mix at 100% exposure, is excluded: its full-period OHLC bound is **-25.34%**. The 50/50 mix at 100% exposure reaches **-25.66%**. Close-only results hid those breaches.
 
-| Rank and rebalance targets (NIFTY / Gold / cash) | 2015–2026 net return / CAGR; ending balance | Fees / assumed slippage | Historical OHLC bound | 10-year, 126-session bootstrap (p05; breach ± MCSE; screen) | 2023–2026 pseudo-holdout |
-|---|---:|---:|---:|---:|---:|
-| **1. Lead — 65% cap; 30/70 sleeve (19.5% / 45.5% / 35%)**; synthetic cash-yield proxy | **+219.46% / 10.54%; ₹31.95L** | ₹4,067 / ₹99,835 | -17.57% | -16.35%; 0.60% ± 0.11 pp; **0.81% pass** | +68.81% |
-| 2. 60% cap; 20/80 sleeve (12% / 48% / 40%); synthetic cash-yield proxy | +214.62% / 10.39%; ₹31.46L | ₹4,020 / ₹86,604 | -16.53% | -15.48%; 0.50% ± 0.10 pp; **0.70% pass** | +71.65% |
-| 3. 65% cap; 40/60 sleeve (26% / 39% / 35%); synthetic cash-yield proxy | +212.36% / 10.33%; ₹31.24L | ₹4,117 / ₹102,884 | -17.70% | -16.13%; 0.62% ± 0.11 pp; **0.84% pass** | +61.91% |
-| 4. 55% cap; 10/90 sleeve (5.5% / 49.5% / 45%); synthetic cash-yield proxy | +208.51% / 10.21%; ₹30.85L | ₹3,928 / ₹73,591 | -16.67% | -14.99%; 0.20% ± 0.06 pp; **0.32% pass** | +73.40% |
-| 5. 60% cap; 30/70 sleeve (18% / 42% / 40%); synthetic cash-yield proxy | +208.48% / 10.21%; ₹30.85L | ₹4,053 / ₹91,129 | -16.37% | -14.53%; 0.24% ± 0.07 pp; **0.38% pass** | +65.22% |
+Each row starts with ₹10 lakh and uses 50 bps adverse slippage per side plus the shared modeled fees, with zero cash yield. CAGR windows differ because source histories differ; all tested dates have been inspected, so ranks are descriptive rather than untouched out-of-sample results.
 
-**Interpret the lead conditionally:** the proxy credits the whole cash balance continuously at the previous session’s known RBI auction yield on actual/365; no executable T-bill ladder, taxes, or reinvestment costs are modeled. Without an investable cash-yield instrument, use the zero-yield baseline results later in this report. GoldBeES distributions are incomplete. Do not treat these retrospective results as proof of a winner or as a hard drawdown control.
+| Rank | Strategy at a glance | Net return / CAGR; ending value | Historical OHLC drawdown | Latest tested segment |
+|---|---|---:|---:|---:|
+| **1** | Monthly equal-weight BANK, IT, Auto, Pharma and PSU Bank ETFs; 95% exposure | **+76.68% / 12.79%** (Jan 2022–Oct 2026); ₹17.67L | **-19.69%** (0.31 pp headroom) | 2025–Oct 2026: +3.50% |
+| **2** | Monthly top-10 stock 12–1 momentum; stock and NIFTY 200DMA gates; 95% cap; restored action-source names | **+95.08% / 12.39%** (Feb 2021–Oct 2026); ₹19.51L | **-19.66%** (0.34 pp headroom) | 2025–Oct 2026: +1.84% |
+| **3** | 25% NIFTY D55/20 + 50% equal-weight sector ETFs + 25% Gold SMA200; 100% cap | **+72.92% / 11.92%** (Jan 2022–Oct 2026); ₹17.29L | **-14.72%** (5.28 pp headroom) | 2025–Oct 2026: +17.05% |
+| **4** | 50/50 initial-capital blend: stock momentum plus quarterly NIFTY/Gold mix | **+76.59% / 10.45%** (Feb 2021–Oct 2026); ₹17.66L | **-13.56%** (6.44 pp headroom) | 2025–Oct 2026: +12.47% |
+| **5** | Quarterly 50/50 active NIFTY/Gold mix; 70% gross cap | **+93.31% / 5.85%** (Jan 2015–Oct 2026); ₹19.33L | **-19.06%** (0.94 pp headroom) | No separate holdout |
+
+The recent-segment returns are not directly comparable: sector slices start fresh accounts, while the stock and blended-stock slices preserve a continuous account. Rows 1 and 2 lead by CAGR but sit almost on the 20% line and were nearly flat in their latest tested segment. Row 3 currently offers the stronger tested return with more drawdown room; it has only five years of sector ETF history and incomplete distribution coverage. Row 4 has more risk headroom and a longer history, but depends on provisional stock-universe and ETF total-return inputs. None is a proven winner or a promise that future drawdown stays below 20%. The [CAGR reanalysis note](../work/research/cagr_reassessment_2026-10-30.md) explains the revised ranking, risk replays, and next experiments.
 
 ## Data integrity correction — 2026-10-27
 
