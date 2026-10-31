@@ -6,13 +6,17 @@ No current unlevered cash strategy has demonstrated the target of **20% annual C
 
 The leading research case is monthly NIFTY 50 12–1 momentum, top 15, chosen on 2021–2023 training data. It earned 23.88% in training, then 11.87% in 2024 and -4.94% in 2025–October 2026. Its corrected continuous full-period CAGR is 11.90% versus 9.66% for matched NIFTY 50 TRI. It is not a winner or deployment recommendation. See the [top-five leaderboard and full report](outputs/quant_research_report.md).
 
-This cycle corrected terminal liquidation and calendar-time CAGR, replayed the selected stock rule’s order ledger, and reran the highlighted Donchian/Gold case. The broad-stock point-in-time data gate failed: existing coverage is not NIFTY 200/500, so none of the preregistered broad-universe configurations ran. The exact gaps and licensed acquisition route are in the [data-gate report](outputs/broad_stock_data_gate_2026-10-31.md). The synthetic 2× index is a diagnostic only; no leverage was used for this cycle.
+The NIFTY 200 continuation produced a dated ISIN replay and matched 111 overlapping 2018–2020 XLS events, but 22 state-precondition checks still fail across 11 notice/date batches; its intervals remain uncertified. The separately specified L500-v1 fallback failed before universe selection because the raw feed lacks per-security session status and its rights/merger/demerger entitlements are unresolved. No broad-universe strategy result was calculated. Start with the [current cycle checkpoint](outputs/nifty200_cycle_checkpoint_2026-10-31.md), [machine-readable replay residuals](outputs/nifty200_membership_replay_summary_2026-10-31.json), and [L500 gate](outputs/l500_data_gate_2026-10-31.json). The earlier broad-stock audit remains in [its data-gate report](outputs/broad_stock_data_gate_2026-10-31.md).
 
 The API token has not been rotated, so this cycle made no Upstox API requests. No live orders were placed, and the existing frozen paper paths were left unchanged.
 
 ## Cycle records
 
 - [24-hour governor checkpoint](outputs/24_hour_checkpoint_2026-10-31.md)
+- [NIFTY 200 replay and L500 gate checkpoint](outputs/nifty200_cycle_checkpoint_2026-10-31.md)
+- [Frozen universe and strategy protocol](outputs/next_cycle_spec_2026-10-31.md)
+- [NIFTY 200 replay summary and source-specific residual manifest](outputs/nifty200_membership_replay_summary_2026-10-31.json)
+- [L500 pre-performance data gate](outputs/l500_data_gate_2026-10-31.json)
 - [Experiment register](outputs/experiment_register_2026-10-31.csv)
 - [Historical search-family inventory](outputs/historical_search_inventory_2026-10-31.csv)
 - [Terminal liquidation and saved held-mark audit](outputs/terminal_liquidation_audit_2026-10-31.md)

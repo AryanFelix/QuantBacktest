@@ -63,6 +63,11 @@ def parse_month_date(match: re.Match | None) -> str:
 def release_metadata(text: str, filename: str, title: str) -> tuple[str, str]:
     announcement = parse_month_date(ANNOUNCE_RE.search(text[:2500]))
     effective = parse_month_date(DATE_RE.search(title)) or parse_month_date(DATE_RE.search(text))
+    if filename == "ind_prs20022026_1.pdf":
+        match = re.search(r"(?i)effective\s+from\s+February\s+24,?\s+2026", text)
+        if not match:
+            raise ValueError("KWIL exclusion notice no longer contains its reviewed effective date")
+        effective = "2026-02-24"
     if not announcement:
         date_match = re.search(r"ind_prs(\d{2})(\d{2})(\d{4})", filename)
         if date_match:
@@ -73,26 +78,38 @@ def release_metadata(text: str, filename: str, title: str) -> tuple[str, str]:
 
 
 def section_events(text: str) -> list[dict]:
-    lines = text.replace("\r", "").splitlines()
-    headings = [i for i, line in enumerate(lines) if HEADING_RE.search(line)]
+    lines = [(page_no, line) for page_no, page in enumerate(text.split("\f"), 1)
+             for line in page.replace("\r", "").splitlines()]
+    headings = [i for i, (_, line) in enumerate(lines) if HEADING_RE.search(line)]
     events = []
     for start in headings:
-        end = next((i for i in range(start + 1, len(lines)) if NEXT_HEADING_RE.search(lines[i])), len(lines))
+        end = next((i for i in range(start + 1, len(lines)) if NEXT_HEADING_RE.search(lines[i][1])), len(lines))
         side = ""
-        for line in lines[start + 1:end]:
+        pending = ""
+        for page_no, line in lines[start + 1:end]:
             lowered = line.lower()
             if "exclud" in lowered:
                 side = "exclude"
+                pending = ""
             elif "includ" in lowered:
                 side = "include"
-            row = ROW_RE.match(line)
+                pending = ""
+            if re.fullmatch(r"\s*\d{1,3}[.)]?\s*", line):
+                pending = line.strip().rstrip(".)") + " "
+                continue
+            candidate = pending + " ".join(line.split()) if pending else line
+            row = ROW_RE.match(candidate)
             if not row or not side:
+                if pending and line.strip():
+                    pending = candidate + " "
                 continue
             company = " ".join(row.group(2).split()).strip(" .")
             symbol = row.group(3).upper().strip(".")
             if company.lower() in {"company name", "symbol", "sr. no."} or symbol in {"SYMBOL", "NO"}:
+                pending = ""
                 continue
-            events.append({"side": side, "company": company, "symbol": symbol})
+            events.append({"page_ref": f"p.{page_no}", "side": side, "company": company, "symbol": symbol})
+            pending = ""
     return events
 
 
@@ -168,8 +185,8 @@ The following companies are being included:
 """
     events = section_events(sample)
     assert events == [
-        {"side": "exclude", "company": "Alkem Laboratories Ltd", "symbol": "ALKEM"},
-        {"side": "include", "company": "Apar Industries Ltd", "symbol": "APARINDS"},
+        {"page_ref": "p.1", "side": "exclude", "company": "Alkem Laboratories Ltd", "symbol": "ALKEM"},
+        {"page_ref": "p.1", "side": "include", "company": "Apar Industries Ltd", "symbol": "APARINDS"},
     ]
     announced, effective = release_metadata(
         "PRESS RELEASE\nMumbai, August 10, 2026\nprior event effective from July 20, 2023",
@@ -178,8 +195,25 @@ The following companies are being included:
     assert announced == "2026-08-10" and effective == "2026-09-30"
     assert not section_events("Only a paragraph mentioning Nifty 200.")
     assert section_events(sample.replace("14)", "l)").replace("15)", "m)")) == events
-    assert not section_events("14) Nifty 200 Momentum 30\nThe following companies are being included:\n1 Example Ltd. EXAMPLE")
-    print("membership parser self-check passed: section boundaries, actions, and dates")
+    for title in ("Nifty 200 Alpha 30", "Nifty 200 Momentum 30", "Nifty 200 Quality 30"):
+        assert not section_events(f"14) {title}\nThe following companies are being included:\n1 Example Ltd. EXAMPLE")
+    wrapped = """12) NIFTY 200
+The following companies are being included:
+Sr. No. Company Name Symbol
+6
+Indian Railway Catering And Tourism
+Corporation Ltd. IRCTC
+13) NIFTY Auto
+"""
+    assert section_events(wrapped) == [
+        {"page_ref": "p.1", "side": "include", "company": "Indian Railway Catering And Tourism Corporation Ltd", "symbol": "IRCTC"}
+    ]
+    assert release_metadata(
+        "Mumbai, February 20, 2026. Historical inclusion effective from December 05, 2025. "
+        "Exclude effective from February 24, 2026.",
+        "ind_prs20022026_1.pdf", "Exclusion of Kwality Wall's (India) Ltd. from Nifty Indices",
+    ) == ("2026-02-20", "2026-02-24")
+    print("membership parser self-check passed: boundaries, wrapped rows, and event-specific dates")
 
 
 def run() -> dict:
@@ -192,7 +226,7 @@ def run() -> dict:
     source_audit = []
     for path in sorted(PDF_DIR.glob("*.pdf")):
         pdf = PdfReader(path)
-        text = "\n".join(page.extract_text() or "" for page in pdf.pages)
+        text = "\n\f\n".join(page.extract_text() or "" for page in pdf.pages)
         if "nifty 200" not in text.lower() and "nifty200" not in text.lower():
             continue
         entry = titles.get(path.name, {})
@@ -236,7 +270,7 @@ def run() -> dict:
     # Keep row-level notices local; only source counts and exception totals leave the ignored data cache.
     audit_dir = PUBLIC / "membership"
     atomic_csv(audit_dir / "release_events.csv", release_rows,
-               ["announcement_date", "effective_date", "side", "company", "symbol", "isin", "mapping_error",
+               ["announcement_date", "effective_date", "page_ref", "side", "company", "symbol", "isin", "mapping_error",
                 "filename", "official_url", "pdf_sha256", "archive_title"])
     atomic_csv(audit_dir / "notice_sources.csv", source_audit,
                ["filename", "official_url", "archive_title", "announcement_date", "effective_date",
@@ -262,7 +296,7 @@ def run() -> dict:
         "xls_pdf_exact_match_rows_2018_to_2020": len(xls_key & pdf_key),
         "xls_only_event_rows_2018_to_2020": len(xls_key - pdf_key),
         "pdf_only_event_rows_2018_to_2020": len(pdf_key - xls_key),
-        "membership_reconstruction": "not_yet_run; requires resolved event rows and amendment/deferment audit",
+        "membership_reconstruction": "parser output only; run work/replay_nifty200_membership.py for the dated ISIN ledger and replay gate",
         "performance_gate": "NOT PASSED",
     }
     (audit_dir / "membership_audit.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
@@ -279,4 +313,3 @@ if __name__ == "__main__":
     parser.add_argument("--self-check", action="store_true")
     args = parser.parse_args()
     self_check() if args.self_check else run()
-

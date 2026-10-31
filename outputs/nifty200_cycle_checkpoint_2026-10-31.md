@@ -1,37 +1,46 @@
-# NIFTY 200 research checkpoint — 2026-10-31
+# NIFTY 200 replay and L500 gate checkpoint — 2026-10-31
 
-## Frozen strategy set: no leader; all four remain untested
+## Decision
 
-| Rule | Signal and schedule | Portfolio / execution | Status |
-|---|---|---|---|
-| A-M | Positive 12–1 total-return momentum, omit most recent 21 sessions; monthly | Equal-weight top 20, retain ranks 1–25; next-session open, integer shares | NOT RUN — data gate |
-| A-Q | Same signal; quarterly | Same portfolio and execution | NOT RUN — data gate |
-| B-M | Positive average of 6–1 and 12–1 total returns divided by trailing 252-session annualized volatility; both legs omit latest 21 sessions; require 252 observations; monthly | Same portfolio and execution | NOT RUN — data gate |
-| B-Q | Same signal; quarterly | Same portfolio and execution | NOT RUN — data gate |
+**No new broad-universe strategy result was produced, and no strategy has demonstrated 20% net CAGR over the predefined full evaluation.** The NIFTY 200 event ledger is useful but uncertified. The predeclared L500-v1 fallback failed its pre-performance data gate. All eight broad-universe configurations remain NOT RUN.
 
-No performance result or ranking exists for this frozen set. The target remains 20% net CAGR on ₹10 lakh, unlevered, before personal tax. The prior 20% drawdown ceiling remains removed.
+The objective remains at least 20% calendar-time CAGR after modeled costs on ₹10 lakh, unlevered and before personal tax. There is no hard drawdown ceiling. The evaluation dates remain 2018-01-01 through 2026-10-23, with signal warm-up before the start date.
 
-## Coverage acquired and verified
+## Frozen configurations
 
-- Downloaded 34 Parquet files from the public TejHQ indian-markets dataset at pinned revision 2d6629d656fcb715a03b859f7cff8fbd53a7f420: 11 raw NSE daily-price files, 11 adjusted-price files, 11 action files and one symbol-history file. Total raw payload: 305,712,150 bytes. File sizes, SHA-256 hashes, schemas, row counts and date coverage are recorded in the local manifest and the aggregate [TejHQ source manifest](tejhq_public_source_manifest_2026-10-31.csv).
-- Raw and adjusted price files each contain 5,114,880 rows from 2016-01-01 through 2026-10-30. The 23,564 action rows range from 2016-01-05 to 2026-11-06; dates after the as-of date are future records and were not eligible for simulation. Symbol history contains 4,934 rows. This is market-wide source coverage, not proof that every NIFTY 200 name has an executable continuous series.
-- Retrieved the official NIFTY 200 constituent CSV (200 unique symbols and ISINs; inferred as-of 2026-09-30), the official IndexInclExcl.xls file (464 deduplicated NIFTY 200 events through 2020-07-31), and cached official notices. Of 79 notices mentioning NIFTY 200, the strict parser extracted 498 membership rows from 38; 41 still lack a parsed numbered membership table.
-- On the overlapping 2018–2020 event history, 110 rows match exactly. The remaining comparison is one company-name alias in the XLS and 12 PDF rows from the proposed March 2020 change later deferred. The deferred rows must not be replayed as executed events.
-- The membership audit now has one unmapped parsed symbol, PIPAVAVDOC, dated outside the 2018–2026 evaluation. This does not resolve the 41 unparsed notices or prove point-in-time membership completeness.
+| Universe / ID | Rule | Status |
+|---|---|---|
+| NIFTY 200 — A-M | Positive 12–1 total-return momentum, omitting latest 21 sessions; equal-weight top 20, retain ranks 1–25; monthly | NOT RUN — membership/action gate |
+| NIFTY 200 — A-Q | Same signal and portfolio; quarterly | NOT RUN — membership/action gate |
+| NIFTY 200 — B-M | Mean of 6–1 and 12–1 total returns divided by trailing 252-session annualized volatility; both legs omit latest 21 sessions; require 252 observations; monthly | NOT RUN — membership/action gate |
+| NIFTY 200 — B-Q | Same signal and portfolio; quarterly | NOT RUN — membership/action gate |
+| L500-v1 — L500-A-M / L500-A-Q | Same A rules; point-in-time top-500 raw-turnover universe | NOT RUN — pre-performance data gate |
+| L500-v1 — L500-B-M / L500-B-Q | Same B rules; point-in-time top-500 raw-turnover universe | NOT RUN — pre-performance data gate |
 
-## Gate and result
+The fallback protocol, turnover lookback and execution rules are recorded in the [next-cycle specification](next_cycle_spec_2026-10-31.md). No current constituent list or current-survivor screen was substituted.
 
-**Data gate: NOT PASSED.** The dated membership transition set has not been reconstructed and replayed in both directions; 41 notices, amendments/contingencies and successor entitlements remain unresolved. TejHQ's adjustment documentation excludes rights, mergers and demergers from its split/bonus/dividend price adjustment, so the action file alone is insufficient for those cases. No dataset/evaluation fingerprint was frozen for outcome analysis and none of A-M, A-Q, B-M or B-Q ran. No 20% result can be claimed for the frozen rules.
+## What the source evidence established
 
-The pre-existing NIFTY 50 stock-momentum diagnostic remains context only: 11.90% continuous net CAGR at the 50 bps per-side slippage assumption, versus 9.66% matched NIFTY 50 TRI and 9.69% price-only NIFTYBEES under the same modeled trading-cost convention. It is below the 20% target. The modeled 50 bps is uncalibrated; costs materially reduced the strategy's gross return. A separate 20.72% NIFTY/Gold result is limited to 2020 onward and did not qualify on the full-history target.
+- The pinned TejHQ revision `2d6629d656fcb715a03b859f7cff8fbd53a7f420` contains 34 files and 305,712,150 bytes. Raw and adjusted prices each have 5,114,880 matching rows from 2016-01-01 to 2026-10-30. The action feed has 23,564 rows through 2026-11-06; no action after the 2026-10-23 evaluation cutoff was applied.
+- The official NIFTY 200 page and the exact union of current NIFTY 100 and Midcap 100 component anchors support 2026-09-30 as the last-trading-day-of-previous-month anchor. Each component list has 100 unique ISINs; their disjoint union equals the 200-member parent anchor. The parent and component file hashes are in the [replay summary](nifty200_membership_replay_summary_2026-10-31.json).
+- The notice corpus contains 79 NIFTY 200-mentioning releases with numbered-table rows and 41 without them. All 41 exceptional notices are triaged: 16 parent prose/index-list changes, 22 descendant-only/no parent change, and 3 amendment/deferment cases. Descendant-only Alpha30/Momentum30/Quality30 changes are excluded from parent membership. The KWIL multi-date notice and the 2020 deferment chain have event-specific handling.
+- The ordinary table parser plus reviewed exceptions yields 379 operative parent events and 20 identity bridges. The BDL 2-for-1 split has a source-backed old/new ISIN bridge. Temporary extra components are preserved; event-boundary membership ranges from 200 to 204.
+- The independent 2018–2020 official XLS comparison has 111 exact matches, zero XLS-only events and zero operative-PDF-only events. This overlap is a check on those deltas, not proof of later archive completeness.
+
+## Why neither universe passed
+
+**NIFTY 200:** Reverse and forward replay each have 11 failed state-precondition checks across 11 notice/date batches (22 checks total). The forward state happens to equal the 2026-09-30 anchor after skipped batches, so equality alone is not certification. All 339 generated member intervals are `PARTIAL_UNCERTIFIED`. The finite source/date/hash list is in the [replay summary](nifty200_membership_replay_summary_2026-10-31.json); row-level diagnostics remain local. No NIFTY 200 performance or NAV was calculated.
+
+**L500-v1 fallback:** The market-wide raw feed has 5,114,880 rows over 2,665 distinct dates, but no per-security trading/no-trade/status field. A missing security-session row therefore cannot be distinguished from a source gap using this feed alone. Its action file also contains 260 rights, 2 merger and 97 demerger records during the evaluation period. Those are market-wide records, not a claim that each affects a candidate; candidate-level entitlements have not been reconciled. The fallback gate stopped before universe formation, signals or P&L. See the [machine-readable gate](l500_data_gate_2026-10-31.json).
+
+Both pre-performance gates failed, so the cycle’s eligible universe for performance testing is **none**. No result from this cycle can support the 20% objective. The prior NIFTY 50 momentum diagnostic remains context only at 11.90% net CAGR versus 9.66% NIFTY 50 TRI over its separately defined period; it is not an outcome for these frozen candidates.
 
 ## Single next research action
 
-Resolve the 41 unparsed notices and exceptional/amended membership events, then produce a dated ISIN-level event ledger and forward/reverse replay against the 2026-09-30 anchor. Keep the 2020 deferred proposals out of operative history and join successor entitlements to source-backed corporate-action records. Re-run the gate before freezing evaluation dates and costs; do not start another parameter search.
+The official-source audit did not verify a public, date-complete session-state panel for 2018–2026. The next action is to assemble a source-backed historical per-security session-state and identity panel from records already available for authorized research, distinguishing traded, known no-trade, suspension/delisting and missing source rows; then reconcile rights, merger and demerger entitlements for those identifiers. Rerun the pre-performance gates before forming an L500 universe or calculating any strategy return. The detailed source note remains local.
 
-## Reproduction and source-use note
+## Reproduction and handling
 
-The resumable collectors and membership parser are work/collect_tejhq_public_data.py, work/collect_nifty200_notices.py and work/reconstruct_nifty200_membership.py. Their raw inputs and row-level event cache remain outside Git. The report and published manifest contain source metadata and aggregates, not raw price observations or constituent-level event rows.
+Run `python work/reconstruct_nifty200_membership.py`, then `python work/replay_nifty200_membership.py`, and `python work/audit_l500_data_gate.py`. Their `--self-check` options cover the parser/replay/gate invariants. Raw bars, notices and row-level event/replay files stay under the ignored local `work/data/public_research/` cache; only source-file hashes, aggregate counts and source-specific replay residual references are published.
 
-TejHQ's published terms state personal research/backtesting is allowed and raw data may not be redistributed. NSE's website terms separately restrict storage and use of website content for simulation. The source terms therefore conflict; this report records the conflict and does not claim it is resolved by public accessibility or user authorization. No supplier was contacted, no paid data was acquired, no Upstox request was made, and no live order, leverage or paper-path change occurred.
-
+The TejHQ public dataset terms and NSE website terms differ on storing and using sourced data for simulation. This conflict is documented in a local source note and is not resolved by public accessibility. No paid purchase, supplier contact, Upstox request, live order or leverage was used.

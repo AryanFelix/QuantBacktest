@@ -1,0 +1,160 @@
+{
+  "gate": "MEMBERSHIP_REPLAY_FAILED_WITH_RESIDUALS",
+  "anchor_date": "2026-09-30",
+  "evaluation_membership_end": "2026-10-23",
+  "anchor_members": 200,
+  "forward_state_matches_anchor": true,
+  "round_trip_certified": false,
+  "anchor_sha256": "27851fa65cabfc2b9cdbeaf92fdefc34ab841e8a60b3974defcc14aed7be2dd4",
+  "official_xls_sha256": "8869bb7c4df67403131a494a8cc65509e80828f9438bc150b506cdbf55378046",
+  "component_anchors_union_to_parent": true,
+  "component_anchor_sizes": [
+    100,
+    100
+  ],
+  "component_anchor_hashes": {
+    "ind_nifty100list.csv": "0a53ad14c15e9ec258dc72117a8c0699546ec25f2d283c47d53412e2de8a06fc",
+    "ind_niftymidcap100list.csv": "c2def031d14e2878a87c38e4ebf59c1089f8028cdf2c0c1d0192f85299e120bf"
+  },
+  "operative_events": 379,
+  "identity_bridges": 20,
+  "interval_rows": 339,
+  "minimum_members_at_event_boundary": 200,
+  "maximum_members_at_event_boundary": 204,
+  "temporary_extra_members_are_allowed": true,
+  "official_xls_pdf_crosscheck_2018_2020": {
+    "official_xls_pdf_match_count": 111,
+    "official_xls_only_count": 0,
+    "operative_pdf_only_count": 0,
+    "matches": 111
+  },
+  "xls_crosscheck_passed": true,
+  "replay_failed_notice_date_pairs": 11,
+  "replay_failed_direction_count": 22,
+  "replay_failed_direction_counts": {
+    "reverse": 11,
+    "forward": 11
+  },
+  "replay_failure_reason": "State preconditions fail in both directions for the listed notice/date batches; forward equality after skipped batches does not certify membership.",
+  "replay_failure_source_manifest": [
+    {
+      "date": "2018-02-05",
+      "source_filename": "ind_prs08012018.pdf",
+      "source_sha256": "364784c98963a7bc2d28fa19d7b0c5377063178e9215669b1c7b1dfcdc8981f2",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2018-04-02",
+      "source_filename": "ind_prs21022018.pdf",
+      "source_sha256": "a31019896822ef7a28f2229ba5e1552c835f51952ee033d02a5f79c9c7914b3d",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2018-06-29",
+      "source_filename": "ind_prs24052018.pdf",
+      "source_sha256": "bbc4a4c04cae7a1ff924e8b3ef3f7acc6b3a9da069a1d6a36cfe0ae99189e957",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2018-09-28",
+      "source_filename": "ind_prs28082018.pdf",
+      "source_sha256": "5fadad6119356497ef78ce7d062e18e1104eebad707c5850fade491fe47398be",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2018-12-28",
+      "source_filename": "ind_prs14122018.pdf",
+      "source_sha256": "0a9fb1a90d69d6d34c7893409ff33806ce153fd464b2ed7809ac132362c6afe0",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2019-03-29",
+      "source_filename": "ind_prs25022019.pdf",
+      "source_sha256": "bb0224baa0a399eb0d2bd86a6b2c06514a1ae68ef3ad2bf5628a4d93423e59ea",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2019-09-27",
+      "source_filename": "ind_prs28082019.pdf",
+      "source_sha256": "f722969a26b18dfe12256669ff35e8b19d14ae03de5715e0e6b148dd61955e50",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2019-12-27",
+      "source_filename": "ind_prs16122019.pdf",
+      "source_sha256": "2525ecd8a9d22322b4f6179c67ef96c72fed484145f3ebd217159b0006af82a5",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2020-06-26",
+      "source_filename": "ind_prs10062020.pdf",
+      "source_sha256": "ea83ae30ff9e8d80892e143ebd8f16fedd04c974e77d673539bb663a9f9de49e",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2020-07-31",
+      "source_filename": "ind_prs02072020_1.pdf",
+      "source_sha256": "a1941f2afac0e2d9608dbf96607ed0f3101f7347c105c2b96068717a563f1218",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    },
+    {
+      "date": "2021-03-31",
+      "source_filename": "ind_prs23022021.pdf",
+      "source_sha256": "74b5e33ef8c7b140caf6799926a91df424cf309855d6870b31d77c1f2c925360",
+      "failed_directions": [
+        "forward",
+        "reverse"
+      ],
+      "failed_direction_count": 2
+    }
+  ],
+  "notices_without_parent_tables": 41,
+  "notice_triage_class_counts": {
+    "parent_prose_index_list": 16,
+    "descendant_only_no_parent_change": 22,
+    "amendment_deferment": 3
+  },
+  "untriaged_notices_without_parent_tables": [],
+  "deferred_or_revoked_parent_event_count": 21,
+  "performance_gate": "NOT PASSED; no strategy outcomes calculated"
+}

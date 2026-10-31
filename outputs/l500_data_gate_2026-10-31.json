@@ -1,0 +1,50 @@
+{
+  "protocol_id": "L500-v1",
+  "candidate_ids": [
+    "L500-A-M",
+    "L500-A-Q",
+    "L500-B-M",
+    "L500-B-Q"
+  ],
+  "universe_rule": "At each calendar-month boundary, rank eligible securities by mean raw INR turnover over the 63 completed exchange sessions through the preceding close; take up to 500, tie-break by ISIN. No current constituent list or survivor filter.",
+  "protocol": "Preperformance fallback data gate; same four frozen signal, portfolio, retention and execution rules as NIFTY200-v1; no performance calculation",
+  "evaluation_start": "2018-01-01",
+  "evaluation_cutoff": "2026-10-23",
+  "raw_year_files": 11,
+  "raw_rows": 5114880,
+  "market_session_dates": 2665,
+  "first_session": "2016-01-01",
+  "last_session": "2026-10-30",
+  "raw_schema_fields": [
+    "close",
+    "date",
+    "high",
+    "isin",
+    "last",
+    "low",
+    "month",
+    "name",
+    "open",
+    "prev_close",
+    "series",
+    "symbol",
+    "trades",
+    "turnover",
+    "volume",
+    "year"
+  ],
+  "security_session_status_fields": [],
+  "rights_merger_demerger_action_rows_2018_to_cutoff": {
+    "rights": 260,
+    "merger": 2,
+    "demerger": 97
+  },
+  "universe_dependency_gate": "NOT PASSED",
+  "economic_action_gate": "NOT PASSED",
+  "performance_gate": "NOT RUN",
+  "security_session_status_source_audit": "Local official-source review on 2026-10-31 found no verified date-complete public per-security session-state source for the evaluation interval",
+  "residuals": [
+    "The raw daily bar schema has no per-security trading/no-trade/status field. A missing security-session row cannot be labeled as a known zero-turnover session versus a source gap from this feed alone.",
+    "The pinned action feed contains 260 rights, 2 merger, and 97 demerger records in the evaluation window; those entitlements are outside the stated split/bonus/dividend adjustment convention and have not been reconciled for candidate holdings."
+  ]
+}

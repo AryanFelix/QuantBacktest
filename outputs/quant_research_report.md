@@ -21,11 +21,13 @@ The table ranks current unlevered cash leads by their highest displayed after-co
 | **4** | MID150BEES SMA200 long/flat, 100% cap; 2021–Oct 2026 | **17.20%**; ₹25.14L | Midcap 150 TRI 18.64%; NIFTY 50 TRI 9.87% | -12.18% / -23.04% | Lower close drawdown, still trails its own index. Modeled fees ₹5,048.
 | **5** | HDFCSML250 buy-and-hold, 100%; 2023–Oct 2026 | **16.39%**; ₹17.45L | Smallcap 250 TRI 18.10%; NIFTY 50 TRI 7.95% | -25.90% / -28.82% | Only 909 ETF sessions; 50 bps/side; fees ₹341 and modeled slippage ₹13,744. Price-only ETF history.
 
+These five are prior diagnostics. The new NIFTY 200 rules and their L500-v1 fallback have no performance results because both data gates failed; none of this cycle's candidates has demonstrated the 20% full-evaluation target. See the [replay and fallback checkpoint](nifty200_cycle_checkpoint_2026-10-31.md).
+
 **Decision:** keep stock momentum as a diagnostic research lead, not a deployable recommendation. Its gross same-share 2025+ result is near the index; modeled turnover and costs remove its small relative edge. NIFTY/Gold remains a historical comparison, not the primary route to 20%. The separate synthetic 2× Smallcap 250 headline is 32.06% since 2020, but the same-period MTF-rate sensitivity is 15.71% before trading costs and its close drawdown is -70.50%; it is not a qualifying strategy.
 
 **Historical labels:** any later section referring to a 20% drawdown cutoff describes an older screen, not the current mandate. Older low-exposure NIFTY/Gold variants remain comparison results and are not promoted as current candidates.
 
-Cycle artifacts: [governor checkpoint](24_hour_checkpoint_2026-10-31.md), [experiment register](experiment_register_2026-10-31.csv), [terminal and held-mark audit](terminal_liquidation_audit_2026-10-31.md), [broad-stock data gate](broad_stock_data_gate_2026-10-31.md), [NIFTY 200 public-data pilot](nifty200_public_data_pilot_2026-10-31.md), [stock attribution](stock_momentum_attribution_2026-10-31.md), and [next-cycle specification](next_cycle_spec_2026-10-31.md).
+Cycle artifacts: [governor checkpoint](24_hour_checkpoint_2026-10-31.md), [NIFTY 200/L500 continuation checkpoint](nifty200_cycle_checkpoint_2026-10-31.md), [experiment register](experiment_register_2026-10-31.csv), [terminal and held-mark audit](terminal_liquidation_audit_2026-10-31.md), [broad-stock data gate](broad_stock_data_gate_2026-10-31.md), [stock attribution](stock_momentum_attribution_2026-10-31.md), and [next-cycle specification](next_cycle_spec_2026-10-31.md).
 
 ## Current cycle corrections — 2026-10-31
 
@@ -33,7 +35,7 @@ The 50-bps stock attribution is reconciled from its CSV: training excess is **+6
 
 The saved-ledger audit now reconciles **3,168 discovered = 3,143 checked + 25 excluded + 0 invalid**. Four orders files have no equity pair; 20 intraday/derivative paths and one paired non-daily ledger are also excluded. It finds 438 overlapping daily holding gaps for GOLDBEES on 2019-05-07; there are no saved terminal sales with missing raw closes. The audit covers daily net positions, not intraday order-price validity. See its [machine-readable coverage summary](stored_position_gap_audit_2026-10-31.json) and [audit notes](terminal_liquidation_audit_2026-10-31.md).
 
-An exploratory public-file pilot showed that source files can be parsed, but the official NSE website terms prohibit using site data for simulation and restrict copying/storage without prior written permission; NSE Indices also requires a license to use or distribute its index data. The broad-universe gate remains **NOT PASSED**, and the four frozen cases are **NOT RUN**. No source observations or constituent lists are included in this public repository. The prepared sample/quote request asks for explicit internal backtesting and output-sharing rights and has not been sent. See the [pilot decision and request](nifty200_public_data_pilot_2026-10-31.md).
+The earlier public-file pilot established that files could be parsed, not that the event history or security-session panel was complete. This continuation produced an uncertified NIFTY 200 replay and a failed L500-v1 pre-performance gate; see the [cycle checkpoint](nifty200_cycle_checkpoint_2026-10-31.md) for counts and residuals. No source observations or constituent-level events are included in this repository. Source-term notes remain local.
 
 Later dated sections in this file are retained research history and do not change the current top-five ranking above.
 

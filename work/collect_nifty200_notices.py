@@ -122,4 +122,3 @@ if __name__ == "__main__":
     parser.add_argument("--self-check", action="store_true")
     args = parser.parse_args()
     self_check() if args.self_check else collect()
-
