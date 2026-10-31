@@ -1,0 +1,61 @@
+{
+  "as_of": "2026-11-01",
+  "baseline_commit": "650fbaa290f7734b24d8b840c3ef5ea4b40941ca",
+  "steps": [
+    {
+      "correction": "reviewed August 2021 NIFTY 200 source rows",
+      "failed_batches": 8,
+      "failed_direction_checks": 16,
+      "round_trip_certified": false,
+      "identity_bridges": 20,
+      "membership_intervals": 355
+    },
+    {
+      "correction": "reviewed VBL identity/action bridge",
+      "failed_batches": 5,
+      "failed_direction_checks": 10,
+      "round_trip_certified": false,
+      "identity_bridges": 22,
+      "membership_intervals": 373
+    },
+    {
+      "correction": "reviewed IRCTC identity/action bridge",
+      "failed_batches": 5,
+      "failed_direction_checks": 10,
+      "round_trip_certified": false,
+      "identity_bridges": 22,
+      "membership_intervals": 373
+    },
+    {
+      "correction": "reviewed IPCALAB identity/action bridge",
+      "failed_batches": 5,
+      "failed_direction_checks": 10,
+      "round_trip_certified": false,
+      "identity_bridges": 23,
+      "membership_intervals": 374
+    },
+    {
+      "correction": "reviewed CESC identity/action bridge",
+      "failed_batches": 0,
+      "failed_direction_checks": 0,
+      "round_trip_certified": true,
+      "identity_bridges": 24,
+      "membership_intervals": 412
+    }
+  ],
+  "baseline_at_650fbaa": {
+    "failed_batches": 11,
+    "failed_direction_checks": 22,
+    "round_trip_certified": false
+  },
+  "final_state": {
+    "failed_batches": 0,
+    "failed_direction_checks": 0,
+    "round_trip_certified": true,
+    "anchor_date": "2026-09-30",
+    "anchor_members": 200,
+    "official_xls_pdf_matches_2018_2020": 111,
+    "one_sided_xls_pdf_rows": 0
+  },
+  "interpretation": "Residual changes are recorded after each source/identity correction. The failed batch counts were cascading precondition failures and are not independent missing archives."
+}

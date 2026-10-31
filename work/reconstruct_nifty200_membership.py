@@ -27,8 +27,11 @@ CURRENT_CSV = OFFICIAL / "ind_nifty200list.csv"
 EVENT_XLS = OFFICIAL / "IndexInclExcl.xls"
 SYMBOL_HISTORY = PUBLIC / "tejhq" / "symbol_history" / "nse.parquet"
 ARCHIVE = SOURCE / "full_release_archive_index.json"
+EXTRACTION_REVIEWS = SOURCE / "reviewed_source_extraction_reviews.csv"
+MANUAL_EXTRACTIONS = SOURCE / "reviewed_manual_extractions.csv"
 ANCHOR_DATE = pd.Timestamp("2026-09-30")
 START_DATE = pd.Timestamp("2018-01-01")
+DEFERRED_NOTICE_FILES = {"ind_prs18022020.pdf", "ind_prs12032020.pdf", "ind_prs19032020.pdf"}
 
 DATE_RE = re.compile(
     r"(?i)(?:shall\s+become\s+effective(?:\s+from)?|become\s+effective(?:\s+from)?|"
@@ -174,6 +177,16 @@ def atomic_csv(path: Path, rows: list[dict], fields: list[str]) -> None:
     temporary.replace(path)
 
 
+def xls_crosscheck_rows(rows: list[dict]) -> list[dict]:
+    return [row for row in rows if row["effective_date"]
+            and "2018-01-01" <= row["effective_date"] <= "2020-07-31"
+            and row["filename"] not in DEFERRED_NOTICE_FILES]
+
+
+def needs_visual_review(text_chars: int, pages_without_text: int) -> bool:
+    return text_chars <= 100 or pages_without_text > 0
+
+
 def self_check() -> None:
     sample = """14) Nifty 200
 The following companies are being excluded:
@@ -194,6 +207,7 @@ The following companies are being included:
     )
     assert announced == "2026-08-10" and effective == "2026-09-30"
     assert not section_events("Only a paragraph mentioning Nifty 200.")
+    assert needs_visual_review(0, 3) and needs_visual_review(101, 1) and not needs_visual_review(101, 0)
     assert section_events(sample.replace("14)", "l)").replace("15)", "m)")) == events
     for title in ("Nifty 200 Alpha 30", "Nifty 200 Momentum 30", "Nifty 200 Quality 30"):
         assert not section_events(f"14) {title}\nThe following companies are being included:\n1 Example Ltd. EXAMPLE")
@@ -213,6 +227,11 @@ Corporation Ltd. IRCTC
         "Exclude effective from February 24, 2026.",
         "ind_prs20022026_1.pdf", "Exclusion of Kwality Wall's (India) Ltd. from Nifty Indices",
     ) == ("2026-02-20", "2026-02-24")
+    fixture = [
+        {"effective_date": "2020-03-27", "filename": "ind_prs18022020.pdf"},
+        {"effective_date": "2020-06-26", "filename": "ind_prs10062020.pdf"},
+    ]
+    assert xls_crosscheck_rows(fixture) == [fixture[1]]
     print("membership parser self-check passed: boundaries, wrapped rows, and event-specific dates")
 
 
@@ -221,18 +240,60 @@ def run() -> dict:
     history = pq.read_table(SYMBOL_HISTORY).to_pandas()
     archive = json.loads(ARCHIVE.read_text(encoding="utf-8"))
     titles = {item["filename"]: item for item in archive}
+    reviews = {row["filename"]: row for row in csv.DictReader(EXTRACTION_REVIEWS.open(encoding="utf-8-sig", newline=""))}
+    manual_extractions = list(csv.DictReader(MANUAL_EXTRACTIONS.open(encoding="utf-8-sig", newline="")))
+    manual_by_file: dict[str, list[dict]] = {}
+    for row in manual_extractions:
+        manual_by_file.setdefault(row["filename"], []).append(row)
 
     release_rows = []
     source_audit = []
+    extraction_coverage = []
     for path in sorted(PDF_DIR.glob("*.pdf")):
         pdf = PdfReader(path)
-        text = "\n\f\n".join(page.extract_text() or "" for page in pdf.pages)
-        if "nifty 200" not in text.lower() and "nifty200" not in text.lower():
-            continue
+        page_texts = [page.extract_text() or "" for page in pdf.pages]
+        text = "\n\f\n".join(page_texts)
+        page_count = len(page_texts)
+        text_chars = sum(len(page.strip()) for page in page_texts)
+        empty_pages = [str(i) for i, page in enumerate(page_texts, 1) if not page.strip()]
         entry = titles.get(path.name, {})
         title = entry.get("text", "")
+        digest = sha256_file(path)
+        review = reviews.get(path.name, {})
+        reviewed_manual = manual_by_file.get(path.name, [])
+        if needs_visual_review(text_chars, len(empty_pages)):
+            if not review or review.get("pdf_sha256") != digest or review.get("page_count") != str(page_count) or review.get("reviewed_pages") != f"1-{page_count}":
+                raise ValueError(f"low-text PDF needs complete hash-matched source review: {path.name}")
+        if reviewed_manual and (not review or review.get("classification") != "exact_parent_table"):
+            raise ValueError(f"manual parent rows lack a reviewed exact-table source classification: {path.name}")
+        if reviewed_manual:
+            expected = (int(review["include_rows"]), int(review["exclude_rows"]))
+            observed = (sum(row["side"] == "include" for row in reviewed_manual), sum(row["side"] == "exclude" for row in reviewed_manual))
+            if expected != observed or any(row["pdf_sha256"] != digest for row in reviewed_manual):
+                raise ValueError(f"manual extraction coverage/count/hash mismatch: {path.name}")
+            if any(not re.fullmatch(r"p\.\d+", row["page_ref"]) or int(row["page_ref"][2:]) > page_count for row in reviewed_manual):
+                raise ValueError(f"manual extraction page outside source document: {path.name}")
         announcement, effective = release_metadata(text, path.name, title)
         parsed = section_events(text)
+        if reviewed_manual:
+            announcement = reviewed_manual[0]["announcement_date"]
+            effective = reviewed_manual[0]["event_effective_date"]
+        mention = "nifty 200" in text.lower() or "nifty200" in text.lower() or bool(reviewed_manual)
+        extraction_coverage.append({
+            "filename": path.name, "official_url": entry.get("url", f"https://www.niftyindices.com/Press_Release/{path.name}"),
+            "pdf_sha256": digest, "page_count": page_count, "pages_with_text": page_count - len(empty_pages),
+            "pages_without_text": len(empty_pages), "pypdf_text_chars": text_chars,
+            "pypdf_mentions_nifty200": "true" if "nifty 200" in text.lower() or "nifty200" in text.lower() else "false",
+            "candidate_parent_notice": "true" if mention else "false",
+            "manual_reviewed_pages": review.get("reviewed_pages", ""),
+            "manual_review_method": review.get("review_method", ""),
+            "reviewed_classification": review.get("classification", ""),
+            "manual_parent_include_rows": len([row for row in reviewed_manual if row["side"] == "include"]),
+            "manual_parent_exclude_rows": len([row for row in reviewed_manual if row["side"] == "exclude"]),
+            "extraction_status": "MANUAL_REVIEW_COMPLETE" if review else "TEXT_EXTRACTED",
+        })
+        if not mention:
+            continue
         record = {
             "filename": path.name,
             "official_url": entry.get("url", f"https://www.niftyindices.com/Press_Release/{path.name}"),
@@ -240,13 +301,13 @@ def run() -> dict:
             "announcement_date": announcement,
             "effective_date": effective,
             "mentions_nifty200": True,
-            "has_numbered_section": bool(parsed),
-            "include_rows": sum(row["side"] == "include" for row in parsed),
-            "exclude_rows": sum(row["side"] == "exclude" for row in parsed),
-            "pdf_sha256": sha256_file(path),
+            "has_numbered_section": bool(parsed or reviewed_manual),
+            "include_rows": sum(row["side"] == "include" for row in parsed) + len([row for row in reviewed_manual if row["side"] == "include"]),
+            "exclude_rows": sum(row["side"] == "exclude" for row in parsed) + len([row for row in reviewed_manual if row["side"] == "exclude"]),
+            "pdf_sha256": digest,
         }
         source_audit.append(record)
-        for row in parsed:
+        for row in [*parsed, *reviewed_manual]:
             if not effective:
                 row["mapping_error"] = "missing_effective_date"
                 row["isin"] = ""
@@ -260,9 +321,7 @@ def run() -> dict:
             release_rows.append({**record, **row})
 
     xls_events = read_excel_events()
-    pd_release_events = [
-        row for row in release_rows if row["effective_date"] and "2018-01-01" <= row["effective_date"] <= "2020-07-31"
-    ]
+    pd_release_events = xls_crosscheck_rows(release_rows)
     xls_key = {(row["event_date"], re.sub(r"[^A-Z0-9]", "", row["company"].upper()), row["side"]) for row in xls_events
                if "2018-01-01" <= row["event_date"] <= "2020-07-31"}
     pdf_key = {(row["effective_date"], re.sub(r"[^A-Z0-9]", "", row["company"].upper()), row["side"]) for row in pd_release_events}
@@ -299,10 +358,27 @@ def run() -> dict:
         "membership_reconstruction": "parser output only; run work/replay_nifty200_membership.py for the dated ISIN ledger and replay gate",
         "performance_gate": "NOT PASSED",
     }
+    manifest["source_extraction_documents_scanned"] = len(extraction_coverage)
+    manifest["low_text_documents_visually_reviewed"] = sum(int(row["pypdf_text_chars"]) <= 100 for row in extraction_coverage)
+    manifest["text_or_page_gap_documents_visually_reviewed"] = sum(
+        needs_visual_review(int(row["pypdf_text_chars"]), int(row["pages_without_text"]))
+        for row in extraction_coverage
+    )
+    manifest["manual_parent_rows_recovered"] = len(manual_extractions)
     (audit_dir / "membership_audit.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")
     atomic_csv(ROOT / "outputs" / "nifty200_notice_coverage_2026-10-31.csv", source_audit,
                ["filename", "official_url", "archive_title", "announcement_date", "effective_date",
                 "mentions_nifty200", "has_numbered_section", "include_rows", "exclude_rows", "pdf_sha256"])
+    atomic_csv(ROOT / "outputs" / "nifty200_source_extraction_coverage_2026-10-31.csv", extraction_coverage,
+               ["filename", "official_url", "pdf_sha256", "page_count", "pages_with_text", "pages_without_text",
+                "pypdf_text_chars", "pypdf_mentions_nifty200", "candidate_parent_notice", "manual_reviewed_pages",
+                "manual_review_method", "reviewed_classification", "manual_parent_include_rows",
+                "manual_parent_exclude_rows", "extraction_status"])
+    unreviewed_gaps = [row["filename"] for row in extraction_coverage
+                       if needs_visual_review(int(row["pypdf_text_chars"]), int(row["pages_without_text"]))
+                       and row["extraction_status"] != "MANUAL_REVIEW_COMPLETE"]
+    if unreviewed_gaps:
+        raise ValueError(f"source extraction coverage has unreviewed low-text or page-gap PDFs: {unreviewed_gaps}")
     print(json.dumps(manifest, indent=2))
     print(f"row-level event cache: {audit_dir / 'release_events.csv'}")
     return manifest

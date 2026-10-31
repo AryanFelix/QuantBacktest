@@ -1,0 +1,36 @@
+{
+  "as_of": "2026-10-31",
+  "dates_requested": 18,
+  "dates_fetched_and_date_validated": 18,
+  "all_dates_verified_in_raw_bhavcopy": true,
+  "raw_source_sessions_before_backfill": 2665,
+  "verified_sessions_added": 18,
+  "source_session_calendar_after_backfill": 2683,
+  "session_rows": 37576,
+  "unique_security_ids": 3481,
+  "sessions_with_positive_turnover_rows": 18,
+  "special_session_format": "daily aggregate OHLC/turnover in the exchange EOD file; intraday venue paths are not reconstructed",
+  "source_rows_local": true,
+  "raw_files_local": true,
+  "official_nifty50_tri_marks_returned": 18,
+  "official_nifty50_tri_marks_matched_existing_reference": 18,
+  "official_nifty50_ntr_marks_returned": 18,
+  "official_nifty50_ntr_marks_matched_existing_reference": 18,
+  "max_tri_reference_difference": 0.0,
+  "max_ntr_reference_difference": 0.0,
+  "adjusted_factor_reconstruction": {
+    "backfill_rows": 37576,
+    "adjusted_factor_resolved_rows": 37460,
+    "adjusted_factor_unresolved_rows": 116,
+    "factor_status_counts": {
+      "adjacent_factor_match": 37383,
+      "verified_interval_action_factor": 77,
+      "unresolved_action_terms": 54,
+      "unresolved_nearby_history": 47,
+      "unresolved_factor_ratio": 11,
+      "unresolved_factor_jump_without_action": 3,
+      "unresolved_identity_bridge": 1
+    }
+  },
+  "adjusted_backfill_with_benchmark_join": "local nse_calendar_backfill_adjusted.parquet; unresolved factors remain null"
+}

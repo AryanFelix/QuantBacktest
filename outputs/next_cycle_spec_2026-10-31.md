@@ -1,45 +1,46 @@
-# Frozen strategy and universe protocol — status at 2026-10-31
+# Frozen strategy and universe protocol — amendment registered 2026-10-31
 
 ## Objective and decision
 
-Target: at least 20% net calendar-time CAGR on ₹10 lakh, unlevered and before personal tax. The former 20% drawdown cap is removed; drawdown is reported as realized risk. The predefined evaluation remains 2018-01-01 through 2026-10-23, with at least 252 completed sessions of signal warm-up. No rule may be retuned to the observed outcomes.
+Target: at least 20% net calendar-time CAGR on ₹10 lakh, unlevered and before personal tax. The former 20% drawdown cap is removed; report realized drawdown. Evaluation: 2018-01-01 through 2026-10-23, with the frozen A/B rules below. No rule may be retuned to outcomes.
 
-The original NIFTY 200 universe was given the first data-gate timebox. Its dated replay remains uncertified. Per the predeclared fallback, a separate protocol version, **L500-v1**, was evaluated before performance. Its security-session and corporate-action gates also failed. Therefore no universe passed for performance and all eight candidate IDs below remain NOT RUN.
+NIFTY 200 remains preferred, but its dated membership replay is uncertified. L500-v1 cannot identify an absent security row without assuming it means either no-trade or a source failure. Before calculating L500 candidate counts, ranks or P&L, register one operational-eligibility amendment, L500-v2. L500-v1 remains unrun; no performance outcome was used to choose v2.
 
-## Protocol amendment and candidate IDs
+## Protocols and candidate IDs
 
-| Protocol / IDs | Universe | Rule |
+| Protocol / IDs | Universe | Status |
 |---|---|---|
-| NIFTY200-v1: A-M, A-Q, B-M, B-Q | Contemporaneous NIFTY 200 constituents, with temporary components retained for their announced interval | The four frozen A/B signal and rebalance rules below |
-| L500-v1: L500-A-M, L500-A-Q, L500-B-M, L500-B-Q | At each calendar-month boundary, select up to 500 eligible securities by mean raw INR turnover over the 63 completed exchange sessions through the preceding close; rank descending, break ties by ISIN. Use only point-in-time listing/identity/session data. No current constituent list or survivor filter. | Same respective A/B signal, portfolio, retention and execution rules as NIFTY200-v1; only the universe changes |
+| NIFTY200-v1: A-M, A-Q, B-M, B-Q | Point-in-time NIFTY 200 members, including temporary components for their announced interval | NOT RUN; replay residuals |
+| L500-v1: L500-A-M, L500-A-Q, L500-B-M, L500-B-Q | Original top-500 raw-turnover fallback | Preserved, NOT RUN; operational identity of missing rows is unknown |
+| L500-v2: L500v2-A-M, L500v2-A-Q, L500v2-B-M, L500v2-B-Q | Point-in-time NSE cash EQ/BE series ranked by mean raw INR turnover over the prior 63 completed source sessions through the decision close; descending turnover, then ISIN; up to 500 | Preregistered dependency audit only; no P&L |
 
-The fallback universe did not reach selection because the available bar feed cannot distinguish a known non-trading session from a missing source record. No liquidity ranking or candidate-specific performance was computed. The four L500 IDs are pending data validation, not failed strategies.
+L500-v2 eligibility is contemporaneous: every expected raw OHLC and turnover observation must be positive, finite, valid OHLC, and genuinely present for all 63 liquidity sessions and the applicable signal window. Any absent or ambiguous required observation is unknown and makes that identity ineligible at that decision date. A change of ISIN is not stitched unless a reviewed bridge supports it. Use no current constituents, future survival, later cleanliness or future event flags. If two series produce ambiguous same-ISIN observations on a session, that identity is ineligible for that session.
 
-## Frozen signal and portfolio rules
+## Frozen signals, portfolio and schedules
 
-| Rule | Score and eligibility | Portfolio | Schedule |
-|---|---|---|---|
-| A | 12–1 total return, excluding the latest 21 completed sessions; require positive score | Equal-weight top 20; retain current positions while rank is 1–25, capped at 20; fill remaining slots by descending score and ISIN | Monthly or quarterly |
-| B | Mean of 6–1 and 12–1 total return divided by trailing 252-session annualized volatility; both legs omit latest 21 sessions; require positive score and 252 observations | Same as A | Monthly or quarterly |
+| Rule | Score | Required adjusted-price observations |
+|---|---|---|
+| A | Adjusted 12–1 total return, excluding the latest 21 completed sessions; require positive score | Every adjusted close from session t−252 through t−21 and resolved event/identity terms across the interval |
+| B | Mean of adjusted 6–1 and 12–1 total returns divided by annualized volatility of the trailing 252 adjusted close-to-close returns; both return legs omit latest 21 sessions; require positive score | Every adjusted close from t−273 through t−21 for the 252-return volatility calculation, and every close from t−252 through t−21 for both return legs; event and identity terms resolved |
 
-Monthly decisions use the last exchange session of each month; quarterly decisions use the last session of March, June, September and December. Execute integer-share orders at the next session’s open; reject unaffordable buys and keep residual cash at zero yield. Hold fewer than 20 securities if fewer than 20 qualify. No extra quality, regime, timing, holding-count or allocation variants are authorized in this cycle.
+For both rules, equal-weight the top 20; retain current positions while rank is 1–25, cap at 20, then fill vacancies by descending score and ISIN. Monthly signals use the final exchange session of each month; quarterly signals use final March, June, September and December sessions. Execute integer-share orders at the next session open; reject unaffordable buys and credit cash at 0%. Hold fewer than 20 securities if fewer qualify. These four configurations are fixed; no additional universe or parameter variants are authorized.
 
-## Data gate and current residuals
+## Source corrections and current gates
 
-The NIFTY 200 current anchor is dated 2026-09-30 and independently reproduces as the disjoint union of the NIFTY 100 and Midcap 100 current anchors. The 2018–2020 official XLS overlap matches 111 events with no one-sided rows. But reverse and forward replay each have 11 failed precondition checks across 11 notice/date batches. The forward state matches the anchor only after failed batches were skipped; 339 intervals are provisional. See the [source-specific replay manifest](nifty200_membership_replay_summary_2026-10-31.json). The four NIFTY200-v1 IDs remain NOT RUN.
+The August 2021 low-text notice ind_prs23082021.pdf (SHA-256 c9b9feef248ca89f7d8c8f12009e3d5c409eb4d6c793eee061fb93bf0af1231e) was visually reviewed on all 29 pages. Page 14 has six NIFTY 200 exclusions and six inclusions effective 2021-09-30; these rows were restored. The low-text September 2018 ind_prs24092018.pdf was reviewed on all three pages and classified as CPSE-only, no parent-index change. The extraction ledger now records per-document text/page counts and a manual-review disposition, so an empty notice cannot silently be classed irrelevant.
 
-For L500-v1, the raw feed has no per-security session-status field, so absent bars cannot be classified as known no-trade versus source gap. Across the evaluation dates it also lists 260 rights, 2 merger and 97 demerger actions. These counts are market-wide; actual candidate exposures are unknown. Entitlements, security identity, session status and listing eligibility have not passed the fallback gate. See the [L500 pre-performance audit](l500_data_gate_2026-10-31.json). The four L500-v1 IDs remain NOT RUN.
+That source correction reduced NIFTY 200 replay failures from 11 batches / 22 directional checks to 8 batches / 16 checks. All 8 remaining failed checks occur in both directions; these are cascading batch failures, not 8 independent missing archives. The 2018–2020 official XLS/PDF overlap is 111 matches with no one-sided rows. See nifty200_membership_replay_summary_2026-10-31.json; raw event rows stay local.
 
-The official-source audit could not verify a public, date-complete per-security session-state archive for 2018–2026. The single next action is to assemble a source-backed historical session-state and identity panel from records already available for authorized research, then reconcile economic entitlements for event-affected securities. Keep known non-trading sessions distinct from missing rows; preserve exits and successor identities; do not use stale prices as fills or invent pre-listing history. Run exactly one data-valid universe and at most these four configurations only after all material gates pass. Detailed source notes remain local.
+The finite 18-date calendar audit found all dates to be actual NSE cash sessions: 14 special sessions and 4 regular sessions. Official NSE daily EOD files add 37,576 EQ/BE rows for 3,481 identities. All 18 NSE NIFTY 50 TRI and NTR marks match local reference values exactly. The supplement leaves 117 adjusted factors unresolved (54 action terms, 47 nearby history, 11 factor ratios, 3 unexplained jumps, 2 identity bridges). Special-session files are daily aggregates; intraday venue paths are not reconstructed. See the aggregate calendar CSV and summary JSON.
 
-## Performance protocol, only after a gate passes
+## L500-v2 dependency audit; no performance authorization yet
 
-Use continuous capital from one initial ₹10 lakh allocation and one account high-water mark. Do not reset NAV or drawdown across folds, or average fold CAGRs. Use raw prices for fills; adjusted data may inform signals only after event/identity correctness and no-leakage are validated. Source-backed split, bonus, dividend, rights, merger and demerger accounting must not double-credit distributions or count non-executable adjusted-price jumps as profit.
+Use the raw market calendar plus the 18 verified NSE sessions as a working calendar, not a claim of global completeness. Calculate only point-in-time eligibility, fixed signal ranks, intended next-session entry/exit identities, position intervals and daily valuation dependencies. For each unresolved input, save rule, date, entity, source, reason and affected signal/order/position locally; publish aggregate coverage only.
 
-Freeze the data, identity, action and benchmark hashes; coverage; chronological folds; selection rule; and costs before outcomes. Preserve the evaluation dates above when supported cleanly; any coverage-driven alternative is a separately named diagnostic selected before returns. Use 50 bps adverse slippage per side as the uncalibrated base and show 10/100/200 bps sensitivities. Report integer-share next-open fills, fees, annual and fold outcomes, matched broad TRI and investable passive references, gross/net/cost attribution, turnover, close/OHLC drawdown, recovery, concentration, break-even cost, and order-to-NAV reconciliation.
+A missing candidate bar before entry can make that candidate ineligible under this version. A missing fill, held-position mark, identity transition or entitlement after entry remains a material unresolved dependency: do not invent a fill, zero a missing holding, use a stale mark, retroactively exclude a name, or omit a ranking-changing signal. Market-wide rights/merger/demerger counts are not strategy blockers unless they touch an actual required signal or position. Any path with a material unresolved dependency is invalid. Run no strategy outcomes until the dependency audit shows the selected universe and all ranking-changing signals/orders/valuation paths are supported.
 
-Repeatedly inspected history is retrospective, not an untouched holdout. If none reaches 20% net CAGR on its full predefined evaluation, report that plainly. No leverage, paid purchase, supplier contact, Upstox API request or live order is part of this protocol.
+## Performance protocol, only after dependencies pass
 
-## Data handling and source-use note
+Use continuous ₹10 lakh capital, aligned calendar CAGR, one account high-water mark and no cash yield. Raw prices determine next-session integer-share fills. Freeze data, identity, action and benchmark hashes before outcomes. Base adverse slippage is 50 bps per side; show 10/100/200 bps uncalibrated sensitivities. Include fees, order-to-NAV reconciliation, matched TRI and passive references, annual/fold outcomes, gross/net/cost attribution, drawdown/recovery, turnover, concentration and break-even costs.
 
-Raw downloads, event rows, member intervals, identity bridges and detailed replay diagnostics stay local outside Git. Publish code, reviewed exception schema, source-file hashes, aggregate gate results and the non-identifying source/date/hash residual manifest. The TejHQ/NSE source-term conflict is recorded in local notes; public accessibility does not resolve that difference.
+Any coverage-driven shorter diagnostic must be selected and registered before outcomes and cannot establish a full-period 20% claim. No leverage, paid purchase, supplier contact, credential inspection, Upstox API request, exposed-token use or live order is authorized in this cycle. Raw downloads and detailed entity-level dependencies remain local; only code, extraction coverage, source hashes and aggregate results are published.

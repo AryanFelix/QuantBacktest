@@ -24,6 +24,8 @@ INDEX_XLS = PUBLIC / "official" / "IndexInclExcl.xls"
 HISTORY = PUBLIC / "tejhq" / "symbol_history" / "nse.parquet"
 ACTION_DIR = PUBLIC / "tejhq" / "actions"
 RAW_DIR = PUBLIC / "tejhq" / "nse"
+CALENDAR_BACKFILL = PUBLIC / "nse_calendar_backfill" / "nse_calendar_backfill.parquet"
+IDENTITY_BRIDGES = PUBLIC / "isin_bridges" / "reviewed_identity_bridges.csv"
 START = pd.Timestamp("2018-01-01")
 ANCHOR_DATE = pd.Timestamp("2026-09-30")
 EVALUATION_END = pd.Timestamp("2026-10-23")
@@ -61,6 +63,36 @@ def identity_isin(history: pd.DataFrame, symbol: str, when: pd.Timestamp, side: 
     return values[0]
 
 
+def reviewed_identity_bridges() -> list[dict]:
+    if not IDENTITY_BRIDGES.is_file():
+        return []
+    output = []
+    for row in read_rows(IDENTITY_BRIDGES):
+        files, hashes = row["source_files"].split(";"), row["source_hashes"].split(";")
+        if len(files) != len(hashes):
+            raise ValueError(f"{row['symbol']}: bridge source file/hash counts differ")
+        for relative, expected in zip(files, hashes):
+            path = (PUBLIC / relative).resolve()
+            if PUBLIC.resolve() not in path.parents or not path.is_file():
+                raise ValueError(f"{row['symbol']}: reviewed bridge source is absent or outside local research data: {relative}")
+            actual = hashlib.sha256(path.read_bytes()).hexdigest()
+            if actual != expected:
+                raise ValueError(f"{row['symbol']}: reviewed bridge source hash mismatch: {relative}")
+        if row["status"] != "verified" or row["membership_replay"].lower() != "true":
+            continue
+        if not all(row.get(key) for key in ("effective_date", "economic_ex_date", "from_isin", "to_isin", "official_url", "pdf_sha256")):
+            raise ValueError(f"{row['symbol']}: incomplete reviewed identity bridge")
+        output.append({
+            "effective_date": row["effective_date"], "reference_close_date": row["reference_close_date"],
+            "economic_ex_date": row["economic_ex_date"],
+            "announcement_date": "", "action": "isin_bridge", "symbol": row["symbol"],
+            "from_isin": row["from_isin"].upper(), "to_isin": row["to_isin"].upper(), "isin": "",
+            "identity_bridge": row["identity_bridge"], "filename": row["filename"], "page_ref": row["page_ref"],
+            "official_url": row["official_url"], "pdf_sha256": row["pdf_sha256"], "status": "operative",
+        })
+    return output
+
+
 def release_status(row: dict) -> str:
     filename, symbol = row["filename"], row["symbol"].upper()
     if filename in DEFERRED_2020 and row["effective_date"] == "2020-03-27":
@@ -77,6 +109,8 @@ def previous_sessions() -> list[pd.Timestamp]:
     sessions = set()
     for path in sorted(RAW_DIR.glob("year=*/nse_*.parquet")):
         sessions.update(pd.to_datetime(pq.read_table(path, columns=["date"])["date"].to_pandas()).dropna().unique())
+    if CALENDAR_BACKFILL.is_file():
+        sessions.update(pd.to_datetime(pq.read_table(CALENDAR_BACKFILL, columns=["date"])["date"].to_pandas()).dropna().unique())
     return sorted(pd.Timestamp(value).normalize() for value in sessions)
 
 
@@ -215,7 +249,7 @@ def build() -> dict:
 
     unresolved: list[dict] = []
     selected: list[dict] = []
-    bridges: list[dict] = []
+    bridges = reviewed_identity_bridges()
     for row in release:
         dt = pd.Timestamp(row["effective_date"])
         if not START <= dt <= EVALUATION_END or release_status(row) != "operative":
@@ -392,6 +426,11 @@ def build() -> dict:
         for (dt, filename), directions in sorted(failure_sources.items())
     ]
     failed_directions = Counter(item["direction"] for item in replay_residuals)
+    failure_reason = (
+        "Every source/date batch passed its precondition checks in reverse and forward replay."
+        if replay_ok else
+        "State preconditions fail in both directions for the listed notice/date batches; forward equality after skipped batches does not certify membership."
+    )
     residuals = {
         "gate": "MEMBERSHIP_REPLAY_PASSED" if replay_ok and comparison_ok else "MEMBERSHIP_REPLAY_FAILED_WITH_RESIDUALS",
         "anchor_date": ANCHOR_DATE.date().isoformat(), "evaluation_membership_end": end_date,
@@ -409,7 +448,7 @@ def build() -> dict:
         "replay_failed_notice_date_pairs": len(failure_sources),
         "replay_failed_direction_count": sum(failed_directions.values()),
         "replay_failed_direction_counts": dict(failed_directions),
-        "replay_failure_reason": "State preconditions fail in both directions for the listed notice/date batches; forward equality after skipped batches does not certify membership.",
+        "replay_failure_reason": failure_reason,
         "replay_failure_source_manifest": residual_source_manifest,
         "notices_without_parent_tables": len(no_table), "notice_triage_class_counts": dict(no_table_classes),
         "untriaged_notices_without_parent_tables": uncovered_no_table,
@@ -486,6 +525,9 @@ def self_check() -> None:
     assert state == {"NEW"}
     state = day_bridges(split, state, reverse=True)
     assert state == {"OLD"}
+    reviewed = reviewed_identity_bridges()
+    assert all(row["effective_date"] and row["economic_ex_date"] for row in reviewed)
+    assert (pd.Timestamp("2021-10-29") != pd.Timestamp("2021-10-28"))
     print("membership replay self-check passed: notice triage, defer/amendment chain, atomic replacement, strict preconditions, no fixed-count assumption")
 
 
