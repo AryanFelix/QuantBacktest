@@ -2,23 +2,40 @@
 
 ## Decision
 
-The current evidence does not support a durable, investable after-cost 20% CAGR strategy. One existing rule reaches 20.72% from 2020 to October 2026 and 23.06% from 2023, but the full 2014–2026 compound rate is 10.40%, below matched NIFTY 50 TRI at 11.83%. It also saw a -32.43% full-history conservative OHLC drawdown bound. A 2014–2019 training-only exposure selection, frozen for 2020 onward, returned 13.60%, not 20%. The live Smallcap 250 TRI reached 20.36% from 2020 with -43.48% close drawdown, but its HDFC ETF only has price bars from February 2023 and produced 16.39% after modeled costs. The high beta result is real index performance, not a backtest of an investable ETF position during 2020 onward.
+The current evidence does not support a durable, investable after-cost 20% CAGR strategy. A synthetic 2× Smallcap 250 TRI path reached 32.06% for 2020–October 2026 and 21.03% since the index's live 2016 launch, but its close drawdowns were -69.83% and -87.19%, respectively. Replacing overnight funding with Upstox's published 18.25% Standard MTF rate reduced those estimates to 15.71% and 6.36%, before trading costs and margin liquidation. This is an index sensitivity, not a tradable 2× Smallcap product. The real Smallcap 250 TRI returned 20.36% from 2020 with -43.48% close drawdown; HDFCSML250's live price sample starts in February 2023 and produced 16.39% after modeled costs.
+
+The stock-momentum grid found no 20% full-period rule. Its training-selected rule returned 23.88% in 2021–2023, 11.98% in 2024, -4.94% in 2025–October 2026, and 11.90% over its full sample at 50 bps per side. A restricted-universe diagnostic returned 26.74% in training but -9.26% in 2025+. The NIFTY/Gold rule remains 20.72% only from 2020 and 10.40% over 2014–2026, below matched NIFTY 50 TRI at 11.83%. The prior conservative full-history OHLC bound for that rule was -32.43%.
 
 The user has relaxed the previous 20% drawdown ceiling. We therefore allow 100% unlevered exposure in the current leaderboard and report actual risk rather than rejecting any drawdown level. The reference capital remains ₹10 lakh.
 
 ## Five leading candidates
 
-The front section of `outputs/quant_research_report.md` is ranked by the largest relevant observed CAGR for each candidate, with every window named. It records matched benchmark return, close drawdown, conservative OHLC bound, and the present limitations.
+The front section of `outputs/quant_research_report.md` ranks the strongest observed research leads and labels each window and evidence type. It records matched benchmark return, close drawdown, conservative OHLC bound where available, and the present limitations.
 
-| Candidate | Net CAGR | Same-window benchmark | Close / OHLC drawdown | Interpretation |
+| Candidate | CAGR and value on ₹10L | Same-window benchmark | Close / OHLC drawdown | Interpretation |
 |---|---:|---:|---:|---|
-| Quarterly NIFTY/Gold 63-session inverse-vol rule, 100% active exposure; 2020–2026 | 20.72% | NIFTY 50 TRI 10.79% | -25.10% / -29.31% | Meets target in selected recent window only; 2014–2026 CAGR 10.40%, training-selected future exposure 13.60%. |
-| MID150BEES 100% buy-and-hold; 2021–2026 | 18.23% | Midcap 150 TRI 18.64%; NIFTY 50 TRI 9.87% | -21.23% / -37.65% | Beats broad NIFTY but trails its direct Midcap benchmark; from ETF inception in 2019 it returned 17.77% vs Midcap TRI 18.15%. |
-| MID150BEES 200-day moving-average rule; 100% cap; 2021–2026 | 17.20% | Midcap 150 TRI 18.64%; NIFTY 50 TRI 9.87% | -12.18% / -23.04% | Materially reduces close drawdown, gives up return, and still trails its direct benchmark. |
-| HDFCSML250 100% buy-and-hold; 21 Feb 2023–23 Oct 2026 | 16.39% net at 50 bps/side | Smallcap 250 TRI 18.10%; NIFTY 50 TRI 7.95% | -25.90% / -28.82% | Price-only Upstox ETF history; modeled fees and slippage included. It beats NIFTY, trails its own TRI, and cannot validate the earlier 2020+ index result. |
-| Tata Nifty Midcap150 Momentum 50 Direct Growth live NAV; 20 Oct 2022–30 Sep 2026 | 15.82% | Momentum 50 TRI 16.97%; NIFTY 50 TRI 7.85% | Not reported in AMC return table | Actual live fund evidence, net of fund expenses; it misses 20% and trails its own benchmark. |
+| Synthetic daily 2× Smallcap 250 TRI, low-cost overnight funding; 2020–Oct 2026 | 32.06% modeled; ₹66.41L | Smallcap 250 TRI 20.36%; NIFTY 50 TRI 10.79% | -69.83%; OHLC unavailable | MTF-rate sensitivity is 15.71% and ₹27.01L with -70.50% close DD, before trading costs or liquidation. No executable 2× index product is modeled. |
+| NIFTY 50 monthly 12–1 momentum, top 15, 100% exposure; training-selected 2021–2023 | 23.88% training only; ₹18.63L | NIFTY 50 TRI 16.95% | -21.72% / -24.64% | 2024 11.98%; 2025–Oct 2026 -4.94% vs -1.50%; full sample 11.90% vs 9.66%. Restricted-universe diagnostic reached 26.74% training and -9.26% in 2025+. |
+| Quarterly NIFTY/Gold 63-session inverse-vol rule, 100% active exposure; 2020–2026 | 20.72%; ₹35.42L | NIFTY 50 TRI 10.79% | -25.10% / -29.31% | 2014–2026 CAGR 10.40%, below NIFTY 11.83%; frozen training-selected future exposure returned 13.60%. |
+| MID150BEES 100% buy-and-hold; 2021–2026 | 18.23%; ₹26.45L | Midcap 150 TRI 18.64%; NIFTY 50 TRI 9.87% | -21.23% / -37.65% | Beats broad NIFTY but trails its direct Midcap benchmark; from ETF inception in 2019 it returned 17.77% vs Midcap TRI 18.15%. |
+| MID150BEES 200-day moving-average rule; 100% cap; 2021–2026 | 17.20%; ₹25.14L | Midcap 150 TRI 18.64%; NIFTY 50 TRI 9.87% | -12.18% / -23.04% | Reduces close drawdown, gives up return, and still trails its direct benchmark. |
 
-The first candidate's full 2020–2026 result grew ₹10 lakh to ₹35.42 lakh after modeled charges: ₹15,826 fees and ₹520,536 estimated slippage at 50 bps per side. Its 2014–2019 training return was -0.51%; its 2020–2022 validation return was 16.91%; and the already-inspected 2023+ return was 23.06%. The 50% solo exposure selected on training data produced 13.60% over 2020–2026. Do not treat the 100% headline as a locked out-of-sample result.
+The NIFTY/Gold candidate's full 2020–2026 result grew ₹10 lakh to ₹35.42 lakh after modeled charges: ₹15,826 fees and ₹520,536 estimated slippage at 50 bps per side. Its 2014–2019 training return was -0.51%; its 2020–2022 validation return was 16.91%; and the already-inspected 2023+ return was 23.06%. The 50% solo exposure selected on training data produced 13.60% over 2020–2026. Do not treat the 100% headline as a locked out-of-sample result.
+
+## 2026-10-31 leverage and stock-momentum additions
+
+The Smallcap leverage experiment derives daily returns as twice the Smallcap 250 TRI simple return less financing. NSE's Nifty 1D Rate overnight funding index is used where adjacent observations exist; the remaining 182 daily intervals use the latest previously issued RBI 91-day T-bill auction yield, prorated by actual calendar gap / 360. An identical NIFTY 50 calculation was calibrated to the official live NSE Nifty50 TR 2x Leverage Index from 1 April 2016 through 23 October 2026: 2,617 matched sessions, 0.58% endpoint difference, 0.58% maximum path difference, and 0.033% annualized daily tracking error. This supports the funding arithmetic for the NIFTY proxy, but cannot verify a Smallcap product's tracking or funding.
+
+| Period | Smallcap TRI | Synthetic 2× with overnight proxy | Synthetic 2× with 18.25% MTF funding | 2× MTF close MDD |
+|---|---:|---:|---:|---:|
+| 2016–Oct 2026 live index history | 15.10% | 21.03% | 6.36% | -90.28% |
+| 2020–Oct 2026 | 20.36% | 32.06% | 15.71% | -70.50% |
+| 2023–Oct 2026 | 15.95% | 22.58% | 8.42% | -57.44% |
+| 2025–Oct 2026 | -4.24% | -16.21% | -26.34% | -51.72% |
+
+Upstox states Standard MTF charges of ₹20/day per ₹40,000 borrowed, equivalent to 18.25% simple annualized, and allows partial or full square-off after margin/MTM shortfalls. The sensitivity applies today's rate uniformly to all dates, assumes daily resetting to 2× with debt equal to account equity, and omits brokerage, pledging costs, taxes, changing margins, and liquidation. Its high drawdown would likely prevent a real account from following the full modeled path. See the [official MTF fees and conditions](https://upstox.com/help-center/t-251427/), the [reproduction script](../backtest_smallcap250_2x_sensitivity.py), [segment output](../../outputs/smallcap250_2x_leverage_proxy.csv), and [method and sources](../../outputs/smallcap250_2x_leverage_proxy_method.md).
+
+The stock screen fixed 36 cases before reviewing results: two universe policies, three momentum definitions, top 5/10/15 holdings, and full/stress-reduced exposure. All cases use monthly rebalancing, positive momentum, equal weights, a two-rank exit buffer, next-session-open integer-share trades, 10/50 bps adverse slippage, current modeled fees, and 2021–2023 for selection. Only all-saved-universe cases were eligible for training selection. The training-selected 12–1 top-15 rule returned 23.88% train CAGR, 11.98% in 2024, -4.94% in the previously inspected 2025–Oct 2026 slice, and 11.90% full sample. Same-period NIFTY 50 TRI CAGRs were 16.95%, 10.04%, -1.50%, and 9.66%. This selected rule had -26.63% close DD and -29.66% conservative OHLC envelope over the full sample. A separate action-restricted 12–1 top-5 diagnostic returned 26.74% in training, 19.20% in 2024, -9.26% in 2025+, and 12.78% full period; it was not selected by the stated training-universe rule. See the [frontier CSV](../../outputs/stock_momentum_reassessment_frontier.csv), [holding-level picks](../../outputs/stock_momentum_reassessment_picks.csv), and [method note](../../outputs/stock_momentum_reassessment_method.md).
 
 ## MID150BEES execution-aware screen
 
@@ -65,4 +82,3 @@ The next high-value experiment is point-in-time cross-sectional momentum and qua
 `capture_midcap_etf_benchmark.py`, `backtest_midcap_etf_cagr_screen.py`, and `capture_live_factor_tri_comparison.py` each contain assertions for session ranges, positive index marks, benchmark alignment, and close-NAV order replay. The ETF order ledgers reconcile to the shared simulator within three paise; the 10 displayed cases are saved under `work/backtests/midcap_etf_cagr_screen/`.
 
 Every date shown has been inspected in this research; no later period is an untouched lockbox. The OHLC bound assumes each day's highs occur before its lows, and is a conservative envelope rather than a synchronized market path. Current fee schedules are applied uniformly to historical cash ETF backtests; taxes, live spread, impact, fills, ETF distributions, and future liquidation risk can change realized results. No strategy can promise a 20% CAGR or a future drawdown ceiling.
-
