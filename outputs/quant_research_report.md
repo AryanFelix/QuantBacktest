@@ -1,28 +1,26 @@
-# Indian Market Quant Research — Iteration 1
+# Indian Market Quant Research — Iteration 2
 
-- **As of:** 2026-10-30
+- **As of:** 2026-10-31
 - **Backtest history through:** 2026-10-23
 - **Forward-paper warm-up data through:** 2026-10-29
 - **Research capital:** ₹10,00,000
-- **Requested maximum peak-to-trough drawdown:** 20% (₹2,00,000 from starting capital; measured from a later peak, rupee loss can be larger)
+- **Return objective:** at least 20% CAGR; user permits larger drawdown. Drawdown figures below are measured, not capped.
 
-## Top 5 cross-family candidates — CAGR reanalysis, 2026-10-30
+## Top 5 strategies — 20% CAGR reassessment, 2026-10-31
 
-**Highest observed CAGR that passes the tested historical OHLC screen:** the 95%-cap equal-weight sector ETF basket at **12.79%**. Its conservative OHLC drawdown is **-19.69%**, leaving just 0.31 percentage points under the requested limit. The more balanced growth candidate is the 25% NIFTY trend / 50% sector basket / 25% Gold trend mix: **11.92% CAGR** with a **-14.72%** OHLC bound.
+The leading candidate above 20% is the quarterly NIFTY/Gold inverse-volatility rule at 100% active exposure. Its 20.72% result is specific to 2020–2026; it returned 10.40% from 2014–2026, below the same-period NIFTY 50 TRI at 11.83%. A training-only exposure choice produced 13.60% in 2020–2026. The Smallcap 250 TRI reached 20.36% from 2020 but had a -43.48% close drawdown; the HDFC ETF's live price series starts in 2023 and its costed CAGR is 16.39%. We have not validated a durable, investable 20% strategy.
 
-The highest headline result, 14.35% CAGR for the quarterly 30/70 NIFTY/Gold active mix at 100% exposure, is excluded: its full-period OHLC bound is **-25.34%**. The 50/50 mix at 100% exposure reaches **-25.66%**. Close-only results hid those breaches.
+The table ranks the highest relevant observed CAGRs; sample windows are shown because the candidates have different histories. Backtests use ₹10 lakh, 50 bps adverse slippage per side, modeled fees, and zero cash yield. ETF strategy benchmarks use exact matched sessions; the Tata fund is actual reported NAV performance.
 
-Each row starts with ₹10 lakh and uses 50 bps adverse slippage per side plus the shared modeled fees, with zero cash yield. CAGR windows differ because source histories differ; all tested dates have been inspected, so ranks are descriptive rather than untouched out-of-sample results.
+| Rank | Strategy and window | Net CAGR; ₹10L ending value | Same-window benchmark CAGR | Close MDD / OHLC bound | Read |
+|---|---|---:|---:|---:|---|
+| **1** | Quarterly NIFTY/Gold trend; 63-session inverse-vol split, 100% active exposure; 2020–2026 | **20.72%**; ₹35.42L | NIFTY 50 TRI **10.79%** (+9.93 pp) | **-25.10% / -29.31%** | Clears 20% only in this selected window. 2014–2026: 10.40% vs NIFTY 11.83%; frozen 50%-exposure choice returned 13.60% in 2020–2026. 2023–2026 showed 23.06%, but it is not an untouched holdout. |
+| **2** | MID150BEES 100% buy-and-hold; 2021–2026 | **18.23%**; ₹26.45L | Midcap 150 TRI **18.64%** (-0.41 pp); NIFTY 50 TRI **9.87%** (+8.36 pp) | **-21.23% / -37.65%** | Beats NIFTY, slightly trails its own index. Since ETF history began in 2019: 17.77% vs Midcap 150 TRI 18.15%. |
+| **3** | MID150BEES SMA200 long/flat, 100% cap; 2021–2026 | **17.20%**; ₹25.14L | Midcap 150 TRI **18.64%** (-1.44 pp); NIFTY 50 TRI **9.87%** (+7.33 pp) | **-12.18% / -23.04%** | Lower close drawdown than buy-and-hold; still trails its own benchmark and exceeds a 20% intraday OHLC envelope. |
+| **4** | HDFCSML250 100% buy-and-hold; 2023–2026, 50 bps/side modeled slippage | **16.39%**; ₹17.45L | Smallcap 250 TRI **18.10%** (-1.72 pp); NIFTY 50 TRI **7.95%** (+8.44 pp) | **-25.90% / -28.82%** | Upstox price history starts 2023; price-only history may omit distributions. The Smallcap 250's 20.36% 2020+ TRI predates this ETF sample. |
+| **5** | Tata Nifty Midcap 150 Momentum 50 Direct Growth actual NAV; inception–Sep 2026 | **15.82%**; ₹17.86L equivalent | Momentum 50 TRI **16.97%** (-1.15 pp); NIFTY 50 TRI **7.85%** (+7.97 pp) | Not published in the checked source | Live fund NAV includes fund expenses; the scheme reports a 0.38% expense ratio and Very High risk. |
 
-| Rank | Strategy at a glance | Net return / CAGR; ending value | Historical OHLC drawdown | Latest tested segment |
-|---|---|---:|---:|---:|
-| **1** | Monthly equal-weight BANK, IT, Auto, Pharma and PSU Bank ETFs; 95% exposure | **+76.68% / 12.79%** (Jan 2022–Oct 2026); ₹17.67L | **-19.69%** (0.31 pp headroom) | 2025–Oct 2026: +3.50% |
-| **2** | Monthly top-10 stock 12–1 momentum; stock and NIFTY 200DMA gates; 95% cap; restored action-source names | **+95.08% / 12.39%** (Feb 2021–Oct 2026); ₹19.51L | **-19.66%** (0.34 pp headroom) | 2025–Oct 2026: +1.84% |
-| **3** | 25% NIFTY D55/20 + 50% equal-weight sector ETFs + 25% Gold SMA200; 100% cap | **+72.92% / 11.92%** (Jan 2022–Oct 2026); ₹17.29L | **-14.72%** (5.28 pp headroom) | 2025–Oct 2026: +17.05% |
-| **4** | 50/50 initial-capital blend: stock momentum plus quarterly NIFTY/Gold mix | **+76.59% / 10.45%** (Feb 2021–Oct 2026); ₹17.66L | **-13.56%** (6.44 pp headroom) | 2025–Oct 2026: +12.47% |
-| **5** | Quarterly 50/50 active NIFTY/Gold mix; 70% gross cap | **+93.31% / 5.85%** (Jan 2015–Oct 2026); ₹19.33L | **-19.06%** (0.94 pp headroom) | No separate holdout |
-
-The recent-segment returns are not directly comparable: sector slices start fresh accounts, while the stock and blended-stock slices preserve a continuous account. Rows 1 and 2 lead by CAGR but sit almost on the 20% line and were nearly flat in their latest tested segment. Row 3 currently offers the stronger tested return with more drawdown room; it has only five years of sector ETF history and incomplete distribution coverage. Row 4 has more risk headroom and a longer history, but depends on provisional stock-universe and ETF total-return inputs. None is a proven winner or a promise that future drawdown stays below 20%. The [CAGR reanalysis note](../work/research/cagr_reassessment_2026-10-30.md) explains the revised ranking, risk replays, and next experiments.
+**Index answer:** several recent candidates beat NIFTY 50 TRI, and the high-exposure NIFTY/Gold rule crosses 20% in recent windows. Smallcap 250 TRI also crossed 20% from 2020, with materially higher drawdown, but the actual ETF sample starts in 2023 and returns less. No candidate has demonstrated a robust, full-history, after-cost 20% CAGR. The [dated reassessment](../work/research/cagr_reassessment_2026-10-31.md) records the calculations, exact sources, and limits.
 
 ## Data integrity correction — 2026-10-27
 
@@ -472,3 +470,4 @@ The independent source review confirms that Upstox’s candle contract does not 
 - **2026-10-30 — quarterly static NIFTY/Gold cap, mix, and cost frontier:** expanded from 80 equal-sleeve replays / 120 bootstrap summaries to 176 replays / 408 summaries, adding ten sleeve ratios at 55% and targeted 30/70 and 40/60 mixes at 60%. At 200 bps/side, 55% cap with a 40/60 risky sleeve (22% NIFTY, 33% Gold) returned +115.29% (+6.84% CAGR) over 2015–2026, -15.33% OHLC, and +40.66% in the already-inspected 2023+ pseudo-holdout. The 10-year 126-session close-return bootstrap estimated 0.56% breaches (±0.11 pp MCSE) and -16.16% p05; breach plus 1.96 MCSE is 0.78%, versus 1.19% for the higher-return 30/70 mix. Targeted 60% mixes exceed the 1% researcher-selected screen. This is post-hoc conditional return resampling, not independent validation or a hard drawdown cap. Gold distributions are incomplete; cash yield is zero. See [method, risk tables, and reproductions](quarterly_static_mix_cost_method.md), [176 replay rows](quarterly_static_mix_cost_sensitivity.csv), and [408 bootstrap summaries](quarterly_static_mix_cost_bootstrap.csv).
 - **2026-10-30 — cash-yield data-source preflight:** reviewed RBI DBIE report 307 for 91-day T-bill auctions. The available flattened report-307 API export did not reconcile to the official RBI Table 213 on the 30-Aug-2023 row (export fields were ambiguous around cutoff price/yield; official table reports 98.33 and 6.8225%). No cash return was imputed; quarterly static-mix results remain zero-yield. See the [source audit and re-entry criteria](../work/research/rbi_cash_yield_proxy_2026-10-30.md).
 - **Research checkpoint:** the first 24-hour synthesis, current risk-return candidates, cross-strategy results, Upstox data status, validation gaps, and next-phase plan are in the [checkpoint report](24_hour_checkpoint_2026-10-30.md).
+

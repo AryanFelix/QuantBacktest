@@ -32,6 +32,12 @@ CASES = (
     ("Post-hoc D40/20 parameter challenger", "work/backtests/etf_parameter_sensitivity/channel_entry_D40_20_SMA200__full_2014_plus__50bps"),
     ("Walk-forward blend; 95% cap, 2020+ holdout at 50 bps", "work/backtests/donchian_gold_clean/holdout_2020_plus_95cap_50bps"),
     ("Walk-forward blend; 95% cap, 2023+ holdout at 50 bps", "work/backtests/donchian_gold_clean/holdout_recent_95cap_50bps"),
+    ("Quarterly inverse-vol; 100% solo, 2020+ flat-start", "work/backtests/single_sleeve_deployment/inverse_vol_quarterly_single_100__full_2020_plus__50bps"),
+    ("Monthly inverse-vol; 100% solo, 2020+ flat-start", "work/backtests/single_sleeve_deployment/inverse_vol_monthly_single_100__full_2020_plus__50bps"),
+    ("Quarterly inverse-vol; 100% solo, 2023+ flat-start", "work/backtests/single_sleeve_deployment/inverse_vol_quarterly_single_100__holdout_2023_plus__50bps"),
+    ("Monthly inverse-vol; 100% solo, 2023+ flat-start", "work/backtests/single_sleeve_deployment/inverse_vol_monthly_single_100__holdout_2023_plus__50bps"),
+    ("Quarterly inverse-vol; 100% solo, continuous 2014+", "work/backtests/single_sleeve_deployment/inverse_vol_quarterly_single_100__full_2014_plus__50bps"),
+    ("Monthly inverse-vol; 100% solo, continuous 2014+", "work/backtests/single_sleeve_deployment/inverse_vol_monthly_single_100__full_2014_plus__50bps"),
 )
 OUTPUT = ROOT / "outputs" / "etf_intraday_drawdown_audit.csv"
 
@@ -231,3 +237,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+

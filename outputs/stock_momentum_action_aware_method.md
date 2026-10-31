@@ -42,3 +42,4 @@ The market gate itself was added after earlier results were inspected. The train
 - Rank diagnostic: `work/audit_stock_action_exclusion_rank.py`; candidate rows: `outputs/stock_action_exclusion_rank_audit.csv`.
 - Portfolio replay: `work/backtest_stock_momentum_action_aware.py`; daily equity, orders, and summaries: `work/backtests/stock_momentum_action_aware/`.
 - Consolidated 12-row comparison: `outputs/stock_momentum_action_aware_screen.csv`.
+
