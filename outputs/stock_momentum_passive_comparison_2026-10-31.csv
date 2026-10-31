@@ -1,0 +1,2 @@
+benchmark,period_start,period_end,starting_balance_inr,ending_balance_inr,calendar_cagr_pct,close_mdd_pct,fees_inr,slippage_cost_inr,orders,independent_replay_max_error_inr,slippage_bps_per_side
+"NIFTYBEES buy-and-hold, 100% unlevered; price-only ETF series",2021-02-01,2026-10-23,1000000,1697240.9932252085,9.68573559886292,-16.107603856103914,338.631574791866,13503.415199999843,2,0.0,50

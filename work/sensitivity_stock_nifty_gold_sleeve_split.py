@@ -56,13 +56,12 @@ def period_metrics(dates: pd.DatetimeIndex, close: np.ndarray, high: np.ndarray,
             bound_peak_date = dates[i].date().isoformat()
         ohlc_dd = min(ohlc_dd, float(low[i]) / ohlc_peak - 1)
     end_nav = float(close[last])
-    years = max((dates[last] - dates[first]).days / 365.25, 1 / 252)
     total_return = end_nav / start_nav - 1
     return {
         "period_start": dates[first].date().isoformat(), "period_end": dates[last].date().isoformat(),
         "starting_balance_inr": start_nav, "ending_balance_inr": end_nav,
         "total_return_pct": total_return * 100,
-        "cagr_pct": ((1 + total_return) ** (1 / years) - 1) * 100 if total_return > -1 else -100.0,
+        "cagr_pct": stock.q._calendar_cagr_pct(start_nav, end_nav, dates[first], dates[last]),
         "close_max_drawdown_pct": close_dd * 100,
         "ohlc_drawdown_bound_pct": ohlc_dd * 100,
         "bound_peak_date": bound_peak_date,

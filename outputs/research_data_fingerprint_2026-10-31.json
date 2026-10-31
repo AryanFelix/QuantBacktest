@@ -1,0 +1,513 @@
+{
+  "as_of": "2026-10-31",
+  "stock_history_files": 70,
+  "input_files": 101,
+  "combined_sha256": "180972b026b3f2ebb87302bfa3f7dc30e87c044cf3f7b0bc4c2f33e2df7aca68",
+  "files": [
+    {
+      "path": "outputs/data_manifest.csv",
+      "sha256": "d8ce488012452319dbe68860fbcce39ab132897b09401be5459b40bc87128ba0",
+      "bytes": 187925
+    },
+    {
+      "path": "outputs/stock_dividend_share_unit_alignment.csv",
+      "sha256": "6f1bc27785cc00d51605535a18e8fe96a91ac1f6f5863533d81b73ed4bacfe3c",
+      "bytes": 149897
+    },
+    {
+      "path": "work/data/etf_daily/GOLDBEES-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "a72467f15a4c02e4432fa40d238779d6cb5eea44852ae84b2f35c9a656fea61b",
+      "bytes": 172937
+    },
+    {
+      "path": "work/data/etf_daily/MID150BEES-days-1-2019-02-04-2026-10-30.csv",
+      "sha256": "1f9578c1dcf331edea7b2ba5a2924d4246ac6b1f159b8e2cbb0706af740167e7",
+      "bytes": 117841
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KB14I2-days-1-2014-01-01-2026-09-30.csv",
+      "sha256": "f2cdc1e770f4f8c78e82f9185e20ecaa077138b6d1dfc28a94b5a72ecb0dc82e",
+      "bytes": 192893
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KB14I2-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "a0858f0b44512e684e57206987911d530a14cd66a1e1aa6c41261b3c2099317b",
+      "bytes": 193852
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KB15I9-days-1-2014-01-01-2026-09-30.csv",
+      "sha256": "32fb3c9cdf18df45b3465fa40458c52bc572111a7c24a1ea6696732c47b0fc16",
+      "bytes": 194187
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KB15I9-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "884725f9f0dd35bcfd67e8db069cb3afb3c651a56a6611835891c79efce2f3b4",
+      "bytes": 195131
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KB15V2-days-1-2014-01-01-2026-09-30.csv",
+      "sha256": "a169ae419cc43815e4469a935c21c3ab7ca8934dab63f5cccb9577e6177aae1f",
+      "bytes": 93362
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KB15V2-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "9d645283c8ef56caf4d7d0da85db01ca96676ec13846ad720dd7a72615c0a61a",
+      "bytes": 94274
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KB16I7-days-1-2014-01-01-2026-09-30.csv",
+      "sha256": "eda20f6a5fbfc8c20d0cd569bf756618e8127a7ceca937ae2b25662e0af2c3a9",
+      "bytes": 167978
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KB16I7-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "cc2a0cad18629c20b0d2db86af5b129fc673bb5ce02fce02eae2a29bb93e600a",
+      "bytes": 168877
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KC1089-days-1-2014-01-01-2026-09-30.csv",
+      "sha256": "5796710edb1a41c9990bab4c4bdfdfe7cd9eed2a90bb902c8d2af9950556eb99",
+      "bytes": 77996
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KC1089-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "7415e71f41434f34897ca12167ff7ff96816e31e0040dd38b8530ba388cd492f",
+      "bytes": 78896
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KC1337-days-1-2014-01-01-2026-09-30.csv",
+      "sha256": "df920857b6b9f741635999b683339f51c6017a5499d13a6bc64bea2238404336",
+      "bytes": 72718
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF204KC1337-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "a37dc18144144a4099d3dedc60064eb94e1846d3c569507bf7d8b50a3dc251f9",
+      "bytes": 73661
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF732E01037-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "ec7ab4727ab89d1d24bd088c8ce980e48db6f834664ca986a0372635c6fb3b2c",
+      "bytes": 191167
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF732E01045-days-1-2014-01-01-2026-09-30.csv",
+      "sha256": "2df9cbf514e6d8b82b89b22eb67f8b0320183824a2fa624b163391d74dac552c",
+      "bytes": 178876
+    },
+    {
+      "path": "work/data/etf_daily/NSE_EQ_INF732E01045-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "61cef470d22f8d4fde8cd7e2603f7b52eff9d8bfbcd06d31936f62a8e49844ec",
+      "bytes": 179809
+    },
+    {
+      "path": "work/data/etf_daily/smallcap_candidates/NSE_EQ_INF109K1A476-days-1-2019-01-01-2026-10-23.csv",
+      "sha256": "49f6ea6424ff5382b767b385ba662eff2b4f077c22fcf1ab6285781ddcb651d2",
+      "bytes": 4965
+    },
+    {
+      "path": "work/data/etf_daily/smallcap_candidates/NSE_EQ_INF179KC1FB2-days-1-2019-01-01-2026-10-23.csv",
+      "sha256": "a76457e677958d2a9dee57d2379bc3b3640ad5a52ee1f12a50372f8185c85062",
+      "bytes": 57068
+    },
+    {
+      "path": "work/data/etf_daily/smallcap_candidates/NSE_EQ_INF200KB1AY9-days-1-2019-01-01-2026-10-23.csv",
+      "sha256": "b7d9a6269f7613cbaa31ef722b92713d0f16450d37c7bc889ca1c5b7af3e6896",
+      "bytes": 6184
+    },
+    {
+      "path": "work/data/etf_daily/smallcap_candidates/NSE_EQ_INF247L01CH6-days-1-2019-01-01-2026-10-23.csv",
+      "sha256": "5eee5a6a32a798956cdc0eeac7b703db4f3d6d1f259ef1846fb35cf3eb5f9f67",
+      "bytes": 38380
+    },
+    {
+      "path": "work/data/etf_daily/smallcap_candidates/NSE_EQ_INF666M01MO0-days-1-2019-01-01-2026-10-23.csv",
+      "sha256": "da928692c7e33d1a943f79ca2defd7869305a8a0904ba3b441f28f68219b1ec7",
+      "bytes": 13843
+    },
+    {
+      "path": "work/data/etf_daily/smallcap_candidates/NSE_EQ_INF769K01PQ4-days-1-2019-01-01-2026-10-23.csv",
+      "sha256": "3a0b87233803edaf71c36af3a9e36966454c3c803416f7c23f86307329208b86",
+      "bytes": 13966
+    },
+    {
+      "path": "work/data/index_daily/NIFTY50TR-days-1-2014-01-01-2026-10-23.csv",
+      "sha256": "291f01b5ac2fb25f773116cd427db5dc5a3d3f8fd6b7396276b2cdcce3777d5a",
+      "bytes": 94017
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE002A01018-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "7ba3b93a33a2b5184fd48943c8abef21f3f121b56f204b29c20da3df297fec87",
+      "bytes": 111371
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE003A01024-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "8903f2460b712b78bb746b8f19d3ecdaa869eb90ab9347a41d5ddfeffcc4ed9f",
+      "bytes": 110268
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE009A01021-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "2c1ec55af7f3ec35dfb0f39aaf39a908d7a4a3f0547fd7ffd3b71eb6f4918bc8",
+      "bytes": 111590
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE018A01030-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "d636998d7894081a6a0b99898c8b3eee3c3be522a6bd42c044eb7055b1935cce",
+      "bytes": 111131
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE019A01038-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "5e0dc73370453f007f0cf2a0c0e26429ab7beca3620f89ef81349dfc957e2f89",
+      "bytes": 106954
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE021A01026-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "4d810a7c1595ba4c600d9eee81bedb5f94cb7777f90f6b8924e1412f2dd95da6",
+      "bytes": 111088
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE027H01010-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "194ced501e2fc173a4d7ffc45cd7e14782fc820ccdde7cce41d937c69fb02b83",
+      "bytes": 96643
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE029A01011-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "4c1f3c42f912b22ea635a52c343e6cd0b3a43b53f9c23681835d69b4df8edd08",
+      "bytes": 106181
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE030A01027-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "f0729d30730015e32d89f5424e2577afebf3ba46911f39cc0f6d4f9503e95fcb",
+      "bytes": 111531
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE038A01020-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "8808b06a24c60e4e683e612fdd7b2ab5a881e5f476c4feebcc242e62120c8773",
+      "bytes": 106538
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE040A01034-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "058ff681a0581eb9516e44e1b26580a50914f2ce2486f704eb0908a5a3184801",
+      "bytes": 105282
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE044A01036-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "0c2c90244635d1eda6d04b6460bfc93f14492943487b4c3260aec53d8d9d38fd",
+      "bytes": 108871
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE047A01021-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "420a10c1907c0ec20dae8b1fb7b4260335054a73855666971f3c4243b06cea0c",
+      "bytes": 110401
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE059A01026-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "24f92f7b275552901eca399302db4c45821c077dccde678a7b31c6379f958646",
+      "bytes": 108887
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE062A01020-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "be588e25733385f768f089c0ff962e56eaacbc1863d27bd85c60c35b7e79401d",
+      "bytes": 107494
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE066A01021-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "87ba39fb4ec4877804f3b8326af51b9d586c546aa79554584cf6b140808baeac",
+      "bytes": 110294
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE070A01015-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "f149f7b3a98e961a9f65c3e4e379e1679b102e2f90d299d160af0fefaa27555c",
+      "bytes": 115174
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE075A01022-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "c8c24d96503d3e433e4acc8ef8c64f25b0d152205f5bcb24df935cb9ad907821",
+      "bytes": 106465
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE081A01020-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "1e02fcfc32fd575026a28ec72296cc9814d8210e1795f854884feb5de9b2a7e6",
+      "bytes": 107186
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE089A01031-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "018ff70bf01d612ab1e07f152a8ea013041ae1c66594410e20f0e49e6630e73e",
+      "bytes": 108569
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE090A01021-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "3c6ad334f23ee8a0c57f663feaf41e3b169bd0876985cc330e07384e6b443ca5",
+      "bytes": 109408
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE095A01012-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "5b5c0855a4b85f545c00f68e113001c2fb59c88eb1d06f3fb1d754c0259d3bf2",
+      "bytes": 109139
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE101A01026-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "48c7002bf17cab56943110c38cc1335caad5f2087840068445635df162e2f421",
+      "bytes": 109518
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE118H01025-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "45185b4b7c1e4444f9093a992e9749c277e31c1ad2ac54174c046fda398e57ea",
+      "bytes": 104081
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE121J01017-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "eac4d7ecab5013d107a225f253ee4a8e0090215b73feb1d639a46fcfa9a43428",
+      "bytes": 106225
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE123W01016-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "a9643dad941a7805f4ca9293910c55b40e4ef4b0930b28828dc29f5d0bf4d10a",
+      "bytes": 109790
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE129A01019-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "c543c168915378597c7d1acc0fd0d7849ad26f549869d6165faab194c60f1218",
+      "bytes": 105521
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE154A01025-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "9d76c0cf987682e42bde9d5718f66bbb438675ad1af9222d88b9351de96aa008",
+      "bytes": 107152
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE155A01022-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "397e67954dc72163fb0952d946c61316c753a136268b011d942b4aa01fadb605",
+      "bytes": 107058
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE158A01026-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "84b3939203b0005b2b40fef810433edf74f97e7890a3948dcb607c332ca80f72",
+      "bytes": 110549
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE192A01025-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "4a45ae5f2dfbb7048f181d70722790ea1e905c8126dec5346740c6ea37561333",
+      "bytes": 107212
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE1TAE01010-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "60ef5e8de140ba8b968d80cf090ed842010d5f7e4f6725a706ba93d9f7c963ce",
+      "bytes": 14818
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE205A01025-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "e74006dea914c1a60ceb795bc2b752ed69c0e246dbdf3ea6eaa39aaa9ebc5430",
+      "bytes": 106291
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE213A01029-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "f179b8775f868bce43f2d6ad4dc03ea9efbd5999da891a9249b993bffe92aabe",
+      "bytes": 107257
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE214T01019-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "dd3e1331de46a997f2351b5c4e30df98aafe04d0d3cd9b8e1999ad5d494dc2c4",
+      "bytes": 110011
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE216A01030-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "11d75dcd9725d0b139abce665473054b35f6d0d878a83e21590341c0ab39e881",
+      "bytes": 110153
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE237A01036-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "8985e54f666d2f23dd5bd4211040c26c92b7257dbb1d4bb1fd5531e633059178",
+      "bytes": 104990
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE238A01034-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "64238f64cda4a2b369820702b8cfb2ec8c9b43d5b0314bc393aea0d1b5f5152f",
+      "bytes": 108790
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE239A01024-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "edc8cee1d92dff82c84382f3ceb4ec5b4166c4cb74e389981e2343fee7ddcbb5",
+      "bytes": 106462
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE242A01010-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "ffcf9b78e5c4d9deaffbdd1e68eac8953ca2cdb0d108b39495bd45cc22dae315",
+      "bytes": 104807
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE256A01028-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "28024e485894da8d0dd7a05cfc63c90b5eb3fa6164ca780d2783018715cdd078",
+      "bytes": 106678
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE263A01024-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "c8905ba5debecae2c96bce71f7c4ab3a3b0e878f40e32639fc70c9df7a2f771b",
+      "bytes": 104861
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE280A01028-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "c17492154b76a85ebc96f8ac39a09f1de1087bdb9f4617cba4e46260b515551c",
+      "bytes": 110768
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE296A01032-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "979e4d57e39d09f9fa9b3e2ca6d71cd8f5c0d4b4f0d0f0e44e8636797c39e9b3",
+      "bytes": 105011
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE2KCE01013-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "45e0bacbc3d30150060df6fdb5571fb5b112bf03c905126525f5ae10464a6b27",
+      "bytes": 10312
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE361B01024-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "48824870612d413717fac1fea4e04eea120c42fc328cd1cc46096386ad137ac0",
+      "bytes": 110315
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE379A01028-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "3603a033bb2fdd3081d5e6d9ac8233e3030ea5bd0c8a31bb90b36687fb1be629",
+      "bytes": 27305
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE397D01024-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "f03cd1a6df9b15d9af2e7c2977b16cdf222382dae1c346f9bc4aac1ba2c2a7a4",
+      "bytes": 108803
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE423A01024-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "0e9f13d76aed70d0729d2a302f4af8888698e908ab7e9762d60a91f49cc5b587",
+      "bytes": 110358
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE437A01024-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "65fb861db39c47e4c47f8428bd7ebb2f86cc19c6849cf18ecac0268b27d32b0c",
+      "bytes": 110434
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE467B01029-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "81c4f8be7ab2fbcc581b9ceee2d1c2fe9ac7d0f6b99b12cba27b51572f770fb6",
+      "bytes": 111712
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE481G01011-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "6e5bcabfa314bdf7c866e2008e28e0492d98c56dbbcca5768b8c92c4c109d364",
+      "bytes": 112570
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE522F01014-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "30ce33ac87a2975b55526bb1ead0ed2e30ee74671d6365cb70f723300ae5a57c",
+      "bytes": 107260
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE528G01035-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "5bcdce1ca2b4121b82da318b1af0aaeefdfe86d8a1170634e0661c961a0adc2b",
+      "bytes": 103104
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE585B01010-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "29719a574aa68c7bd0637285486d40a071bc9a01924bd3b4702f50e98485b1f4",
+      "bytes": 113302
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE628A01036-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "1ec6eaca063f8bd0b9eacbc0a57d3c58d5e213a0be0a3e6125216d4ea54de123",
+      "bytes": 105832
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE646L01027-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "bbaba89e5c6e2881d223c9ebc31d02487cbb330aa95d1fa2b2d7881a9262a355",
+      "bytes": 110601
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE669C01036-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "e710cac6fb6d64bee85f5493e394e89c1de16d75f213ff00a8c258b52e72925a",
+      "bytes": 110454
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE721A01047-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "4335f7968de043662782c73a1e43298722b70aaf10c331965830bb1a491b452e",
+      "bytes": 106341
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE733E01010-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "6238b6201ef30ca78f8de4578dabcebb5b966173a24937186518a740796a28e8",
+      "bytes": 106416
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE742F01042-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "f52225753d16705a10d5bc0b3757f10849ac64a4b1f0cbbc0af42f4c7b726a75",
+      "bytes": 108064
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE752E01010-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "11e44ac8dc82c8f3b3e7c227e7592f15a112f0679c4e7344ff8fd327a85bcde4",
+      "bytes": 106900
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE758E01017-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "42011ea83b067157bb84964a6c4a9bbce4f30e1eb0ea8ae6eb85c11615fa2e85",
+      "bytes": 50066
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE758T01015-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "12fc4cad5c1874d4e5903868e5dd727805b2ffb361b98136b88fb477bdc1b295",
+      "bytes": 81534
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE795G01014-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "683e98ac20c2114015ab7b2e2a2f491f973e04b34d50b58807b0fe43291da3a6",
+      "bytes": 105786
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE849A01020-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "900941233fb2553a916cbad7a473cdd0c7fca412c85a17f46f19b3e97d5e419d",
+      "bytes": 105791
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE860A01027-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "614a8d7c5877dca2a9d45c45f35701989f2a3fb1e3a23803b0784aef75f539cc",
+      "bytes": 110061
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE917I01010-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "212cf1e1503277d7912ee05edf934b8e98452573d5789edf280d2d44aace9afc",
+      "bytes": 110845
+    },
+    {
+      "path": "work/data/stocks/NSE_EQ_INE918I01026-days-1-2020-01-01-2026-10-23.csv",
+      "sha256": "78f6c962413d4c468b4356f1d1a16c885c9b58d3e2936e103a158d298cc3f932",
+      "bytes": 110086
+    },
+    {
+      "path": "work/data/stocks/NSE_HDFC_EQ-days-1-2020-01-01-2023-07-12.csv",
+      "sha256": "cc1dbc6a29e9592fa1d553578188c921bfd15584868e16fc55877833a965cc06",
+      "bytes": 58242
+    },
+    {
+      "path": "work/data/universe_sources/current_nifty50_constituents_2026-09-30.csv",
+      "sha256": "f5ba4027d935ae72879d5c24bbebf0e8439ec8ed504ffdf4175fde69206244b3",
+      "bytes": 3344
+    },
+    {
+      "path": "work/data/universe_sources/nifty50_monthly_universe_2020_2026.csv",
+      "sha256": "6dba1938883c8658582b129ff196d51a1df87ab9f445a0ce7be3275224542f70",
+      "bytes": 37152
+    },
+    {
+      "path": "work/data/universe_sources/nse_corporate_actions_2000_2026.json",
+      "sha256": "60e4e9c94fa0f58847ea5fc44d676c4776fff1b947a090a17453bf9267d044f6",
+      "bytes": 1179679
+    },
+    {
+      "path": "work/data/universe_sources/stock_history_coverage.csv",
+      "sha256": "46c08a47d78ae71c5f5c923e93f409d2081a2a115272d0f381756b9f253d37f5",
+      "bytes": 11711
+    },
+    {
+      "path": "work/data/universe_sources/stock_monthly_universe_coverage.csv",
+      "sha256": "88a072c0e3d31c81b4889046168f42cee71822a0d0fdf535c318b300fff22df9",
+      "bytes": 6860
+    }
+  ]
+}

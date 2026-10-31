@@ -1,0 +1,62 @@
+{
+  "as_of": "2026-10-31",
+  "files": [
+    {
+      "path": "work/attribute_stock_momentum_leader.py",
+      "sha256": "e763080a81cbd64869fb7802b5322ab167b1f366168c1448698ba064e1a0188a"
+    },
+    {
+      "path": "work/audit_stock_momentum_ohlc.py",
+      "sha256": "d6cc7b333e19708e903c11cc6e5859de8e9cc537fda49348621de07b92d0b048"
+    },
+    {
+      "path": "work/audit_stored_position_gaps.py",
+      "sha256": "462001eb2240b285e8a960151ab24399cbad882ea73036afccfccbe5a5fadbd9"
+    },
+    {
+      "path": "work/backtest_intraday_gap_fade.py",
+      "sha256": "65a4d2549311ff0348c4ac921e205ba1ddd9790505bb537b8456d5f9db8476c2"
+    },
+    {
+      "path": "work/backtest_monthly_nifty_credit_spread.py",
+      "sha256": "d2a09d26b67332d79e13a6f7f1b9c435b821e3cf78ef8cb0197e731a08ad3e52"
+    },
+    {
+      "path": "work/backtest_passive_mix_drawdown_control.py",
+      "sha256": "ca65a80d99a7b35799eda4f6ab996bc1c7f8c3ff08fa43f089e7f7a480600e57"
+    },
+    {
+      "path": "work/backtest_stock_momentum.py",
+      "sha256": "d9a8d1a38e11b1c967876003556cf84fd93ab96f7e78a438666795b9c1ccd24e"
+    },
+    {
+      "path": "work/backtest_stock_momentum_reassessment.py",
+      "sha256": "41819d39d395b85832f0d6628695e4c2237dc2cd258f6e3d18385ff9dff3553d"
+    },
+    {
+      "path": "work/benchmark_nifty_gold_2020.py",
+      "sha256": "343c5c24a5f57a46644a844dca45ee6606c3a593329c966649a357ba488b3346"
+    },
+    {
+      "path": "work/check_terminal_liquidation.py",
+      "sha256": "953d228e7095406e5595cfc9427deac0ea36e515ba606230c6f0deaac6de396e"
+    },
+    {
+      "path": "work/replay_donchian_gold_blend.py",
+      "sha256": "d11916e7a99c2e5dc085a1d5cf467beb165287e69d5caf2dd563142b6315e387"
+    },
+    {
+      "path": "work/sensitivity_stock_nifty_gold_sleeve_split.py",
+      "sha256": "a25d702f22a545ec52a82127a2d0bd677d452d44efe8bc83b6b1d54e8a80d4ee"
+    },
+    {
+      "path": "work/upstox_quant.py",
+      "sha256": "bc7e10005bc8963236fa66c0c4658cbefa10767a5a8815fd7c7282711e86d12b"
+    },
+    {
+      "path": "work/write_research_data_fingerprint.py",
+      "sha256": "872abf95f3be4cc0c0792d91a7c3678f37f925db009347a931a547e855ee967b"
+    }
+  ],
+  "combined_sha256": "bda1cc218c635071f8580d5c6f0b7c7c0bb56595dcf85a2901fcb60ab5290cb1"
+}

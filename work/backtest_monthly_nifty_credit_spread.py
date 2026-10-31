@@ -355,8 +355,7 @@ def simulate(events: list[dict], sessions: list[date], bps: float, label: str) -
         loss = -trades.loc[trades["net_pnl_inr"] < 0, "net_pnl_inr"] if not trades.empty else pd.Series(dtype=float)
         stats = {"period": label, "starting_balance_inr": CAPITAL, "ending_balance_inr": float(equity.iloc[-1]["nav"]),
                  "total_return_pct": float((equity.iloc[-1]["nav"] / CAPITAL - 1) * 100),
-                 "cagr_pct": float(((equity.iloc[-1]["nav"] / CAPITAL) ** (252 / len(equity)) - 1) * 100)
-                 if equity.iloc[-1]["nav"] > 0 else -100.0,
+                 "cagr_pct": q._calendar_cagr_pct(CAPITAL, float(equity.iloc[-1]["nav"]), equity.index[0], equity.index[-1]),
                  "max_close_drawdown_pct": float(close_dd * 100),
                  "max_ohlc_envelope_drawdown_pct": float(envelope_dd * 100),
                  "within_20pct_close_limit": bool(close_dd >= -DD_LIMIT / 100),

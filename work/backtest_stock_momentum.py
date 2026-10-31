@@ -234,12 +234,21 @@ def simulate(name: str, bars: dict[str, pd.DataFrame], dividends: dict[tuple[str
                        "exposure_pct": invested / nav * 100 if nav > 0 else 0,
                        "holdings": sum(qty > 0 for qty in quantity.values())})
 
-    if quantity:
-        terminal_date = dates[-1]
+    terminal_date = dates[-1]
+    missing_terminal_quotes = [
+        symbol for symbol, qty in quantity.items()
+        if qty > 0 and (symbol not in close.columns or pd.isna(close.at[terminal_date, symbol]))
+    ]
+    if missing_terminal_quotes:
+        raise ValueError(
+            f"terminal liquidation lacks a raw close on {terminal_date.date()} for held positions: "
+            f"{', '.join(sorted(missing_terminal_quotes))}"
+        )
+    if any(quantity.values()):
         for symbol, qty in sorted(quantity.items()):
-            raw = marks.get(symbol, np.nan)
-            if qty <= 0 or pd.isna(raw):
+            if qty <= 0:
                 continue
+            raw = float(close.at[terminal_date, symbol])
             fill = float(raw) * (1 - slip_rate)
             notional = qty * fill
             fee = q._fee_breakdown(notional, "sell", fee_products.get(symbol, "equity_delivery"))
@@ -247,8 +256,7 @@ def simulate(name: str, bars: dict[str, pd.DataFrame], dividends: dict[tuple[str
             turnover += notional
             costs["fees"] += fee["total"]
             costs["slippage"] += qty * abs(fill - float(raw))
-            last_bar_date = bars[symbol].loc[:terminal_date].index[-1] if symbol in bars else terminal_date
-            orders.append({"date": last_bar_date.date().isoformat(), "symbol": symbol, "side": "sell", "quantity": qty,
+            orders.append({"date": terminal_date.date().isoformat(), "symbol": symbol, "side": "sell", "quantity": qty,
                            "raw_price": float(raw), "fill_price": fill, "notional": notional,
                            "terminal_liquidation": True, **fee})
         equity[-1].update({"nav": cash, "cash": cash, "invested": 0.0, "exposure_pct": 0.0, "holdings": 0})
@@ -258,15 +266,14 @@ def simulate(name: str, bars: dict[str, pd.DataFrame], dividends: dict[tuple[str
     rets.iloc[0] = eq["nav"].iloc[0] / CAPITAL - 1
     dd = pd.concat([pd.Series([CAPITAL]), eq["nav"].reset_index(drop=True)], ignore_index=True)
     max_dd = float((dd / dd.cummax() - 1).min() * 100)
-    years = max((eq.index[-1] - start).days / 365.25, 1 / 252)
     total_ret = float(eq["nav"].iloc[-1] / CAPITAL - 1)
     sd = float(rets.std(ddof=1)) if len(rets) > 1 else 0.0
     stats = {
         "simulation_type": "stock_cross_sectional_momentum", "strategy": name,
         "universe": f"Provisional point-in-time NIFTY 50; {len(ACTION_EXCLUSIONS)} unresolved action-source names excluded",
-        "period": f"{start.date()} to {end.date()}", "period_start": start.date().isoformat(), "period_end": eq.index[-1].date().isoformat(),
+        "period": f"{eq.index[0].date()} to {eq.index[-1].date()}", "period_start": eq.index[0].date().isoformat(), "period_end": eq.index[-1].date().isoformat(),
         "starting_balance_inr": CAPITAL, "ending_balance_inr": float(eq["nav"].iloc[-1]),
-        "total_return_pct": total_ret * 100, "cagr_pct": ((1 + total_ret) ** (1 / years) - 1) * 100 if total_ret > -1 else -100,
+        "total_return_pct": total_ret * 100, "cagr_pct": q._calendar_cagr_pct(CAPITAL, float(eq["nav"].iloc[-1]), eq.index[0], eq.index[-1]),
         "max_drawdown_pct": max_dd, "sharpe_zero_rf": float(rets.mean() / sd * math.sqrt(252)) if sd else 0.0,
         "gross_exposure_cap_pct": exposure_cap * 100, "slippage_bps_per_side": slippage_bps,
         "fees_inr": costs["fees"], "slippage_cost_inr": costs["slippage"],
@@ -292,7 +299,7 @@ def period_row(stats: dict, eq: pd.DataFrame, orders: pd.DataFrame, label: str,
     prior_peak = max(float(CAPITAL), float(previous.max())) if not previous.empty else float(CAPITAL)
     path_peaks = np.maximum(prior_peak, segment["nav"].cummax().to_numpy())
     continuous_drawdown = segment["nav"].to_numpy() / path_peaks - 1
-    elapsed_years = max((segment.index[-1] - start).days / 365.25, 1 / 252)
+    baseline_date = previous.index[-1] if not previous.empty else segment.index[0]
     total_return = float(segment["nav"].iloc[-1] / baseline - 1)
     subset = orders.loc[(orders["date"] >= start.date().isoformat()) & (orders["date"] <= segment.index[-1].date().isoformat())] if not orders.empty else orders
     fees = float(subset["total"].sum()) if not subset.empty else 0.0
@@ -302,7 +309,7 @@ def period_row(stats: dict, eq: pd.DataFrame, orders: pd.DataFrame, label: str,
         **stats, "period": label, "period_start": start.date().isoformat(),
         "period_end": segment.index[-1].date().isoformat(), "starting_balance_inr": baseline,
         "ending_balance_inr": float(segment["nav"].iloc[-1]), "total_return_pct": total_return * 100,
-        "cagr_pct": ((1 + total_return) ** (1 / elapsed_years) - 1) * 100 if total_return > -1 else -100.0,
+        "cagr_pct": q._calendar_cagr_pct(baseline, float(segment["nav"].iloc[-1]), baseline_date, segment.index[-1]),
         "max_drawdown_pct": float(continuous_drawdown.min() * 100),
         "period_max_drawdown_pct": float(period_drawdown.min() * 100),
         "sharpe_zero_rf": float(returns.mean() / sd * math.sqrt(252)) if sd else 0.0,

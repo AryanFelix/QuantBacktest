@@ -1,26 +1,31 @@
 # Indian Market Quant Research — Iteration 2
 
 - **As of:** 2026-10-31
-- **Backtest history through:** 2026-10-23
-- **Forward-paper warm-up data through:** 2026-10-29
-- **Research capital:** ₹10,00,000
-- **Return objective:** at least 20% CAGR; user permits larger drawdown. Drawdown figures below are measured, not capped.
+- **Price history through:** 2026-10-23
+- **Reference capital:** ₹10,00,000
+- **Objective:** at least 20% annual CAGR after modeled trading costs, before personal income/capital-gains tax.
+- **Risk mandate:** the former 20% drawdown ceiling is removed. Report measured close drawdown and OHLC envelope; neither is a future loss limit.
+- **Execution:** unlevered cash, integer shares, next-session fills, modeled current charges and stated slippage.
 
-## Top 5 strategies — 20% CAGR reassessment, 2026-10-31
+## Top 5 unlevered cash research leads
 
-Fast read: the highest observed rate is a synthetic 2× Smallcap 250 TRI path (32.06% for 2020–Oct 2026), but it is not an investable backtest. Its close drawdown was -69.83%; applying today's Upstox MTF borrowing rate uniformly to history drops the same-period sensitivity to 15.71% before brokerage, taxes, margin calls, and liquidation. The best training-selected stock rule also falls to 11.90% over its full sample and -4.94% in 2025–Oct 2026. There is still no validated, investable, after-cost 20% strategy.
+**No candidate has demonstrated 20% CAGR across its full predefined evaluation.** The current research lead is monthly NIFTY 50 12–1 momentum, top 15, selected on 2021–2023 training data at 23.88%. It returns 11.90% over 2021–October 2026 after costs, versus 9.66% for NIFTY 50 TRI and 9.69% for a modeled 100% NIFTYBEES buy-and-hold path; the ETF comparison is price-only. The rule loses 4.94% in 2025–October 2026 versus the index’s -1.27%. This lead is not a winner. All history and later windows have already been inspected.
 
-The table puts the strongest observed research leads first and labels each window and evidence type. Cash strategy backtests use ₹10 lakh, 50 bps adverse slippage per side, modeled fees, and zero cash yield. The synthetic leverage proxy has no execution fees; benchmark series are matched to its dates.
+The table ranks current unlevered cash leads by their highest displayed after-cost historical window. Window lengths differ, so the ranks are a research queue, not a comparable forecast. Cash ETF and stock rows use 50 bps adverse slippage per side and current modeled fees; cash yield is zero. Returns are before personal tax. Synthetic leveraged index proxies are excluded from this leaderboard because this cycle’s mandate is unlevered cash.
 
-| Rank | Strategy and window | Observed CAGR; ₹10L value | Same-window benchmark CAGR | Close MDD / OHLC bound | Read |
-|---|---|---:|---:|---:|---|
-| **1** | Synthetic daily 2× Smallcap 250 TRI; low-cost overnight funding; 2020–Oct 2026 | **32.06% modeled**; ₹66.41L | Smallcap 250 TRI **20.36%** (+11.69 pp); NIFTY 50 TRI **10.79%** (+21.26 pp) | **-69.83% / not modeled** | Not an investable product or fee-net result. At today's Upstox Standard MTF rate applied uniformly to history (18.25% simple), sensitivity is **15.71%**, ₹27.01L, with -70.50% close drawdown. Since live index launch in 2016, low-cost proxy is 21.03% with -87.19% drawdown; MTF sensitivity is 6.36%. |
-| **2** | NIFTY 50 monthly 12–1 momentum, top 15, 100% exposure; training selection 2021–2023; 50 bps/side | **23.88% training only**; ₹18.63L | NIFTY 50 TRI **16.95%** (+6.93 pp) | **-21.72% / -24.64%** | This was the highest training-selected row among the 36 fixed stock models. 2024: 11.98%; 2025–Oct 2026: -4.94% vs NIFTY -1.50%; full 2021–Oct 2026: 11.90% vs NIFTY 9.66%. A restricted-universe diagnostic reached 26.74% in training but fell to -9.26% in 2025+. |
-| **3** | Quarterly NIFTY/Gold trend; 63-session inverse-vol split, 100% active exposure; 2020–2026 | **20.72%**; ₹35.42L | NIFTY 50 TRI **10.79%** (+9.93 pp) | **-25.10% / -29.31%** | Clears 20% only in this selected window. 2014–2026: 10.40% vs NIFTY 11.83%; frozen 50%-exposure choice returned 13.60% in 2020–2026. 2023–2026 showed 23.06%, but it is not an untouched holdout. |
-| **4** | MID150BEES 100% buy-and-hold; 2021–2026 | **18.23%**; ₹26.45L | Midcap 150 TRI **18.64%** (-0.41 pp); NIFTY 50 TRI **9.87%** (+8.36 pp) | **-21.23% / -37.65%** | Beats NIFTY, slightly trails its own index. Since ETF history began in 2019: 17.77% vs Midcap 150 TRI 18.15%. |
-| **5** | MID150BEES SMA200 long/flat, 100% cap; 2021–2026 | **17.20%**; ₹25.14L | Midcap 150 TRI **18.64%** (-1.44 pp); NIFTY 50 TRI **9.87%** (+7.33 pp) | **-12.18% / -23.04%** | Lower close drawdown than buy-and-hold; still trails its own benchmark. |
+| Rank | Strategy and best displayed window | After-cost CAGR on ₹10L | Matched benchmark | Close MDD / OHLC envelope | What later/full history says |
+|---:|---|---:|---:|---:|---|
+| **1** | NIFTY 50 monthly 12–1 momentum, top 15; training 2021–2023 | **23.88%**; ₹18.63L | NIFTY 50 TRI 16.95% | -21.72% / -24.64% (training) | Corrected continuous full 2021–Oct 2026: 11.90% vs 9.66% TRI and 9.69% NIFTYBEES passive (price-only); 2024: 11.87% vs 10.01% TRI; 2025+: -4.94% vs -1.27%. Full close/OHLC drawdown -26.63% / -29.66%. Full modeled fees ₹93,443 plus slippage ₹240,296.
+| **2** | Quarterly NIFTY/Gold trend, 100% active exposure; 2020–Oct 2026 | **20.72%**; ₹35.42L | NIFTY 50 TRI 10.79% | -25.10% / -29.31% | 2014–Oct 2026: 10.40% vs 11.83%. Its 2014–2019 training window lost 0.51%; training-selected 50% exposure returned 13.60% since 2020. Retrospective, not an untouched holdout.
+| **3** | MID150BEES buy-and-hold, 100%; 2021–Oct 2026 | **18.23%**; ₹26.45L | Midcap 150 TRI 18.64%; NIFTY 50 TRI 9.87% | -21.23% / -37.65% | Slightly trails its own benchmark; ETF prices may omit cash distributions. Modeled fees ₹384.
+| **4** | MID150BEES SMA200 long/flat, 100% cap; 2021–Oct 2026 | **17.20%**; ₹25.14L | Midcap 150 TRI 18.64%; NIFTY 50 TRI 9.87% | -12.18% / -23.04% | Lower close drawdown, still trails its own index. Modeled fees ₹5,048.
+| **5** | HDFCSML250 buy-and-hold, 100%; 2023–Oct 2026 | **16.39%**; ₹17.45L | Smallcap 250 TRI 18.10%; NIFTY 50 TRI 7.95% | -25.90% / -28.82% | Only 909 ETF sessions; 50 bps/side; fees ₹341 and modeled slippage ₹13,744. Price-only ETF history.
 
-**Index answer:** some candidates beat NIFTY 50 TRI in selected periods, but none has demonstrated robust, full-history, after-cost 20% CAGR. The only current full-live-history 20%+ figure is a synthetic 2× index proxy whose practical MTF-cost sensitivity is below 20% and whose drawdown is extreme. See the [leverage proxy and method](smallcap250_2x_leverage_proxy_method.md), [dated reassessment](../work/research/cagr_reassessment_2026-10-31.md), and [stock-grid output](stock_momentum_reassessment_frontier.csv).
+**Decision:** keep stock momentum as a diagnostic research lead, not a deployable recommendation. Its gross same-share 2025+ result is near the index; modeled turnover and costs remove its small relative edge. NIFTY/Gold remains a historical comparison, not the primary route to 20%. The separate synthetic 2× Smallcap 250 headline is 32.06% since 2020, but the same-period MTF-rate sensitivity is 15.71% before trading costs and its close drawdown is -70.50%; it is not a qualifying strategy.
+
+**Historical labels:** any later section referring to a 20% drawdown cutoff describes an older screen, not the current mandate. Older low-exposure NIFTY/Gold variants remain comparison results and are not promoted as current candidates.
+
+Cycle artifacts: [governor checkpoint](24_hour_checkpoint_2026-10-31.md), [experiment register](experiment_register_2026-10-31.csv), [terminal and held-mark audit](terminal_liquidation_audit_2026-10-31.md), [broad-stock data gate](broad_stock_data_gate_2026-10-31.md), [stock attribution](stock_momentum_attribution_2026-10-31.md), and [next-cycle specification](next_cycle_spec_2026-10-31.md).
 
 ## Data integrity correction — 2026-10-27
 

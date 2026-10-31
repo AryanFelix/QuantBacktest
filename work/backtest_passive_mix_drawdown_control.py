@@ -261,7 +261,7 @@ def simulate(
         "starting_balance_inr": CAPITAL,
         "ending_balance_inr": cash,
         "total_return_pct": (cash / CAPITAL - 1) * 100,
-        "cagr_pct": ((cash / CAPITAL) ** (252 / len(dates)) - 1) * 100,
+        "cagr_pct": q._calendar_cagr_pct(CAPITAL, cash, dates[0], dates[-1]),
         "total_fees_inr": float(order_frame["total"].sum()),
         "total_slippage_inr": total_slippage,
         "order_count": len(order_frame),

@@ -1,50 +1,38 @@
 # Indian Market Quant Research
 
-Research and backtests for Indian index, sector, stock, ETF, derivatives, swing, and intraday strategies using Upstox history plus official NSE/AMFI cross-checks.
+## Current decision — 2026-10-31
 
-## Research status
+No current unlevered cash strategy has demonstrated the target of **20% annual CAGR after modeled trading costs**, before personal tax. The former 20% drawdown ceiling has been removed; actual close drawdown and the separate conservative OHLC envelope are reported. The reference account is ₹10 lakh.
 
-The account reference is ₹10 lakh with a 20% peak-to-trough risk screen. No strategy is established as a reliable winner. The latest report compares strategy families, modeled fees and slippage, chronological holdouts, and drawdown limits: [quant research report](outputs/quant_research_report.md). The [24-hour research checkpoint](outputs/24_hour_checkpoint_2026-10-30.md) summarizes current candidates, data limits, and the next phase.
+The leading research case is monthly NIFTY 50 12–1 momentum, top 15, chosen on 2021–2023 training data. It earned 23.88% in training, then 11.87% in 2024 and -4.94% in 2025–October 2026. Its corrected continuous full-period CAGR is 11.90% versus 9.66% for matched NIFTY 50 TRI. It is not a winner or deployment recommendation. See the [top-five leaderboard and full report](outputs/quant_research_report.md).
 
-The 2026 primary-source [ETF delivery fee audit](work/research/cash_etf_delivery_cost_sources_2026-10-30.md) led to a correction: the shared helper now includes GST on SEBI turnover fees, and the passive-control tables and bootstraps were regenerated. A scan of 2,637 stored order ledgers suggests prior fee totals may be low by at most ₹41.34 per ledger; those include many overlapping parameter scenarios, and not every strategy output has been regenerated. Slippage and spread remain assumed, not measured.
+This cycle corrected terminal liquidation and calendar-time CAGR, replayed the selected stock rule’s order ledger, and reran the highlighted Donchian/Gold case. The broad-stock point-in-time data gate failed: existing coverage is not NIFTY 200/500, so none of the preregistered broad-universe configurations ran. The exact gaps and licensed acquisition route are in the [data-gate report](outputs/broad_stock_data_gate_2026-10-31.md). The synthetic 2× index is a diagnostic only; no leverage was used for this cycle.
 
-The latest quarterly NIFTY/Gold cap, mix, and cost frontier identifies a **55% aggregate cap with a 40/60 NIFTY/Gold risky sleeve** as the highest-return tested mix passing a conservative bootstrap screen, not a proven winner. Its rebalance targets are 22% NIFTYBEES, 33% GOLDBEES, and 45% zero-yield cash. At 200 bps per-side assumed slippage, ₹10 lakh grew to ₹21.53 lakh across 2015–2026 (+115.29%, 6.84% CAGR), with a -15.33% daily OHLC envelope; a 5,000-path 10-year close-return bootstrap at 126-session blocks estimated a 0.56% chance of crossing -20% (±0.11 percentage-point Monte Carlo error) and a -16.16% p05 drawdown. The already-inspected 2023–2026 pseudo-holdout returned +40.66%. All dates were inspected, Gold distribution history is incomplete, cash yield is excluded, and neither result caps future loss. See the [cap, mix, and cost method](outputs/quarterly_static_mix_cost_method.md).
+The API token has not been rotated, so this cycle made no Upstox API requests. No live orders were placed, and the existing frozen paper paths were left unchanged.
 
-A separate sensitivity using normalized RBI 91-day T-bill auction yields as a **synthetic cash opportunity-return proxy** changes the tested ranking: 65% cap with a 30/70 NIFTY/Gold sleeve returned +219.46% (+10.54% CAGR), had a -17.57% historical OHLC envelope, and a 0.81% 10-year bootstrap point-plus-1.96-MCSE screen. This is not broker cash interest or a modeled bill ladder; it assumes cost-free continuous reinvestment. The zero-yield 55/40/60 case remains the direct-cash baseline. The proxy ranking is retrospective, the 1% screen does not guarantee a 20% loss limit, and nearby higher-return mixes failed the screen. Methods and limitations are in the [cash-yield audit](work/research/rbi_cash_yield_proxy_2026-10-30.md) and [quarterly mix method](outputs/quarterly_static_mix_cost_method.md).
+## Cycle records
 
-The monthly NIFTYBEES Donchian 55/20 + GOLDBEES 200DMA blend is under prospective paper observation at several frozen settings. Its selected 95% exposure setting returned +63.69% on the inspected 2023–2026 holdout at 50 bps per-side slippage and passed the conservative daily OHLC envelope at -16.28%; the same rule failed the 2020+ envelope at -24.41%. It is a challenger, not a validated winner. See the [OHLC audit](outputs/etf_daily_timestamp_and_intraday_risk_audit.md) and [paper protocol](outputs/forward_paper_plan.md).
+- [24-hour governor checkpoint](outputs/24_hour_checkpoint_2026-10-31.md)
+- [Experiment register](outputs/experiment_register_2026-10-31.csv)
+- [Terminal liquidation and saved held-mark audit](outputs/terminal_liquidation_audit_2026-10-31.md)
+- [Stock momentum attribution](outputs/stock_momentum_attribution_2026-10-31.md)
+- [Matched NIFTYBEES passive baseline](outputs/stock_momentum_passive_comparison_2026-10-31.csv)
+- [Next-cycle specification](outputs/next_cycle_spec_2026-10-31.md)
+- [Elapsed-calendar CAGR and Donchian fee correction](outputs/measurement_correction_2026-10-31.csv)
 
-At assumed 200 bps per-side slippage, the passive 30% initial 50/50 mix returned +83.78% over 2015–2026 with a -14.66% historical OHLC bound. In the 42-summary paired-OHLC composition bootstrap, its 63/126-session breach estimates were 3.06%/2.68%, with p05 envelopes of -19.15%/-18.98%. The new 30% initial 40/60 mix returned more (+88.56%) with a -15.89% bound; its corresponding estimates were 2.70%/3.34% and -18.94%/-19.13%. These initial weights drift: 30% reached about 67% peak gross exposure.
+## How to reproduce
 
-A 20% initial 30/70 NIFTY/Gold mix returned +62.21% historically with a -13.96% OHLC bound; its 126-session bootstrap had a -16.80% fifth percentile and 0.92% estimated envelope-breach rate. A 20% 50/50 alternative returned +55.86%, with a lower 0.22% 126-session estimate and -15.42% fifth percentile. The 20% paths reached about 56.72% and 54.16% peak gross exposure. A frozen 8/4 drawdown throttle on 20% 30/70 cut to 10% returned +66.12% / -11.46% historically; its matched 126-block bootstrap had zero of 5,000 breaches and a -13.62% fifth percentile, but median CAGR was lower than fixed exposure and the only historical trigger was post-2019. A 25% 30/70 mix returned +77.77% with a 2.78% 126-session estimate; at 30%, 30/70 returned +93.33%, but its fifth percentile crossed -20%. The 45% initial 40/60 variant returned +132.85% with a -18.75% historical envelope, but estimated 20.00%/19.68% envelope breaches at 63/126-session blocks and p05 envelopes of -22.54%/-22.76%, failing the coarse risk screen. The 8% throttle earned +130.01% but had an 11.74% breach estimate and -21.18% fifth-percentile bound. Costs are assumed and resampling is conditional on inspected history, so all candidates remain paper-only. See the [walk-forward and 200-bps stress](outputs/passive_drawdown_control_walkforward_method.md), [composition stress](outputs/passive_mix_composition_cost_method.md), and [stateful bootstrap](outputs/stateful_drawdown_control_bootstrap_method.md).
-
-A 64-replay 10/50/100/200-bps sweep of 30% initial NIFTY/Gold mixes kept the 30/70 ratio highest by historical return, but its 126-session p05 crossed -20%. A matched 50/200-bps paired-OHLC bootstrap found that 40/60 returned more than 50/50 while 50/50 had slightly lower 126-session breach probabilities at both costs. See the [composition cost results](outputs/passive_mix_composition_cost_method.md) and [bootstrap ledger](outputs/passive_mix_30pct_composition_cost_bootstrap.csv).
-
-The corrected cross-asset ETF 12–1 momentum replay selected 45% exposure at 50 bps. A strength-weighted variant returned +22.51% with a -16.24% OHLC envelope on the already-inspected 2023–2026 segment; under assumed 100/150/200-bps per-side costs, selected caps fell to 35/30/25% and pseudo-holdout returns to +12.51/+6.80/+2.56%. Its conditional 63-session block bootstrap estimated a 41.98% 10-year 20% drawdown breach rate at 50 bps. These are paper candidates, not validated winners; see the [equal-weight audit](outputs/cross_asset_momentum_ohlc_method.md), [strength-weighted audit](outputs/cross_asset_momentum_strength_method.md), and [inverse-vol comparison](outputs/cross_asset_inverse_vol_method.md), which supersede the older ETF-unit STT results.
-
-## Reproducing the main research
-
-The scripts are under `work/`; summary tables and methods are under `outputs/`.
+Run from the repository root:
 
 ```powershell
+python work/check_terminal_liquidation.py
+python work/audit_stored_position_gaps.py
+python work/attribute_stock_momentum_leader.py
 python work/replay_donchian_gold_blend.py
-python work/audit_etf_intraday_drawdown.py
-python work/refresh_backtest_summary.py
-python work/capture_amfi_goldman_etf_nav.py
-python work/capture_amfi_liquidbees_nav.py
-python work/probe_nifty_expired_option_coverage.py
+python work/write_research_data_fingerprint.py
+python work/write_research_code_fingerprint.py
 ```
 
-The AMFI/Nippon capture verifies the NIFTYBEES/GOLDBEES historical NAV lineage and split-normalized price basis. Its public aggregate is `outputs/etf_nav_market_close_reconciliation.csv`; raw NAV responses are ignored under `work/data/api_probes/`.
+Most source data and per-run histories stay local under `work/data/` and `work/backtests/`; `outputs/data_manifest.csv` records coverage and paths. The repository contains methods and aggregate results. Upstox credentials must remain in the local environment or user registry, never in source, logs, or commits.
 
-The separate LIQUIDBEES capture records official AMFI daily-IDCW payout NAVs from 2019 through 2026. Those NAVs stay near ₹1,000 and are not total returns; cash yield remains excluded until the issuer dividend feed reconciles to reported reinvestment performance. See `work/research/liquidbees_nav_source_review.md` and `outputs/liquidbees_amfi_nav_2019_2026.csv`.
-
-The expired-option preflight found empty contract lists at six sampled 2022–2023 NIFTY monthly expiries, so the frozen intraday-options training window still fails its data gate. It saves contract counts and local raw responses; no option strategy P&L is claimed from these probes. Official NSE EOD contract records may support a separate daily-mark options screen, but they cannot validate intraday fills; see the [historical options source review](work/research/nifty_historical_options_source_fallback.md).
-
-For live candle refreshes, `work/upstox_quant.py` reads `UPSTOX_ANALYTICS_TOKEN` from the process environment or the current user's `HKCU\Environment` registry value. Keep the token out of source files, logs, commits, and issue reports. The forward-paper runner is read-only and never sends broker orders.
-
-## Data and repository contents
-
-This is a public repository. Raw Upstox/market-data caches, API probe responses, and most per-run equity/order histories are kept out of Git; they remain in the local `work/data/` and `work/backtests/` directories. `outputs/data_manifest.csv` records their local source paths and coverage. The repository tracks code, methods, aggregate results, frozen paper configurations, and the two OHLC-audited holdout ledgers. Reproducing the full results requires obtaining and placing the source data locally according to the manifest.
-
-Historical results use modeled current fees and stated slippage, zero cash yield in most ETF simulations, and next-open fills. Historical drawdown screens and resampled return stresses are not guarantees of future loss limits. No live orders are placed by this research project.
+Past 20% drawdown screens and NIFTY/Gold ratio sweeps are historical comparisons. They do not constrain the current strategy selection, and the NIFTY/Gold family is no longer the primary route to the return objective. A historical return or bootstrap does not limit future losses.

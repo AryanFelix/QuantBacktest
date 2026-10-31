@@ -227,11 +227,10 @@ def simulate(
     winners = [trade["net_pnl_inr"] for trade in trades if trade["net_pnl_inr"] > 0]
     losers = [-trade["net_pnl_inr"] for trade in trades if trade["net_pnl_inr"] < 0]
     total_return = cash / CAPITAL - 1
-    years = max(len(daily_nav) / 252, 1 / 252)
     stats = {
         "starting_balance_inr": CAPITAL, "ending_balance_inr": cash,
         "total_return_pct": total_return * 100,
-        "cagr_pct": ((cash / CAPITAL) ** (1 / years) - 1) * 100 if cash > 0 else -100.0,
+        "cagr_pct": q._calendar_cagr_pct(CAPITAL, cash, equity.index[0], equity.index[-1]),
         "max_drawdown_pct": max_drawdown * 100, "drawdown_limit_pct": DD_LIMIT,
         "within_drawdown_limit": max_drawdown * 100 >= -DD_LIMIT,
         "sharpe_zero_rf": float(returns.mean() / stdev * math.sqrt(252)) if stdev else 0.0,

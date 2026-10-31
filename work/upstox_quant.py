@@ -312,6 +312,13 @@ def _fee_breakdown(
     }
 
 
+def _calendar_cagr_pct(starting_balance: float, ending_balance: float, start: date | pd.Timestamp, end: date | pd.Timestamp) -> float | None:
+    years = (pd.Timestamp(end).date() - pd.Timestamp(start).date()).days / 365.25
+    if years <= 0:
+        return None
+    return (ending_balance / starting_balance) ** (1 / years) * 100 - 100 if ending_balance > 0 else -100.0
+
+
 def _read_prices(specs: list[str]) -> tuple[dict[str, pd.DataFrame], dict[str, pd.DataFrame]]:
     frames = {}
     for spec in specs:
@@ -579,15 +586,21 @@ def _simulate(
         gross_exposures.append(invested / nav_close if nav_close > 0 else 0.0)
         prior_close_nav = nav_close
 
+    terminal_date = run_dates[-1]
+    missing_terminal_quotes = [
+        name for name in names if quantity[name] > 0 and pd.isna(closes.at[terminal_date, name])
+    ]
+    if missing_terminal_quotes:
+        raise ValueError(
+            f"terminal liquidation lacks a raw close on {terminal_date.date()} for held positions: "
+            f"{', '.join(missing_terminal_quotes)}"
+        )
     for name in names:
         amount = quantity[name]
         if amount <= 0:
             continue
-        available = closes.loc[run_dates, name].dropna()
-        if available.empty:
-            continue
-        last_trade_time = available.index[-1]
-        fill = float(available.iloc[-1]) * (1 - slip)
+        last_trade_time = terminal_date
+        fill = float(closes.at[terminal_date, name]) * (1 - slip)
         notional = amount * fill
         charges = _fee_breakdown(notional, "sell", instrument_fee_products[name])
         cash += notional - charges["total"]
@@ -596,15 +609,16 @@ def _simulate(
             totals[component] += charges[component]
         orders.append({"time": last_trade_time, "symbol": name, "side": "sell", "quantity": amount, "fill_price": fill, "notional": notional, "terminal_liquidation": True, **charges})
     equity[-1] = cash
+    risky_exposures[-1] = 0.0
+    gross_exposures[-1] = 0.0
     equity_frame = pd.DataFrame({"nav": equity, "risky_exposure": risky_exposures, "gross_exposure": gross_exposures,
                                  "cash_distribution_inr": daily_distributions,
                                  "cash_yield_inr": daily_cash_yields}, index=run_dates)
     trades = pd.DataFrame(orders)
     daily_returns = equity_frame["nav"].pct_change().replace([np.inf, -np.inf], np.nan).fillna(0)
     daily_returns.iloc[0] = equity_frame["nav"].iloc[0] / starting_balance - 1
-    years = max(len(equity_frame) / 252, 1 / 252)
     total_return = equity_frame["nav"].iloc[-1] / starting_balance - 1
-    cagr = (equity_frame["nav"].iloc[-1] / starting_balance) ** (1 / years) - 1 if equity_frame["nav"].iloc[-1] > 0 else -1.0
+    cagr_pct = _calendar_cagr_pct(starting_balance, float(equity_frame["nav"].iloc[-1]), equity_frame.index[0], equity_frame.index[-1])
     stdev = float(daily_returns.std(ddof=1)) if len(daily_returns) > 1 else 0.0
     downside = daily_returns[daily_returns < 0]
     downside_std = float(downside.std(ddof=1)) if len(downside) > 1 else 0.0
@@ -615,7 +629,7 @@ def _simulate(
         "starting_balance_inr": starting_balance,
         "ending_balance_inr": float(equity_frame["nav"].iloc[-1]),
         "total_return_pct": float(total_return * 100),
-        "cagr_pct": float(cagr * 100),
+        "cagr_pct": cagr_pct,
         "annualized_volatility_pct": float(stdev * math.sqrt(252) * 100),
         "sharpe_zero_rf": float(daily_returns.mean() / stdev * math.sqrt(252)) if stdev else 0.0,
         "sortino_zero_rf": float(daily_returns.mean() / downside_std * math.sqrt(252)) if downside_std else 0.0,
@@ -623,7 +637,7 @@ def _simulate(
         "drawdown_limit_pct": drawdown_limit_pct,
         "within_drawdown_limit": max_drawdown_pct >= -drawdown_limit_pct,
         "drawdown_budget_used_pct": abs(max_drawdown_pct) / drawdown_limit_pct * 100,
-        "calmar": float(cagr / abs(drawdown.min())) if drawdown.min() < 0 else 0.0,
+        "calmar": cagr_pct / 100 / abs(drawdown.min()) if cagr_pct is not None and drawdown.min() < 0 else None,
         "average_exposure_pct": float(equity_frame["risky_exposure"].mean() * 100),
         "average_gross_exposure_pct": float(equity_frame["gross_exposure"].mean() * 100),
         "order_count": len(trades),
@@ -763,7 +777,7 @@ def _intraday_orb(
         raise ValueError("the selected intraday period contains no sessions")
     returns = equity["nav"].pct_change().fillna(0)
     returns.iloc[0] = equity["nav"].iloc[0] / starting_balance - 1
-    years = max(len(equity) / 252, 1 / 252)
+    cagr_pct = _calendar_cagr_pct(starting_balance, float(equity["nav"].iloc[-1]), equity.index[0], equity.index[-1])
     total_return = equity["nav"].iloc[-1] / starting_balance - 1
     full_nav = pd.concat([pd.Series([starting_balance]), equity["nav"].reset_index(drop=True)], ignore_index=True)
     drawdown = full_nav / full_nav.cummax() - 1
@@ -771,7 +785,7 @@ def _intraday_orb(
     stats = {
         "starting_balance_inr": starting_balance, "ending_balance_inr": float(equity["nav"].iloc[-1]),
         "total_return_pct": float(total_return * 100),
-        "cagr_pct": float(((1 + total_return) ** (1 / years) - 1) * 100) if total_return > -1 else -100.0,
+        "cagr_pct": cagr_pct,
         "max_drawdown_pct": float(drawdown.min() * 100), "drawdown_limit_pct": drawdown_limit_pct,
         "within_drawdown_limit": bool(drawdown.min() * 100 >= -drawdown_limit_pct),
         "sharpe_zero_rf": float(returns.mean() / stdev * math.sqrt(252)) if stdev else 0.0,
@@ -867,7 +881,7 @@ def _simulate_expiry_spreads(
     stats = {
         "starting_balance_inr": capital, "ending_balance_inr": float(equity["nav"].iloc[-1]),
         "total_return_pct": float(total_return * 100),
-        "cagr_pct": float(((1 + total_return) ** (252 / len(equity)) - 1) * 100) if total_return > -1 else -100.0,
+        "cagr_pct": _calendar_cagr_pct(capital, float(equity["nav"].iloc[-1]), equity.index[0], equity.index[-1]),
         "max_drawdown_pct": float(drawdown.min() * 100), "drawdown_limit_pct": drawdown_limit_pct,
         "within_drawdown_limit": bool(drawdown.min() * 100 >= -drawdown_limit_pct),
         "sharpe_zero_rf": float(returns.mean() / stdev * math.sqrt(252)) if stdev else 0.0,

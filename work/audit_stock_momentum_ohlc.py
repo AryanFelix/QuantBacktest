@@ -212,9 +212,9 @@ def window_rows(name: str, run: tuple[pd.DataFrame, pd.DataFrame, int, str], res
         first, last = int(positions[0]), int(positions[-1])
         baseline = CAPITAL if first == 0 else float(equity.iloc[first - 1]["nav"])
         ending = float(result["closes"][last])
-        years = max((dates[last] - start).days / 365.25, 1 / 252)
         total = ending / baseline - 1
-        cagr = ((1 + total) ** (1 / years) - 1) * 100 if total > -1 else -100.0
+        baseline_date = dates[first - 1] if first else dates[first]
+        cagr = stock.q._calendar_cagr_pct(baseline, ending, baseline_date, dates[last])
         fee_mask = (order_dates >= start) & (order_dates <= dates[last]) if len(order_dates) else []
         period_orders = orders.loc[fee_mask] if len(order_dates) else orders
         window_dd = result["ohlc_dd"][first:last + 1]
@@ -261,8 +261,8 @@ def main() -> None:
     for name, result in primary:
         train_index = np.asarray([pd.Timestamp(d["date"]) <= pd.Timestamp("2023-12-29") for d in result["daily"]])
         train_end = float(result["closes"][train_index][-1])
-        years = (pd.Timestamp("2023-12-29") - pd.Timestamp("2021-02-01")).days / 365.25
-        cagr = ((train_end / CAPITAL) ** (1 / years) - 1) * 100
+        train_dates = [pd.Timestamp(d["date"]) for d, selected in zip(result["daily"], train_index) if selected]
+        cagr = stock.q._calendar_cagr_pct(CAPITAL, train_end, train_dates[0], train_dates[-1])
         dd = float(result["ohlc_dd"][train_index].min() * 100)
         train_scores.append({"strategy": name, "training_cagr_pct": cagr, "training_ohlc_drawdown_pct": dd,
                              "passes_20pct_training_bound": dd >= -LIMIT_PCT})

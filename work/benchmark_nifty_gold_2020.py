@@ -113,7 +113,6 @@ def _annual_sequence_row(role: str, sequence: pd.DataFrame) -> dict:
     sequence = sequence.sort_values("test_year")
     final = sequence.iloc[-1]
     sessions = int(sequence["sessions"].sum())
-    years = max(sessions / 252, 1 / 252)
     return {
         "strategy": role,
         "period_start": sequence.iloc[0]["test_start"],
@@ -122,7 +121,7 @@ def _annual_sequence_row(role: str, sequence: pd.DataFrame) -> dict:
         "starting_balance_inr": CAPITAL,
         "ending_balance_inr": final["ending_balance_inr"],
         "total_return_pct": (float(final["ending_balance_inr"]) / CAPITAL - 1) * 100,
-        "cagr_pct": (float(final["ending_balance_inr"]) / CAPITAL) ** (1 / years) * 100 - 100,
+        "cagr_pct": q._calendar_cagr_pct(CAPITAL, float(final["ending_balance_inr"]), sequence.iloc[0]["test_start"], final["test_end"]),
         "close_mdd_pct": final["stitched_close_mdd_pct"],
         "ohlc_drawdown_bound_pct": final["ohlc_bound_pct"],
         "within_20pct_ohlc": bool(final["within_20pct_ohlc"]),
