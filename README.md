@@ -14,6 +14,7 @@ The API token has not been rotated, so this cycle made no Upstox API requests. N
 
 - [24-hour governor checkpoint](outputs/24_hour_checkpoint_2026-10-31.md)
 - [Experiment register](outputs/experiment_register_2026-10-31.csv)
+- [Historical search-family inventory](outputs/historical_search_inventory_2026-10-31.csv)
 - [Terminal liquidation and saved held-mark audit](outputs/terminal_liquidation_audit_2026-10-31.md)
 - [Stock momentum attribution](outputs/stock_momentum_attribution_2026-10-31.md)
 - [Matched NIFTYBEES passive baseline](outputs/stock_momentum_passive_comparison_2026-10-31.csv)
