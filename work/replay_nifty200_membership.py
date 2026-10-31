@@ -83,8 +83,10 @@ def reviewed_identity_bridges() -> list[dict]:
         if not all(row.get(key) for key in ("effective_date", "economic_ex_date", "from_isin", "to_isin", "official_url", "pdf_sha256")):
             raise ValueError(f"{row['symbol']}: incomplete reviewed identity bridge")
         output.append({
-            "effective_date": row["effective_date"], "reference_close_date": row["reference_close_date"],
+            "effective_date": row["effective_date"],
+            "official_trade_isin_effective_date": row.get("official_trade_isin_effective_date", ""),
             "economic_ex_date": row["economic_ex_date"],
+            "reference_close_date": row["reference_close_date"],
             "announcement_date": "", "action": "isin_bridge", "symbol": row["symbol"],
             "from_isin": row["from_isin"].upper(), "to_isin": row["to_isin"].upper(), "isin": "",
             "identity_bridge": row["identity_bridge"], "filename": row["filename"], "page_ref": row["page_ref"],
@@ -114,6 +116,25 @@ def previous_sessions() -> list[pd.Timestamp]:
     return sorted(pd.Timestamp(value).normalize() for value in sessions)
 
 
+def split_successor(history: pd.DataFrame, symbol: str, action_isin: str, economic_ex_date: pd.Timestamp):
+    prior = history[(history["symbol"] == symbol) & (history["isin"] == action_isin)
+                    & (history["valid_to"] <= economic_ex_date)
+                    & (history["valid_to"] >= economic_ex_date - pd.Timedelta(days=7))]
+    if not prior.empty:
+        prior = prior[prior["valid_to"].eq(prior["valid_to"].max())]
+    successor = history[(history["symbol"] == symbol)
+                        & (history["valid_from"] >= economic_ex_date)
+                        & (history["valid_from"] <= economic_ex_date + pd.Timedelta(days=7))]
+    if not successor.empty:
+        successor = successor[successor["valid_from"].eq(successor["valid_from"].min())]
+    if len(prior) != 1 or len(successor) != 1:
+        return None
+    old_isin, new_isin = str(prior.iloc[0]["isin"]).upper(), str(successor.iloc[0]["isin"]).upper()
+    if old_isin == new_isin:
+        return None
+    return old_isin, new_isin, pd.Timestamp(successor.iloc[0]["valid_from"]).normalize()
+
+
 def split_identity_bridges(history: pd.DataFrame, referenced_isins: set[str]) -> list[dict]:
     bridges = []
     for path in sorted(ACTION_DIR.glob("nse_*.parquet")):
@@ -124,17 +145,14 @@ def split_identity_bridges(history: pd.DataFrame, referenced_isins: set[str]) ->
             effective = pd.Timestamp(row.ex_date)
             if not START <= effective <= EVALUATION_END:
                 continue
-            prior = history[(history["symbol"] == str(row.symbol).upper()) & (history["isin"] == str(row.isin).upper())
-                            & (history["valid_to"] < effective) & (history["valid_to"] >= effective - pd.Timedelta(days=7))]
-            if not prior.empty:
-                prior = prior[prior["valid_to"].eq(prior["valid_to"].max())]
-            successor = history[(history["symbol"] == str(row.symbol).upper()) & (history["valid_from"] == effective)]
-            if len(prior) != 1 or len(successor) != 1:
+            pair = split_successor(history, str(row.symbol).upper(), str(row.isin).upper(), effective)
+            if pair is None:
                 continue
-            old_isin, new_isin = prior.iloc[0]["isin"], successor.iloc[0]["isin"]
+            old_isin, new_isin, identity_date = pair
             if old_isin == new_isin or not ({old_isin, new_isin} & referenced_isins):
                 continue
-            bridges.append({"effective_date": effective.date().isoformat(), "reference_close_date": "", "announcement_date": "",
+            bridges.append({"effective_date": identity_date.date().isoformat(), "economic_ex_date": effective.date().isoformat(),
+                            "reference_close_date": "", "announcement_date": "",
                             "action": "isin_bridge", "symbol": row.symbol, "from_isin": old_isin, "to_isin": new_isin,
                             "isin": "", "identity_bridge": f"TejHQ face value split {row.face_value_from:g}->{row.face_value_to:g}",
                             "filename": path.name, "page_ref": row.raw_subject, "official_url": "",
@@ -273,7 +291,8 @@ def build() -> dict:
             if not row["from_isin"] or not row["to_isin"]:
                 unresolved.append({"filename": row["filename"], "page_ref": row["page_ref"], "date": row["event_effective_date"], "symbol": row["event_symbol"], "reason": "identity bridge needs both ISINs"})
                 continue
-            bridges.append({"effective_date": row["event_effective_date"], "reference_close_date": row["reference_close_date"],
+            bridges.append({"effective_date": row["event_effective_date"], "economic_ex_date": row.get("economic_ex_date", ""),
+                            "reference_close_date": row["reference_close_date"],
                             "announcement_date": row["announcement_date"], "action": "isin_bridge", "symbol": row["event_symbol"],
                             "from_isin": row["from_isin"].upper(), "to_isin": row["to_isin"].upper(), "isin": "",
                             "identity_bridge": row["identity_symbol"], "filename": row["filename"], "page_ref": row["page_ref"],
@@ -397,7 +416,7 @@ def build() -> dict:
         raise ValueError(f"untriaged notices without parent tables: {uncovered_no_table}")
     comparison_ok = not comparison["xls_only"] and not comparison["pdf_only"]
 
-    fields = ["effective_date", "reference_close_date", "announcement_date", "action", "symbol", "isin", "identity_bridge", "status", "filename", "page_ref", "official_url", "pdf_sha256"]
+    fields = ["effective_date", "official_trade_isin_effective_date", "economic_ex_date", "reference_close_date", "announcement_date", "action", "symbol", "isin", "identity_bridge", "status", "filename", "page_ref", "official_url", "pdf_sha256"]
     event_fields = fields + ["from_isin", "to_isin"]
     write_rows(MEMBERSHIP / "operative_events.csv", [*operative, *bridges], event_fields)
     write_rows(MEMBERSHIP / "identity_bridges.csv", bridges, event_fields)
@@ -525,6 +544,13 @@ def self_check() -> None:
     assert state == {"NEW"}
     state = day_bridges(split, state, reverse=True)
     assert state == {"OLD"}
+    adjacent = pd.DataFrame([
+        {"symbol": "IRCTC", "isin": "OLD", "valid_from": pd.Timestamp("2020-01-01"), "valid_to": pd.Timestamp("2021-10-28")},
+        {"symbol": "IRCTC", "isin": "NEW", "valid_from": pd.Timestamp("2021-10-29"), "valid_to": pd.NaT},
+    ])
+    assert split_successor(adjacent, "IRCTC", "OLD", pd.Timestamp("2021-10-28")) == (
+        "OLD", "NEW", pd.Timestamp("2021-10-29"))
+    assert split_successor(adjacent, "IRCTC", "UNRELATED", pd.Timestamp("2021-10-28")) is None
     reviewed = reviewed_identity_bridges()
     assert all(row["effective_date"] and row["economic_ex_date"] for row in reviewed)
     assert (pd.Timestamp("2021-10-29") != pd.Timestamp("2021-10-28"))

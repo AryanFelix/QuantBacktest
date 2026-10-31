@@ -57,5 +57,353 @@
     "official_xls_pdf_matches_2018_2020": 111,
     "one_sided_xls_pdf_rows": 0
   },
-  "interpretation": "Residual changes are recorded after each source/identity correction. The failed batch counts were cascading precondition failures and are not independent missing archives."
+  "interpretation": "Residual changes are recorded after each source/identity correction. The failed batch counts were cascading precondition failures and are not independent missing archives.",
+  "cycle_base_commit": "7d4d20c78fd8873f4f81672b9621b124b08b2c00",
+  "warmup_identity_bridge_replay": {
+    "scope": "Same membership replay code and local source set; three newly reviewed pre-evaluation split/ISIN bridges added cumulatively.",
+    "steps": [
+      {
+        "step": "prior 17 reviewed bridges; BEL/IGL/JSWSTEEL withheld",
+        "failed_batches": 0,
+        "failed_directions": 0,
+        "round_trip_certified": true,
+        "identity_bridges": 43,
+        "interval_rows": 424
+      },
+      {
+        "step": "add BEL",
+        "failed_batches": 0,
+        "failed_directions": 0,
+        "round_trip_certified": true,
+        "identity_bridges": 44,
+        "interval_rows": 424
+      },
+      {
+        "step": "add IGL",
+        "failed_batches": 0,
+        "failed_directions": 0,
+        "round_trip_certified": true,
+        "identity_bridges": 45,
+        "interval_rows": 424
+      },
+      {
+        "step": "add JSWSTEEL",
+        "failed_batches": 0,
+        "failed_directions": 0,
+        "round_trip_certified": true,
+        "identity_bridges": 46,
+        "interval_rows": 424
+      }
+    ],
+    "interpretation": "Membership replay already had zero failed preconditions before these three additions. Each bridge adds one reviewed identity link; none changes replay failure counts. The bridges address signal-history identity/window residuals, not constituent event residuals."
+  },
+  "warmup_bridge_dependency_audit_before_after": {
+    "protocol_id": "NIFTY200-v1.1",
+    "comparison": "Same full dependency audit, same calendar and frozen configurations; first run withheld only the three new reviewed bridge rows, second run restored all three.",
+    "per_configuration": {
+      "NIFTY200-A-M": {
+        "missing_adjusted_signal_windows": {
+          "before": 594,
+          "after": 582,
+          "delta": -12
+        },
+        "unreviewed_signal_action_path_incidences": {
+          "before": 644,
+          "after": 623,
+          "delta": -21
+        },
+        "unreviewed_signal_action_unique_events": {
+          "before": 109,
+          "after": 105,
+          "delta": -4
+        },
+        "unreviewed_identity_signal_path_incidences": {
+          "before": 194,
+          "after": 182,
+          "delta": -12
+        },
+        "ranking_changing_signal_dependencies": {
+          "before": 1421,
+          "after": 1376,
+          "delta": -45
+        },
+        "decisions_with_unresolved_member_signals": {
+          "before": 105,
+          "after": 105,
+          "delta": 0
+        }
+      },
+      "NIFTY200-A-Q": {
+        "missing_adjusted_signal_windows": {
+          "before": 208,
+          "after": 205,
+          "delta": -3
+        },
+        "unreviewed_signal_action_path_incidences": {
+          "before": 214,
+          "after": 209,
+          "delta": -5
+        },
+        "unreviewed_signal_action_unique_events": {
+          "before": 74,
+          "after": 72,
+          "delta": -2
+        },
+        "unreviewed_identity_signal_path_incidences": {
+          "before": 65,
+          "after": 62,
+          "delta": -3
+        },
+        "ranking_changing_signal_dependencies": {
+          "before": 490,
+          "after": 479,
+          "delta": -11
+        },
+        "decisions_with_unresolved_member_signals": {
+          "before": 35,
+          "after": 35,
+          "delta": 0
+        }
+      },
+      "NIFTY200-B-M": {
+        "missing_adjusted_signal_windows": {
+          "before": 662,
+          "after": 647,
+          "delta": -15
+        },
+        "unreviewed_signal_action_path_incidences": {
+          "before": 710,
+          "after": 684,
+          "delta": -26
+        },
+        "unreviewed_signal_action_unique_events": {
+          "before": 113,
+          "after": 108,
+          "delta": -5
+        },
+        "unreviewed_identity_signal_path_incidences": {
+          "before": 213,
+          "after": 198,
+          "delta": -15
+        },
+        "ranking_changing_signal_dependencies": {
+          "before": 1576,
+          "after": 1520,
+          "delta": -56
+        },
+        "decisions_with_unresolved_member_signals": {
+          "before": 105,
+          "after": 105,
+          "delta": 0
+        }
+      },
+      "NIFTY200-B-Q": {
+        "missing_adjusted_signal_windows": {
+          "before": 226,
+          "after": 222,
+          "delta": -4
+        },
+        "unreviewed_signal_action_path_incidences": {
+          "before": 234,
+          "after": 227,
+          "delta": -7
+        },
+        "unreviewed_signal_action_unique_events": {
+          "before": 78,
+          "after": 75,
+          "delta": -3
+        },
+        "unreviewed_identity_signal_path_incidences": {
+          "before": 72,
+          "after": 68,
+          "delta": -4
+        },
+        "ranking_changing_signal_dependencies": {
+          "before": 535,
+          "after": 520,
+          "delta": -15
+        },
+        "decisions_with_unresolved_member_signals": {
+          "before": 35,
+          "after": 35,
+          "delta": 0
+        }
+      }
+    },
+    "strategy_study_authorized": false,
+    "performance_gate": "NOT RUN; this audit computes no NAV, return, CAGR, fees, or strategy ranking"
+  },
+  "current_cycle_final_replay": {
+    "membership_replay_certified": true,
+    "failed_batches": 0,
+    "failed_directions": 0,
+    "operative_events": 391,
+    "identity_bridges": 46,
+    "interval_rows": 424,
+    "anchor_date": "2026-09-30",
+    "anchor_members": 200,
+    "official_xls_pdf_matches_2018_2020": 111,
+    "one_sided_event_rows": 0
+  },
+  "current_cycle_decision": {
+    "study": "four frozen NIFTY200 A-M/A-Q/B-M/B-Q configurations",
+    "full_period_performance": "NOT RUN; all four paths stopped at the first scheduled signal before any order because candidate signal inputs can change ranking.",
+    "objective": "20%+ annual CAGR net of costs on INR 1,000,000, before tax; not achieved or evaluated.",
+    "unlevered_cash_prefixes": {
+      "NIFTY200-A-M": {
+        "first_signal_date": "2018-01-31",
+        "cash_sessions": 22,
+        "ending_cash_inr": 1000000,
+        "actual_orders": 0
+      },
+      "NIFTY200-A-Q": {
+        "first_signal_date": "2018-03-28",
+        "cash_sessions": 60,
+        "ending_cash_inr": 1000000,
+        "actual_orders": 0
+      },
+      "NIFTY200-B-M": {
+        "first_signal_date": "2018-01-31",
+        "cash_sessions": 22,
+        "ending_cash_inr": 1000000,
+        "actual_orders": 0
+      },
+      "NIFTY200-B-Q": {
+        "first_signal_date": "2018-03-28",
+        "cash_sessions": 60,
+        "ending_cash_inr": 1000000,
+        "actual_orders": 0
+      }
+    },
+    "first_ranking_changing_identity_blocker": "INE528G01035 has no unique active point-in-time symbol and lacks its required adjusted price history; no alias or score was imputed.",
+    "trace_artifact": "nifty200_cash_prefix_traces_2026-11-01.json"
+  },
+  "current_cycle_dependency_audit": {
+    "srf_source_correction": {
+      "signal_action_path_incidences_after": [
+        774,
+        254,
+        844,
+        279
+      ],
+      "signal_action_path_incidences_before": [
+        781,
+        256,
+        852,
+        281
+      ],
+      "first_signal_unresolved_scores_before": [
+        9,
+        11,
+        9,
+        12
+      ],
+      "interpretation": "MSE supports one ₹6 2017-08-16 dividend; provider variants normalized and exact duplicate removed. No strategy result follows from this signal-dependency correction.",
+      "first_signal_unresolved_scores_after": [
+        8,
+        10,
+        8,
+        11
+      ]
+    },
+    "dependency_rows": 5368,
+    "point_in_time_identity_isins": 405,
+    "evaluation_sessions": 2183,
+    "working_sessions_including_warmup": 2683,
+    "actual_account_attempts": {
+      "valid_strategy_orders_before_first_blocker": 0,
+      "full_period_cagr": null,
+      "conditional_projection": "20 shared-engine projected first-rebalance buys per configuration; not a valid target or P&L",
+      "full_period_max_drawdown": null,
+      "valid_cash_inr": 1000000,
+      "promotion": "NOT PROMOTED"
+    },
+    "additional_predecessor_successor_isins": 29,
+    "candidate_dependency_counts": {
+      "NIFTY200-A-Q": {
+        "missing_adjusted_windows": 197,
+        "conditional_target_missing_close_marks": 0,
+        "all_decisions_have_unresolved_signals": true,
+        "conditional_target_open_gaps": 0,
+        "decisions": 35,
+        "ranking_changing_dependencies": 524
+      },
+      "NIFTY200-A-M": {
+        "missing_adjusted_windows": 556,
+        "conditional_target_missing_close_marks": 0,
+        "all_decisions_have_unresolved_signals": true,
+        "conditional_target_open_gaps": 0,
+        "decisions": 105,
+        "ranking_changing_dependencies": 1527
+      },
+      "NIFTY200-B-M": {
+        "missing_adjusted_windows": 621,
+        "conditional_target_missing_close_marks": 0,
+        "all_decisions_have_unresolved_signals": true,
+        "conditional_target_open_gaps": 0,
+        "decisions": 105,
+        "ranking_changing_dependencies": 1680
+      },
+      "NIFTY200-B-Q": {
+        "missing_adjusted_windows": 214,
+        "conditional_target_missing_close_marks": 0,
+        "all_decisions_have_unresolved_signals": true,
+        "conditional_target_open_gaps": 0,
+        "decisions": 35,
+        "ranking_changing_dependencies": 572
+      }
+    },
+    "conditional_first_rebalance_costs_inr": {
+      "NIFTY200-A-Q": {
+        "nav_residual": 0.0,
+        "slippage": 4966.54,
+        "turnover": 998273.89,
+        "fees": 1657.36
+      },
+      "NIFTY200-A-M": {
+        "nav_residual": 0.0,
+        "slippage": 4938.55,
+        "turnover": 992647.65,
+        "fees": 1650.68
+      },
+      "NIFTY200-B-M": {
+        "nav_residual": 0.0,
+        "slippage": 4892.21,
+        "turnover": 983334.41,
+        "fees": 1639.62
+      },
+      "NIFTY200-B-Q": {
+        "nav_residual": 0.0,
+        "slippage": 4948.3,
+        "turnover": 994608.2,
+        "fees": 1653.0
+      }
+    },
+    "replay": {
+      "interval_rows": 424,
+      "failed_batches": 0,
+      "failed_direction_checks": 0,
+      "identity_bridges": 47
+    },
+    "protocol_id": "NIFTY200-v1.3",
+    "unresolved_membership_identity_signal_rows": 32,
+    "date_valid_action_symbol_corrections": 1240,
+    "sessions": {
+      "verified_backfill_sessions": 18,
+      "adjusted_rows_unresolved": 116,
+      "set_equal": true,
+      "cash": 2183,
+      "raw_rows_added": 37576,
+      "adjusted_rows_resolved": 37460,
+      "official_nifty200_tri": 2183
+    },
+    "routine_action_factor_groups": {
+      "bonus_supported": 115,
+      "dividend_supported": 4068,
+      "dividend_exception": 10129,
+      "bonus_exception": 301,
+      "split_supported": 28,
+      "split_exception": 416
+    }
+  }
 }

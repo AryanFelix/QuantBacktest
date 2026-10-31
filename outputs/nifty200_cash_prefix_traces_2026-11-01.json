@@ -1,0 +1,692 @@
+{
+  "protocol_id": "NIFTY200-v1.3-diagnostic",
+  "study_selection": "Original NIFTY200 A-M/A-Q/B-M/B-Q fixed before any new P&L",
+  "starting_capital_inr": 1000000.0,
+  "evaluation": {
+    "start": "2018-01-01",
+    "cutoff": "2026-10-23"
+  },
+  "execution": "Shared cash engine; next-session raw open; integer shares; 50 bps per-side slippage; current NSE fee model; zero cash yield; no terminal liquidation in the diagnostic window",
+  "conditional_order_policy": "Only positive, fully SCORED members receive a provisional 5% weight; unknown scores remain unknown and their weight stays cash. These orders discover execution dependencies and are not strategy P&L or a valid target ranking.",
+  "configurations": [
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "first_signal_date": "2018-01-31",
+      "first_execution_date": "2018-02-01",
+      "signal_members": 201,
+      "unresolved_member_signals": 8,
+      "positive_fully_scored_members": 166,
+      "conditional_names_simulated": 20,
+      "unfilled_slots_left_as_cash": 0,
+      "first_signal_blocks_valid_target": true,
+      "valid_strategy_orders_before_stop": 0,
+      "valid_strategy_cash_at_stop_inr": 1000000.0,
+      "first_signal_unresolved_examples": [
+        {
+          "symbol": "HUDCO",
+          "isin": "INE031A01017",
+          "membership_interval_isin": "INE031A01017",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "missing_or_invalid_adjusted_close"
+        },
+        {
+          "symbol": "KARURVYSYA",
+          "isin": "INE036D01028",
+          "membership_interval_isin": "INE036D01028",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "INDHOTEL",
+          "isin": "INE053A01029",
+          "membership_interval_isin": "INE053A01029",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "IDFCBANK",
+          "isin": "INE092T01019",
+          "membership_interval_isin": "INE092T01019",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "DMART",
+          "isin": "INE192R01011",
+          "membership_interval_isin": "INE192R01011",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "missing_or_invalid_adjusted_close"
+        },
+        {
+          "symbol": "COLPAL",
+          "isin": "INE259A01022",
+          "membership_interval_isin": "INE259A01022",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "CANBK",
+          "isin": "INE476A01014",
+          "membership_interval_isin": "INE476A01014",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "ENGINERSIN",
+          "isin": "INE510A01028",
+          "membership_interval_isin": "INE510A01028",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        }
+      ],
+      "first_signal_dependency_examples": [
+        {
+          "date": "2017-02-17",
+          "entity": "CANBK|INE476A01014",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE476A01014; vendor terms=ratio_num:1.0,ratio_den:10.0,cash_amount:197.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-09-11",
+          "entity": "ENGINERSIN|INE510A01028",
+          "input": "signal_dividend",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE510A01010; vendor terms=cash_amount:0.5; support check=adjusted_factor_mismatch; expected=1.003136763; observed=1",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-10-04",
+          "entity": "INDHOTEL|INE053A01029",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE053A01029; vendor terms=ratio_num:1.0,ratio_den:5.0,cash_amount:74.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-10-12",
+          "entity": "KARURVYSYA|INE036D01028",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE036D01010; vendor terms=ratio_num:1.0,ratio_den:6.0,cash_amount:74.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-12-14",
+          "entity": "IDFCBANK|INE092T01019",
+          "input": "signal_other",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-12-18",
+          "entity": "COLPAL|INE259A01022",
+          "input": "signal_dividend",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE259A01022; vendor terms=cash_amount:4.0; support check=adjusted_factor_mismatch; expected=1.003743916; observed=1",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2018-01-31",
+          "entity": "DMART|INE192R01011",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2017-01-25..2018-01-01; missing/invalid adjusted closes=36, first=2017-01-25, last=2017-03-20",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        },
+        {
+          "date": "2018-01-31",
+          "entity": "HUDCO|INE031A01017",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2017-01-25..2018-01-01; missing/invalid adjusted closes=76, first=2017-01-25, last=2017-05-18",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        }
+      ],
+      "diagnostic_quote_issues": [],
+      "diagnostic_engine_ran": true,
+      "diagnostic_only_orders": 20,
+      "diagnostic_fees_inr": 1650.6769414767946,
+      "diagnostic_slippage_cost_inr": 4938.545499999897,
+      "diagnostic_total_fees_plus_slippage_inr": 6589.2224414766915,
+      "diagnostic_turnover_inr": 992647.6454999996,
+      "diagnostic_ending_cash_inr": 5701.677558523508,
+      "diagnostic_ending_invested_inr": 968237.25,
+      "diagnostic_ending_nav_inr": 973938.9275585235,
+      "max_cash_plus_position_nav_residual_inr": 0.0,
+      "strategy_pnl": "NOT CALCULATED; unresolved signals may change the target",
+      "valid_strategy_prefix": "cash-only through 2018-01-31; stops before 2018-02-01 order"
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "first_signal_date": "2018-03-28",
+      "first_execution_date": "2018-04-02",
+      "signal_members": 201,
+      "unresolved_member_signals": 10,
+      "positive_fully_scored_members": 143,
+      "conditional_names_simulated": 20,
+      "unfilled_slots_left_as_cash": 0,
+      "first_signal_blocks_valid_target": true,
+      "valid_strategy_orders_before_stop": 0,
+      "valid_strategy_cash_at_stop_inr": 1000000.0,
+      "first_signal_unresolved_examples": [
+        {
+          "symbol": "HUDCO",
+          "isin": "INE031A01017",
+          "membership_interval_isin": "INE031A01017",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "missing_or_invalid_adjusted_close"
+        },
+        {
+          "symbol": "KARURVYSYA",
+          "isin": "INE036D01028",
+          "membership_interval_isin": "INE036D01028",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "INDHOTEL",
+          "isin": "INE053A01029",
+          "membership_interval_isin": "INE053A01029",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "TATASTEEL",
+          "isin": "INE081A01012",
+          "membership_interval_isin": "INE081A01012",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "IDFCBANK",
+          "isin": "INE092T01019",
+          "membership_interval_isin": "INE092T01019",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "PEL",
+          "isin": "INE140A01024",
+          "membership_interval_isin": "INE140A01024",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "COLPAL",
+          "isin": "INE259A01022",
+          "membership_interval_isin": "INE259A01022",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "ENGINERSIN",
+          "isin": "INE510A01028",
+          "membership_interval_isin": "INE510A01028",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        }
+      ],
+      "first_signal_dependency_examples": [
+        {
+          "date": "2017-09-05",
+          "entity": "RELCAPITAL|INE013A01015",
+          "input": "signal_other",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE013A01015; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-09-11",
+          "entity": "ENGINERSIN|INE510A01028",
+          "input": "signal_dividend",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE510A01010; vendor terms=cash_amount:0.5; support check=adjusted_factor_mismatch; expected=1.003136763; observed=1",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-10-04",
+          "entity": "INDHOTEL|INE053A01029",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE053A01029; vendor terms=ratio_num:1.0,ratio_den:5.0,cash_amount:74.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-10-12",
+          "entity": "KARURVYSYA|INE036D01028",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE036D01010; vendor terms=ratio_num:1.0,ratio_den:6.0,cash_amount:74.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-12-14",
+          "entity": "IDFCBANK|INE092T01019",
+          "input": "signal_other",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-12-18",
+          "entity": "COLPAL|INE259A01022",
+          "input": "signal_dividend",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE259A01022; vendor terms=cash_amount:4.0; support check=adjusted_factor_mismatch; expected=1.003743916; observed=1",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2018-01-31",
+          "entity": "PEL|INE140A01024",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE140A01024; vendor terms=ratio_num:1.0,ratio_den:23.0,cash_amount:2378.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2018-01-31",
+          "entity": "TATASTEEL|INE081A01012",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE081A01012; vendor terms=cash_amount:1105.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2018-03-28",
+          "entity": "AUBANK|INE949L01017",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2017-03-23..2018-02-26; missing/invalid adjusted closes=73, first=2017-03-23, last=2017-07-07",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        },
+        {
+          "date": "2018-03-28",
+          "entity": "HUDCO|INE031A01017",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2017-03-23..2018-02-26; missing/invalid adjusted closes=38, first=2017-03-23, last=2017-05-18",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        }
+      ],
+      "diagnostic_quote_issues": [],
+      "diagnostic_engine_ran": true,
+      "diagnostic_only_orders": 20,
+      "diagnostic_fees_inr": 1657.3575807334569,
+      "diagnostic_slippage_cost_inr": 4966.53674999989,
+      "diagnostic_total_fees_plus_slippage_inr": 6623.894330733347,
+      "diagnostic_turnover_inr": 998273.88675,
+      "diagnostic_ending_cash_inr": 68.7556692665894,
+      "diagnostic_ending_invested_inr": 1009526.55,
+      "diagnostic_ending_nav_inr": 1009595.3056692666,
+      "max_cash_plus_position_nav_residual_inr": 0.0,
+      "strategy_pnl": "NOT CALCULATED; unresolved signals may change the target",
+      "valid_strategy_prefix": "cash-only through 2018-03-28; stops before 2018-04-02 order"
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "first_signal_date": "2018-01-31",
+      "first_execution_date": "2018-02-01",
+      "signal_members": 201,
+      "unresolved_member_signals": 8,
+      "positive_fully_scored_members": 159,
+      "conditional_names_simulated": 20,
+      "unfilled_slots_left_as_cash": 0,
+      "first_signal_blocks_valid_target": true,
+      "valid_strategy_orders_before_stop": 0,
+      "valid_strategy_cash_at_stop_inr": 1000000.0,
+      "first_signal_unresolved_examples": [
+        {
+          "symbol": "HUDCO",
+          "isin": "INE031A01017",
+          "membership_interval_isin": "INE031A01017",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "missing_or_invalid_adjusted_close"
+        },
+        {
+          "symbol": "KARURVYSYA",
+          "isin": "INE036D01028",
+          "membership_interval_isin": "INE036D01028",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "INDHOTEL",
+          "isin": "INE053A01029",
+          "membership_interval_isin": "INE053A01029",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "IDFCBANK",
+          "isin": "INE092T01019",
+          "membership_interval_isin": "INE092T01019",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "DMART",
+          "isin": "INE192R01011",
+          "membership_interval_isin": "INE192R01011",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "missing_or_invalid_adjusted_close"
+        },
+        {
+          "symbol": "COLPAL",
+          "isin": "INE259A01022",
+          "membership_interval_isin": "INE259A01022",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "CANBK",
+          "isin": "INE476A01014",
+          "membership_interval_isin": "INE476A01014",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "ENGINERSIN",
+          "isin": "INE510A01028",
+          "membership_interval_isin": "INE510A01028",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        }
+      ],
+      "first_signal_dependency_examples": [
+        {
+          "date": "2017-02-17",
+          "entity": "CANBK|INE476A01014",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE476A01014; vendor terms=ratio_num:1.0,ratio_den:10.0,cash_amount:197.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-09-11",
+          "entity": "ENGINERSIN|INE510A01028",
+          "input": "signal_dividend",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE510A01010; vendor terms=cash_amount:0.5; support check=adjusted_factor_mismatch; expected=1.003136763; observed=1",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-10-04",
+          "entity": "INDHOTEL|INE053A01029",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE053A01029; vendor terms=ratio_num:1.0,ratio_den:5.0,cash_amount:74.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-10-12",
+          "entity": "KARURVYSYA|INE036D01028",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE036D01010; vendor terms=ratio_num:1.0,ratio_den:6.0,cash_amount:74.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-12-14",
+          "entity": "IDFCBANK|INE092T01019",
+          "input": "signal_other",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-12-18",
+          "entity": "COLPAL|INE259A01022",
+          "input": "signal_dividend",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE259A01022; vendor terms=cash_amount:4.0; support check=adjusted_factor_mismatch; expected=1.003743916; observed=1",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2018-01-31",
+          "entity": "DMART|INE192R01011",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2016-12-27..2018-01-01; missing/invalid adjusted closes=57, first=2016-12-27, last=2017-03-20",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        },
+        {
+          "date": "2018-01-31",
+          "entity": "HUDCO|INE031A01017",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2016-12-27..2018-01-01; missing/invalid adjusted closes=97, first=2016-12-27, last=2017-05-18",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        }
+      ],
+      "diagnostic_quote_issues": [],
+      "diagnostic_engine_ran": true,
+      "diagnostic_only_orders": 20,
+      "diagnostic_fees_inr": 1639.6183399624708,
+      "diagnostic_slippage_cost_inr": 4892.2109999998975,
+      "diagnostic_total_fees_plus_slippage_inr": 6531.829339962368,
+      "diagnostic_turnover_inr": 983334.411,
+      "diagnostic_ending_cash_inr": 15025.970660037703,
+      "diagnostic_ending_invested_inr": 960055.45,
+      "diagnostic_ending_nav_inr": 975081.4206600377,
+      "max_cash_plus_position_nav_residual_inr": 0.0,
+      "strategy_pnl": "NOT CALCULATED; unresolved signals may change the target",
+      "valid_strategy_prefix": "cash-only through 2018-01-31; stops before 2018-02-01 order"
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "first_signal_date": "2018-03-28",
+      "first_execution_date": "2018-04-02",
+      "signal_members": 201,
+      "unresolved_member_signals": 11,
+      "positive_fully_scored_members": 142,
+      "conditional_names_simulated": 20,
+      "unfilled_slots_left_as_cash": 0,
+      "first_signal_blocks_valid_target": true,
+      "valid_strategy_orders_before_stop": 0,
+      "valid_strategy_cash_at_stop_inr": 1000000.0,
+      "first_signal_unresolved_examples": [
+        {
+          "symbol": "HUDCO",
+          "isin": "INE031A01017",
+          "membership_interval_isin": "INE031A01017",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "missing_or_invalid_adjusted_close"
+        },
+        {
+          "symbol": "KARURVYSYA",
+          "isin": "INE036D01028",
+          "membership_interval_isin": "INE036D01028",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "INDHOTEL",
+          "isin": "INE053A01029",
+          "membership_interval_isin": "INE053A01029",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "TATASTEEL",
+          "isin": "INE081A01012",
+          "membership_interval_isin": "INE081A01012",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "IDFCBANK",
+          "isin": "INE092T01019",
+          "membership_interval_isin": "INE092T01019",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "PEL",
+          "isin": "INE140A01024",
+          "membership_interval_isin": "INE140A01024",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        },
+        {
+          "symbol": "DMART",
+          "isin": "INE192R01011",
+          "membership_interval_isin": "INE192R01011",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "missing_or_invalid_adjusted_close"
+        },
+        {
+          "symbol": "COLPAL",
+          "isin": "INE259A01022",
+          "membership_interval_isin": "INE259A01022",
+          "identity_resolution_method": "date_valid_interval_isin",
+          "unresolved_reason": "historical signal action unresolved under registered terms/factor policy"
+        }
+      ],
+      "first_signal_dependency_examples": [
+        {
+          "date": "2017-09-05",
+          "entity": "RELCAPITAL|INE013A01015",
+          "input": "signal_other",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE013A01015; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-09-11",
+          "entity": "ENGINERSIN|INE510A01028",
+          "input": "signal_dividend",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE510A01010; vendor terms=cash_amount:0.5; support check=adjusted_factor_mismatch; expected=1.003136763; observed=1",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-10-04",
+          "entity": "INDHOTEL|INE053A01029",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE053A01029; vendor terms=ratio_num:1.0,ratio_den:5.0,cash_amount:74.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-10-12",
+          "entity": "KARURVYSYA|INE036D01028",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE036D01010; vendor terms=ratio_num:1.0,ratio_den:6.0,cash_amount:74.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-12-14",
+          "entity": "IDFCBANK|INE092T01019",
+          "input": "signal_other",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2017-12-18",
+          "entity": "COLPAL|INE259A01022",
+          "input": "signal_dividend",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE259A01022; vendor terms=cash_amount:4.0; support check=adjusted_factor_mismatch; expected=1.003743916; observed=1",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2018-01-31",
+          "entity": "PEL|INE140A01024",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE140A01024; vendor terms=ratio_num:1.0,ratio_den:23.0,cash_amount:2378.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2018-01-31",
+          "entity": "TATASTEEL|INE081A01012",
+          "input": "signal_rights",
+          "source": "TejHQ NSE corporate-action feed",
+          "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE081A01012; vendor terms=cash_amount:1105.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+          "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+          "impact": "ranking-changing signal may be misstated"
+        },
+        {
+          "date": "2018-03-28",
+          "entity": "AUBANK|INE949L01017",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2017-02-20..2018-02-26; missing/invalid adjusted closes=94, first=2017-02-20, last=2017-07-07",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        },
+        {
+          "date": "2018-03-28",
+          "entity": "DMART|INE192R01011",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2017-02-20..2018-02-26; missing/invalid adjusted closes=19, first=2017-02-20, last=2017-03-20",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        },
+        {
+          "date": "2018-03-28",
+          "entity": "HUDCO|INE031A01017",
+          "input": "signal_window",
+          "source": "TejHQ adjusted NSE price history",
+          "reason": "missing_or_invalid_adjusted_close; window=2017-02-20..2018-02-26; missing/invalid adjusted closes=59, first=2017-02-20, last=2017-05-18",
+          "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+          "impact": "ranking-changing signal unknown"
+        }
+      ],
+      "diagnostic_quote_issues": [],
+      "diagnostic_engine_ran": true,
+      "diagnostic_only_orders": 20,
+      "diagnostic_fees_inr": 1653.0049173731722,
+      "diagnostic_slippage_cost_inr": 4948.299499999889,
+      "diagnostic_total_fees_plus_slippage_inr": 6601.304417373061,
+      "diagnostic_turnover_inr": 994608.1995,
+      "diagnostic_ending_cash_inr": 3738.79558262691,
+      "diagnostic_ending_invested_inr": 1003946.9,
+      "diagnostic_ending_nav_inr": 1007685.695582627,
+      "max_cash_plus_position_nav_residual_inr": 0.0,
+      "strategy_pnl": "NOT CALCULATED; unresolved signals may change the target",
+      "valid_strategy_prefix": "cash-only through 2018-03-28; stops before 2018-04-02 order"
+    }
+  ],
+  "performance_gate": "NOT RUN; no configuration has a fully resolved first-signal ranking",
+  "strategy_study_authorized": false
+}

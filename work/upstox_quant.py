@@ -438,6 +438,7 @@ def _simulate(
     cash_distributions: list[tuple[str, date, float]] | None = None,
     fee_product_by_symbol: dict[str, str] | None = None,
     cash_yield_series: pd.Series | None = None,
+    liquidate_terminal: bool = True,
 ) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
     if starting_balance <= 0 or not 0 < max_exposure <= 1 or slippage_bps < 0 or drawdown_limit_pct <= 0:
         raise ValueError("capital must be positive, exposure in (0, 1], slippage non-negative, and drawdown limit positive")
@@ -483,6 +484,8 @@ def _simulate(
     totals = defaultdict(float)
     turnover = 0.0
     equity = []
+    cash_balances = []
+    invested_balances = []
     daily_distributions = []
     daily_cash_yields = []
     applied_distributions = []
@@ -580,6 +583,8 @@ def _simulate(
         invested = sum(quantity[name] * float(close_prices[name]) for name in names if quantity[name] and pd.notna(close_prices[name]))
         invested_risk = sum(quantity[name] * float(close_prices[name]) for name in risk_names if quantity[name] and pd.notna(close_prices[name]))
         equity.append(nav_close)
+        cash_balances.append(cash)
+        invested_balances.append(invested)
         daily_distributions.append(distribution_cash)
         daily_cash_yields.append(cash_yield)
         risky_exposures.append(invested_risk / nav_close if nav_close > 0 else 0.0)
@@ -595,23 +600,27 @@ def _simulate(
             f"terminal liquidation lacks a raw close on {terminal_date.date()} for held positions: "
             f"{', '.join(missing_terminal_quotes)}"
         )
-    for name in names:
-        amount = quantity[name]
-        if amount <= 0:
-            continue
-        last_trade_time = terminal_date
-        fill = float(closes.at[terminal_date, name]) * (1 - slip)
-        notional = amount * fill
-        charges = _fee_breakdown(notional, "sell", instrument_fee_products[name])
-        cash += notional - charges["total"]
-        turnover += notional
-        for component in FEE_COMPONENTS:
-            totals[component] += charges[component]
-        orders.append({"time": last_trade_time, "symbol": name, "side": "sell", "quantity": amount, "fill_price": fill, "notional": notional, "terminal_liquidation": True, **charges})
-    equity[-1] = cash
-    risky_exposures[-1] = 0.0
-    gross_exposures[-1] = 0.0
+    if liquidate_terminal:
+        for name in names:
+            amount = quantity[name]
+            if amount <= 0:
+                continue
+            last_trade_time = terminal_date
+            fill = float(closes.at[terminal_date, name]) * (1 - slip)
+            notional = amount * fill
+            charges = _fee_breakdown(notional, "sell", instrument_fee_products[name])
+            cash += notional - charges["total"]
+            turnover += notional
+            for component in FEE_COMPONENTS:
+                totals[component] += charges[component]
+            orders.append({"time": last_trade_time, "symbol": name, "side": "sell", "quantity": amount, "fill_price": fill, "notional": notional, "terminal_liquidation": True, **charges})
+        equity[-1] = cash
+        cash_balances[-1] = cash
+        invested_balances[-1] = 0.0
+        risky_exposures[-1] = 0.0
+        gross_exposures[-1] = 0.0
     equity_frame = pd.DataFrame({"nav": equity, "risky_exposure": risky_exposures, "gross_exposure": gross_exposures,
+                                 "cash_inr": cash_balances, "invested_inr": invested_balances,
                                  "cash_distribution_inr": daily_distributions,
                                  "cash_yield_inr": daily_cash_yields}, index=run_dates)
     trades = pd.DataFrame(orders)
@@ -628,6 +637,8 @@ def _simulate(
     stats = {
         "starting_balance_inr": starting_balance,
         "ending_balance_inr": float(equity_frame["nav"].iloc[-1]),
+        "ending_cash_inr": float(equity_frame["cash_inr"].iloc[-1]),
+        "ending_invested_inr": float(equity_frame["invested_inr"].iloc[-1]),
         "total_return_pct": float(total_return * 100),
         "cagr_pct": cagr_pct,
         "annualized_volatility_pct": float(stdev * math.sqrt(252) * 100),
@@ -661,7 +672,7 @@ def _simulate(
             "fee_schedule": "current Upstox/NSE charges applied uniformly to all history; fund-unit STT is classified by instrument",
             "instrument_fee_products": instrument_fee_products,
             "cash_interest_pct": 0,
-            "terminal_liquidation": True,
+            "terminal_liquidation": liquidate_terminal,
         },
     }
     return equity_frame, trades, stats
@@ -1185,6 +1196,15 @@ def _self_check() -> None:
     assert stats["total_fees_inr"] > 0 and len(orders) == 2
     assert equity["nav"].iloc[-1] < 10_000 * values[-1] / values[1]
     assert stats["within_drawdown_limit"]
+    diagnostic_equity, diagnostic_orders, diagnostic_stats = _simulate(
+        panels, targets, rebalance, 10_000, 0.95, 0, start=index[0].date(), end=index[1].date(),
+        liquidate_terminal=False,
+    )
+    assert len(diagnostic_orders) == 1 and diagnostic_orders.iloc[0]["side"] == "buy"
+    assert not diagnostic_orders.iloc[0].get("terminal_liquidation", False)
+    assert diagnostic_stats["assumptions"]["terminal_liquidation"] is False
+    assert np.isclose(diagnostic_equity["nav"].iloc[-1],
+                      diagnostic_equity["cash_inr"].iloc[-1] + diagnostic_equity["invested_inr"].iloc[-1])
     ex_date = index[100].date()
     distributed_equity, distributed_orders, distributed_stats = _simulate(
         panels, targets, rebalance, 10_000, 0.95, 0, cash_distributions=[("TEST", ex_date, 2.0)])

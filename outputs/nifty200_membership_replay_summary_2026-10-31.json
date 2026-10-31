@@ -17,8 +17,8 @@
     "ind_niftymidcap100list.csv": "c2def031d14e2878a87c38e4ebf59c1089f8028cdf2c0c1d0192f85299e120bf"
   },
   "operative_events": 391,
-  "identity_bridges": 24,
-  "interval_rows": 412,
+  "identity_bridges": 47,
+  "interval_rows": 424,
   "minimum_members_at_event_boundary": 200,
   "maximum_members_at_event_boundary": 204,
   "temporary_extra_members_are_allowed": true,

@@ -1,0 +1,20 @@
+{
+  "as_of": "2026-11-01",
+  "benchmark": "NIFTY 200 Gross Total Return Index",
+  "source_page": "https://www.niftyindices.com/reports/historical-data",
+  "source_route": "/BackPage/getTotalReturnIndexString",
+  "source_capture_sha256": "6e2ac7e8995c654c0a30f9683438356931c878afc85b8a47ecd1f20a272c495e",
+  "evaluation_start": "2018-01-01",
+  "evaluation_end": "2026-10-23",
+  "cash_session_count": 2183,
+  "tri_session_count": 2183,
+  "cash_sessions_missing_tri": [],
+  "tri_dates_missing_cash": [],
+  "session_set_equal": true,
+  "special_sessions_in_window": [
+    "2024-03-02",
+    "2024-05-18"
+  ],
+  "raw_rows_local": true,
+  "method": "Exact date-set comparison of TejHQ raw NSE sessions plus 18 verified official NSE EOD backfill sessions against official NSE Indices NIFTY 200 TRI dates; no imputation or deletion."
+}

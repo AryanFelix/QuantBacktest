@@ -101,20 +101,33 @@ def parse_archive(content: bytes, day: str, name: str) -> pd.DataFrame:
 
 
 def expected_factor_change(events: list[dict], previous_close: float) -> float:
+    if not np.isfinite(previous_close) or previous_close <= 0:
+        raise ValueError("previous close must be positive and finite")
     change = 1.0
+    dividend_total = 0.0
     for event in events:
         kind = str(event["type"]).lower()
         if kind == "split":
-            change *= float(event["face_value_from"]) / float(event["face_value_to"])
+            old_face, new_face = float(event["face_value_from"]), float(event["face_value_to"])
+            if not np.isfinite([old_face, new_face]).all() or old_face <= 0 or new_face <= 0:
+                raise ValueError("split face values must be positive and finite")
+            change *= old_face / new_face
         elif kind == "bonus":
-            change *= 1 + float(event["ratio_num"]) / float(event["ratio_den"])
+            numerator, denominator = float(event["ratio_num"]), float(event["ratio_den"])
+            if not np.isfinite([numerator, denominator]).all() or numerator < 0 or denominator <= 0:
+                raise ValueError("bonus ratio must be finite with a non-negative numerator and positive denominator")
+            change *= 1 + numerator / denominator
         elif kind == "dividend":
             amount = float(event["cash_amount"])
-            if previous_close <= amount:
-                raise ValueError("dividend is not below previous close")
-            change *= previous_close / (previous_close - amount)
-        elif kind != "buyback":
+            if not np.isfinite(amount) or amount < 0:
+                raise ValueError("dividend amount must be finite and non-negative")
+            dividend_total += amount
+        elif kind not in {"buyback", "agm"}:
             raise ValueError(f"unsupported adjustment event: {kind}")
+    if dividend_total:
+        if previous_close <= dividend_total:
+            raise ValueError("aggregate dividend is not below previous close")
+        change *= previous_close / (previous_close - dividend_total)
     return change
 
 
@@ -180,7 +193,7 @@ def adjusted_backfill(panel: pd.DataFrame, sessions: list[pd.Timestamp]) -> tupl
         action_rows.extend(ds.dataset(path).to_table().to_pylist())
     actions = pd.DataFrame(action_rows)
     actions["ex_date"] = pd.to_datetime(actions["ex_date"])
-    actions = actions.drop_duplicates(["symbol", "isin", "ex_date", "type", "cash_amount", "face_value_from", "face_value_to"])
+    actions = actions.drop_duplicates(["symbol", "isin", "ex_date", "type", "ratio_num", "ratio_den", "cash_amount", "face_value_from", "face_value_to"])
     actions_by_symbol = {str(symbol).upper(): rows.sort_values("ex_date") for symbol, rows in actions.groupby("symbol", sort=False)}
     relevant_events = actions.loc[actions["ex_date"].isin(reference_dates) & actions["symbol"].astype(str).str.upper().isin(set(panel["symbol"]))]
     raw_dates = sorted(relevant_events["ex_date"].dropna().unique())
@@ -355,6 +368,8 @@ if __name__ == "__main__":
     if args.self_check:
         assert np.isclose(expected_factor_change([{"type": "split", "face_value_from": 10, "face_value_to": 1}], 500), 10)
         assert np.isclose(expected_factor_change([{"type": "dividend", "cash_amount": 5}], 100), 100 / 95)
+        assert np.isclose(expected_factor_change([{"type": "dividend", "cash_amount": 2}, {"type": "dividend", "cash_amount": 3}], 100), 100 / 95)
+        assert np.isclose(expected_factor_change([{"type": "agm"}, {"type": "buyback"}], 100), 1)
         assert expected_factor_change([{"type": "buyback"}], 100) == 1
         target = pd.Timestamp("2020-01-02")
         assert select_gap_factor(0.1, 1.0, [(target, 10)], target) == (1.0, "verified_interval_action_factor")
