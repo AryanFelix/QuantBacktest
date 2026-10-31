@@ -40,6 +40,7 @@ def period_metrics(dates: pd.DatetimeIndex, close: np.ndarray, high: np.ndarray,
         raise ValueError(f"No bars in requested period {start.date()} to {end.date()}")
     first, last = int(positions[0]), int(positions[-1])
     start_nav = CAPITAL if first == 0 else float(close[first - 1])
+    funding_date = dates[first] if first == 0 else dates[first - 1]
     prior_close_peak = CAPITAL if first == 0 else max(CAPITAL, float(close[:first].max()))
     prior_ohlc_peak = CAPITAL if first == 0 else max(CAPITAL, float(high[:first].max()))
     close_peak, ohlc_peak = prior_close_peak, prior_ohlc_peak
@@ -61,12 +62,23 @@ def period_metrics(dates: pd.DatetimeIndex, close: np.ndarray, high: np.ndarray,
         "period_start": dates[first].date().isoformat(), "period_end": dates[last].date().isoformat(),
         "starting_balance_inr": start_nav, "ending_balance_inr": end_nav,
         "total_return_pct": total_return * 100,
-        "cagr_pct": stock.q._calendar_cagr_pct(start_nav, end_nav, dates[first], dates[last]),
+        "funding_date": funding_date.date().isoformat(),
+        "funding_date_basis": "initial_capital" if first == 0 else "prior_close",
+        "cagr_pct": stock.q._calendar_cagr_pct(start_nav, end_nav, funding_date, dates[last]),
         "close_max_drawdown_pct": close_dd * 100,
         "ohlc_drawdown_bound_pct": ohlc_dd * 100,
         "bound_peak_date": bound_peak_date,
         "within_20pct_ohlc": ohlc_dd >= -0.20,
     }
+
+
+def _self_check_period_boundary() -> None:
+    dates = pd.DatetimeIndex(["2023-12-29", "2024-01-02", "2024-12-31"])
+    values = np.array([1_000.0, 1_000.0, 1_200.0])
+    result = period_metrics(dates, values, values, values, dates[1], dates[-1])
+    assert result["funding_date"] == "2023-12-29"
+    assert result["funding_date_basis"] == "prior_close"
+    assert np.isclose(result["cagr_pct"], 19.836616, atol=1e-5), result
 
 
 def register_outputs(rows: list[dict], selected_pct: float) -> None:
@@ -223,6 +235,7 @@ def load_context() -> dict:
 
 
 def main() -> None:
+    _self_check_period_boundary()
     context = load_context()
     runs = [run_weight(weight, context) for weight in WEIGHTS]
     all_rows = [row for run in runs for row in run["rows"]]

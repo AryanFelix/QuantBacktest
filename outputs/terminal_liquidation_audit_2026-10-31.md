@@ -12,17 +12,22 @@ All callers of the shared `_simulate` were reviewed. No caller was found that ca
 
 | Check | Result |
 |---|---:|
-| Order CSV files scanned | 3,168 |
-| Unpaired/skipped order/equity cases | 0 |
-| Files with terminal orders | 2,495 |
-| Terminal sale rows | 4,932 |
+| Order CSV files discovered | 3,168 |
+| Paired order/equity files | 3,164 |
+| Checked supported daily cash ledgers | 3,143 |
+| Excluded files (including 4 orphan orders) | 25 |
+| Invalid paired ledgers | 0 |
+| Files with terminal orders | 2,494 |
+| Terminal sale rows | 4,924 |
 | Terminal sales dated before the account’s final equity date | 0 |
 | Terminal sales without a raw close on their order date | 0 |
-| Held symbol-day observations checked | 7,293,564 |
+| Held symbol-day observations checked | 7,184,956 |
 | Held observations missing a raw close | 438, across 438 saved files |
 | Unmapped symbols | 0 |
 
-All 438 held-position gaps are the same event: GOLDBEES has no raw daily candle on 2019-05-07. Other traded ETF and index histories do contain that session; the gap is instrument-specific. The adjacent GOLDBEES closes are ₹28.00 on May 6 and ₹28.05 on May 8. The saved runs carried the previous close on May 7. The missing day’s actual price is not in the cache, so its precise NAV and rebalance effect cannot be reconstructed or corrected from these files. These 438 rows are overlapping parameter runs, not 438 independent strategy failures.
+All three file-count reconciliations passed. The audit excludes 20 intraday/derivative paths, four orphan orders files, and one paired non-daily equity ledger; it does not treat those as checked daily cash data. It validates finite positive raw closes and rejects conflicting duplicate dates. The synthetic audit regression catches invalid NaN closes, a held-session gap, a terminal gap, conflicting duplicates and an orphan pair.
+
+All 438 held-position gaps are the same event: GOLDBEES has no raw daily candle on 2019-05-07. Other traded ETF and index histories do contain that session; the gap is instrument-specific. The adjacent GOLDBEES closes are ₹28.00 on May 6 and ₹28.05 on May 8. The saved runs carried the previous close on May 7. The missing day’s actual price is not in the cache, so its precise NAV and rebalance effect cannot be reconstructed or corrected from these files. These 438 rows are overlapping parameter runs, not 438 independent strategy failures. The audit covers daily net positions and says nothing about intraday execution-price validity.
 
 The audit found no stored terminal backdated sale and no terminal sale missing a raw quote. Therefore the terminal fix does not invalidate all prior stored ledgers. The GOLDBEES mid-run mark remains a disclosed source-data exception in the affected NIFTY/Gold runs.
 
@@ -36,4 +41,4 @@ The selected stock leader’s continuous account was rerun and independently rep
 
 ## Minimal checks
 
-`python work/check_terminal_liquidation.py` passed the four-session synthetic stale-terminal-quote case for both simulator paths and verified final-date sales and calendar-time CAGR when the quote exists. `q._self_check()` and Python compilation of the edited modules also passed. Reproduce the stored audit with `python work/audit_stored_position_gaps.py`.
+`python work/check_terminal_liquidation.py` passed the four-session synthetic stale-terminal-quote case for both simulator paths and verified final-date sales and calendar-time CAGR when the quote exists. `python work/check_stored_position_gap_audit.py` passed the synthetic saved-ledger checks. Reproduce the stored audit with `python work/audit_stored_position_gaps.py`; its machine-readable result is [`stored_position_gap_audit_2026-10-31.json`](stored_position_gap_audit_2026-10-31.json).

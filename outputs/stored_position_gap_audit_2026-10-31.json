@@ -1,0 +1,330 @@
+{
+  "audit_scope": "daily net positions in supported cash ledgers; does not establish intraday order-price validity; intraday and derivative paths/schemas are excluded",
+  "files": {
+    "discovered": 3168,
+    "paired": 3164,
+    "checked": 3143,
+    "excluded": 25,
+    "invalid": 0,
+    "orphan_order_files": 4,
+    "excluded_paired": 21,
+    "invalid_paired": 0,
+    "excluded_unpaired": 4,
+    "reconciliation": {
+      "discovered_equals_checked_plus_excluded_plus_invalid": true,
+      "paired_equals_checked_plus_excluded_paired_plus_invalid_paired": true,
+      "discovered_equals_paired_plus_orphans": true
+    }
+  },
+  "coverage": {
+    "mapped_symbols": 87,
+    "valid_symbol_dates": 139048,
+    "invalid_price_observations": 0,
+    "invalid_price_files": 0,
+    "terminal_cases": 2494,
+    "terminal_rows": 4924,
+    "terminal_rows_before_equity_end": 0,
+    "held_symbol_days": 7184956,
+    "missing_raw_close_observations": 438,
+    "affected_cases": 438,
+    "unmapped_symbols": []
+  },
+  "missing_detail": [
+    {
+      "symbol": "GOLDBEES",
+      "date": "2019-05-07",
+      "kind": "held",
+      "occurrences": 438
+    }
+  ],
+  "exception_counts": {
+    "unsupported_intraday_or_derivative_path": 20,
+    "missing_equity_pair": 4,
+    "non_daily_equity_rows": 1
+  },
+  "exception_examples": [
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_100pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_25pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_30pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_35pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_40pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_45pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_50pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_55pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_60pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_65pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_70pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_71pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_72pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_73pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_74pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_75pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_80pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_85pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_90pct__50bps/orders.csv"
+    },
+    {
+      "kind": "unsupported_intraday_or_derivative_path",
+      "file": "work/backtests/intraday_ohlc_exposure/gross_cap_95pct__50bps/orders.csv"
+    },
+    {
+      "kind": "missing_equity_pair",
+      "file": "work/backtests/nifty50_futures_200dma/orders.csv"
+    },
+    {
+      "kind": "non_daily_equity_rows",
+      "file": "work/backtests/nifty_sector_gold_composites/orders.csv"
+    },
+    {
+      "kind": "missing_equity_pair",
+      "file": "work/backtests/stock_momentum_action_aware/slippage_10bps/orders.csv"
+    },
+    {
+      "kind": "missing_equity_pair",
+      "file": "work/backtests/stock_momentum_action_aware/slippage_20bps/orders.csv"
+    },
+    {
+      "kind": "missing_equity_pair",
+      "file": "work/backtests/stock_momentum_action_aware/slippage_50bps/orders.csv"
+    }
+  ],
+  "price_exception_examples": [],
+  "affected_examples": [
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_10bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_60cap_50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_70cap_10bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_70cap_50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_80cap_50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_dividend_adjusted_60cap_50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_dividend_adjusted_70cap_10bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_dividend_adjusted_70cap_50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_dividend_adjusted_80cap_50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_dividend_adjusted_95cap_10bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\dual_momentum_nifty_gold_dividend_adjusted_95cap_50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\nifty_gold_2020_benchmarks\\verify\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\nifty_gold_common_history_benchmarks\\passive_GOLDBEES_45pct\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\nifty_gold_common_history_benchmarks\\passive_NIFTY_Gold_22_5pct_each\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\nifty_gold_common_history_benchmarks\\quarterly_static_50_50_45pct\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\nifty_gold_full_history_benchmarks\\passive_GOLDBEES_45pct\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\nifty_gold_full_history_benchmarks\\passive_NIFTY_Gold_22_5pct_each\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\nifty_gold_full_history_benchmarks\\quarterly_static_50_50_45pct\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_10pct_cut_60_to_30_recover_5pct__100bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_10pct_cut_60_to_30_recover_5pct__10bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_10pct_cut_60_to_30_recover_5pct__50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_12pct_cut_60_to_30_recover_6pct__100bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_12pct_cut_60_to_30_recover_6pct__10bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_12pct_cut_60_to_30_recover_6pct__50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_8pct_cut_60_to_30_recover_4pct__100bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_8pct_cut_60_to_30_recover_4pct__10bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\dd_8pct_cut_60_to_30_recover_4pct__50bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\fixed_45pct__100bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    },
+    {
+      "file": "work\\backtests\\passive_drawdown_control\\fixed_45pct__10bps\\orders.csv",
+      "date": "2019-05-07",
+      "symbol": "GOLDBEES",
+      "kind": "held"
+    }
+  ]
+}

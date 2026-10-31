@@ -11,6 +11,7 @@ import pandas as pd
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "work"))
 import backtest_stock_momentum as stock
+import backtest_passive_mix_drawdown_control as passive
 import upstox_quant as q
 
 
@@ -60,6 +61,34 @@ def main() -> None:
         expected = q._calendar_cagr_pct(1_000_000, float(stats["ending_balance_inr"]), dates[0], dates[-1])
         assert np.isclose(float(stats["cagr_pct"]), expected)
     assert stock_equity.index[-1] == dates[-1]
+
+    dates = pd.date_range("2024-01-02", periods=5, freq="B")
+    closes = pd.DataFrame({"NIFTYBEES": [100, 101, 102, 103, 104],
+                           "GOLDBEES": [100, 101, 102, 103, 104]}, index=dates).astype(float)
+    opens = pd.DataFrame(100.0, index=dates, columns=closes.columns)
+    panels = {"open": opens, "close": closes}
+    panels["high"] = closes + 1
+    panels["low"] = closes - 1
+    missing = {key: value.copy() for key, value in panels.items()}
+    missing["close"].loc[dates[-1], "GOLDBEES"] = np.nan
+    try:
+        passive.simulate(missing, "terminal_gap", 0.60, None, 50, dates[1].date(), dates[-1].date())
+    except ValueError as error:
+        assert "terminal liquidation lacks a raw close" in str(error)
+    else:
+        raise AssertionError("passive mix accepted a forward-filled terminal close")
+
+    final_equity, final_orders, final_stats = passive.simulate(
+        panels, "terminal_quote", 0.60, None, 50, dates[1].date(), dates[-1].date(),
+    )
+    terminal = final_orders.loc[final_orders["terminal_liquidation"].eq(True)]
+    assert set(terminal["symbol"]) == {"NIFTYBEES", "GOLDBEES"}
+    assert terminal["total"].sum() > 0
+    assert final_stats["total_fees_inr"] > 0
+    assert np.isclose(final_equity.iloc[-1]["nav"], final_stats["ending_balance_inr"])
+    assert final_equity.iloc[-1]["risky_exposure"] == 0
+    assert final_equity.iloc[-1]["gross_exposure"] == 0
+    assert final_equity.iloc[-1]["target_exposure_after_close_pct"] == 0
 
 
 if __name__ == "__main__":

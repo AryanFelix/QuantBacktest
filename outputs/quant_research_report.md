@@ -25,7 +25,17 @@ The table ranks current unlevered cash leads by their highest displayed after-co
 
 **Historical labels:** any later section referring to a 20% drawdown cutoff describes an older screen, not the current mandate. Older low-exposure NIFTY/Gold variants remain comparison results and are not promoted as current candidates.
 
-Cycle artifacts: [governor checkpoint](24_hour_checkpoint_2026-10-31.md), [experiment register](experiment_register_2026-10-31.csv), [terminal and held-mark audit](terminal_liquidation_audit_2026-10-31.md), [broad-stock data gate](broad_stock_data_gate_2026-10-31.md), [stock attribution](stock_momentum_attribution_2026-10-31.md), and [next-cycle specification](next_cycle_spec_2026-10-31.md).
+Cycle artifacts: [governor checkpoint](24_hour_checkpoint_2026-10-31.md), [experiment register](experiment_register_2026-10-31.csv), [terminal and held-mark audit](terminal_liquidation_audit_2026-10-31.md), [broad-stock data gate](broad_stock_data_gate_2026-10-31.md), [NIFTY 200 public-data pilot](nifty200_public_data_pilot_2026-10-31.md), [stock attribution](stock_momentum_attribution_2026-10-31.md), and [next-cycle specification](next_cycle_spec_2026-10-31.md).
+
+## Current cycle corrections — 2026-10-31
+
+The 50-bps stock attribution is reconciled from its CSV: training excess is **+6.93 percentage points** (23.88% minus 16.95%), correcting the former +5.11 prose value. A full-strategy zero-slippage rerun retains current fees and integer-share affordability and returns **14.72% CAGR**, below the 20% objective; it is distinct from the 15.11% same-share gross cost attribution. Full-strategy returns at 10 and 50 bps per side are 14.15% and 11.90%. These are the frozen rule's cost sensitivities, not a new parameter sweep.
+
+The saved-ledger audit now reconciles **3,168 discovered = 3,143 checked + 25 excluded + 0 invalid**. Four orders files have no equity pair; 20 intraday/derivative paths and one paired non-daily ledger are also excluded. It finds 438 overlapping daily holding gaps for GOLDBEES on 2019-05-07; there are no saved terminal sales with missing raw closes. The audit covers daily net positions, not intraday order-price validity. See its [machine-readable coverage summary](stored_position_gap_audit_2026-10-31.json) and [audit notes](terminal_liquidation_audit_2026-10-31.md).
+
+An exploratory public-file pilot showed that source files can be parsed, but the official NSE website terms prohibit using site data for simulation and restrict copying/storage without prior written permission; NSE Indices also requires a license to use or distribute its index data. The broad-universe gate remains **NOT PASSED**, and the four frozen cases are **NOT RUN**. No source observations or constituent lists are included in this public repository. The prepared sample/quote request asks for explicit internal backtesting and output-sharing rights and has not been sent. See the [pilot decision and request](nifty200_public_data_pilot_2026-10-31.md).
+
+Later dated sections in this file are retained research history and do not change the current top-five ranking above.
 
 ## Data integrity correction — 2026-10-27
 

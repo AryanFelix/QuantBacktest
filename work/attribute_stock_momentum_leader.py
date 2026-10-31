@@ -168,10 +168,12 @@ def main() -> None:
     }
     pd.DataFrame([passive_row]).to_csv(stock.OUT / "stock_momentum_passive_comparison_2026-10-31.csv", index=False)
 
-    outputs, selected = [], None
-    for bps in (10, 50):
+    outputs, selected, zero_slippage_stats = [], None, None
+    for bps in (0, 10, 50):
         equity, orders, stats = stock.simulate(NAME, bars, dividends, schedules[NAME], 1.0, bps, START, END)
         gross, sector_weights, _ = gross_replay(equity, orders, bars, dividends, sectors)
+        if bps == 0:
+            zero_slippage_stats = stats
         if bps == 50:
             selected = (equity, orders, stats, gross, sector_weights)
         for label, start, end in PERIODS:
@@ -198,8 +200,14 @@ def main() -> None:
                             "slippage_cost_inr": float(period_orders.apply(lambda x: int(x["quantity"]) * abs(float(x["fill_price"]) - float(x["raw_price"])), axis=1).sum()) if not period_orders.empty else 0.0,
                             "traded_notional_inr": float(period_orders["notional"].sum()) if not period_orders.empty else 0.0,
                             "orders": len(period_orders), "capital_turnovers": float(period_orders["notional"].sum()) / CAPITAL if not period_orders.empty else 0.0})
+    for row in outputs:
+        assert np.isclose(
+            row["net_excess_vs_nifty50_pp"],
+            row["net_cagr_pct"] - row["nifty50_tri_cagr_pct"],
+            rtol=0, atol=1e-10,
+        ), row
 
-    assert selected is not None
+    assert selected is not None and zero_slippage_stats is not None
     equity, orders, stats, gross, sector_weights = selected
     annual_turnover = float(orders["notional"].sum()) / CAPITAL / ((END - START).days / 365.25)
     benchmark_cagr = float(pd.read_csv(stock.OUT / "stock_momentum_benchmark_comparison.csv").query("row_type == 'official_index' and scenario == 'NIFTY 50 Total Return' and period == 'full_2021_2026'").iloc[0]["cagr_pct"])
@@ -228,6 +236,8 @@ def main() -> None:
     print({"strategy": NAME, "full_period_net_ending_inr": stats["ending_balance_inr"],
            "gross_same_shares_ending_inr": float(gross.iloc[-1]), "full_fees_inr": stats["fees_inr"],
            "full_slippage_cost_inr": stats["slippage_cost_inr"], "full_order_notional_inr": float(orders["notional"].sum()),
+           "zero_slippage_full_strategy_net_cagr_pct": zero_slippage_stats["cagr_pct"],
+           "zero_slippage_full_strategy_ending_balance_inr": zero_slippage_stats["ending_balance_inr"],
            "annual_turnover_x_initial_capital": annual_turnover, "break_even_slippage_bps_per_side_vs_nifty50_tri": break_even_bps,
            "niftybees_passive_net_cagr_pct": passive_stats["cagr_pct"],
            "niftybees_passive_end_nav_inr": passive_stats["ending_balance_inr"],

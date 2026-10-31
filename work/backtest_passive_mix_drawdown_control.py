@@ -234,10 +234,21 @@ def simulate(
         prior_close_nav = nav
 
     last_timestamp = dates[-1]
+    terminal_closes = closes.loc[last_timestamp]
+    missing_terminal = [
+        symbol for symbol, amount in quantity.items()
+        if amount > 0 and (not np.isfinite(pd.to_numeric(terminal_closes[symbol], errors="coerce"))
+                           or float(terminal_closes[symbol]) <= 0)
+    ]
+    if missing_terminal:
+        raise ValueError(
+            f"terminal liquidation lacks a raw close on {last_timestamp.date()} for held positions: "
+            f"{', '.join(missing_terminal)}"
+        )
     for symbol, amount in quantity.items():
         if amount <= 0:
             continue
-        raw_fill = float(close_marks.loc[last_timestamp, symbol])
+        raw_fill = float(terminal_closes[symbol])
         fill = raw_fill * (1 - slip)
         notional = amount * fill
         charges = q._fee_breakdown(notional, "sell", fee_products[symbol])
@@ -248,7 +259,13 @@ def simulate(
             "fill_price": fill, "notional": notional, "reason": "terminal_liquidation",
             "terminal_liquidation": True, **charges,
         })
-    equity_rows[-1]["nav"] = cash
+    equity_rows[-1].update({
+        "nav": cash,
+        "risky_exposure": 0.0,
+        "gross_exposure": 0.0,
+        "target_exposure_after_close_pct": 0.0,
+        "close_drawdown_pct": (cash / high_water - 1) * 100,
+    })
     equity = pd.DataFrame(equity_rows).set_index("time")
     order_frame = pd.DataFrame(orders)
     full_nav = np.r_[CAPITAL, equity["nav"].to_numpy(dtype=float)]
