@@ -1,0 +1,3253 @@
+{
+  "protocol_id": "NIFTY200-v1.5-first-signal-source-corrections",
+  "evaluation": {
+    "start": "2018-01-01",
+    "full_end": "2026-10-23"
+  },
+  "capital_inr": 1000000.0,
+  "base_slippage_bps_per_side": 50.0,
+  "cash_yield": "zero",
+  "score_certificates": {
+    "NIFTY200-A-M": [
+      {
+        "candidate_id": "NIFTY200-A-M",
+        "signal_date": "2018-01-31",
+        "target_status": "CERTIFIED_UNDER_REGISTERED_SOURCE_CORRECTIONS",
+        "signal_rows": 201,
+        "rule_ineligible_count": 2,
+        "resolved_source_exception_count": 6,
+        "twentieth_positive_score": 0.754716433651681,
+        "positive_known_scores": 171,
+        "ineligible": [
+          {
+            "symbol": "HUDCO",
+            "isin": "INE031A01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-05-19; required_from=2017-01-25"
+          },
+          {
+            "symbol": "DMART",
+            "isin": "INE192R01011",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-03-21; required_from=2017-01-25"
+          }
+        ],
+        "source_resolved_exceptions": [
+          {
+            "symbol": "KARURVYSYA",
+            "vendor_score": 0.4681535735024242,
+            "corrected_score": 0.5758470107504978,
+            "score_delta": 0.10769343724807362,
+            "free_right_score_sensitivity": 0.7128458357528284,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "KARURVYSYA",
+                "ex_date": "2017-10-12",
+                "event": "rights",
+                "prior_raw_close_inr": 145.7,
+                "ratio_new_per_old": 0.16666666666666666,
+                "full_subscription_cash_per_old_share_inr": 12.666666666666666,
+                "terp_inr": 135.7428571428571,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.073352978320354,
+                "applied_signal_multiplier": 1.073352978320354,
+                "vendor_score": 0.4681535735024242,
+                "corrected_score": 0.5758470107504978,
+                "score_delta": 0.10769343724807362,
+                "free_right_score_sensitivity": 0.7128458357528284
+              }
+            ]
+          },
+          {
+            "symbol": "INDHOTEL",
+            "vendor_score": 0.086228522134766,
+            "corrected_score": 0.16065382189827293,
+            "score_delta": 0.07442529976350692,
+            "free_right_score_sensitivity": 0.3034742265617192,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "INDHOTEL",
+                "ex_date": "2017-10-04",
+                "event": "rights",
+                "prior_raw_close_inr": 121.9,
+                "ratio_new_per_old": 0.2,
+                "full_subscription_cash_per_old_share_inr": 15.0,
+                "terp_inr": 114.08333333333334,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.068517165814463,
+                "applied_signal_multiplier": 1.068517165814463,
+                "vendor_score": 0.086228522134766,
+                "corrected_score": 0.16065382189827293,
+                "score_delta": 0.07442529976350692,
+                "free_right_score_sensitivity": 0.3034742265617192
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCBANK",
+            "vendor_score": -0.1536252839550453,
+            "corrected_score": -0.15362528395504538,
+            "score_delta": -8.326672684688674e-17,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": {
+              "vendor_symbol": "IDFCBANK",
+              "vendor_isin": "INE092T01019",
+              "debt_isin": "INE092T08352",
+              "classification": "supported_debt_event_inference"
+            },
+            "classification_caveat": "exact original vendor event notice not located; event/debt match remains an inference",
+            "corrections": []
+          },
+          {
+            "symbol": "COLPAL",
+            "vendor_score": 0.2369266432087444,
+            "corrected_score": 0.24155759282764655,
+            "score_delta": 0.004630949618902147,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "COLPAL",
+                "ex_date": "2017-12-18",
+                "event": "dividend",
+                "prior_raw_close_inr": 1072.4,
+                "cash_per_share_inr": 4.0,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0037439161362784,
+                "applied_signal_multiplier": 1.0037439161362784,
+                "vendor_score": 0.2369266432087444,
+                "corrected_score": 0.24155759282764655,
+                "score_delta": 0.004630949618902147,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "CANBK",
+            "vendor_score": 0.2838222385214242,
+            "corrected_score": 0.3199151731197931,
+            "score_delta": 0.03609293459836893,
+            "free_right_score_sensitivity": 0.4122044623735668,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "CANBK",
+                "ex_date": "2017-02-17",
+                "event": "rights",
+                "prior_raw_close_inr": 296.05,
+                "ratio_new_per_old": 0.1,
+                "full_subscription_cash_per_old_share_inr": 20.700000000000003,
+                "terp_inr": 287.95454545454544,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0281136543014997,
+                "applied_signal_multiplier": 1.0281136543014997,
+                "vendor_score": 0.2838222385214242,
+                "corrected_score": 0.3199151731197931,
+                "score_delta": 0.03609293459836893,
+                "free_right_score_sensitivity": 0.4122044623735668
+              }
+            ]
+          },
+          {
+            "symbol": "ENGINERSIN",
+            "vendor_score": 0.3115084361621758,
+            "corrected_score": 0.31562232711626037,
+            "score_delta": 0.004113890954084598,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "ENGINERSIN",
+                "ex_date": "2017-09-11",
+                "event": "dividend",
+                "prior_raw_close_inr": 159.9,
+                "cash_per_share_inr": 0.5,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0031367628607277,
+                "applied_signal_multiplier": 1.0031367628607277,
+                "vendor_score": 0.3115084361621758,
+                "corrected_score": 0.31562232711626037,
+                "score_delta": 0.004113890954084598,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          }
+        ],
+        "retained_from_prior": [],
+        "selected": [
+          {
+            "symbol": "VAKRANGEE",
+            "canonical": "INE051B01021",
+            "score": 1.7900380324290517
+          },
+          {
+            "symbol": "EDELWEISS",
+            "canonical": "INE532F01054",
+            "score": 1.568284093971101
+          },
+          {
+            "symbol": "JINDALSTEL",
+            "canonical": "INE749A01030",
+            "score": 1.5085158150851576
+          },
+          {
+            "symbol": "TATAGLOBAL",
+            "canonical": "INE192A01025",
+            "score": 1.4727342521696674
+          },
+          {
+            "symbol": "PCJEWELLER",
+            "canonical": "INE785M01013",
+            "score": 1.4179480989579245
+          },
+          {
+            "symbol": "TITAN",
+            "canonical": "INE280A01028",
+            "score": 1.301625241215406
+          },
+          {
+            "symbol": "ENDURANCE",
+            "canonical": "INE913H01037",
+            "score": 1.2319194755723055
+          },
+          {
+            "symbol": "BALKRISIND",
+            "canonical": "INE787D01026",
+            "score": 1.138568487563021
+          },
+          {
+            "symbol": "DHFL",
+            "canonical": "INE202B01012",
+            "score": 1.0980854702695555
+          },
+          {
+            "symbol": "JUBLFOOD",
+            "canonical": "INE797F01012",
+            "score": 1.0839289741946136
+          },
+          {
+            "symbol": "ADANIENT",
+            "canonical": "INE423A01024",
+            "score": 1.0816282537960955
+          },
+          {
+            "symbol": "VOLTAS",
+            "canonical": "INE226A01021",
+            "score": 1.0033646832504894
+          },
+          {
+            "symbol": "TVSMOTOR",
+            "canonical": "INE494B01023",
+            "score": 0.9625413239027854
+          },
+          {
+            "symbol": "PRESTIGE",
+            "canonical": "INE811K01011",
+            "score": 0.9234237066533212
+          },
+          {
+            "symbol": "SUNTV",
+            "canonical": "INE424H01027",
+            "score": 0.8910586473979969
+          },
+          {
+            "symbol": "DLF",
+            "canonical": "INE271C01023",
+            "score": 0.8877441702810183
+          },
+          {
+            "symbol": "IGL",
+            "canonical": "INE203G01027",
+            "score": 0.8261062959027359
+          },
+          {
+            "symbol": "RELIANCE",
+            "canonical": "INE002A01018",
+            "score": 0.8016731647753514
+          },
+          {
+            "symbol": "HEXAWARE",
+            "canonical": "INE093A01033",
+            "score": 0.7660521056684406
+          },
+          {
+            "symbol": "PAGEIND",
+            "canonical": "INE761H01022",
+            "score": 0.754716433651681
+          }
+        ],
+        "selection_bounds": [],
+        "unresolved": [],
+        "ranking_policy": "positive score descending; ISIN ascending tie-break; retain prior names ranked 1-25 then fill to 20",
+        "canonical_names": [
+          "INE051B01021",
+          "INE532F01054",
+          "INE749A01030",
+          "INE192A01025",
+          "INE785M01013",
+          "INE280A01028",
+          "INE913H01037",
+          "INE787D01026",
+          "INE202B01012",
+          "INE797F01012",
+          "INE423A01024",
+          "INE226A01021",
+          "INE494B01023",
+          "INE811K01011",
+          "INE424H01027",
+          "INE271C01023",
+          "INE203G01027",
+          "INE002A01018",
+          "INE093A01033",
+          "INE761H01022"
+        ]
+      },
+      {
+        "candidate_id": "NIFTY200-A-M",
+        "signal_date": "2018-02-28",
+        "target_status": "CERTIFIED_UNDER_REGISTERED_SOURCE_CORRECTIONS",
+        "signal_rows": 201,
+        "rule_ineligible_count": 3,
+        "resolved_source_exception_count": 6,
+        "twentieth_positive_score": 0.6621649236014922,
+        "positive_known_scores": 163,
+        "ineligible": [
+          {
+            "symbol": "HUDCO",
+            "isin": "INE031A01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-05-19; required_from=2017-02-22"
+          },
+          {
+            "symbol": "DMART",
+            "isin": "INE192R01011",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-03-21; required_from=2017-02-22"
+          },
+          {
+            "symbol": "AUBANK",
+            "isin": "INE949L01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-07-10; required_from=2017-02-22"
+          }
+        ],
+        "source_resolved_exceptions": [
+          {
+            "symbol": "KARURVYSYA",
+            "vendor_score": 0.1806933003154913,
+            "corrected_score": 0.2673006703765206,
+            "score_delta": 0.08660737006102931,
+            "free_right_score_sensitivity": 0.3774755170347399,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "KARURVYSYA",
+                "ex_date": "2017-10-12",
+                "event": "rights",
+                "prior_raw_close_inr": 145.7,
+                "ratio_new_per_old": 0.16666666666666666,
+                "full_subscription_cash_per_old_share_inr": 12.666666666666666,
+                "terp_inr": 135.7428571428571,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.073352978320354,
+                "applied_signal_multiplier": 1.073352978320354,
+                "vendor_score": 0.1806933003154913,
+                "corrected_score": 0.2673006703765206,
+                "score_delta": 0.08660737006102931,
+                "free_right_score_sensitivity": 0.3774755170347399
+              }
+            ]
+          },
+          {
+            "symbol": "INDHOTEL",
+            "vendor_score": 0.1597079379715444,
+            "corrected_score": 0.23916783905388983,
+            "score_delta": 0.07945990108234544,
+            "free_right_score_sensitivity": 0.3916495255658534,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "INDHOTEL",
+                "ex_date": "2017-10-04",
+                "event": "rights",
+                "prior_raw_close_inr": 121.9,
+                "ratio_new_per_old": 0.2,
+                "full_subscription_cash_per_old_share_inr": 15.0,
+                "terp_inr": 114.08333333333334,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.068517165814463,
+                "applied_signal_multiplier": 1.068517165814463,
+                "vendor_score": 0.1597079379715444,
+                "corrected_score": 0.23916783905388983,
+                "score_delta": 0.07945990108234544,
+                "free_right_score_sensitivity": 0.3916495255658534
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCBANK",
+            "vendor_score": -0.0703617817967122,
+            "corrected_score": -0.07036178179671226,
+            "score_delta": -6.938893903907228e-17,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": {
+              "vendor_symbol": "IDFCBANK",
+              "vendor_isin": "INE092T01019",
+              "debt_isin": "INE092T08352",
+              "classification": "supported_debt_event_inference"
+            },
+            "classification_caveat": "exact original vendor event notice not located; event/debt match remains an inference",
+            "corrections": []
+          },
+          {
+            "symbol": "COLPAL",
+            "vendor_score": 0.2853178056639684,
+            "corrected_score": 0.2901299277368399,
+            "score_delta": 0.004812122072871461,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "COLPAL",
+                "ex_date": "2017-12-18",
+                "event": "dividend",
+                "prior_raw_close_inr": 1072.4,
+                "cash_per_share_inr": 4.0,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0037439161362784,
+                "applied_signal_multiplier": 1.0037439161362784,
+                "vendor_score": 0.2853178056639684,
+                "corrected_score": 0.2901299277368399,
+                "score_delta": 0.004812122072871461,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "ENGINERSIN",
+            "vendor_score": 0.1866028708133971,
+            "corrected_score": 0.19032496262899756,
+            "score_delta": 0.003722091815600459,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "ENGINERSIN",
+                "ex_date": "2017-09-11",
+                "event": "dividend",
+                "prior_raw_close_inr": 159.9,
+                "cash_per_share_inr": 0.5,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0031367628607277,
+                "applied_signal_multiplier": 1.0031367628607277,
+                "vendor_score": 0.1866028708133971,
+                "corrected_score": 0.19032496262899756,
+                "score_delta": 0.003722091815600459,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "RELCAPITAL",
+            "vendor_score": -0.0236549663030873,
+            "corrected_score": 0.13069304190535358,
+            "score_delta": 0.15434800820844088,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": []
+          }
+        ],
+        "retained_from_prior": [
+          "VAKRANGEE",
+          "PCJEWELLER",
+          "JINDALSTEL",
+          "EDELWEISS",
+          "ADANIENT",
+          "TATAGLOBAL",
+          "JUBLFOOD",
+          "TITAN",
+          "DHFL",
+          "BALKRISIND",
+          "PRESTIGE",
+          "ENDURANCE",
+          "DLF",
+          "VOLTAS",
+          "HEXAWARE",
+          "TVSMOTOR"
+        ],
+        "selected": [
+          {
+            "symbol": "VAKRANGEE",
+            "canonical": "INE051B01021",
+            "score": 2.1338294374089988
+          },
+          {
+            "symbol": "PCJEWELLER",
+            "canonical": "INE785M01013",
+            "score": 2.0012214944727256
+          },
+          {
+            "symbol": "JINDALSTEL",
+            "canonical": "INE749A01030",
+            "score": 1.4131519274376418
+          },
+          {
+            "symbol": "EDELWEISS",
+            "canonical": "INE532F01054",
+            "score": 1.2700578709235453
+          },
+          {
+            "symbol": "ADANIENT",
+            "canonical": "INE423A01024",
+            "score": 1.263004382367595
+          },
+          {
+            "symbol": "TATAGLOBAL",
+            "canonical": "INE192A01025",
+            "score": 1.186547691505086
+          },
+          {
+            "symbol": "JUBLFOOD",
+            "canonical": "INE797F01012",
+            "score": 1.1502347369920276
+          },
+          {
+            "symbol": "TITAN",
+            "canonical": "INE280A01028",
+            "score": 1.0466141997107594
+          },
+          {
+            "symbol": "DHFL",
+            "canonical": "INE202B01012",
+            "score": 0.9011660150088012
+          },
+          {
+            "symbol": "BALKRISIND",
+            "canonical": "INE787D01026",
+            "score": 0.8998605082215569
+          },
+          {
+            "symbol": "PRESTIGE",
+            "canonical": "INE811K01011",
+            "score": 0.8618771482082834
+          },
+          {
+            "symbol": "ENDURANCE",
+            "canonical": "INE913H01037",
+            "score": 0.7987695569699096
+          },
+          {
+            "symbol": "DLF",
+            "canonical": "INE271C01023",
+            "score": 0.7576064583863653
+          },
+          {
+            "symbol": "VOLTAS",
+            "canonical": "INE226A01021",
+            "score": 0.7462376719834409
+          },
+          {
+            "symbol": "HEXAWARE",
+            "canonical": "INE093A01033",
+            "score": 0.7307481146784525
+          },
+          {
+            "symbol": "TVSMOTOR",
+            "canonical": "INE494B01023",
+            "score": 0.6937729297574298
+          },
+          {
+            "symbol": "IBULHSGFIN",
+            "canonical": "INE148I01020",
+            "score": 0.6663923803860305
+          },
+          {
+            "symbol": "BIOCON",
+            "canonical": "INE376G01013",
+            "score": 0.6652770153542991
+          },
+          {
+            "symbol": "NAUKRI",
+            "canonical": "INE663F01032",
+            "score": 0.6642727581897538
+          },
+          {
+            "symbol": "MINDTREE",
+            "canonical": "INE018I01017",
+            "score": 0.6621649236014922
+          }
+        ],
+        "selection_bounds": [],
+        "unresolved": [],
+        "ranking_policy": "positive score descending; ISIN ascending tie-break; retain prior names ranked 1-25 then fill to 20",
+        "canonical_names": [
+          "INE051B01021",
+          "INE785M01013",
+          "INE749A01030",
+          "INE532F01054",
+          "INE423A01024",
+          "INE192A01025",
+          "INE797F01012",
+          "INE280A01028",
+          "INE202B01012",
+          "INE787D01026",
+          "INE811K01011",
+          "INE913H01037",
+          "INE271C01023",
+          "INE226A01021",
+          "INE093A01033",
+          "INE494B01023",
+          "INE148I01020",
+          "INE376G01013",
+          "INE663F01032",
+          "INE018I01017"
+        ]
+      },
+      {
+        "candidate_id": "NIFTY200-A-M",
+        "signal_date": "2018-03-28",
+        "target_status": "CERTIFIED_UNDER_REGISTERED_SOURCE_CORRECTIONS",
+        "signal_rows": 201,
+        "rule_ineligible_count": 2,
+        "resolved_source_exception_count": 8,
+        "twentieth_positive_score": 0.571427543565957,
+        "positive_known_scores": 149,
+        "ineligible": [
+          {
+            "symbol": "HUDCO",
+            "isin": "INE031A01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-05-19; required_from=2017-03-23"
+          },
+          {
+            "symbol": "AUBANK",
+            "isin": "INE949L01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-07-10; required_from=2017-03-23"
+          }
+        ],
+        "source_resolved_exceptions": [
+          {
+            "symbol": "KARURVYSYA",
+            "vendor_score": 0.049512097004766,
+            "corrected_score": 0.12649693510330562,
+            "score_delta": 0.07698483809853962,
+            "free_right_score_sensitivity": 0.2244307798388938,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "KARURVYSYA",
+                "ex_date": "2017-10-12",
+                "event": "rights",
+                "prior_raw_close_inr": 145.7,
+                "ratio_new_per_old": 0.16666666666666666,
+                "full_subscription_cash_per_old_share_inr": 12.666666666666666,
+                "terp_inr": 135.7428571428571,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.073352978320354,
+                "applied_signal_multiplier": 1.073352978320354,
+                "vendor_score": 0.049512097004766,
+                "corrected_score": 0.12649693510330562,
+                "score_delta": 0.07698483809853962,
+                "free_right_score_sensitivity": 0.2244307798388938
+              }
+            ]
+          },
+          {
+            "symbol": "INDHOTEL",
+            "vendor_score": 0.0713612715380427,
+            "corrected_score": 0.14476790942720852,
+            "score_delta": 0.07340663788916582,
+            "free_right_score_sensitivity": 0.28563352584565127,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "INDHOTEL",
+                "ex_date": "2017-10-04",
+                "event": "rights",
+                "prior_raw_close_inr": 121.9,
+                "ratio_new_per_old": 0.2,
+                "full_subscription_cash_per_old_share_inr": 15.0,
+                "terp_inr": 114.08333333333334,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.068517165814463,
+                "applied_signal_multiplier": 1.068517165814463,
+                "vendor_score": 0.0713612715380427,
+                "corrected_score": 0.14476790942720852,
+                "score_delta": 0.07340663788916582,
+                "free_right_score_sensitivity": 0.28563352584565127
+              }
+            ]
+          },
+          {
+            "symbol": "TATASTEEL",
+            "vendor_score": 0.3972158550259537,
+            "corrected_score": 0.4825975869311627,
+            "score_delta": 0.08538173190520904,
+            "free_right_score_sensitivity": 0.7325476602321828,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": true,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "TATASTEEL",
+                "ex_date": "2018-01-31",
+                "event": "rights",
+                "prior_raw_close_inr": 775.85,
+                "ratio_new_per_old": 0.24,
+                "full_subscription_cash_per_old_share_inr": 130.8,
+                "terp_inr": 731.1693548387098,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0611084762587546,
+                "applied_signal_multiplier": 1.0611084762587546,
+                "vendor_score": 0.3972158550259537,
+                "corrected_score": 0.4825975869311627,
+                "score_delta": 0.08538173190520904,
+                "free_right_score_sensitivity": 0.7325476602321828
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCBANK",
+            "vendor_score": -0.1249432830983634,
+            "corrected_score": -0.12494328309836344,
+            "score_delta": -4.163336342344337e-17,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": {
+              "vendor_symbol": "IDFCBANK",
+              "vendor_isin": "INE092T01019",
+              "debt_isin": "INE092T08352",
+              "classification": "supported_debt_event_inference"
+            },
+            "classification_caveat": "exact original vendor event notice not located; event/debt match remains an inference",
+            "corrections": []
+          },
+          {
+            "symbol": "PEL",
+            "vendor_score": 0.416395090759696,
+            "corrected_score": 0.42469674670664936,
+            "score_delta": 0.008301655946953368,
+            "free_right_score_sensitivity": 0.4779774860101176,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "PEL",
+                "ex_date": "2018-01-31",
+                "event": "rights",
+                "prior_raw_close_inr": 2766.95,
+                "ratio_new_per_old": 0.043478260869565216,
+                "full_subscription_cash_per_old_share_inr": 103.47826086956522,
+                "terp_inr": 2750.827083333333,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0058611160128355,
+                "applied_signal_multiplier": 1.0058611160128355,
+                "vendor_score": 0.416395090759696,
+                "corrected_score": 0.42469674670664936,
+                "score_delta": 0.008301655946953368,
+                "free_right_score_sensitivity": 0.4779774860101176
+              }
+            ]
+          },
+          {
+            "symbol": "COLPAL",
+            "vendor_score": 0.0798617787131978,
+            "corrected_score": 0.08390469065147244,
+            "score_delta": 0.004042911938274635,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "COLPAL",
+                "ex_date": "2017-12-18",
+                "event": "dividend",
+                "prior_raw_close_inr": 1072.4,
+                "cash_per_share_inr": 4.0,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0037439161362784,
+                "applied_signal_multiplier": 1.0037439161362784,
+                "vendor_score": 0.0798617787131978,
+                "corrected_score": 0.08390469065147244,
+                "score_delta": 0.004042911938274635,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "ENGINERSIN",
+            "vendor_score": 0.1903950953678472,
+            "corrected_score": 0.19412908249258942,
+            "score_delta": 0.0037339871247422107,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "ENGINERSIN",
+                "ex_date": "2017-09-11",
+                "event": "dividend",
+                "prior_raw_close_inr": 159.9,
+                "cash_per_share_inr": 0.5,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0031367628607277,
+                "applied_signal_multiplier": 1.0031367628607277,
+                "vendor_score": 0.1903950953678472,
+                "corrected_score": 0.19412908249258942,
+                "score_delta": 0.0037339871247422107,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "RELCAPITAL",
+            "vendor_score": -0.1947507147608278,
+            "corrected_score": -0.07587403848274188,
+            "score_delta": 0.11887667627808593,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": []
+          }
+        ],
+        "retained_from_prior": [
+          "JINDALSTEL",
+          "ADANIENT",
+          "EDELWEISS",
+          "JUBLFOOD",
+          "TATAGLOBAL",
+          "TITAN",
+          "ENDURANCE",
+          "MINDTREE",
+          "BIOCON",
+          "PRESTIGE",
+          "PCJEWELLER",
+          "DHFL",
+          "VOLTAS",
+          "TVSMOTOR",
+          "DLF",
+          "HEXAWARE",
+          "BALKRISIND"
+        ],
+        "selected": [
+          {
+            "symbol": "JINDALSTEL",
+            "canonical": "INE749A01030",
+            "score": 1.1310756972111555
+          },
+          {
+            "symbol": "ADANIENT",
+            "canonical": "INE423A01024",
+            "score": 0.9722108973035628
+          },
+          {
+            "symbol": "EDELWEISS",
+            "canonical": "INE532F01054",
+            "score": 0.9121643528920648
+          },
+          {
+            "symbol": "JUBLFOOD",
+            "canonical": "INE797F01012",
+            "score": 0.8404705708166327
+          },
+          {
+            "symbol": "TATAGLOBAL",
+            "canonical": "INE192A01025",
+            "score": 0.8298937926471464
+          },
+          {
+            "symbol": "TITAN",
+            "canonical": "INE280A01028",
+            "score": 0.8222175295230802
+          },
+          {
+            "symbol": "ENDURANCE",
+            "canonical": "INE913H01037",
+            "score": 0.7717488162002732
+          },
+          {
+            "symbol": "MINDTREE",
+            "canonical": "INE018I01017",
+            "score": 0.7343877601773254
+          },
+          {
+            "symbol": "BIOCON",
+            "canonical": "INE376G01013",
+            "score": 0.6754697505546865
+          },
+          {
+            "symbol": "PRESTIGE",
+            "canonical": "INE811K01011",
+            "score": 0.6717633129099216
+          },
+          {
+            "symbol": "PCJEWELLER",
+            "canonical": "INE785M01013",
+            "score": 0.6512053137082972
+          },
+          {
+            "symbol": "DHFL",
+            "canonical": "INE202B01012",
+            "score": 0.6432227471076359
+          },
+          {
+            "symbol": "VOLTAS",
+            "canonical": "INE226A01021",
+            "score": 0.6003783755186256
+          },
+          {
+            "symbol": "TVSMOTOR",
+            "canonical": "INE494B01023",
+            "score": 0.5962088692841505
+          },
+          {
+            "symbol": "DLF",
+            "canonical": "INE271C01023",
+            "score": 0.571427543565957
+          },
+          {
+            "symbol": "HEXAWARE",
+            "canonical": "INE093A01033",
+            "score": 0.5632434926261392
+          },
+          {
+            "symbol": "BALKRISIND",
+            "canonical": "INE787D01026",
+            "score": 0.5407755090064372
+          },
+          {
+            "symbol": "DMART",
+            "canonical": "INE192R01011",
+            "score": 1.033866267622273
+          },
+          {
+            "symbol": "COROMANDEL",
+            "canonical": "INE169A01031",
+            "score": 0.7404408050626468
+          },
+          {
+            "symbol": "JSWSTEEL",
+            "canonical": "INE019A01038",
+            "score": 0.710787132564354
+          }
+        ],
+        "selection_bounds": [],
+        "unresolved": [],
+        "ranking_policy": "positive score descending; ISIN ascending tie-break; retain prior names ranked 1-25 then fill to 20",
+        "canonical_names": [
+          "INE749A01030",
+          "INE423A01024",
+          "INE532F01054",
+          "INE797F01012",
+          "INE192A01025",
+          "INE280A01028",
+          "INE913H01037",
+          "INE018I01017",
+          "INE376G01013",
+          "INE811K01011",
+          "INE785M01013",
+          "INE202B01012",
+          "INE226A01021",
+          "INE494B01023",
+          "INE271C01023",
+          "INE093A01033",
+          "INE787D01026",
+          "INE192R01011",
+          "INE169A01031",
+          "INE019A01038"
+        ]
+      }
+    ],
+    "NIFTY200-B-M": [
+      {
+        "candidate_id": "NIFTY200-B-M",
+        "signal_date": "2018-01-31",
+        "target_status": "CERTIFIED_UNDER_REGISTERED_SOURCE_CORRECTIONS",
+        "signal_rows": 201,
+        "rule_ineligible_count": 2,
+        "resolved_source_exception_count": 6,
+        "twentieth_positive_score": 1.8972407483291167,
+        "positive_known_scores": 164,
+        "ineligible": [
+          {
+            "symbol": "HUDCO",
+            "isin": "INE031A01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-05-19; required_from=2016-12-27"
+          },
+          {
+            "symbol": "DMART",
+            "isin": "INE192R01011",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-03-21; required_from=2016-12-27"
+          }
+        ],
+        "source_resolved_exceptions": [
+          {
+            "symbol": "KARURVYSYA",
+            "vendor_score": 0.5659774499973493,
+            "corrected_score": 0.895369048190579,
+            "score_delta": 0.3293915981932297,
+            "free_right_score_sensitivity": 1.2646793037142632,
+            "baseline_annualized_volatility_pct": 30.681254043848277,
+            "corrected_annualized_volatility_pct": 29.00922562837977,
+            "free_right_annualized_volatility_pct": 29.19768999072458,
+            "volatility_delta_pct": -1.6720284154685068,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "KARURVYSYA",
+                "ex_date": "2017-10-12",
+                "event": "rights",
+                "prior_raw_close_inr": 145.7,
+                "ratio_new_per_old": 0.16666666666666666,
+                "full_subscription_cash_per_old_share_inr": 12.666666666666666,
+                "terp_inr": 135.7428571428571,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.073352978320354,
+                "applied_signal_multiplier": 1.073352978320354,
+                "vendor_score": 0.5659774499973493,
+                "corrected_score": 0.895369048190579,
+                "score_delta": 0.3293915981932297,
+                "free_right_score_sensitivity": 1.2646793037142632
+              }
+            ]
+          },
+          {
+            "symbol": "INDHOTEL",
+            "vendor_score": 0.0680925515589949,
+            "corrected_score": 0.3262636268435339,
+            "score_delta": 0.258171075284539,
+            "free_right_score_sensitivity": 0.785666017050065,
+            "baseline_annualized_volatility_pct": 29.052419190481523,
+            "corrected_annualized_volatility_pct": 27.47935567547869,
+            "free_right_annualized_volatility_pct": 28.477627307818175,
+            "volatility_delta_pct": -1.5730635150028327,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "INDHOTEL",
+                "ex_date": "2017-10-04",
+                "event": "rights",
+                "prior_raw_close_inr": 121.9,
+                "ratio_new_per_old": 0.2,
+                "full_subscription_cash_per_old_share_inr": 15.0,
+                "terp_inr": 114.08333333333334,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.068517165814463,
+                "applied_signal_multiplier": 1.068517165814463,
+                "vendor_score": 0.0680925515589949,
+                "corrected_score": 0.3262636268435339,
+                "score_delta": 0.258171075284539,
+                "free_right_score_sensitivity": 0.785666017050065
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCBANK",
+            "vendor_score": -0.4285246187159456,
+            "corrected_score": -0.4285246187159456,
+            "score_delta": 0.0,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 26.953087411930372,
+            "corrected_annualized_volatility_pct": 26.953087411930372,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": 0.0,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": {
+              "vendor_symbol": "IDFCBANK",
+              "vendor_isin": "INE092T01019",
+              "debt_isin": "INE092T08352",
+              "classification": "supported_debt_event_inference"
+            },
+            "classification_caveat": "exact original vendor event notice not located; event/debt match remains an inference",
+            "corrections": []
+          },
+          {
+            "symbol": "COLPAL",
+            "vendor_score": 0.7376443875598315,
+            "corrected_score": 0.7608457911218552,
+            "score_delta": 0.023201403562023715,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 17.76982629408214,
+            "corrected_annualized_volatility_pct": 17.78452211538135,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": 0.014695821299209655,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "COLPAL",
+                "ex_date": "2017-12-18",
+                "event": "dividend",
+                "prior_raw_close_inr": 1072.4,
+                "cash_per_share_inr": 4.0,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0037439161362784,
+                "applied_signal_multiplier": 1.0037439161362784,
+                "vendor_score": 0.7376443875598315,
+                "corrected_score": 0.7608457911218552,
+                "score_delta": 0.023201403562023715,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "CANBK",
+            "vendor_score": 0.3032873147609651,
+            "corrected_score": 0.34487210868314616,
+            "score_delta": 0.04158479392218106,
+            "free_right_score_sensitivity": 0.44376680298920607,
+            "baseline_annualized_volatility_pct": 43.47676161663802,
+            "corrected_annualized_volatility_pct": 43.46711907892763,
+            "free_right_annualized_volatility_pct": 44.178747364067114,
+            "volatility_delta_pct": -0.009642537710391252,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "CANBK",
+                "ex_date": "2017-02-17",
+                "event": "rights",
+                "prior_raw_close_inr": 296.05,
+                "ratio_new_per_old": 0.1,
+                "full_subscription_cash_per_old_share_inr": 20.700000000000003,
+                "terp_inr": 287.95454545454544,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0281136543014997,
+                "applied_signal_multiplier": 1.0281136543014997,
+                "vendor_score": 0.3032873147609651,
+                "corrected_score": 0.34487210868314616,
+                "score_delta": 0.04158479392218106,
+                "free_right_score_sensitivity": 0.44376680298920607
+              }
+            ]
+          },
+          {
+            "symbol": "ENGINERSIN",
+            "vendor_score": 0.906082961004634,
+            "corrected_score": 0.9195266974180345,
+            "score_delta": 0.013443736413400464,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 30.095305229740326,
+            "corrected_annualized_volatility_pct": 30.08945312137623,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": -0.005852108364095443,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "ENGINERSIN",
+                "ex_date": "2017-09-11",
+                "event": "dividend",
+                "prior_raw_close_inr": 159.9,
+                "cash_per_share_inr": 0.5,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0031367628607277,
+                "applied_signal_multiplier": 1.0031367628607277,
+                "vendor_score": 0.906082961004634,
+                "corrected_score": 0.9195266974180345,
+                "score_delta": 0.013443736413400464,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          }
+        ],
+        "retained_from_prior": [],
+        "selected": [
+          {
+            "symbol": "VAKRANGEE",
+            "canonical": "INE051B01021",
+            "score": 4.9883581862281
+          },
+          {
+            "symbol": "TATAGLOBAL",
+            "canonical": "INE192A01025",
+            "score": 3.620907504674306
+          },
+          {
+            "symbol": "ENDURANCE",
+            "canonical": "INE913H01037",
+            "score": 3.0248770936640725
+          },
+          {
+            "symbol": "PCJEWELLER",
+            "canonical": "INE785M01013",
+            "score": 2.821034486280083
+          },
+          {
+            "symbol": "TVSMOTOR",
+            "canonical": "INE494B01023",
+            "score": 2.7950090206571097
+          },
+          {
+            "symbol": "BALKRISIND",
+            "canonical": "INE787D01026",
+            "score": 2.6651091194394807
+          },
+          {
+            "symbol": "MARUTI",
+            "canonical": "INE585B01010",
+            "score": 2.64724584936543
+          },
+          {
+            "symbol": "IGL",
+            "canonical": "INE203G01027",
+            "score": 2.512580231056193
+          },
+          {
+            "symbol": "TITAN",
+            "canonical": "INE280A01028",
+            "score": 2.4891416493391345
+          },
+          {
+            "symbol": "EDELWEISS",
+            "canonical": "INE532F01054",
+            "score": 2.426859714244152
+          },
+          {
+            "symbol": "PAGEIND",
+            "canonical": "INE761H01022",
+            "score": 2.2999298838344937
+          },
+          {
+            "symbol": "VOLTAS",
+            "canonical": "INE226A01021",
+            "score": 2.1827984681646293
+          },
+          {
+            "symbol": "JUBLFOOD",
+            "canonical": "INE797F01012",
+            "score": 2.141480096603867
+          },
+          {
+            "symbol": "HINDUNILVR",
+            "canonical": "INE030A01027",
+            "score": 2.0833682061646286
+          },
+          {
+            "symbol": "DHFL",
+            "canonical": "INE202B01012",
+            "score": 2.0713017380816554
+          },
+          {
+            "symbol": "RAJESHEXPO",
+            "canonical": "INE343B01030",
+            "score": 2.0661810723716805
+          },
+          {
+            "symbol": "JINDALSTEL",
+            "canonical": "INE749A01030",
+            "score": 2.040910097847589
+          },
+          {
+            "symbol": "BRITANNIA",
+            "canonical": "INE216A01030",
+            "score": 1.9865627217427628
+          },
+          {
+            "symbol": "PGHH",
+            "canonical": "INE179A01014",
+            "score": 1.9046525286446967
+          },
+          {
+            "symbol": "RELIANCE",
+            "canonical": "INE002A01018",
+            "score": 1.8972407483291167
+          }
+        ],
+        "selection_bounds": [],
+        "unresolved": [],
+        "ranking_policy": "positive score descending; ISIN ascending tie-break; retain prior names ranked 1-25 then fill to 20",
+        "canonical_names": [
+          "INE051B01021",
+          "INE192A01025",
+          "INE913H01037",
+          "INE785M01013",
+          "INE494B01023",
+          "INE787D01026",
+          "INE585B01010",
+          "INE203G01027",
+          "INE280A01028",
+          "INE532F01054",
+          "INE761H01022",
+          "INE226A01021",
+          "INE797F01012",
+          "INE030A01027",
+          "INE202B01012",
+          "INE343B01030",
+          "INE749A01030",
+          "INE216A01030",
+          "INE179A01014",
+          "INE002A01018"
+        ]
+      },
+      {
+        "candidate_id": "NIFTY200-B-M",
+        "signal_date": "2018-02-28",
+        "target_status": "CERTIFIED_UNDER_REGISTERED_SOURCE_CORRECTIONS",
+        "signal_rows": 201,
+        "rule_ineligible_count": 3,
+        "resolved_source_exception_count": 6,
+        "twentieth_positive_score": 1.7913347145798963,
+        "positive_known_scores": 166,
+        "ineligible": [
+          {
+            "symbol": "HUDCO",
+            "isin": "INE031A01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-05-19; required_from=2017-01-23"
+          },
+          {
+            "symbol": "DMART",
+            "isin": "INE192R01011",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-03-21; required_from=2017-01-23"
+          },
+          {
+            "symbol": "AUBANK",
+            "isin": "INE949L01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-07-10; required_from=2017-01-23"
+          }
+        ],
+        "source_resolved_exceptions": [
+          {
+            "symbol": "KARURVYSYA",
+            "vendor_score": -0.0195204777821046,
+            "corrected_score": 0.2231130205333691,
+            "score_delta": 0.2426334983154737,
+            "free_right_score_sensitivity": 0.5295625927560011,
+            "baseline_annualized_volatility_pct": 31.526233177640663,
+            "corrected_annualized_volatility_pct": 29.91644654176153,
+            "free_right_annualized_volatility_pct": 30.116726322475103,
+            "volatility_delta_pct": -1.6097866358791322,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "KARURVYSYA",
+                "ex_date": "2017-10-12",
+                "event": "rights",
+                "prior_raw_close_inr": 145.7,
+                "ratio_new_per_old": 0.16666666666666666,
+                "full_subscription_cash_per_old_share_inr": 12.666666666666666,
+                "terp_inr": 135.7428571428571,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.073352978320354,
+                "applied_signal_multiplier": 1.073352978320354,
+                "vendor_score": -0.0195204777821046,
+                "corrected_score": 0.2231130205333691,
+                "score_delta": 0.2426334983154737,
+                "free_right_score_sensitivity": 0.5295625927560011
+              }
+            ]
+          },
+          {
+            "symbol": "INDHOTEL",
+            "vendor_score": 0.6156445347727154,
+            "corrected_score": 0.9132622881837161,
+            "score_delta": 0.2976177534110007,
+            "free_right_score_sensitivity": 1.388448599879071,
+            "baseline_annualized_volatility_pct": 31.938814853104258,
+            "corrected_annualized_volatility_pct": 30.508128744197293,
+            "free_right_annualized_volatility_pct": 31.39874834222494,
+            "volatility_delta_pct": -1.430686108906965,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "INDHOTEL",
+                "ex_date": "2017-10-04",
+                "event": "rights",
+                "prior_raw_close_inr": 121.9,
+                "ratio_new_per_old": 0.2,
+                "full_subscription_cash_per_old_share_inr": 15.0,
+                "terp_inr": 114.08333333333334,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.068517165814463,
+                "applied_signal_multiplier": 1.068517165814463,
+                "vendor_score": 0.6156445347727154,
+                "corrected_score": 0.9132622881837161,
+                "score_delta": 0.2976177534110007,
+                "free_right_score_sensitivity": 1.388448599879071
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCBANK",
+            "vendor_score": -0.0328707210946329,
+            "corrected_score": -0.03287072109463292,
+            "score_delta": -2.0816681711721685e-17,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 31.24808421126527,
+            "corrected_annualized_volatility_pct": 31.24808421126527,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": 0.0,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": {
+              "vendor_symbol": "IDFCBANK",
+              "vendor_isin": "INE092T01019",
+              "debt_isin": "INE092T08352",
+              "classification": "supported_debt_event_inference"
+            },
+            "classification_caveat": "exact original vendor event notice not located; event/debt match remains an inference",
+            "corrections": []
+          },
+          {
+            "symbol": "COLPAL",
+            "vendor_score": 0.9366637142745986,
+            "corrected_score": 0.9602338252618192,
+            "score_delta": 0.023570110987220616,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 17.973661090423445,
+            "corrected_annualized_volatility_pct": 17.988012062631203,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": 0.014350972207758161,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "COLPAL",
+                "ex_date": "2017-12-18",
+                "event": "dividend",
+                "prior_raw_close_inr": 1072.4,
+                "cash_per_share_inr": 4.0,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0037439161362784,
+                "applied_signal_multiplier": 1.0037439161362784,
+                "vendor_score": 0.9366637142745986,
+                "corrected_score": 0.9602338252618192,
+                "score_delta": 0.023570110987220616,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "CANBK",
+            "vendor_score": 0.2385978804068435,
+            "corrected_score": 0.2386393574916625,
+            "score_delta": 4.14770848190249e-05,
+            "free_right_score_sensitivity": 0.23493136111841945,
+            "baseline_annualized_volatility_pct": 44.415896304796824,
+            "corrected_annualized_volatility_pct": 44.40817653083457,
+            "free_right_annualized_volatility_pct": 45.1090849014104,
+            "volatility_delta_pct": -0.007719773962257648,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "CANBK",
+                "ex_date": "2017-02-17",
+                "event": "rights",
+                "prior_raw_close_inr": 296.05,
+                "ratio_new_per_old": 0.1,
+                "full_subscription_cash_per_old_share_inr": 20.700000000000003,
+                "terp_inr": 287.95454545454544,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0281136543014997,
+                "applied_signal_multiplier": 1.0281136543014997,
+                "vendor_score": 0.2385978804068435,
+                "corrected_score": 0.2386393574916625,
+                "score_delta": 4.14770848190249e-05,
+                "free_right_score_sensitivity": 0.23493136111841945
+              }
+            ]
+          },
+          {
+            "symbol": "ENGINERSIN",
+            "vendor_score": 0.5497907338073009,
+            "corrected_score": 0.5626296273179051,
+            "score_delta": 0.012838893510604188,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 28.527539419789676,
+            "corrected_annualized_volatility_pct": 28.521517320868174,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": -0.0060220989215018506,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "ENGINERSIN",
+                "ex_date": "2017-09-11",
+                "event": "dividend",
+                "prior_raw_close_inr": 159.9,
+                "cash_per_share_inr": 0.5,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0031367628607277,
+                "applied_signal_multiplier": 1.0031367628607277,
+                "vendor_score": 0.5497907338073009,
+                "corrected_score": 0.5626296273179051,
+                "score_delta": 0.012838893510604188,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          }
+        ],
+        "retained_from_prior": [
+          "VAKRANGEE",
+          "PCJEWELLER",
+          "TATAGLOBAL",
+          "JUBLFOOD",
+          "JINDALSTEL",
+          "MARUTI",
+          "HINDUNILVR",
+          "BALKRISIND",
+          "TITAN",
+          "TVSMOTOR",
+          "RAJESHEXPO",
+          "EDELWEISS",
+          "ENDURANCE",
+          "RELIANCE",
+          "PGHH"
+        ],
+        "selected": [
+          {
+            "symbol": "VAKRANGEE",
+            "canonical": "INE051B01021",
+            "score": 5.520727904271135
+          },
+          {
+            "symbol": "PCJEWELLER",
+            "canonical": "INE785M01013",
+            "score": 3.21092031035442
+          },
+          {
+            "symbol": "TATAGLOBAL",
+            "canonical": "INE192A01025",
+            "score": 2.73029831741434
+          },
+          {
+            "symbol": "JUBLFOOD",
+            "canonical": "INE797F01012",
+            "score": 2.550520428664305
+          },
+          {
+            "symbol": "JINDALSTEL",
+            "canonical": "INE749A01030",
+            "score": 2.5432208136058305
+          },
+          {
+            "symbol": "MARUTI",
+            "canonical": "INE585B01010",
+            "score": 2.459086166550822
+          },
+          {
+            "symbol": "HINDUNILVR",
+            "canonical": "INE030A01027",
+            "score": 2.3482968051266075
+          },
+          {
+            "symbol": "BALKRISIND",
+            "canonical": "INE787D01026",
+            "score": 2.269928858079205
+          },
+          {
+            "symbol": "TITAN",
+            "canonical": "INE280A01028",
+            "score": 2.05485190027505
+          },
+          {
+            "symbol": "TVSMOTOR",
+            "canonical": "INE494B01023",
+            "score": 2.0145910664353237
+          },
+          {
+            "symbol": "RAJESHEXPO",
+            "canonical": "INE343B01030",
+            "score": 1.936871261483113
+          },
+          {
+            "symbol": "EDELWEISS",
+            "canonical": "INE532F01054",
+            "score": 1.798207879349694
+          },
+          {
+            "symbol": "ENDURANCE",
+            "canonical": "INE913H01037",
+            "score": 1.7913347145798963
+          },
+          {
+            "symbol": "RELIANCE",
+            "canonical": "INE002A01018",
+            "score": 1.7710727890878233
+          },
+          {
+            "symbol": "PGHH",
+            "canonical": "INE179A01014",
+            "score": 1.6847615589367542
+          },
+          {
+            "symbol": "MINDTREE",
+            "canonical": "INE018I01017",
+            "score": 2.326618295426278
+          },
+          {
+            "symbol": "HDFCBANK",
+            "canonical": "INE040A01034",
+            "score": 2.1709759683238024
+          },
+          {
+            "symbol": "MPHASIS",
+            "canonical": "INE356A01018",
+            "score": 1.9923257773368983
+          },
+          {
+            "symbol": "ADANIENT",
+            "canonical": "INE423A01024",
+            "score": 1.93491926540982
+          },
+          {
+            "symbol": "LT",
+            "canonical": "INE018A01030",
+            "score": 1.8596663248082843
+          }
+        ],
+        "selection_bounds": [
+          {
+            "symbol": "RELCAPITAL",
+            "reason": "B_volatility_not_calculated_missing_RHFL_prelisting_daily_marks",
+            "return_numerator": -0.049710906398648724,
+            "selection_bound": "NONPOSITIVE; cannot displace a positive target"
+          }
+        ],
+        "unresolved": [],
+        "ranking_policy": "positive score descending; ISIN ascending tie-break; retain prior names ranked 1-25 then fill to 20",
+        "canonical_names": [
+          "INE051B01021",
+          "INE785M01013",
+          "INE192A01025",
+          "INE797F01012",
+          "INE749A01030",
+          "INE585B01010",
+          "INE030A01027",
+          "INE787D01026",
+          "INE280A01028",
+          "INE494B01023",
+          "INE343B01030",
+          "INE532F01054",
+          "INE913H01037",
+          "INE002A01018",
+          "INE179A01014",
+          "INE018I01017",
+          "INE040A01034",
+          "INE356A01018",
+          "INE423A01024",
+          "INE018A01030"
+        ]
+      },
+      {
+        "candidate_id": "NIFTY200-B-M",
+        "signal_date": "2018-03-28",
+        "target_status": "CERTIFIED_UNDER_REGISTERED_SOURCE_CORRECTIONS",
+        "signal_rows": 201,
+        "rule_ineligible_count": 3,
+        "resolved_source_exception_count": 7,
+        "twentieth_positive_score": 1.3739925275967926,
+        "positive_known_scores": 147,
+        "ineligible": [
+          {
+            "symbol": "HUDCO",
+            "isin": "INE031A01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-05-19; required_from=2017-02-20"
+          },
+          {
+            "symbol": "DMART",
+            "isin": "INE192R01011",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-03-21; required_from=2017-02-20"
+          },
+          {
+            "symbol": "AUBANK",
+            "isin": "INE949L01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-07-10; required_from=2017-02-20"
+          }
+        ],
+        "source_resolved_exceptions": [
+          {
+            "symbol": "KARURVYSYA",
+            "vendor_score": -0.2903901855411384,
+            "corrected_score": -0.0831707448197351,
+            "score_delta": 0.20721944072140328,
+            "free_right_score_sensitivity": 0.1987551117106991,
+            "baseline_annualized_volatility_pct": 31.517257063804315,
+            "corrected_annualized_volatility_pct": 29.91860803135405,
+            "free_right_annualized_volatility_pct": 30.13246200745346,
+            "volatility_delta_pct": -1.5986490324502647,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "KARURVYSYA",
+                "ex_date": "2017-10-12",
+                "event": "rights",
+                "prior_raw_close_inr": 145.7,
+                "ratio_new_per_old": 0.16666666666666666,
+                "full_subscription_cash_per_old_share_inr": 12.666666666666666,
+                "terp_inr": 135.7428571428571,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.073352978320354,
+                "applied_signal_multiplier": 1.073352978320354,
+                "vendor_score": -0.2903901855411384,
+                "corrected_score": -0.0831707448197351,
+                "score_delta": 0.20721944072140328,
+                "free_right_score_sensitivity": 0.1987551117106991
+              }
+            ]
+          },
+          {
+            "symbol": "INDHOTEL",
+            "vendor_score": 0.3591893632584382,
+            "corrected_score": 0.6180177635194206,
+            "score_delta": 0.2588284002609824,
+            "free_right_score_sensitivity": 1.0549547610604422,
+            "baseline_annualized_volatility_pct": 32.87976735434764,
+            "corrected_annualized_volatility_pct": 31.505520480447608,
+            "free_right_annualized_volatility_pct": 32.39198162939484,
+            "volatility_delta_pct": -1.3742468739000344,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "INDHOTEL",
+                "ex_date": "2017-10-04",
+                "event": "rights",
+                "prior_raw_close_inr": 121.9,
+                "ratio_new_per_old": 0.2,
+                "full_subscription_cash_per_old_share_inr": 15.0,
+                "terp_inr": 114.08333333333334,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.068517165814463,
+                "applied_signal_multiplier": 1.068517165814463,
+                "vendor_score": 0.3591893632584382,
+                "corrected_score": 0.6180177635194206,
+                "score_delta": 0.2588284002609824,
+                "free_right_score_sensitivity": 1.0549547610604422
+              }
+            ]
+          },
+          {
+            "symbol": "TATASTEEL",
+            "vendor_score": 0.8075864259261503,
+            "corrected_score": 1.1286147559886288,
+            "score_delta": 0.32102833006247855,
+            "free_right_score_sensitivity": 1.795984203947401,
+            "baseline_annualized_volatility_pct": 28.507393364519125,
+            "corrected_annualized_volatility_pct": 27.059616191469566,
+            "free_right_annualized_volatility_pct": 29.258335315512223,
+            "volatility_delta_pct": -1.447777173049559,
+            "free_right_sensitivity_crosses_cutoff": true,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "TATASTEEL",
+                "ex_date": "2018-01-31",
+                "event": "rights",
+                "prior_raw_close_inr": 775.85,
+                "ratio_new_per_old": 0.24,
+                "full_subscription_cash_per_old_share_inr": 130.8,
+                "terp_inr": 731.1693548387098,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0611084762587546,
+                "applied_signal_multiplier": 1.0611084762587546,
+                "vendor_score": 0.8075864259261503,
+                "corrected_score": 1.1286147559886288,
+                "score_delta": 0.32102833006247855,
+                "free_right_score_sensitivity": 1.795984203947401
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCBANK",
+            "vendor_score": -0.3204587423354729,
+            "corrected_score": -0.3204587423354729,
+            "score_delta": 0.0,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 31.34803143188999,
+            "corrected_annualized_volatility_pct": 31.34803143188999,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": 0.0,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": {
+              "vendor_symbol": "IDFCBANK",
+              "vendor_isin": "INE092T01019",
+              "debt_isin": "INE092T08352",
+              "classification": "supported_debt_event_inference"
+            },
+            "classification_caveat": "exact original vendor event notice not located; event/debt match remains an inference",
+            "corrections": []
+          },
+          {
+            "symbol": "PEL",
+            "vendor_score": 0.6708148841774252,
+            "corrected_score": 0.6949852965799997,
+            "score_delta": 0.02417041240257456,
+            "free_right_score_sensitivity": 0.8430056692076423,
+            "baseline_annualized_volatility_pct": 29.44869848046327,
+            "corrected_annualized_volatility_pct": 29.43446589839859,
+            "free_right_annualized_volatility_pct": 29.609940964235715,
+            "volatility_delta_pct": -0.014232582064682475,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "PEL",
+                "ex_date": "2018-01-31",
+                "event": "rights",
+                "prior_raw_close_inr": 2766.95,
+                "ratio_new_per_old": 0.043478260869565216,
+                "full_subscription_cash_per_old_share_inr": 103.47826086956522,
+                "terp_inr": 2750.827083333333,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0058611160128355,
+                "applied_signal_multiplier": 1.0058611160128355,
+                "vendor_score": 0.6708148841774252,
+                "corrected_score": 0.6949852965799997,
+                "score_delta": 0.02417041240257456,
+                "free_right_score_sensitivity": 0.8430056692076423
+              }
+            ]
+          },
+          {
+            "symbol": "COLPAL",
+            "vendor_score": 0.1483667345353348,
+            "corrected_score": 0.1693364679681318,
+            "score_delta": 0.020969733432796983,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 18.214884564186598,
+            "corrected_annualized_volatility_pct": 18.22993276576742,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": 0.01504820158082154,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "COLPAL",
+                "ex_date": "2017-12-18",
+                "event": "dividend",
+                "prior_raw_close_inr": 1072.4,
+                "cash_per_share_inr": 4.0,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0037439161362784,
+                "applied_signal_multiplier": 1.0037439161362784,
+                "vendor_score": 0.1483667345353348,
+                "corrected_score": 0.1693364679681318,
+                "score_delta": 0.020969733432796983,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "ENGINERSIN",
+            "vendor_score": 0.5792539003507388,
+            "corrected_score": 0.5858922786700932,
+            "score_delta": 0.006638378319354432,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 28.640803087686013,
+            "corrected_annualized_volatility_pct": 28.63495025406123,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": -0.005852833624782505,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "ENGINERSIN",
+                "ex_date": "2017-09-11",
+                "event": "dividend",
+                "prior_raw_close_inr": 159.9,
+                "cash_per_share_inr": 0.5,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0031367628607277,
+                "applied_signal_multiplier": 1.0031367628607277,
+                "vendor_score": 0.5792539003507388,
+                "corrected_score": 0.5858922786700932,
+                "score_delta": 0.006638378319354432,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          }
+        ],
+        "retained_from_prior": [
+          "MINDTREE",
+          "JINDALSTEL",
+          "JUBLFOOD",
+          "ENDURANCE",
+          "MPHASIS",
+          "TATAGLOBAL",
+          "MARUTI",
+          "PGHH",
+          "ADANIENT",
+          "HINDUNILVR",
+          "TITAN",
+          "HDFCBANK",
+          "TVSMOTOR",
+          "BALKRISIND",
+          "RAJESHEXPO"
+        ],
+        "selected": [
+          {
+            "symbol": "MINDTREE",
+            "canonical": "INE018I01017",
+            "score": 2.478565216500158
+          },
+          {
+            "symbol": "JINDALSTEL",
+            "canonical": "INE749A01030",
+            "score": 2.215800879734262
+          },
+          {
+            "symbol": "JUBLFOOD",
+            "canonical": "INE797F01012",
+            "score": 1.91546467011448
+          },
+          {
+            "symbol": "ENDURANCE",
+            "canonical": "INE913H01037",
+            "score": 1.903228439808442
+          },
+          {
+            "symbol": "MPHASIS",
+            "canonical": "INE356A01018",
+            "score": 1.8596687333020925
+          },
+          {
+            "symbol": "TATAGLOBAL",
+            "canonical": "INE192A01025",
+            "score": 1.82945000712286
+          },
+          {
+            "symbol": "MARUTI",
+            "canonical": "INE585B01010",
+            "score": 1.7475182501561477
+          },
+          {
+            "symbol": "PGHH",
+            "canonical": "INE179A01014",
+            "score": 1.7469990823968704
+          },
+          {
+            "symbol": "ADANIENT",
+            "canonical": "INE423A01024",
+            "score": 1.688288060926713
+          },
+          {
+            "symbol": "HINDUNILVR",
+            "canonical": "INE030A01027",
+            "score": 1.6328933358664943
+          },
+          {
+            "symbol": "TITAN",
+            "canonical": "INE280A01028",
+            "score": 1.6197171135657338
+          },
+          {
+            "symbol": "HDFCBANK",
+            "canonical": "INE040A01034",
+            "score": 1.5275006395763828
+          },
+          {
+            "symbol": "TVSMOTOR",
+            "canonical": "INE494B01023",
+            "score": 1.40149261737563
+          },
+          {
+            "symbol": "BALKRISIND",
+            "canonical": "INE787D01026",
+            "score": 1.3682085051063533
+          },
+          {
+            "symbol": "RAJESHEXPO",
+            "canonical": "INE343B01030",
+            "score": 1.295066151472397
+          },
+          {
+            "symbol": "BIOCON",
+            "canonical": "INE376G01013",
+            "score": 1.8224074496884608
+          },
+          {
+            "symbol": "BRITANNIA",
+            "canonical": "INE216A01030",
+            "score": 1.8213534869916164
+          },
+          {
+            "symbol": "JSWSTEEL",
+            "canonical": "INE019A01038",
+            "score": 1.7673972898811163
+          },
+          {
+            "symbol": "GSKCONS",
+            "canonical": "INE264A01014",
+            "score": 1.6979830542898366
+          },
+          {
+            "symbol": "COROMANDEL",
+            "canonical": "INE169A01031",
+            "score": 1.6168044259709309
+          }
+        ],
+        "selection_bounds": [
+          {
+            "symbol": "RELCAPITAL",
+            "reason": "B_volatility_not_calculated_missing_RHFL_prelisting_daily_marks",
+            "return_numerator": -0.15760881550992606,
+            "selection_bound": "NONPOSITIVE; cannot displace a positive target"
+          }
+        ],
+        "unresolved": [],
+        "ranking_policy": "positive score descending; ISIN ascending tie-break; retain prior names ranked 1-25 then fill to 20",
+        "canonical_names": [
+          "INE018I01017",
+          "INE749A01030",
+          "INE797F01012",
+          "INE913H01037",
+          "INE356A01018",
+          "INE192A01025",
+          "INE585B01010",
+          "INE179A01014",
+          "INE423A01024",
+          "INE030A01027",
+          "INE280A01028",
+          "INE040A01034",
+          "INE494B01023",
+          "INE787D01026",
+          "INE343B01030",
+          "INE376G01013",
+          "INE216A01030",
+          "INE019A01038",
+          "INE264A01014",
+          "INE169A01031"
+        ]
+      }
+    ],
+    "NIFTY200-A-Q": [
+      {
+        "candidate_id": "NIFTY200-A-Q",
+        "signal_date": "2018-03-28",
+        "target_status": "CERTIFIED_UNDER_REGISTERED_SOURCE_CORRECTIONS",
+        "signal_rows": 201,
+        "rule_ineligible_count": 2,
+        "resolved_source_exception_count": 8,
+        "twentieth_positive_score": 0.571427543565957,
+        "positive_known_scores": 149,
+        "ineligible": [
+          {
+            "symbol": "HUDCO",
+            "isin": "INE031A01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-05-19; required_from=2017-03-23"
+          },
+          {
+            "symbol": "AUBANK",
+            "isin": "INE949L01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-07-10; required_from=2017-03-23"
+          }
+        ],
+        "source_resolved_exceptions": [
+          {
+            "symbol": "KARURVYSYA",
+            "vendor_score": 0.049512097004766,
+            "corrected_score": 0.12649693510330562,
+            "score_delta": 0.07698483809853962,
+            "free_right_score_sensitivity": 0.2244307798388938,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "KARURVYSYA",
+                "ex_date": "2017-10-12",
+                "event": "rights",
+                "prior_raw_close_inr": 145.7,
+                "ratio_new_per_old": 0.16666666666666666,
+                "full_subscription_cash_per_old_share_inr": 12.666666666666666,
+                "terp_inr": 135.7428571428571,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.073352978320354,
+                "applied_signal_multiplier": 1.073352978320354,
+                "vendor_score": 0.049512097004766,
+                "corrected_score": 0.12649693510330562,
+                "score_delta": 0.07698483809853962,
+                "free_right_score_sensitivity": 0.2244307798388938
+              }
+            ]
+          },
+          {
+            "symbol": "INDHOTEL",
+            "vendor_score": 0.0713612715380427,
+            "corrected_score": 0.14476790942720852,
+            "score_delta": 0.07340663788916582,
+            "free_right_score_sensitivity": 0.28563352584565127,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "INDHOTEL",
+                "ex_date": "2017-10-04",
+                "event": "rights",
+                "prior_raw_close_inr": 121.9,
+                "ratio_new_per_old": 0.2,
+                "full_subscription_cash_per_old_share_inr": 15.0,
+                "terp_inr": 114.08333333333334,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.068517165814463,
+                "applied_signal_multiplier": 1.068517165814463,
+                "vendor_score": 0.0713612715380427,
+                "corrected_score": 0.14476790942720852,
+                "score_delta": 0.07340663788916582,
+                "free_right_score_sensitivity": 0.28563352584565127
+              }
+            ]
+          },
+          {
+            "symbol": "TATASTEEL",
+            "vendor_score": 0.3972158550259537,
+            "corrected_score": 0.4825975869311627,
+            "score_delta": 0.08538173190520904,
+            "free_right_score_sensitivity": 0.7325476602321828,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": true,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "TATASTEEL",
+                "ex_date": "2018-01-31",
+                "event": "rights",
+                "prior_raw_close_inr": 775.85,
+                "ratio_new_per_old": 0.24,
+                "full_subscription_cash_per_old_share_inr": 130.8,
+                "terp_inr": 731.1693548387098,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0611084762587546,
+                "applied_signal_multiplier": 1.0611084762587546,
+                "vendor_score": 0.3972158550259537,
+                "corrected_score": 0.4825975869311627,
+                "score_delta": 0.08538173190520904,
+                "free_right_score_sensitivity": 0.7325476602321828
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCBANK",
+            "vendor_score": -0.1249432830983634,
+            "corrected_score": -0.12494328309836344,
+            "score_delta": -4.163336342344337e-17,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": {
+              "vendor_symbol": "IDFCBANK",
+              "vendor_isin": "INE092T01019",
+              "debt_isin": "INE092T08352",
+              "classification": "supported_debt_event_inference"
+            },
+            "classification_caveat": "exact original vendor event notice not located; event/debt match remains an inference",
+            "corrections": []
+          },
+          {
+            "symbol": "PEL",
+            "vendor_score": 0.416395090759696,
+            "corrected_score": 0.42469674670664936,
+            "score_delta": 0.008301655946953368,
+            "free_right_score_sensitivity": 0.4779774860101176,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "PEL",
+                "ex_date": "2018-01-31",
+                "event": "rights",
+                "prior_raw_close_inr": 2766.95,
+                "ratio_new_per_old": 0.043478260869565216,
+                "full_subscription_cash_per_old_share_inr": 103.47826086956522,
+                "terp_inr": 2750.827083333333,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0058611160128355,
+                "applied_signal_multiplier": 1.0058611160128355,
+                "vendor_score": 0.416395090759696,
+                "corrected_score": 0.42469674670664936,
+                "score_delta": 0.008301655946953368,
+                "free_right_score_sensitivity": 0.4779774860101176
+              }
+            ]
+          },
+          {
+            "symbol": "COLPAL",
+            "vendor_score": 0.0798617787131978,
+            "corrected_score": 0.08390469065147244,
+            "score_delta": 0.004042911938274635,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "COLPAL",
+                "ex_date": "2017-12-18",
+                "event": "dividend",
+                "prior_raw_close_inr": 1072.4,
+                "cash_per_share_inr": 4.0,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0037439161362784,
+                "applied_signal_multiplier": 1.0037439161362784,
+                "vendor_score": 0.0798617787131978,
+                "corrected_score": 0.08390469065147244,
+                "score_delta": 0.004042911938274635,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "ENGINERSIN",
+            "vendor_score": 0.1903950953678472,
+            "corrected_score": 0.19412908249258942,
+            "score_delta": 0.0037339871247422107,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "ENGINERSIN",
+                "ex_date": "2017-09-11",
+                "event": "dividend",
+                "prior_raw_close_inr": 159.9,
+                "cash_per_share_inr": 0.5,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0031367628607277,
+                "applied_signal_multiplier": 1.0031367628607277,
+                "vendor_score": 0.1903950953678472,
+                "corrected_score": 0.19412908249258942,
+                "score_delta": 0.0037339871247422107,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "RELCAPITAL",
+            "vendor_score": -0.1947507147608278,
+            "corrected_score": -0.07587403848274188,
+            "score_delta": 0.11887667627808593,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": null,
+            "corrected_annualized_volatility_pct": null,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": null,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": []
+          }
+        ],
+        "retained_from_prior": [],
+        "selected": [
+          {
+            "symbol": "JINDALSTEL",
+            "canonical": "INE749A01030",
+            "score": 1.1310756972111555
+          },
+          {
+            "symbol": "DMART",
+            "canonical": "INE192R01011",
+            "score": 1.033866267622273
+          },
+          {
+            "symbol": "ADANIENT",
+            "canonical": "INE423A01024",
+            "score": 0.9722108973035628
+          },
+          {
+            "symbol": "EDELWEISS",
+            "canonical": "INE532F01054",
+            "score": 0.9121643528920648
+          },
+          {
+            "symbol": "JUBLFOOD",
+            "canonical": "INE797F01012",
+            "score": 0.8404705708166327
+          },
+          {
+            "symbol": "TATAGLOBAL",
+            "canonical": "INE192A01025",
+            "score": 0.8298937926471464
+          },
+          {
+            "symbol": "TITAN",
+            "canonical": "INE280A01028",
+            "score": 0.8222175295230802
+          },
+          {
+            "symbol": "ENDURANCE",
+            "canonical": "INE913H01037",
+            "score": 0.7717488162002732
+          },
+          {
+            "symbol": "COROMANDEL",
+            "canonical": "INE169A01031",
+            "score": 0.7404408050626468
+          },
+          {
+            "symbol": "MINDTREE",
+            "canonical": "INE018I01017",
+            "score": 0.7343877601773254
+          },
+          {
+            "symbol": "JSWSTEEL",
+            "canonical": "INE019A01038",
+            "score": 0.710787132564354
+          },
+          {
+            "symbol": "DIVISLAB",
+            "canonical": "INE361B01024",
+            "score": 0.6824162775518554
+          },
+          {
+            "symbol": "BIOCON",
+            "canonical": "INE376G01013",
+            "score": 0.6754697505546865
+          },
+          {
+            "symbol": "PRESTIGE",
+            "canonical": "INE811K01011",
+            "score": 0.6717633129099216
+          },
+          {
+            "symbol": "PCJEWELLER",
+            "canonical": "INE785M01013",
+            "score": 0.6512053137082972
+          },
+          {
+            "symbol": "DHFL",
+            "canonical": "INE202B01012",
+            "score": 0.6432227471076359
+          },
+          {
+            "symbol": "VOLTAS",
+            "canonical": "INE226A01021",
+            "score": 0.6003783755186256
+          },
+          {
+            "symbol": "TVSMOTOR",
+            "canonical": "INE494B01023",
+            "score": 0.5962088692841505
+          },
+          {
+            "symbol": "ASHOKLEY",
+            "canonical": "INE208A01029",
+            "score": 0.5951765839559142
+          },
+          {
+            "symbol": "DLF",
+            "canonical": "INE271C01023",
+            "score": 0.571427543565957
+          }
+        ],
+        "selection_bounds": [],
+        "unresolved": [],
+        "ranking_policy": "positive score descending; ISIN ascending tie-break; retain prior names ranked 1-25 then fill to 20",
+        "canonical_names": [
+          "INE749A01030",
+          "INE192R01011",
+          "INE423A01024",
+          "INE532F01054",
+          "INE797F01012",
+          "INE192A01025",
+          "INE280A01028",
+          "INE913H01037",
+          "INE169A01031",
+          "INE018I01017",
+          "INE019A01038",
+          "INE361B01024",
+          "INE376G01013",
+          "INE811K01011",
+          "INE785M01013",
+          "INE202B01012",
+          "INE226A01021",
+          "INE494B01023",
+          "INE208A01029",
+          "INE271C01023"
+        ]
+      }
+    ],
+    "NIFTY200-B-Q": [
+      {
+        "candidate_id": "NIFTY200-B-Q",
+        "signal_date": "2018-03-28",
+        "target_status": "CERTIFIED_UNDER_REGISTERED_SOURCE_CORRECTIONS",
+        "signal_rows": 201,
+        "rule_ineligible_count": 3,
+        "resolved_source_exception_count": 7,
+        "twentieth_positive_score": 1.3739925275967926,
+        "positive_known_scores": 147,
+        "ineligible": [
+          {
+            "symbol": "HUDCO",
+            "isin": "INE031A01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-05-19; required_from=2017-02-20"
+          },
+          {
+            "symbol": "DMART",
+            "isin": "INE192R01011",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-03-21; required_from=2017-02-20"
+          },
+          {
+            "symbol": "AUBANK",
+            "isin": "INE949L01017",
+            "unresolved_reason": "not_listed_for_full_required_window; official_listing_date=2017-07-10; required_from=2017-02-20"
+          }
+        ],
+        "source_resolved_exceptions": [
+          {
+            "symbol": "KARURVYSYA",
+            "vendor_score": -0.2903901855411384,
+            "corrected_score": -0.0831707448197351,
+            "score_delta": 0.20721944072140328,
+            "free_right_score_sensitivity": 0.1987551117106991,
+            "baseline_annualized_volatility_pct": 31.517257063804315,
+            "corrected_annualized_volatility_pct": 29.91860803135405,
+            "free_right_annualized_volatility_pct": 30.13246200745346,
+            "volatility_delta_pct": -1.5986490324502647,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "KARURVYSYA",
+                "ex_date": "2017-10-12",
+                "event": "rights",
+                "prior_raw_close_inr": 145.7,
+                "ratio_new_per_old": 0.16666666666666666,
+                "full_subscription_cash_per_old_share_inr": 12.666666666666666,
+                "terp_inr": 135.7428571428571,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.073352978320354,
+                "applied_signal_multiplier": 1.073352978320354,
+                "vendor_score": -0.2903901855411384,
+                "corrected_score": -0.0831707448197351,
+                "score_delta": 0.20721944072140328,
+                "free_right_score_sensitivity": 0.1987551117106991
+              }
+            ]
+          },
+          {
+            "symbol": "INDHOTEL",
+            "vendor_score": 0.3591893632584382,
+            "corrected_score": 0.6180177635194206,
+            "score_delta": 0.2588284002609824,
+            "free_right_score_sensitivity": 1.0549547610604422,
+            "baseline_annualized_volatility_pct": 32.87976735434764,
+            "corrected_annualized_volatility_pct": 31.505520480447608,
+            "free_right_annualized_volatility_pct": 32.39198162939484,
+            "volatility_delta_pct": -1.3742468739000344,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "INDHOTEL",
+                "ex_date": "2017-10-04",
+                "event": "rights",
+                "prior_raw_close_inr": 121.9,
+                "ratio_new_per_old": 0.2,
+                "full_subscription_cash_per_old_share_inr": 15.0,
+                "terp_inr": 114.08333333333334,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.068517165814463,
+                "applied_signal_multiplier": 1.068517165814463,
+                "vendor_score": 0.3591893632584382,
+                "corrected_score": 0.6180177635194206,
+                "score_delta": 0.2588284002609824,
+                "free_right_score_sensitivity": 1.0549547610604422
+              }
+            ]
+          },
+          {
+            "symbol": "TATASTEEL",
+            "vendor_score": 0.8075864259261503,
+            "corrected_score": 1.1286147559886288,
+            "score_delta": 0.32102833006247855,
+            "free_right_score_sensitivity": 1.795984203947401,
+            "baseline_annualized_volatility_pct": 28.507393364519125,
+            "corrected_annualized_volatility_pct": 27.059616191469566,
+            "free_right_annualized_volatility_pct": 29.258335315512223,
+            "volatility_delta_pct": -1.447777173049559,
+            "free_right_sensitivity_crosses_cutoff": true,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "TATASTEEL",
+                "ex_date": "2018-01-31",
+                "event": "rights",
+                "prior_raw_close_inr": 775.85,
+                "ratio_new_per_old": 0.24,
+                "full_subscription_cash_per_old_share_inr": 130.8,
+                "terp_inr": 731.1693548387098,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0611084762587546,
+                "applied_signal_multiplier": 1.0611084762587546,
+                "vendor_score": 0.8075864259261503,
+                "corrected_score": 1.1286147559886288,
+                "score_delta": 0.32102833006247855,
+                "free_right_score_sensitivity": 1.795984203947401
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCBANK",
+            "vendor_score": -0.3204587423354729,
+            "corrected_score": -0.3204587423354729,
+            "score_delta": 0.0,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 31.34803143188999,
+            "corrected_annualized_volatility_pct": 31.34803143188999,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": 0.0,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": {
+              "vendor_symbol": "IDFCBANK",
+              "vendor_isin": "INE092T01019",
+              "debt_isin": "INE092T08352",
+              "classification": "supported_debt_event_inference"
+            },
+            "classification_caveat": "exact original vendor event notice not located; event/debt match remains an inference",
+            "corrections": []
+          },
+          {
+            "symbol": "PEL",
+            "vendor_score": 0.6708148841774252,
+            "corrected_score": 0.6949852965799997,
+            "score_delta": 0.02417041240257456,
+            "free_right_score_sensitivity": 0.8430056692076423,
+            "baseline_annualized_volatility_pct": 29.44869848046327,
+            "corrected_annualized_volatility_pct": 29.43446589839859,
+            "free_right_annualized_volatility_pct": 29.609940964235715,
+            "volatility_delta_pct": -0.014232582064682475,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "PEL",
+                "ex_date": "2018-01-31",
+                "event": "rights",
+                "prior_raw_close_inr": 2766.95,
+                "ratio_new_per_old": 0.043478260869565216,
+                "full_subscription_cash_per_old_share_inr": 103.47826086956522,
+                "terp_inr": 2750.827083333333,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0058611160128355,
+                "applied_signal_multiplier": 1.0058611160128355,
+                "vendor_score": 0.6708148841774252,
+                "corrected_score": 0.6949852965799997,
+                "score_delta": 0.02417041240257456,
+                "free_right_score_sensitivity": 0.8430056692076423
+              }
+            ]
+          },
+          {
+            "symbol": "COLPAL",
+            "vendor_score": 0.1483667345353348,
+            "corrected_score": 0.1693364679681318,
+            "score_delta": 0.020969733432796983,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 18.214884564186598,
+            "corrected_annualized_volatility_pct": 18.22993276576742,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": 0.01504820158082154,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "COLPAL",
+                "ex_date": "2017-12-18",
+                "event": "dividend",
+                "prior_raw_close_inr": 1072.4,
+                "cash_per_share_inr": 4.0,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0037439161362784,
+                "applied_signal_multiplier": 1.0037439161362784,
+                "vendor_score": 0.1483667345353348,
+                "corrected_score": 0.1693364679681318,
+                "score_delta": 0.020969733432796983,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          },
+          {
+            "symbol": "ENGINERSIN",
+            "vendor_score": 0.5792539003507388,
+            "corrected_score": 0.5858922786700932,
+            "score_delta": 0.006638378319354432,
+            "free_right_score_sensitivity": null,
+            "baseline_annualized_volatility_pct": 28.640803087686013,
+            "corrected_annualized_volatility_pct": 28.63495025406123,
+            "free_right_annualized_volatility_pct": null,
+            "volatility_delta_pct": -0.005852833624782505,
+            "free_right_sensitivity_crosses_cutoff": false,
+            "classification": null,
+            "classification_caveat": null,
+            "corrections": [
+              {
+                "symbol": "ENGINERSIN",
+                "ex_date": "2017-09-11",
+                "event": "dividend",
+                "prior_raw_close_inr": 159.9,
+                "cash_per_share_inr": 0.5,
+                "provider_factor_multiplier": 1.0,
+                "source_factor_multiplier": 1.0031367628607277,
+                "applied_signal_multiplier": 1.0031367628607277,
+                "vendor_score": 0.5792539003507388,
+                "corrected_score": 0.5858922786700932,
+                "score_delta": 0.006638378319354432,
+                "free_right_score_sensitivity": null
+              }
+            ]
+          }
+        ],
+        "retained_from_prior": [],
+        "selected": [
+          {
+            "symbol": "MINDTREE",
+            "canonical": "INE018I01017",
+            "score": 2.478565216500158
+          },
+          {
+            "symbol": "JINDALSTEL",
+            "canonical": "INE749A01030",
+            "score": 2.215800879734262
+          },
+          {
+            "symbol": "JUBLFOOD",
+            "canonical": "INE797F01012",
+            "score": 1.91546467011448
+          },
+          {
+            "symbol": "ENDURANCE",
+            "canonical": "INE913H01037",
+            "score": 1.903228439808442
+          },
+          {
+            "symbol": "MPHASIS",
+            "canonical": "INE356A01018",
+            "score": 1.8596687333020925
+          },
+          {
+            "symbol": "TATAGLOBAL",
+            "canonical": "INE192A01025",
+            "score": 1.82945000712286
+          },
+          {
+            "symbol": "BIOCON",
+            "canonical": "INE376G01013",
+            "score": 1.8224074496884608
+          },
+          {
+            "symbol": "BRITANNIA",
+            "canonical": "INE216A01030",
+            "score": 1.8213534869916164
+          },
+          {
+            "symbol": "JSWSTEEL",
+            "canonical": "INE019A01038",
+            "score": 1.7673972898811163
+          },
+          {
+            "symbol": "MARUTI",
+            "canonical": "INE585B01010",
+            "score": 1.7475182501561477
+          },
+          {
+            "symbol": "PGHH",
+            "canonical": "INE179A01014",
+            "score": 1.7469990823968704
+          },
+          {
+            "symbol": "GSKCONS",
+            "canonical": "INE264A01014",
+            "score": 1.6979830542898366
+          },
+          {
+            "symbol": "ADANIENT",
+            "canonical": "INE423A01024",
+            "score": 1.688288060926713
+          },
+          {
+            "symbol": "HINDUNILVR",
+            "canonical": "INE030A01027",
+            "score": 1.6328933358664943
+          },
+          {
+            "symbol": "TITAN",
+            "canonical": "INE280A01028",
+            "score": 1.6197171135657338
+          },
+          {
+            "symbol": "COROMANDEL",
+            "canonical": "INE169A01031",
+            "score": 1.6168044259709309
+          },
+          {
+            "symbol": "HDFCBANK",
+            "canonical": "INE040A01034",
+            "score": 1.5275006395763828
+          },
+          {
+            "symbol": "BHARATFORG",
+            "canonical": "INE465A01025",
+            "score": 1.4572916217278005
+          },
+          {
+            "symbol": "TVSMOTOR",
+            "canonical": "INE494B01023",
+            "score": 1.40149261737563
+          },
+          {
+            "symbol": "ASHOKLEY",
+            "canonical": "INE208A01029",
+            "score": 1.3739925275967926
+          }
+        ],
+        "selection_bounds": [
+          {
+            "symbol": "RELCAPITAL",
+            "reason": "B_volatility_not_calculated_missing_RHFL_prelisting_daily_marks",
+            "return_numerator": -0.15760881550992606,
+            "selection_bound": "NONPOSITIVE; cannot displace a positive target"
+          }
+        ],
+        "unresolved": [],
+        "ranking_policy": "positive score descending; ISIN ascending tie-break; retain prior names ranked 1-25 then fill to 20",
+        "canonical_names": [
+          "INE018I01017",
+          "INE749A01030",
+          "INE797F01012",
+          "INE913H01037",
+          "INE356A01018",
+          "INE192A01025",
+          "INE376G01013",
+          "INE216A01030",
+          "INE019A01038",
+          "INE585B01010",
+          "INE179A01014",
+          "INE264A01014",
+          "INE423A01024",
+          "INE030A01027",
+          "INE280A01028",
+          "INE169A01031",
+          "INE040A01034",
+          "INE465A01025",
+          "INE494B01023",
+          "INE208A01029"
+        ]
+      }
+    ]
+  },
+  "accounts": [
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_HELD_EVENT",
+      "valid_through": "2018-04-04",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 66,
+      "actual_buy_count": 43,
+      "actual_sell_count": 23,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 901978.7304071044,
+      "ending_cash_inr": 1184.9804071043304,
+      "ending_invested_inr": 900793.75,
+      "max_drawdown_pct": -11.48349113298609,
+      "turnover_inr": 1774590.5159999994,
+      "fees_inr": 4149.1350928958045,
+      "fees_by_component_inr": {
+        "brokerage": 1320.0,
+        "stt": 1774.59,
+        "exchange": 54.48,
+        "stamp_duty": 207.76,
+        "sebi": 1.77,
+        "ipft": 0.0,
+        "dp": 460.0,
+        "gst": 330.53
+      },
+      "slippage_cost_inr": 8848.284499999869,
+      "max_nav_reconciliation_residual_inr": 0.0,
+      "cash_distributions_inr": 905.6,
+      "cash_distribution_events": [
+        {
+          "symbol": "INE532F01054",
+          "ex_date": "2018-02-02",
+          "cash_per_share_inr": 1.05,
+          "eligible_quantity": 178,
+          "cash_inr": 186.9
+        },
+        {
+          "symbol": "INE761H01022",
+          "ex_date": "2018-02-15",
+          "cash_per_share_inr": 35.0,
+          "eligible_quantity": 2,
+          "cash_inr": 70.0
+        },
+        {
+          "symbol": "INE093A01033",
+          "ex_date": "2018-02-16",
+          "cash_per_share_inr": 1.0,
+          "eligible_quantity": 131,
+          "cash_inr": 131.0
+        },
+        {
+          "symbol": "INE424H01027",
+          "ex_date": "2018-02-16",
+          "cash_per_share_inr": 2.5,
+          "eligible_quantity": 48,
+          "cash_inr": 120.0
+        },
+        {
+          "symbol": "INE787D01026",
+          "ex_date": "2018-02-21",
+          "cash_per_share_inr": 1.5,
+          "eligible_quantity": 43,
+          "cash_inr": 64.5
+        },
+        {
+          "symbol": "INE494B01023",
+          "ex_date": "2018-03-06",
+          "cash_per_share_inr": 1.3,
+          "eligible_quantity": 68,
+          "cash_inr": 88.4
+        },
+        {
+          "symbol": "INE271C01023",
+          "ex_date": "2018-03-27",
+          "cash_per_share_inr": 1.2,
+          "eligible_quantity": 204,
+          "cash_inr": 244.79999999999998
+        }
+      ],
+      "retained_name_resizing_by_rebalance": [
+        {
+          "signal_date": "2018-01-31",
+          "execution_date": "2018-02-01",
+          "retained_names": 0,
+          "retained_names_with_resize_orders": 0,
+          "retained_resize_order_count": 0
+        },
+        {
+          "signal_date": "2018-02-28",
+          "execution_date": "2018-03-01",
+          "retained_names": 16,
+          "retained_names_with_resize_orders": 16,
+          "retained_resize_order_count": 16
+        },
+        {
+          "signal_date": "2018-03-28",
+          "execution_date": "2018-04-02",
+          "retained_names": 17,
+          "retained_names_with_resize_orders": 16,
+          "retained_resize_order_count": 16
+        }
+      ],
+      "first_material_blocker": {
+        "date": "2018-04-05",
+        "symbol": "ADANIENT",
+        "canonical": "INE423A01024",
+        "event": "other",
+        "source_subject": "Scheme Of Arrangement",
+        "reason": "held ADANIENT shares entitled to 761 AGEL shares per 1,000; AGEL had no listed daily mark until 2018-06-18",
+        "held_claim_ratio": "761 AGEL shares per 1,000 ADANIENT shares",
+        "last_valid_account_mark_date": "2018-04-04",
+        "resolution_required": "a contemporaneous source-backed daily fair-value series for the claim from 2018-04-05 through 2018-06-17, or official evidence of earlier cash settlement; include scheme fractional-treatment terms",
+        "primary_evidence": [
+          "https://www.bseindia.com/downloads/ipo/20186131279Adani%20Green%20Energy%20Limited%20-%20Information%20Memorandum.pdf",
+          "https://nsearchives.nseindia.com/corporate/listcontract3_07022019173803_ADANIGREEN_outcome_315.pdf"
+        ],
+        "held_position_quantity_on_last_valid_mark": 287,
+        "gross_AGEL_entitlement_before_fractional_treatment": 218.407,
+        "fractional_treatment": "not inferred; source-backed scheme settlement or fractional-share terms required"
+      },
+      "later_material_blockers": [],
+      "orders_file_local": "work\\data\\public_research\\strategy_dependencies\\nifty200\\sequential_cash_prefixes_2026-11-02\\nifty200_a_m_orders.csv",
+      "equity_file_local": "work\\data\\public_research\\strategy_dependencies\\nifty200\\sequential_cash_prefixes_2026-11-02\\nifty200_a_m_equity.csv",
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_HELD_EVENT",
+      "valid_through": "2018-04-04",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 62,
+      "actual_buy_count": 39,
+      "actual_sell_count": 23,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 921478.7987172479,
+      "ending_cash_inr": 14359.048717247952,
+      "ending_invested_inr": 907119.75,
+      "max_drawdown_pct": -9.758990773851151,
+      "turnover_inr": 2036229.2022500006,
+      "fees_inr": 4344.744032752323,
+      "fees_by_component_inr": {
+        "brokerage": 1240.0,
+        "stt": 2036.23,
+        "exchange": 62.51,
+        "stamp_duty": 226.35,
+        "sebi": 2.04,
+        "ipft": 0.0,
+        "dp": 460.0,
+        "gst": 317.62
+      },
+      "slippage_cost_inr": 10156.857249999866,
+      "max_nav_reconciliation_residual_inr": 0.0,
+      "cash_distributions_inr": 411.1,
+      "cash_distribution_events": [
+        {
+          "symbol": "INE532F01054",
+          "ex_date": "2018-02-02",
+          "cash_per_share_inr": 1.05,
+          "eligible_quantity": 178,
+          "cash_inr": 186.9
+        },
+        {
+          "symbol": "INE761H01022",
+          "ex_date": "2018-02-15",
+          "cash_per_share_inr": 35.0,
+          "eligible_quantity": 2,
+          "cash_inr": 70.0
+        },
+        {
+          "symbol": "INE787D01026",
+          "ex_date": "2018-02-21",
+          "cash_per_share_inr": 1.5,
+          "eligible_quantity": 43,
+          "cash_inr": 64.5
+        },
+        {
+          "symbol": "INE494B01023",
+          "ex_date": "2018-03-06",
+          "cash_per_share_inr": 1.3,
+          "eligible_quantity": 69,
+          "cash_inr": 89.7
+        }
+      ],
+      "retained_name_resizing_by_rebalance": [
+        {
+          "signal_date": "2018-01-31",
+          "execution_date": "2018-02-01",
+          "retained_names": 0,
+          "retained_names_with_resize_orders": 0,
+          "retained_resize_order_count": 0
+        },
+        {
+          "signal_date": "2018-02-28",
+          "execution_date": "2018-03-01",
+          "retained_names": 15,
+          "retained_names_with_resize_orders": 11,
+          "retained_resize_order_count": 11
+        },
+        {
+          "signal_date": "2018-03-28",
+          "execution_date": "2018-04-02",
+          "retained_names": 15,
+          "retained_names_with_resize_orders": 11,
+          "retained_resize_order_count": 11
+        }
+      ],
+      "first_material_blocker": {
+        "date": "2018-04-05",
+        "symbol": "ADANIENT",
+        "canonical": "INE423A01024",
+        "event": "other",
+        "source_subject": "Scheme Of Arrangement",
+        "reason": "held ADANIENT shares entitled to 761 AGEL shares per 1,000; AGEL had no listed daily mark until 2018-06-18",
+        "held_claim_ratio": "761 AGEL shares per 1,000 ADANIENT shares",
+        "last_valid_account_mark_date": "2018-04-04",
+        "resolution_required": "a contemporaneous source-backed daily fair-value series for the claim from 2018-04-05 through 2018-06-17, or official evidence of earlier cash settlement; include scheme fractional-treatment terms",
+        "primary_evidence": [
+          "https://www.bseindia.com/downloads/ipo/20186131279Adani%20Green%20Energy%20Limited%20-%20Information%20Memorandum.pdf",
+          "https://nsearchives.nseindia.com/corporate/listcontract3_07022019173803_ADANIGREEN_outcome_315.pdf"
+        ],
+        "held_position_quantity_on_last_valid_mark": 294,
+        "gross_AGEL_entitlement_before_fractional_treatment": 223.734,
+        "fractional_treatment": "not inferred; source-backed scheme settlement or fractional-share terms required"
+      },
+      "later_material_blockers": [],
+      "orders_file_local": "work\\data\\public_research\\strategy_dependencies\\nifty200\\sequential_cash_prefixes_2026-11-02\\nifty200_b_m_orders.csv",
+      "equity_file_local": "work\\data\\public_research\\strategy_dependencies\\nifty200\\sequential_cash_prefixes_2026-11-02\\nifty200_b_m_equity.csv",
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_HELD_EVENT",
+      "valid_through": "2018-04-04",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 20,
+      "actual_buy_count": 20,
+      "actual_sell_count": 0,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 990565.0667351054,
+      "ending_cash_inr": 793.5167351053169,
+      "ending_invested_inr": 989771.55,
+      "max_drawdown_pct": -2.2780301569401806,
+      "turnover_inr": 997549.9852499999,
+      "fees_inr": 1656.498014894744,
+      "fees_by_component_inr": {
+        "brokerage": 400.0,
+        "stt": 997.55,
+        "exchange": 30.62,
+        "stamp_duty": 149.63,
+        "sebi": 1.0,
+        "ipft": 0.0,
+        "dp": 0.0,
+        "gst": 77.69
+      },
+      "slippage_cost_inr": 4962.935249999891,
+      "max_nav_reconciliation_residual_inr": 0.0,
+      "cash_distributions_inr": 0.0,
+      "cash_distribution_events": [],
+      "retained_name_resizing_by_rebalance": [
+        {
+          "signal_date": "2018-03-28",
+          "execution_date": "2018-04-02",
+          "retained_names": 0,
+          "retained_names_with_resize_orders": 0,
+          "retained_resize_order_count": 0
+        }
+      ],
+      "first_material_blocker": {
+        "date": "2018-04-05",
+        "symbol": "ADANIENT",
+        "canonical": "INE423A01024",
+        "event": "other",
+        "source_subject": "Scheme Of Arrangement",
+        "reason": "held ADANIENT shares entitled to 761 AGEL shares per 1,000; AGEL had no listed daily mark until 2018-06-18",
+        "held_claim_ratio": "761 AGEL shares per 1,000 ADANIENT shares",
+        "last_valid_account_mark_date": "2018-04-04",
+        "resolution_required": "a contemporaneous source-backed daily fair-value series for the claim from 2018-04-05 through 2018-06-17, or official evidence of earlier cash settlement; include scheme fractional-treatment terms",
+        "primary_evidence": [
+          "https://www.bseindia.com/downloads/ipo/20186131279Adani%20Green%20Energy%20Limited%20-%20Information%20Memorandum.pdf",
+          "https://nsearchives.nseindia.com/corporate/listcontract3_07022019173803_ADANIGREEN_outcome_315.pdf"
+        ],
+        "held_position_quantity_on_last_valid_mark": 319,
+        "gross_AGEL_entitlement_before_fractional_treatment": 242.759,
+        "fractional_treatment": "not inferred; source-backed scheme settlement or fractional-share terms required"
+      },
+      "later_material_blockers": [],
+      "orders_file_local": "work\\data\\public_research\\strategy_dependencies\\nifty200\\sequential_cash_prefixes_2026-11-02\\nifty200_a_q_orders.csv",
+      "equity_file_local": "work\\data\\public_research\\strategy_dependencies\\nifty200\\sequential_cash_prefixes_2026-11-02\\nifty200_a_q_equity.csv",
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_HELD_EVENT",
+      "valid_through": "2018-04-04",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 20,
+      "actual_buy_count": 20,
+      "actual_sell_count": 0,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 996957.8455826269,
+      "ending_cash_inr": 3738.795582626808,
+      "ending_invested_inr": 993219.05,
+      "max_drawdown_pct": -1.1896594078187328,
+      "turnover_inr": 994608.1994999999,
+      "fees_inr": 1653.0049173731725,
+      "fees_by_component_inr": {
+        "brokerage": 400.0,
+        "stt": 994.61,
+        "exchange": 30.53,
+        "stamp_duty": 149.19,
+        "sebi": 0.99,
+        "ipft": 0.0,
+        "dp": 0.0,
+        "gst": 77.68
+      },
+      "slippage_cost_inr": 4948.29949999989,
+      "max_nav_reconciliation_residual_inr": 0.0,
+      "cash_distributions_inr": 0.0,
+      "cash_distribution_events": [],
+      "retained_name_resizing_by_rebalance": [
+        {
+          "signal_date": "2018-03-28",
+          "execution_date": "2018-04-02",
+          "retained_names": 0,
+          "retained_names_with_resize_orders": 0,
+          "retained_resize_order_count": 0
+        }
+      ],
+      "first_material_blocker": {
+        "date": "2018-04-05",
+        "symbol": "ADANIENT",
+        "canonical": "INE423A01024",
+        "event": "other",
+        "source_subject": "Scheme Of Arrangement",
+        "reason": "held ADANIENT shares entitled to 761 AGEL shares per 1,000; AGEL had no listed daily mark until 2018-06-18",
+        "held_claim_ratio": "761 AGEL shares per 1,000 ADANIENT shares",
+        "last_valid_account_mark_date": "2018-04-04",
+        "resolution_required": "a contemporaneous source-backed daily fair-value series for the claim from 2018-04-05 through 2018-06-17, or official evidence of earlier cash settlement; include scheme fractional-treatment terms",
+        "primary_evidence": [
+          "https://www.bseindia.com/downloads/ipo/20186131279Adani%20Green%20Energy%20Limited%20-%20Information%20Memorandum.pdf",
+          "https://nsearchives.nseindia.com/corporate/listcontract3_07022019173803_ADANIGREEN_outcome_315.pdf"
+        ],
+        "held_position_quantity_on_last_valid_mark": 319,
+        "gross_AGEL_entitlement_before_fractional_treatment": 242.759,
+        "fractional_treatment": "not inferred; source-backed scheme settlement or fractional-share terms required"
+      },
+      "later_material_blockers": [],
+      "orders_file_local": "work\\data\\public_research\\strategy_dependencies\\nifty200\\sequential_cash_prefixes_2026-11-02\\nifty200_b_q_orders.csv",
+      "equity_file_local": "work\\data\\public_research\\strategy_dependencies\\nifty200\\sequential_cash_prefixes_2026-11-02\\nifty200_b_q_equity.csv",
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    }
+  ],
+  "performance_gate": "NO FULL-PERIOD CAGR; results are sequential prefixes only",
+  "research_limits": [
+    "IDFC event classification is an evidence-supported inference, not a located exact original notice.",
+    "RELCAPITAL B volatility remains unknown where RHFL prelisting marks are absent.",
+    "No result is a 20% full-period CAGR claim or deployable recommendation"
+  ]
+}
+

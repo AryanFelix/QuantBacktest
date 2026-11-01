@@ -1120,6 +1120,8 @@ def _walkforward(
 
 
 def _self_check() -> None:
+    assert math.isclose(_calendar_cagr_pct(100.0, 121.0, date(2020, 1, 1), date(2022, 1, 1)),
+                        (121.0 / 100.0) ** (1 / ((date(2022, 1, 1) - date(2020, 1, 1)).days / 365.25)) * 100 - 100)
     windows = request_windows(date(2024, 1, 20), date(2024, 3, 10), "minutes", 5)
     assert windows[0][0] == date(2024, 1, 20) and windows[-1][1] == date(2024, 3, 10)
     assert all((b - a).days < 32 for a, b in windows)
@@ -1207,11 +1209,37 @@ def _self_check() -> None:
                       diagnostic_equity["cash_inr"].iloc[-1] + diagnostic_equity["invested_inr"].iloc[-1])
     ex_date = index[100].date()
     distributed_equity, distributed_orders, distributed_stats = _simulate(
-        panels, targets, rebalance, 10_000, 0.95, 0, cash_distributions=[("TEST", ex_date, 2.0)])
+        panels, targets, rebalance, 10_000, 0.95, 0,
+        cash_distributions=[("TEST", ex_date, 2.0), ("TEST", ex_date, 3.0)])
     held = sum(int(row["quantity"]) if row["side"] == "buy" else -int(row["quantity"])
                for _, row in distributed_orders.iterrows() if row["time"].date() < ex_date)
-    assert distributed_stats["cash_distributions_inr"] == held * 2.0
-    assert distributed_equity.loc[pd.Timestamp(ex_date), "cash_distribution_inr"] == held * 2.0
+    assert distributed_stats["cash_distributions_inr"] == held * 5.0
+    assert distributed_equity.loc[pd.Timestamp(ex_date), "cash_distribution_inr"] == held * 5.0
+    assert len(distributed_stats["cash_distribution_events"]) == 2
+    stale_terminal = {key: value.copy() for key, value in panels.items()}
+    stale_terminal["close"].iloc[-1, 0] = np.nan
+    for liquidate in (True, False):
+        try:
+            _simulate(stale_terminal, targets, rebalance, 10_000, 0.95, 0, liquidate_terminal=liquidate)
+        except ValueError as exc:
+            assert "terminal liquidation lacks a raw close" in str(exc)
+        else:
+            raise AssertionError("missing terminal marks must not be liquidated or silently carried")
+    resize_index = pd.date_range("2024-01-02", periods=5, freq="B")
+    resize_open = pd.DataFrame({"TEST": [100, 100, 120, 120, 130], "OTHER": [50, 50, 50, 50, 55]}, index=resize_index)
+    resize_close = pd.DataFrame({"TEST": [100, 110, 120, 125, 130], "OTHER": [50, 50, 50, 52, 55]}, index=resize_index)
+    resize_panels = {"open": resize_open, "close": resize_close}
+    resize_targets = pd.DataFrame(0.0, index=resize_index, columns=["TEST", "OTHER"])
+    resize_targets.loc[resize_index[0], "TEST"] = 1.0
+    resize_targets.loc[resize_index[2], ["TEST", "OTHER"]] = 0.5
+    resize_rebalance = pd.Series(False, index=resize_index)
+    resize_rebalance.iloc[[0, 2]] = True
+    _, resize_orders, resize_stats = _simulate(resize_panels, resize_targets, resize_rebalance,
+                                                10_000, 1.0, 0, liquidate_terminal=False)
+    second_rebalance = resize_orders.loc[resize_orders["time"].eq(resize_index[3])]
+    assert {tuple(row) for row in second_rebalance[["symbol", "side"]].itertuples(index=False, name=None)} == {
+        ("TEST", "sell"), ("OTHER", "buy")}
+    assert resize_stats["assumptions"]["terminal_liquidation"] is False
     holdout_start = index[260].date()
     _, holdout_orders, holdout = _simulate(panels, targets, rebalance, 10_000, 0.95, 0, start=holdout_start)
     assert holdout_orders.iloc[0]["time"] == index[260]
@@ -1458,3 +1486,4 @@ if __name__ == "__main__":
     except (RuntimeError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         raise SystemExit(2)
+
