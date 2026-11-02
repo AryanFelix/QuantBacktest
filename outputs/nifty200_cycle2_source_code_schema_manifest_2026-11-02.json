@@ -1,0 +1,305 @@
+{
+  "cycle_id": "2026-11-02-cycle2",
+  "protocol_id": "NIFTY200-v1.6-AGEL-locked-claim-base-zero-stress",
+  "generation_command": "python work/audit_strategy_dependencies.py; python work/advance_nifty200_cash_prefixes.py",
+  "audit_code_sha256": "8a8531ff9745033fec1dc7ad2dd6e459db4e052bdede90b130bb8e01539c11f4",
+  "runner_code_sha256": "e8219298367ce2a9c19242a71ea6dcdad3dccfd0b4dd36c587fb338a2dd441e3",
+  "account_engine_code_sha256": "f6028c122262a222fe85d908e27c15a715e4415e566732e85a117ebdde90e403",
+  "signal_cache_schema": "nifty200-signal-dependencies-v2",
+  "signal_cache_manifest_sha256": "7a189e70c07555295484f0234a316cf81b3d4c46a88de899859b924fb14c9dd0",
+  "signal_cache_sources": [
+    {
+      "path": "outputs/nifty200_listing_evidence_2026-11-02.csv",
+      "bytes": 669,
+      "sha256": "b66ae37e3a9d701c9d89b29a7e1c4dbc03105782ca4cab0c07a8e14d2945f7d6"
+    },
+    {
+      "path": "work/data/public_research/isin_bridges/reviewed_identity_bridges.csv",
+      "bytes": 36165,
+      "sha256": "9f1c15da4524039253926e10751d4309d1818476329f53489a5c700aba7260bd"
+    },
+    {
+      "path": "work/data/public_research/membership/identity_bridges.csv",
+      "bytes": 15661,
+      "sha256": "06a81b1d5ae8b7c848698ce4af6363e33c2af61f06b246085ad01c0ffb906ba5"
+    },
+    {
+      "path": "work/data/public_research/membership/membership_intervals.csv",
+      "bytes": 19547,
+      "sha256": "4c7b1ab6c5d55148d90923355a4fa5014422f4777373a9ca5b69781281f44386"
+    },
+    {
+      "path": "work/data/public_research/membership/operative_events.csv",
+      "bytes": 110687,
+      "sha256": "db1d12b7bd4641f2780b1d6e3ff62b47aacae2b7da6ef1260c5404616ded299c"
+    },
+    {
+      "path": "work/data/public_research/nse_calendar_backfill/nse_calendar_backfill.parquet",
+      "bytes": 2108329,
+      "sha256": "6922639b543677460117a5844b282b7205ce894d79866b88f17bacecc060a8d4"
+    },
+    {
+      "path": "work/data/public_research/nse_calendar_backfill/nse_calendar_backfill_adjusted.parquet",
+      "bytes": 2543415,
+      "sha256": "ba23d69293a3209b7c3cb91ac59bdbfbf444764f93e792ac497ff4267716130c"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2016.parquet",
+      "bytes": 58515,
+      "sha256": "6c357e33bb43be40083c53eb26b45d3659e1a6d3b0c5054240e354cb2ea92587"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2017.parquet",
+      "bytes": 51653,
+      "sha256": "c1e1488a354a5166589057ba7ed1dc7f229f64a30902ec969f32597511d1b6b0"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2018.parquet",
+      "bytes": 51795,
+      "sha256": "9953b3b5319da9d99f92353012842db57c6316513d742d7dad718c84d5ab3161"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2019.parquet",
+      "bytes": 50508,
+      "sha256": "c152467c3c267273b7e405d045ac510f1ac73c3ed4197877a4d316013f7c1545"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2020.parquet",
+      "bytes": 53843,
+      "sha256": "941dafa70805984c7461e3d1d9211251a62877071368bc1703282d7f0df0c668"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2021.parquet",
+      "bytes": 59464,
+      "sha256": "6c7d443b92ebedeed037cd6f23007db914dcb97ab174abd8643cd75b01ac49f7"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2022.parquet",
+      "bytes": 63344,
+      "sha256": "6b8713f981aa77e72d7a433f4a4d4427bb9560ebeafd3ab2f3605b978b013774"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2023.parquet",
+      "bytes": 65949,
+      "sha256": "e264caec99b439ec11a3a55833f00e6a10fcaa7fbc9dca5a1776b8b1860840c9"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2024.parquet",
+      "bytes": 69584,
+      "sha256": "1615049f7710cc96ee4d33c4aa33ed22313f5243bc937a5f06d3c5f498330e36"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2025.parquet",
+      "bytes": 54305,
+      "sha256": "cad497f7c28f8e44e866e855a6c5b02d69a33b9660b7ac0f712de6fcfe4a29a8"
+    },
+    {
+      "path": "work/data/public_research/tejhq/actions/nse_2026.parquet",
+      "bytes": 55067,
+      "sha256": "3a12bc70515b041a559fc5011c8d6733fe85c1d8ed6f3e0b7df266cf42c38b85"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2016/nse_2016.parquet",
+      "bytes": 10050376,
+      "sha256": "5e9d3afbd37fbf70a96e84a59d41b05271345ef5ae48b94b727909941eaba5c7"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2017/nse_2017.parquet",
+      "bytes": 10249171,
+      "sha256": "2f8f620f4087ca92085e2bf2e07761654e009b5f34c985dfdef6367bad7b0c59"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2018/nse_2018.parquet",
+      "bytes": 10845690,
+      "sha256": "5107b627a08681514aa2597a7798e756f27daf849960cb5ae4bae44c257c5f66"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2019/nse_2019.parquet",
+      "bytes": 10551046,
+      "sha256": "0f650f62021d4e95e1728b665c42940d3de58cae7f9d9c9cff85141ed96fcf29"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2020/nse_2020.parquet",
+      "bytes": 11266451,
+      "sha256": "082b50730767c7c316fccb3d849d0d2b29a1864fe0769307be7baaa3bd30397d"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2021/nse_2021.parquet",
+      "bytes": 11771642,
+      "sha256": "3f5be5d8f684cd531786ebf95aa078642842572e17d83240073b45d79372b18d"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2022/nse_2022.parquet",
+      "bytes": 12803942,
+      "sha256": "23c40086ca1936f86957708c092b4a3ca777735522030060f20770925b6f143e"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2023/nse_2023.parquet",
+      "bytes": 13504094,
+      "sha256": "b83d4a68ea1a8a8e5a277fccb5802c2535371c903a7dbc88bf6f0054c2f5e887"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2024/nse_2024.parquet",
+      "bytes": 15671699,
+      "sha256": "a09cd025b558eb833fb87d1ae11ebdf44f1822e67c67d09bc0463d50566eea4c"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2025/nse_2025.parquet",
+      "bytes": 17152026,
+      "sha256": "d755f1ce1431dafaf2fc53880fcc09582dfb27b93bc9e88c2a4ad8589173cc94"
+    },
+    {
+      "path": "work/data/public_research/tejhq/nse/year=2026/nse_2026.parquet",
+      "bytes": 15620244,
+      "sha256": "093b4a22ffac0841f94f64644dbef7f565e13fd751d386743a122074f7aed11e"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2016.parquet",
+      "bytes": 11711725,
+      "sha256": "2ce259dee74407be7bf2f98c287d7c874c416e5bb4829958eb1ce7dbedd5ffff"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2017.parquet",
+      "bytes": 12243607,
+      "sha256": "794172f28f944c7acd27bce3588729762be05f2527c3b377bb1a7d12a08cac49"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2018.parquet",
+      "bytes": 12706908,
+      "sha256": "3d7bc80facba2b9cd518acb04e4f810cdfec571c9ebd54c00c5fa7e904d167bb"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2019.parquet",
+      "bytes": 12731705,
+      "sha256": "2805245de9cb639813a09927089e18d34141cbd61deb508adf54de5ca8584beb"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2020.parquet",
+      "bytes": 13031444,
+      "sha256": "a4bea6b86b9a80236c64cd1a3e8f709a13cba9f8e0c1a4cf658102b0de1f1a2d"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2021.parquet",
+      "bytes": 14233707,
+      "sha256": "3f5091e48284769890af97da6aea7d30752121ce11c517e5d6d29942911553e9"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2022.parquet",
+      "bytes": 15447220,
+      "sha256": "4d5acfa1c3c71a0e2945055555ec07277c7dc6824e710397ab47473a7ac5c1b2"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2023.parquet",
+      "bytes": 16225141,
+      "sha256": "2f7d0db0b48538aaced6c4005845606c5d13ec4ac370f166f09b3e47590d240c"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2024.parquet",
+      "bytes": 18684672,
+      "sha256": "8079447936536516c7241524020cf98e4585f9b5d562ac2a70fdef1c40988a63"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2025.parquet",
+      "bytes": 20358865,
+      "sha256": "fbe5a3fd4eff031823f3e88effc26d789e6ed85f97c6b00324526dfe8bb975c2"
+    },
+    {
+      "path": "work/data/public_research/tejhq/prices_adjusted/nse_2026.parquet",
+      "bytes": 18143025,
+      "sha256": "6fa0760b1848cedc5a135e834d28b9f763e5af29986c9f9a1aa6783947a0abee"
+    },
+    {
+      "path": "work/data/public_research/tejhq/symbol_history/nse.parquet",
+      "bytes": 73723,
+      "sha256": "fd221ddf06b6b2ecc5bf2b5176567fc7dce5e54a62a5a359319b7e9fc5f15b99"
+    }
+  ],
+  "signal_cache_outputs": {
+    "signal_dependencies.csv": "66700ae8c70d99214b21488533c8e6746606ac5c3868a8353f6252245576a832",
+    "unresolved_dependencies.csv": "4b403c662188083af0c4ec6dc6e385090cd1bc5ce0063e6d5a60973811cfece7"
+  },
+  "matched_tri_source_sha256": "6e2ac7e8995c654c0a30f9683438356931c878afc85b8a47ecd1f20a272c495e",
+  "curated_output_sha256": {
+    "outputs/experiment_register_cumulative_2026-11-02.csv": "6d8ca711640d7bacc9bd7cc53968896968ab0fdce69dbab4ef6ce50478c0801c",
+    "outputs/experiment_register_cycle2_2026-11-02.csv": "a4dc43a61153b9cb0fc58280afd01223f81b7eaa69a0e7a86868844f6dd15c84",
+    "outputs/nifty200_cycle2_actual_ledgers_2026-11-02.json": "3e8c18604c56f9fc450fdb468202cafb6dcd62a48bbf9f08731914af5de1d74b",
+    "outputs/nifty200_cycle2_actual_results_2026-11-02.json": "3ad537f8596a161453c45be36c9526906411ea83ff30ec4e83dd918c0fba6946",
+    "outputs/nifty200_cycle2_dependency_blockers_2026-11-02.json": "3aaf76c305480a10481810f1d5453aa610ef91ec6893695c6e035d0f74b8ec83",
+    "outputs/nifty200_sequential_account_cycle2_2026-11-02.json": "466e973e0678923681c13cca7d205f490bfb853722f8f25a75ece99713846bb5",
+    "outputs/nifty200_signal_cache_manifest_cycle2_2026-11-02.json": "7a189e70c07555295484f0234a316cf81b3d4c46a88de899859b924fb14c9dd0",
+    "outputs/nifty200_source_corrections_cycle2_2026-11-02.csv": "64e2ba8206b4f940740f2709ba75254c885615edbc469c034b20a724d30021d4",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_100bps_equity.csv": "db0380fdd575029ae50cae91356060f1324684031c2facfbb36fe1e3468cb810",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_100bps_events.json": "e6b6d255dd0782f0009d46a560751f5df5a2840866280c3c3a5f7a6df6436857",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_100bps_orders.csv": "d4c5c038a1e57035ed451237b009dff003b548e4f1fd25d4894ebdaa05fe4020",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_10bps_equity.csv": "b9c4129c8249cb670126068d440fa7a1601442b4c7f493923f10e4e871d3839a",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_10bps_events.json": "3df1179dc324dbbeb5980d786c9a3eb9ac6804756187287d8906f597cf3c8619",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_10bps_orders.csv": "440cabba8e009e8daadf980f9b0fd9c21ba826a3f20b49ad7ff52860dc2b4db0",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_200bps_equity.csv": "eb25f7e400dfc645b877bf48290bff051e86e44a1e9f8a7289431f57757105f1",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_200bps_events.json": "dc29979feff561e38c9dd0a819f6263102c37e4a3a1d754dcece113828bb8592",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_200bps_orders.csv": "446255021ced24feee0e9183cd32dc6a847794d791797a767703a04b0c616ade",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_50bps_equity.csv": "415252ab89e6e449c030c36f0c155371442766b30dbb16607e6a0c66712d96f5",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_50bps_events.json": "205416c835c6c010b74176ca4e145311c0cf23d9be53af70235da8f23ba47cc0",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_base_50bps_orders.csv": "cba7d84608b05554baf5d54c8987044879a5aaf0e37770be233f344dc52e1aca",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_zero_mark_stress_50bps_equity.csv": "b902994f3e0c4e45fa6583a1f2a7c2abb8de56963e7f0c6ad9bbbb2e8219e77c",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_zero_mark_stress_50bps_events.json": "af346b3960d60a078768da011964bcb742c62136846e2870d9407e3537dd0d80",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_m_zero_mark_stress_50bps_orders.csv": "cba7d84608b05554baf5d54c8987044879a5aaf0e37770be233f344dc52e1aca",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_100bps_equity.csv": "62c424d08d61dbed2739cd904a00daa42c7f218104919664f314312aecfdfbfa",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_100bps_events.json": "95bc45510b8f4747e0bc345ed57733ea9773133bb69e06fc1bf1920ecb32ea0d",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_100bps_orders.csv": "8940cf2c172aca1d496bf02c4b4c0a3b4b58181c0e20706ce41918c1b2ccf62d",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_10bps_equity.csv": "1ae2fe346ec9d492f175deaf2145976c151a3baf8da8f2dd8da1a306ca8109f7",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_10bps_events.json": "b58c8cb58f366337b76bd6656aa603575ddb41b28f08d8862f0943d9a010c1d4",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_10bps_orders.csv": "d08f0f6afa68f334db3886e7c149823b22324a8eef8881672a00a95c6453e86f",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_200bps_equity.csv": "689617d0ec6d743612bd58101277761827c2eebe26dd7c2ab2c8d0866b1dd6bb",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_200bps_events.json": "a924dbdeb4ee300af6861e659aef9e98db2ff35c7a23614309e8a4f73b0dd824",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_200bps_orders.csv": "7712c3dd4b29d180a0fc03922be6a949bfa2a4d8712503611767598832dc0a72",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_50bps_equity.csv": "575cf57525772403677d88d7679f1cf376f264e0890f2dcd70161aec13843099",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_50bps_events.json": "1e6478a7f675b141779fc68c57db794fd961b2329bdd0ab1b6727bcd9fe7b574",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_base_50bps_orders.csv": "c597570f34b5ef191094dd7a44257fcb749464a6bc51c82d30f42ebeac9844a4",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_zero_mark_stress_50bps_equity.csv": "94365cdc189477d8d1c8014ff3dcea4cb27aa3eeaef26e7dd74b0618dda26383",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_zero_mark_stress_50bps_events.json": "16b2cc5cdb7a4eb59d194aa832ff7bc9b67f2f674d07a888fd703191b56b1be1",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_a_q_zero_mark_stress_50bps_orders.csv": "c597570f34b5ef191094dd7a44257fcb749464a6bc51c82d30f42ebeac9844a4",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_100bps_equity.csv": "f67fb44aef98938cb08cefecc6e0e99b169f945bc89bb92ec49a3406937360f4",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_100bps_events.json": "2b85534a205bda43c32e679e0220815cca4d59068f3ef17d173e1497caf6b4ca",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_100bps_orders.csv": "ed78d94468839d7a97fb5db5b7c6f32ba6fc9e39c8d0c86f9e097569866e2374",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_10bps_equity.csv": "1df60bd8cfde66251f01b75f0933cf8308fe39477dfc5588440c95fc91c9746b",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_10bps_events.json": "0f1720d0eefdcc67404dd9b94f5dbe6e0ab653c133d8c789407b1da20af12db0",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_10bps_orders.csv": "274a9bfacbee3a1e96534712b7053897ccae27becea1833c536feccf0c467528",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_200bps_equity.csv": "7be520efaa151d9f548b3dd6fbade88f007763987dd54b980037a6541229155a",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_200bps_events.json": "1a354423ebda389de2f389d0cfab538315ee2a04980c9cb178996ff24097858c",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_200bps_orders.csv": "b13a5fe06b71a4aa77c7335dbc312dcbea0420f32638485960f0591e2f252fa4",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_50bps_equity.csv": "2339ee65e50946b98678828a88285aa3826904de84d17f3d45f5678f0f405368",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_50bps_events.json": "cc8fdb882dabba44f8c5bc78d2e78b6e39b599a393e47bdb7b484c43eed91365",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_base_50bps_orders.csv": "e5696bf360c2f3d678bacd4676765ce1a9dce6d7700e1384c4b215b290a0df4a",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_zero_mark_stress_50bps_equity.csv": "e25621b5ed8025108f65f4dbbac75180df40accbefa80786d8dc66b3acfc1d27",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_zero_mark_stress_50bps_events.json": "73240084e2365efe5db0684705ea63ec22dc0a34ba264561aacda9f17ee874be",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_m_zero_mark_stress_50bps_orders.csv": "e5696bf360c2f3d678bacd4676765ce1a9dce6d7700e1384c4b215b290a0df4a",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_100bps_equity.csv": "a71d3f747cdb19124739ab696f81d195ca2d0130a1e5e40f214437c2c6f66be9",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_100bps_events.json": "3620441d8328a978c8810db1c52a5e9e0d669164063a537bd0ddc7f4dc95e929",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_100bps_orders.csv": "1200116d0dbec9f8122aada74f9ec3b83312112d2e7fc7f4eb70ab26f4d30871",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_10bps_equity.csv": "ef9118ec9a5769379e23a7c81a004e8c87fd9ca76b9570b64b6102f925b0b3e6",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_10bps_events.json": "5a54496ff67d224fcfffe3c277bbe5b1bd85ef25d3183e9b189fe4b31c2e4d5e",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_10bps_orders.csv": "9b9795f56ee1ce2e882b01ecfe8ab24e55418d3da36e3bad13c3f8a41c3541ad",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_200bps_equity.csv": "e1f31d3f04218636c83af6a0eb41583ebae71e652d0b3e0409ccd8227beabd06",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_200bps_events.json": "3b1e2ef4034226cfaecbbbc9c0c712f5f3b08c5b669e5380832c10b4b05e6774",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_200bps_orders.csv": "3fbee33b296718d6760184ac0ba5a2e4eed278b73262d9146424c8ec66264a0c",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_50bps_equity.csv": "5f695eb27b14e1c41d33e0842009a927c7bdffb87f91c8d4dba36b49a0f4b590",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_50bps_events.json": "28faad2cdf2e10c75f43d40eaf3f4f450a0f42b8a8d332c7ee8ad4b2e5a67a68",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_base_50bps_orders.csv": "17e8a178133b90bb4f49e512875d192d3807a733d47458b9e2f70de884da2322",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_zero_mark_stress_50bps_equity.csv": "f046b707890f8cc0bfb43aacc188b7c152ae349e90989514cb1961837b635f9c",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_zero_mark_stress_50bps_events.json": "a28bab65ea65d0e1fa9c544b949b4ee4a70ff5f684f1ab30c39d16cf16d6decd",
+    "work/data/public_research/strategy_dependencies/nifty200/sequential_cash_prefixes_cycle2_2026-11-02/nifty200_b_q_zero_mark_stress_50bps_orders.csv": "17e8a178133b90bb4f49e512875d192d3807a733d47458b9e2f70de884da2322",
+    "README.md": "539da8d1b9f48e2d5140a40b4f62128f04a7223f675522bfabe55a4acb6fde74",
+    "outputs/nifty200_sequential_account_checkpoint_cycle2_2026-11-02.md": "27b11cd47e9614864222d8f418d45685202e6538d4f96cfa2100e8b4888f6a5f",
+    "outputs/quant_research_report.md": "30524e6bdffd85de0932d4f994d2a99871399e780cb771d04bf357e8fe79aff4",
+    "outputs/archive/nifty200_sequential_account_checkpoint_pre_agel_2026-11-02.md": "f9f732b0e6ccb5c65c277035b23f865b12e909025bd79cec27e49114097553e6",
+    "outputs/nifty200_candidate_dependency_audit_2026-11-02.json": "a2c4b39bf14bc221b5270ede6c5ac0508bc471f65a60d04a30d841b473effac6",
+    "outputs/nifty200_benchmark_calendar_reconciliation_2026-11-01.json": "48699d6acee159dbaae4c2b211d2fad0b9de1bdd821ccd4303094a577dbe86bd",
+    "outputs/nifty200_source_extraction_coverage_2026-10-31.csv": "839e734d9bc00f3d2bd683a5f786f6f331437f1aa673db643cdeb8622345d6ec",
+    "outputs/nifty200_replay_residual_delta_2026-11-01.json": "c2adcc3c5a30d0516cf250e33e977cd26f5037e03d0ad2343081851e1ed1bf07",
+    "outputs/nifty200_first_signal_correction_protocol_2026-11-02.md": "cb4108a376d5b5ad96b425378423a056e482c55cafe9968d7b9407eff996841d",
+    "outputs/nifty200_agel_valuation_protocol_2026-11-02.md": "bddf2e197d576730ca6daad96afd380d6e58534c8cc6178464d813db56c8e132",
+    "work/audit_strategy_dependencies.py": "8a8531ff9745033fec1dc7ad2dd6e459db4e052bdede90b130bb8e01539c11f4",
+    "work/advance_nifty200_cash_prefixes.py": "e8219298367ce2a9c19242a71ea6dcdad3dccfd0b4dd36c587fb338a2dd441e3",
+    "work/upstox_quant.py": "f6028c122262a222fe85d908e27c15a715e4415e566732e85a117ebdde90e403"
+  }
+}
