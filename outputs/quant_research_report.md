@@ -21,7 +21,7 @@ The table ranks current unlevered cash leads by their highest displayed after-co
 | **4** | MID150BEES SMA200 long/flat, 100% cap; 2021–Oct 2026 | **17.20%**; ₹25.14L | Midcap 150 TRI 18.64%; NIFTY 50 TRI 9.87% | -12.18% / -23.04% | Lower close drawdown, still trails its own index. Modeled fees ₹5,048.
 | **5** | HDFCSML250 buy-and-hold, 100%; 2023–Oct 2026 | **16.39%**; ₹17.45L | Smallcap 250 TRI 18.10%; NIFTY 50 TRI 7.95% | -25.90% / -28.82% | Only 909 ETF sessions; 50 bps/side; fees ₹341 and modeled slippage ₹13,744. Price-only ETF history.
 
-These five are prior diagnostics. The new NIFTY 200 rules and their L500-v1 fallback have no performance results because both data gates failed; none of this cycle's candidates has demonstrated the 20% full-evaluation target. See the [replay and fallback checkpoint](nifty200_cycle_checkpoint_2026-10-31.md).
+This leaderboard is the 2026-10-31 research snapshot. The four frozen NIFTY 200 configurations now have provisional 2018 account prefixes, but no full-period result; see the [cycle 2 account checkpoint](nifty200_sequential_account_checkpoint_cycle2_2026-11-02.md). None of the top-five historical leads or the new prefixes demonstrates the 20% full-evaluation target.
 
 **Decision:** keep stock momentum as a diagnostic research lead, not a deployable recommendation. Its gross same-share 2025+ result is near the index; modeled turnover and costs remove its small relative edge. NIFTY/Gold remains a historical comparison, not the primary route to 20%. The separate synthetic 2× Smallcap 250 headline is 32.06% since 2020, but the same-period MTF-rate sensitivity is 15.71% before trading costs and its close drawdown is -70.50%; it is not a qualifying strategy.
 
