@@ -16,6 +16,7 @@ import urllib.parse
 import urllib.request
 from collections import defaultdict
 from datetime import date, datetime, timedelta
+from decimal import Decimal, ROUND_FLOOR
 from pathlib import Path
 
 import numpy as np
@@ -436,6 +437,8 @@ def _simulate(
     drawdown_limit_pct: float = 20.0,
     cash_proxy: str | None = None,
     cash_distributions: list[tuple[str, date, float]] | None = None,
+    cash_distribution_payment_dates: dict[tuple[str, date], date] | None = None,
+    detached_claim_events: list[dict] | None = None,
     fee_product_by_symbol: dict[str, str] | None = None,
     cash_yield_series: pd.Series | None = None,
     liquidate_terminal: bool = True,
@@ -451,7 +454,24 @@ def _simulate(
     for symbol, ex_date, amount_per_share in cash_distributions or []:
         if symbol not in names or ex_date not in available_dates or not math.isfinite(amount_per_share) or amount_per_share < 0:
             raise ValueError("cash distributions need a known symbol, a cached session date, and a finite non-negative amount")
-        distribution_by_date[ex_date].append((symbol, amount_per_share))
+        payment_date = (cash_distribution_payment_dates or {}).get((symbol, ex_date))
+        if payment_date is not None and payment_date < ex_date:
+            raise ValueError("cash distribution payment date cannot precede its ex-date")
+        distribution_by_date[ex_date].append((symbol, amount_per_share, payment_date))
+    claim_states = []
+    claim_records = []
+    for event in detached_claim_events or []:
+        parent, child = event["parent_symbol"], event["child_symbol"]
+        ratio = Decimal(str(event["ratio"]))
+        if parent not in names or child not in names or ratio <= 0:
+            raise ValueError("detached claims require known parent/child symbols and a positive exact ratio")
+        if event["sale_date"] < event["listing_date"] or event["listing_date"] < event["ex_date"]:
+            raise ValueError("detached claim dates must follow ex-date, listing, then sale")
+        if not math.isfinite(float(event["detached_unit_mark"])) or float(event["detached_unit_mark"]) < 0:
+            raise ValueError("detached claim mark must be finite and non-negative")
+        claim_states.append({**event, "ratio_decimal": ratio, "whole_units": 0,
+                             "fractional_units": Decimal("0"), "created": False,
+                             "listed_mark": None, "sold": False})
     if cash_proxy and cash_proxy not in names:
         raise ValueError(f"cash proxy {cash_proxy} is missing from price data")
     product_overrides = {**FUND_FEE_PRODUCTS, **(fee_product_by_symbol or {})}
@@ -489,6 +509,12 @@ def _simulate(
     daily_distributions = []
     daily_cash_yields = []
     applied_distributions = []
+    pending_distributions = []
+    cash_receivable_balance = 0.0
+    cash_receivable_balances = []
+    locked_claim_balances = []
+    daily_distribution_entitlements = []
+    daily_distribution_payments = []
     risky_exposures = []
     gross_exposures = []
     prior_close_nav = float(starting_balance)
@@ -505,18 +531,62 @@ def _simulate(
             cash_yield = cash * float(cash_yields.loc[prior_timestamp]) / 100 * days_held / 365
             cash += cash_yield
         distribution_cash = 0.0
-        for name, amount_per_share in distribution_by_date.get(timestamp.date(), []):
+        distribution_entitlement = 0.0
+        for name, amount_per_share, payment_date in distribution_by_date.get(timestamp.date(), []):
             eligible_quantity = quantity[name]
             amount = eligible_quantity * amount_per_share
-            cash += amount
-            distribution_cash += amount
+            if payment_date is None:
+                cash += amount
+                distribution_cash += amount
+            else:
+                cash_receivable_balance += amount
+                pending_distributions.append({"payment_date": payment_date, "amount": amount})
+            distribution_entitlement += amount
             applied_distributions.append({
                 "symbol": name,
                 "ex_date": timestamp.date().isoformat(),
                 "cash_per_share_inr": amount_per_share,
                 "eligible_quantity": eligible_quantity,
                 "cash_inr": amount,
+                "payment_date": payment_date.isoformat() if payment_date else timestamp.date().isoformat(),
             })
+        for claim in claim_states:
+            if timestamp.date() == claim["ex_date"]:
+                entitlement = Decimal(int(quantity[claim["parent_symbol"]])) * claim["ratio_decimal"]
+                claim["whole_units"] = int(entitlement.to_integral_value(rounding=ROUND_FLOOR))
+                claim["fractional_units"] = entitlement - claim["whole_units"]
+                claim["created"] = True
+                claim["record"] = {"parent_symbol": claim["parent_symbol"], "child_symbol": claim["child_symbol"],
+                                    "ex_date": timestamp.date().isoformat(),
+                                    "parent_quantity_before_ex_open": int(quantity[claim["parent_symbol"]]),
+                                    "entitlement_exact": str(entitlement), "whole_units": claim["whole_units"],
+                                    "fractional_units_exact": str(claim["fractional_units"]),
+                                    "scenario": claim["scenario"],
+                                    "base_detached_unit_mark_inr": float(claim["base_detached_unit_mark"]),
+                                    "applied_prelisting_mark_inr": float(claim["detached_unit_mark"])}
+                claim_records.append(claim["record"])
+        for claim in claim_states:
+            if (claim["created"] and not claim["sold"]
+                    and timestamp.date() == claim["sale_date"] and claim["whole_units"]):
+                child_open = executable_prices[claim["child_symbol"]]
+                if pd.isna(child_open) or float(child_open) <= 0:
+                    raise ValueError(f"detached claim disposal lacks a raw open on {timestamp.date()} for {claim['child_symbol']}")
+                amount = claim["whole_units"]
+                fill = float(child_open) * (1 - slip)
+                notional = amount * fill
+                charges = _fee_breakdown(notional, "sell", instrument_fee_products[claim["child_symbol"]])
+                cash += notional - charges["total"]
+                turnover += notional
+                for component in FEE_COMPONENTS:
+                    totals[component] += charges[component]
+                orders.append({"time": timestamp, "symbol": claim["child_symbol"], "side": "sell",
+                               "quantity": amount, "fill_price": fill, "notional": notional,
+                               "order_type": "corporate_action_whole_claim_disposal", **charges})
+                claim["record"].update({"whole_units_sold": amount, "disposal_date": timestamp.date().isoformat(),
+                                        "disposal_open_raw_inr": float(child_open),
+                                        "disposal_fill_inr": fill, "disposal_fee_inr": charges["total"]})
+                claim["whole_units"] = 0
+                claim["sold"] = True
         signal_i = source_i - 1
         first_bar_entry = step == 0 and signal_i >= 0
         should_rebalance = signal_i >= 0 and (first_bar_entry or bool(rebalance.iloc[signal_i]))
@@ -579,13 +649,48 @@ def _simulate(
                 for component in FEE_COMPONENTS:
                     totals[component] += charges[component]
                 orders.append({"time": timestamp, "symbol": name, "side": "buy", "quantity": amount, "fill_price": fill, "notional": notional, **charges})
-        nav_close = cash + sum(quantity[name] * float(close_prices[name]) for name in names if quantity[name] and pd.notna(close_prices[name]))
+        paid_today = 0.0
+        still_pending = []
+        for receivable in pending_distributions:
+            if receivable["payment_date"] <= timestamp.date():
+                cash += receivable["amount"]
+                cash_receivable_balance -= receivable["amount"]
+                paid_today += receivable["amount"]
+            else:
+                still_pending.append(receivable)
+        pending_distributions = still_pending
+        claim_value = 0.0
+        for claim in claim_states:
+            if not claim["created"]:
+                continue
+            if timestamp.date() < claim["listing_date"]:
+                unit_mark = float(claim["detached_unit_mark"])
+            elif claim["listed_mark"] is None:
+                listing_close = closes.at[timestamp, claim["child_symbol"]]
+                if pd.isna(listing_close) or float(listing_close) <= 0:
+                    raise ValueError(f"detached claim lacks the first raw listing close on {timestamp.date()} for {claim['child_symbol']}")
+                claim["listed_mark"] = float(listing_close)
+                claim["record"]["first_listing_close_raw_inr"] = claim["listed_mark"]
+                unit_mark = claim["listed_mark"]
+            else:
+                unit_mark = float(claim["listed_mark"])
+            units = Decimal(claim["whole_units"]) + claim["fractional_units"]
+            claim_value += float(units) * unit_mark
+            claim["record"]["ending_mark_date"] = timestamp.date().isoformat()
+            claim["record"]["ending_mark_per_child_share_inr"] = unit_mark
+            claim["record"]["ending_fractional_receivable_inr"] = float(claim["fractional_units"]) * unit_mark
+            claim["record"]["ending_whole_units_unsold"] = claim["whole_units"]
+        nav_close = cash + sum(quantity[name] * float(close_prices[name]) for name in names if quantity[name] and pd.notna(close_prices[name])) + cash_receivable_balance + claim_value
         invested = sum(quantity[name] * float(close_prices[name]) for name in names if quantity[name] and pd.notna(close_prices[name]))
         invested_risk = sum(quantity[name] * float(close_prices[name]) for name in risk_names if quantity[name] and pd.notna(close_prices[name]))
         equity.append(nav_close)
         cash_balances.append(cash)
         invested_balances.append(invested)
         daily_distributions.append(distribution_cash)
+        daily_distribution_entitlements.append(distribution_entitlement)
+        daily_distribution_payments.append(distribution_cash + paid_today)
+        cash_receivable_balances.append(cash_receivable_balance)
+        locked_claim_balances.append(claim_value)
         daily_cash_yields.append(cash_yield)
         risky_exposures.append(invested_risk / nav_close if nav_close > 0 else 0.0)
         gross_exposures.append(invested / nav_close if nav_close > 0 else 0.0)
@@ -614,7 +719,7 @@ def _simulate(
             for component in FEE_COMPONENTS:
                 totals[component] += charges[component]
             orders.append({"time": last_trade_time, "symbol": name, "side": "sell", "quantity": amount, "fill_price": fill, "notional": notional, "terminal_liquidation": True, **charges})
-        equity[-1] = cash
+        equity[-1] = cash + cash_receivable_balances[-1] + locked_claim_balances[-1]
         cash_balances[-1] = cash
         invested_balances[-1] = 0.0
         risky_exposures[-1] = 0.0
@@ -622,6 +727,10 @@ def _simulate(
     equity_frame = pd.DataFrame({"nav": equity, "risky_exposure": risky_exposures, "gross_exposure": gross_exposures,
                                  "cash_inr": cash_balances, "invested_inr": invested_balances,
                                  "cash_distribution_inr": daily_distributions,
+                                 "cash_distribution_entitlement_inr": daily_distribution_entitlements,
+                                 "cash_distribution_paid_inr": daily_distribution_payments,
+                                 "cash_receivable_inr": cash_receivable_balances,
+                                 "locked_claim_inr": locked_claim_balances,
                                  "cash_yield_inr": daily_cash_yields}, index=run_dates)
     trades = pd.DataFrame(orders)
     daily_returns = equity_frame["nav"].pct_change().replace([np.inf, -np.inf], np.nan).fillna(0)
@@ -655,7 +764,11 @@ def _simulate(
         "turnover_inr": float(turnover),
         "turnover_to_starting_capital": float(turnover / starting_balance),
         "total_fees_inr": float(sum(totals.values())),
-        "cash_distributions_inr": float(sum(event["cash_inr"] for event in applied_distributions)),
+        "cash_distributions_inr": float(sum(daily_distribution_payments)),
+        "cash_distribution_entitlements_inr": float(sum(event["cash_inr"] for event in applied_distributions)),
+        "ending_cash_receivable_inr": float(cash_receivable_balances[-1]),
+        "ending_locked_claim_inr": float(locked_claim_balances[-1]),
+        "detached_claim_events": claim_records,
         "cash_yield_inr": float(sum(daily_cash_yields)),
         "cash_distribution_events": applied_distributions,
         "fees_by_component_inr": {key: round(value, 2) for key, value in totals.items()},
@@ -668,7 +781,11 @@ def _simulate(
             "max_gross_exposure": max_exposure,
             "max_drawdown_limit_pct": drawdown_limit_pct,
             "cash_proxy": cash_proxy,
-            "cash_distributions_credited_on_ex_date": bool(cash_distributions),
+            "cash_distributions_credited_on_ex_date": any(
+                (cash_distribution_payment_dates or {}).get((symbol, ex_date)) is None
+                for symbol, ex_date, _ in cash_distributions or []
+            ),
+            "cash_distributions_deferred_to_payment_date": bool(cash_distribution_payment_dates),
             "fee_schedule": "current Upstox/NSE charges applied uniformly to all history; fund-unit STT is classified by instrument",
             "instrument_fee_products": instrument_fee_products,
             "cash_interest_pct": 0,
@@ -1486,4 +1603,3 @@ if __name__ == "__main__":
     except (RuntimeError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
         raise SystemExit(2)
-
