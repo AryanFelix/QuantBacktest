@@ -1,0 +1,975 @@
+{
+  "protocol_id": "NIFTY200-v1.6-AGEL-locked-claim-base-zero-stress",
+  "signal_schedule_blockers": [
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "certified_signal_count": 3,
+      "first_signal_blocker": {
+        "signal_date": "2018-04-30",
+        "status": "BLOCKED",
+        "unresolved_dependency_groups": [
+          {
+            "entity": "ABCAPITAL|INE674K01013",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-04-25..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 89,
+            "date_start": "2017-04-25",
+            "date_end": "2017-08-31",
+            "dependency_keys_sha256": "d50a8c1bff7b52e6a2ee66f0252fbef07ffdf29096f52547c77c6cae175bca9e",
+            "dependency_key_samples": [
+              "006b5de6b506ef54b1a2a6b760a1c6b0c7feeb0a424200bc1c33b8523d48a786",
+              "037f56c965579ebdacba926c27327f15288a01782b2e6453f5fb0bd9dd24f2e2",
+              "04cdbc01477f73ca90de427c5f3aa42ba479204e780e4487f31ffdb5c016068e"
+            ]
+          },
+          {
+            "entity": "GICRE|INE481Y01014",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-04-25..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 125,
+            "date_start": "2017-04-25",
+            "date_end": "2017-10-24",
+            "dependency_keys_sha256": "b933f5d8be8e10de3b58fd0f767f6910b510c946f2386344ab348eb0130e15c5",
+            "dependency_key_samples": [
+              "0137d77cd28364892c2df5e31eaeb319b8ac86580dd2537adfd5948c3342f3b3",
+              "015caada0a1e1e43a09742479f794ba728bde31821091afdf20bf348505608af",
+              "03612be6c3feb5197e96eed4f1d01a38b175605a238f75684057c8499c6bd6c1"
+            ]
+          },
+          {
+            "entity": "GODREJAGRO|INE850D01014",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-04-25..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 119,
+            "date_start": "2017-04-25",
+            "date_end": "2017-10-13",
+            "dependency_keys_sha256": "b0346b71cd6dcfad692706ca853cfe6eafd7384772e966136acab131c8009005",
+            "dependency_key_samples": [
+              "047d1aa35298d7e58bc94dbd68d46efe5ef2bbb41ba84df4d6c81bd451d90e92",
+              "06e8e04fc919a17baeff5c665f1d5f80776fa5d8d3da95ce2d539e37c1f64f80",
+              "0900e38712229fd10331e67df3bdf266469a0c5303eb802a33a9cc954cbae46b"
+            ]
+          },
+          {
+            "entity": "GRASIM|INE047A01021",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE047A01013; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2017-07-19",
+            "date_end": "2017-07-19",
+            "dependency_keys_sha256": "ecd3c9d04ddb1352df45b6139ea03dc12ac49d1b9a32a82befb9727ed309088a",
+            "dependency_key_samples": [
+              "bd22aca371f513808507716797dd56d45fbb395021f65d590d6a6281bfeda1a3"
+            ]
+          },
+          {
+            "entity": "HINDPETRO|INE094A01015",
+            "input": "signal_dividend",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE094A01015; vendor terms=; support check=missing_or_invalid_dividend_cash_terms",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2018-02-28",
+            "date_end": "2018-02-28",
+            "dependency_keys_sha256": "0564cfa93c5eca073bf793a6df151f38f4de528de7ba60189e9b0e9b28861704",
+            "dependency_key_samples": [
+              "d8ebf97b94651e18215228b37f79ff11440fcb4c8e13d886ca325f9739c96b4a"
+            ]
+          },
+          {
+            "entity": "IBVENTURES|INE274G01010",
+            "input": "signal_rights",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE274G01010; vendor terms=ratio_num:3.0,ratio_den:16.0,cash_amount:238.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2018-02-09",
+            "date_end": "2018-02-09",
+            "dependency_keys_sha256": "66918d738ec82f5b9beda79e66621bf3243ed217a66834749490cf0933068ae9",
+            "dependency_key_samples": [
+              "fc7efb2e27e057bc5338e4eeb8f60df56cf5af690866482baf572a56e183ba83"
+            ]
+          },
+          {
+            "entity": "ICICIGI|INE765G01017",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-04-25..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 107,
+            "date_start": "2017-04-25",
+            "date_end": "2017-09-26",
+            "dependency_keys_sha256": "1ada49c95e68a75d9de03650e34a09008e0e5bc12132a5acd21ef9c355e1703f",
+            "dependency_key_samples": [
+              "010eb19164bf004fdfe15d84a4b5466cb70d2aa04550ca4db07a74b0b862deb0",
+              "01658aff95da2eb11734bef9ae0ea8c23c087ec359a428d958ca21b354a58009",
+              "02108c980ef9c40808e45cf52f6d45c3fdfc39f0f86acb6de57a002b6022b815"
+            ]
+          },
+          {
+            "entity": "IDFCBANK|INE092T01019",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 2,
+            "date_start": "2018-02-28",
+            "date_end": "2018-03-08",
+            "dependency_keys_sha256": "9c1d0d4d5405543025c8393e1c8081356a79005cd65a2a30147032b8c7c88bd2",
+            "dependency_key_samples": [
+              "33263176ad00dbc43462c8fbc5c1ce47ca119fac8cd4e5479f510045ea63abf0",
+              "cae273d34e96e831cac313d982728445fca4d9236eba468440f5ca2e1a7bc521"
+            ]
+          },
+          {
+            "entity": "SBILIFE|INE123W01016",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-04-25..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 110,
+            "date_start": "2017-04-25",
+            "date_end": "2017-09-29",
+            "dependency_keys_sha256": "4a34d777b9e776303fcb367679cb7bd60fa3a4a3e713cf84bcd8ecdccabf63b3",
+            "dependency_key_samples": [
+              "016a503ac1cd12434a386dc8fbce89d2c9f29b649ec663cd007163a01eeec054",
+              "049aa9fc54438e89e3eaf2ffbf49b51cd55a5d7fc40b7f1b25d5720738e4ca13",
+              "06c0b17052b366077961597d808ca309dce177668f60095bfb62129a0ed2a7b9"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "certified_signal_count": 1,
+      "first_signal_blocker": {
+        "signal_date": "2018-06-29",
+        "status": "BLOCKED",
+        "unresolved_dependency_groups": [
+          {
+            "entity": "ABCAPITAL|INE674K01013",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-06-27..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 46,
+            "date_start": "2017-06-27",
+            "date_end": "2017-08-31",
+            "dependency_keys_sha256": "950f758c47103476f01cebedb85b0df8f7d505bfadb47df5d9e625fc8291cc01",
+            "dependency_key_samples": [
+              "01ccaf6e3391b2cbeae1953ebbc24b2f8e27062e1e2ce75c9ebf9b89c9adf539",
+              "161d14136e593a3abe1c1cc8a3584a8b8db2f2ad4d0e4defde5bb7f5050b82ec",
+              "1675190cc2d901795e61c1d9f5906c823cae14287ad239b064707c1ea564acad"
+            ]
+          },
+          {
+            "entity": "CONCOR|INE111A01025",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-06-27..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 232,
+            "date_start": "2017-06-27",
+            "date_end": "2018-05-31",
+            "dependency_keys_sha256": "b0b65f13bb93e9bb90c6abadfabccd73243d97d6a8cca922faec594cf5c32921",
+            "dependency_key_samples": [
+              "0251efb3a39ecd684710d22d68ba4afd2bfbcac19cbd49856bf231406826e287",
+              "02f03be13f377a9b22f8be013dcf6a3af49aa3c50bab788305a9d0ac674f117f",
+              "030f21195a45795470e3c65c4da836c47fae59dd03d463a3cd8b3cc96c31ae56"
+            ]
+          },
+          {
+            "entity": "FRETAIL|INE752P01024",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE752P01024; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2017-11-29",
+            "date_end": "2017-11-29",
+            "dependency_keys_sha256": "d23e1ebccad96f8a2d81736a53703b77e3a5a48f19b94f2c42c4b8bce76a6b5f",
+            "dependency_key_samples": [
+              "1e641b86928d4bac150a69fcaae88e55f5d2deb9071f3c4f66ea41e27fb36a7f"
+            ]
+          },
+          {
+            "entity": "GICRE|INE481Y01014",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-06-27..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 82,
+            "date_start": "2017-06-27",
+            "date_end": "2017-10-24",
+            "dependency_keys_sha256": "38daf1c843fb40bbe9e2f909557f1f9f73c4d7e89e5545a18175a99ca94c38d3",
+            "dependency_key_samples": [
+              "01974c1fcb7c429c4dea9e2922a3277e6b031eb136eaf227fe373a950ea0fe37",
+              "031f8d4fd7e6f140fab7b192dd08995a1c10f3a2926a7a995dd117ea6845b689",
+              "05248e938b69cd90e22b468ba52d51485cc31ae1fe7411620f19432c3dc54336"
+            ]
+          },
+          {
+            "entity": "GODREJAGRO|INE850D01014",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-06-27..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 76,
+            "date_start": "2017-06-27",
+            "date_end": "2017-10-13",
+            "dependency_keys_sha256": "c609f1cf3b95b444ee2ed4090ee3ad6e711a9861d4ec82f613bdc890745eb48b",
+            "dependency_key_samples": [
+              "0214dc7baa3fc28262f6bf705d6cd0358153dfa3bdf46316e5076a2656c3f205",
+              "04324c4dbf6aed2849aa99646ad703e6c1cdab1a8d15cf8ff6e7f98253b479d6",
+              "054c201a9e9ff8b7d7abdcc9aee5df7cb28480dba1b6201ddf10c5cc3623ad8b"
+            ]
+          },
+          {
+            "entity": "GRASIM|INE047A01021",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE047A01013; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2017-07-19",
+            "date_end": "2017-07-19",
+            "dependency_keys_sha256": "e6e8e63079818c21a7f152370ae9af3c07aaa1e87a011027a7484044287e6387",
+            "dependency_key_samples": [
+              "bab6724887732632c7513cbe14af10632405a7831e7d1ecbf4769995824dee97"
+            ]
+          },
+          {
+            "entity": "HINDPETRO|INE094A01015",
+            "input": "signal_dividend",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE094A01015; vendor terms=; support check=missing_or_invalid_dividend_cash_terms",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2018-02-28",
+            "date_end": "2018-02-28",
+            "dependency_keys_sha256": "5d0ca2c9e027655a01b0790f92aa3242b99b19dec54c1a2b5c408aed8424a478",
+            "dependency_key_samples": [
+              "47588c881328a4ce1b935297fc22d450b31afb82919ff966cafeb252cd21f863"
+            ]
+          },
+          {
+            "entity": "IBVENTURES|INE274G01010",
+            "input": "signal_rights",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE274G01010; vendor terms=ratio_num:3.0,ratio_den:16.0,cash_amount:238.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2018-02-09",
+            "date_end": "2018-02-09",
+            "dependency_keys_sha256": "2001f6bbce71936312acfc9badbff703bab03cdc4e7cd06dd57526980bfc1824",
+            "dependency_key_samples": [
+              "75e82f95a44f7be685531cd4430a49acc2f4e08e705e71f20f48497b559ad804"
+            ]
+          },
+          {
+            "entity": "ICICIGI|INE765G01017",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-06-27..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 64,
+            "date_start": "2017-06-27",
+            "date_end": "2017-09-26",
+            "dependency_keys_sha256": "0dda5765c2b7a7bfc4dc467c639207763d4e8566ac2302a574c3d50d91d70ce1",
+            "dependency_key_samples": [
+              "021a9f1be2fbe3b3cf2abb3f6d189a3548156a35e97a29ea32f41ed2fb874944",
+              "022a718f54f153957536c30802775c6646a36dd0913ce54662a6c916fa0b1ec3",
+              "031fd3ba0b1ed2708aa5d82e01423a96008cc808890cd6cb6b43c30d5852f126"
+            ]
+          },
+          {
+            "entity": "IDFCBANK|INE092T01019",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 2,
+            "date_start": "2018-02-28",
+            "date_end": "2018-03-08",
+            "dependency_keys_sha256": "064980d1eb06943b21f40ee15523e45220deba896a69d2d614231bfbcc2ec232",
+            "dependency_key_samples": [
+              "3db5eb1f27c5cc03d00dd66190d1736541092f0c764ab035d1b442a03da24a5a",
+              "f69fd5ea79cc2cfe471f96961f7ba1b66d8aa7b11db77c7ad86ca2131876bb93"
+            ]
+          },
+          {
+            "entity": "SBILIFE|INE123W01016",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-06-27..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 67,
+            "date_start": "2017-06-27",
+            "date_end": "2017-09-29",
+            "dependency_keys_sha256": "c43e3b3679c07c5278cf13f60c281ad384351d4b458655c3a2d9982a83636eff",
+            "dependency_key_samples": [
+              "07b76745f6f793b5b9382d550f7000402018caf9190ac5253d16346500543e59",
+              "0a0353cdb0c9c6ad7977314886fc3e0e12549b64b947b7434625a90087d6b237",
+              "0a0eeeba4e038569cc870b11d198aff675dc2cf8f04f39a492f4e4ee6251688f"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "certified_signal_count": 3,
+      "first_signal_blocker": {
+        "signal_date": "2018-04-30",
+        "status": "BLOCKED",
+        "unresolved_dependency_groups": [
+          {
+            "entity": "ABCAPITAL|INE674K01013",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-03-23..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 110,
+            "date_start": "2017-03-23",
+            "date_end": "2017-08-31",
+            "dependency_keys_sha256": "ed1b3dc1d18f0f271e3b6fda4c832c588ae69942e58859394064d065152841dd",
+            "dependency_key_samples": [
+              "01fb989a87daacbd3a5070cc8e819b1e5af00eaf83e3889d6d0bf16127907431",
+              "02668d14c5bc3a6214d250c760957e49c9b40f944649750a326de1b27c54f653",
+              "041ed7b140649ebe4792ad08266abaa17111d653d836af2889435b94d46d25e2"
+            ]
+          },
+          {
+            "entity": "GICRE|INE481Y01014",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-03-23..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 146,
+            "date_start": "2017-03-23",
+            "date_end": "2017-10-24",
+            "dependency_keys_sha256": "ef3fa8c196142dd80f401784423a32fecca7e804e0ce3f5251452ca1340193c4",
+            "dependency_key_samples": [
+              "05d9782137cccb894af28849d626ea26b5ecd2cff13802b4bdbac14b37ca3786",
+              "06c5b718dd975071c652bdbc840db9510f7b07bb45b8164312bec164ae78be3d",
+              "06c88d6e048db3ad6e906562f6ad82e6e1f1bc3b20b3f07411fae99ae1086e75"
+            ]
+          },
+          {
+            "entity": "GODREJAGRO|INE850D01014",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-03-23..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 140,
+            "date_start": "2017-03-23",
+            "date_end": "2017-10-13",
+            "dependency_keys_sha256": "55812ff14915d0d0e9fcee4516f6ad16a74be57348cb9cdb091a8bb4df718843",
+            "dependency_key_samples": [
+              "019b81a13f8dc3c3b9685bd12ddc1b537ed3b533174446f5dbd2b2fac4f9373a",
+              "05a8c8335c4956ef669446ea3c79e5e23f7ecacf9dcf4f57e9f822785beac321",
+              "06c0ab2920eafbbe4d73d937dab0bed8caa334479633aae165c1bcd3ef25ab3b"
+            ]
+          },
+          {
+            "entity": "GRASIM|INE047A01021",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE047A01013; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2017-07-19",
+            "date_end": "2017-07-19",
+            "dependency_keys_sha256": "60c8797e3b73721933447bafa61d5d2bd256d5552c0454041d7fa97d0ec4f950",
+            "dependency_key_samples": [
+              "bc011fd9dc86b636c78dbeab5daa0c8740c6311cfef8993c5bc918c3c76d1d07"
+            ]
+          },
+          {
+            "entity": "HINDPETRO|INE094A01015",
+            "input": "signal_dividend",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE094A01015; vendor terms=; support check=missing_or_invalid_dividend_cash_terms",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2018-02-28",
+            "date_end": "2018-02-28",
+            "dependency_keys_sha256": "cba60b379c4a97acec86c81b51b4d2dcfa924a24cb9e2698900a523c9a8f283c",
+            "dependency_key_samples": [
+              "5703d589ac89bd901b3de157e21e181eb0b76a5a425dff7b6b324ea7b3b7c5bd"
+            ]
+          },
+          {
+            "entity": "IBVENTURES|INE274G01010",
+            "input": "signal_rights",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE274G01010; vendor terms=ratio_num:3.0,ratio_den:16.0,cash_amount:238.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2018-02-09",
+            "date_end": "2018-02-09",
+            "dependency_keys_sha256": "6d50928a4be7dbca2d699cc408d6bfb44a0de7924acc10d41f51e52a594401f5",
+            "dependency_key_samples": [
+              "d76be8a419969ac16ace83b981915658ead29f0799794b71d041e2edf260635d"
+            ]
+          },
+          {
+            "entity": "ICICIGI|INE765G01017",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-03-23..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 128,
+            "date_start": "2017-03-23",
+            "date_end": "2017-09-26",
+            "dependency_keys_sha256": "17ea661ffeccb58b6253d52b9a14d32a66d680ef947747813d47528f8a6f84d3",
+            "dependency_key_samples": [
+              "00ce7f7c8f1bc03e5d48c8c932668eedd59f55670baf4de25c1984859c6ee9c9",
+              "037888f60ee24643401d319b19daf4c29584e28f320296a0dc1de7addb4008b4",
+              "0689d33035c1df1c00be3122a474fb5610b173f2151c187f3718b5a6ccca552a"
+            ]
+          },
+          {
+            "entity": "IDFCBANK|INE092T01019",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 2,
+            "date_start": "2018-02-28",
+            "date_end": "2018-03-08",
+            "dependency_keys_sha256": "e4d7576e2e7d8dc964164e63856d3dd29a9951744c91e0c3380cc2731c886f52",
+            "dependency_key_samples": [
+              "71b84b079642a8ba08989ad0ffb2075ee7661ab084c05a665e5520208ba308aa",
+              "d197d9cb181cddfff36c1998d4bf46248180e17a11677a46c2f42a31376ba663"
+            ]
+          },
+          {
+            "entity": "SBILIFE|INE123W01016",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-03-23..2018-03-28",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 131,
+            "date_start": "2017-03-23",
+            "date_end": "2017-09-29",
+            "dependency_keys_sha256": "31cfa99b3b3b8d4be04d6e5ad711ef55ba688f78d090d553d38cd4ec4a555a57",
+            "dependency_key_samples": [
+              "05a131e457c3e97b02d3d3fff72ec697e808c665baf9772bc387a6c25da84f24",
+              "06ca42fca3b340991ebba52e4bc0c8a3699f8dfb340d8ab91d3a8cc39622f3af",
+              "0ac8f7eff6836c1230e9bcdd59509ccdbfa0d3687e9ed400525d81ff91af8786"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "certified_signal_count": 1,
+      "first_signal_blocker": {
+        "signal_date": "2018-06-29",
+        "status": "BLOCKED",
+        "unresolved_dependency_groups": [
+          {
+            "entity": "ABCAPITAL|INE674K01013",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-05-26..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 67,
+            "date_start": "2017-05-26",
+            "date_end": "2017-08-31",
+            "dependency_keys_sha256": "0a4832bab64afc4dd935ac15b70c10891b52aac66da20e29a9a044a4ec141d2a",
+            "dependency_key_samples": [
+              "03c0ac54fd144ae01a5621d002da0ddc16dfb86021c179533cbeeac271166cba",
+              "1447cbc86bf0e0028cf6e2d8e39300b9b476e97a26e2be50de7bfee33ead7e4f",
+              "1ab23089a2084a678e44f0914a0a20163a279eb90a3c47ebd32cbc2be3c5549b"
+            ]
+          },
+          {
+            "entity": "CONCOR|INE111A01025",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-05-26..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 253,
+            "date_start": "2017-05-26",
+            "date_end": "2018-05-31",
+            "dependency_keys_sha256": "b0adfa66a11a99036b7a8e7d45fbc38e8673d5ac5d8f968e054f3635f1229212",
+            "dependency_key_samples": [
+              "00b578e077d48fd037acb6af227eb6addd6d3b2a9f88a556e2f42abb41ba8aed",
+              "00eca583de6cc0e413295f92703f18000b023ee618d90cc418ded4521ecb97b1",
+              "02917cdd7ea92c11e98db8a67a83f99d630452a93603ba0c59ef5576dd00f65e"
+            ]
+          },
+          {
+            "entity": "FRETAIL|INE752P01024",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE752P01024; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2017-11-29",
+            "date_end": "2017-11-29",
+            "dependency_keys_sha256": "1205aa055157c1976af123ae130e03ed0562d82a34303a1151685e2a76fa26dc",
+            "dependency_key_samples": [
+              "1ce6129aab7972fbffa5a01431744a70050830dc19a352628966cf7d788d2e15"
+            ]
+          },
+          {
+            "entity": "GICRE|INE481Y01014",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-05-26..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 103,
+            "date_start": "2017-05-26",
+            "date_end": "2017-10-24",
+            "dependency_keys_sha256": "c51c0701cbc478076ec5f236a73c8ae961fc3eb1d4f94c1a72c88811bb697622",
+            "dependency_key_samples": [
+              "000952e61d03a74e95e7d2c4c13bdf0ff0cd6be5b74a8ff8b279a16f530402b6",
+              "042fda58dc1aca45ef6fc106c701d703b6f832c05259c901e59cc7c9964bdafe",
+              "04b0e0493b197e7e255fef1672964d1c05b567df001c89133762d5be6ff62b6d"
+            ]
+          },
+          {
+            "entity": "GODREJAGRO|INE850D01014",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-05-26..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 97,
+            "date_start": "2017-05-26",
+            "date_end": "2017-10-13",
+            "dependency_keys_sha256": "d51ac464131176e79359de1ee6a1693d3bd05144b43d5d885a0b5a837c7353e6",
+            "dependency_key_samples": [
+              "03e405916e78dd9320c7c6c56200ea800a40321de83a86a950e1ab79ac81e934",
+              "05815367e092db6811d55d4ac6f01d72a56a15aa31bc2a2d2aba338fe793ec46",
+              "0970b39f0b24ec989ab7b3583faf4ef8b157493a5b36a49ce8ecfb43a07141a2"
+            ]
+          },
+          {
+            "entity": "GRASIM|INE047A01021",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE047A01013; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2017-07-19",
+            "date_end": "2017-07-19",
+            "dependency_keys_sha256": "bdf4e822a71d9dca194cb31da317f96d95df706fb12131ea069d68646f5a9e52",
+            "dependency_key_samples": [
+              "cbe6691519145058b5d02afaf43d4cc02d361fa86f599b6e157ffbb5179dea17"
+            ]
+          },
+          {
+            "entity": "HINDPETRO|INE094A01015",
+            "input": "signal_dividend",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE094A01015; vendor terms=; support check=missing_or_invalid_dividend_cash_terms",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2018-02-28",
+            "date_end": "2018-02-28",
+            "dependency_keys_sha256": "49c3eca90017f3054b3bad89c81afec124f96159bdbf2856517db4771fed7f4f",
+            "dependency_key_samples": [
+              "372eb08b761ee28039658008f80b280bf2e25f5104b45632a985bd1801f715cf"
+            ]
+          },
+          {
+            "entity": "IBVENTURES|INE274G01010",
+            "input": "signal_rights",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE274G01010; vendor terms=ratio_num:3.0,ratio_den:16.0,cash_amount:238.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 1,
+            "date_start": "2018-02-09",
+            "date_end": "2018-02-09",
+            "dependency_keys_sha256": "b42b0d759e58334c1ded91358d3742cd4a5a72c6ddee0b2618dfb6e666ea68f3",
+            "dependency_key_samples": [
+              "e97e38b50b2bd12de607e0f90405c4ba5c3808468d639a470cd5c424b5929caa"
+            ]
+          },
+          {
+            "entity": "ICICIGI|INE765G01017",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-05-26..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 85,
+            "date_start": "2017-05-26",
+            "date_end": "2017-09-26",
+            "dependency_keys_sha256": "419fb969c8edf9092423cda26e9368ec9b3d07be2f2fd11f8eb3d799eb7beca7",
+            "dependency_key_samples": [
+              "024ab16d49f96a778889bc635fe8c4663d8d1ba390e11521928292aa3393e44c",
+              "085ec200acd5254626795462d16dc97264dfb1a50b6b0b0c7cf1271495bd3416",
+              "12059c9b73afe4a631679f5ea671e1b28c7fa37ab71189d5264eaf12b54a14bf"
+            ]
+          },
+          {
+            "entity": "IDFCBANK|INE092T01019",
+            "input": "signal_other",
+            "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved",
+            "source": "TejHQ NSE corporate-action feed",
+            "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+            "impact": "ranking-changing signal may be misstated",
+            "dependency_count": 2,
+            "date_start": "2018-02-28",
+            "date_end": "2018-03-08",
+            "dependency_keys_sha256": "76def1ee34dfb2a1e3b3514eb198899fefcae9eac216a6019991c40c8c999bb6",
+            "dependency_key_samples": [
+              "a3e27dc67729fdc7afe960240b63f43405c72b87d056f24f492c05a19683852c",
+              "d163799d1769f4a6ca94c9c0eed24195f28187f56079f39d5a6a9a50809ceb6a"
+            ]
+          },
+          {
+            "entity": "SBILIFE|INE123W01016",
+            "input": "signal_window",
+            "reason": "missing_or_invalid_adjusted_close; required window=2017-05-26..2018-05-31",
+            "source": "TejHQ adjusted NSE price history",
+            "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+            "impact": "ranking-changing signal unknown",
+            "dependency_count": 88,
+            "date_start": "2017-05-26",
+            "date_end": "2017-09-29",
+            "dependency_keys_sha256": "8065add7d4eb2133a3eadd07e4fed2de051827e146ba4280ce4a0e8deedf59c2",
+            "dependency_key_samples": [
+              "0608693aefb773e833b913f4cd9c6d71609414bf755eed055467a3b07b34609a",
+              "067d9592ad74b6f522a1f360246683488fc863ecc2d5cd6aeff36e087653cc99",
+              "0699a4c72cf454414d0e1815dcbc1221445ac827d4d12c543229531d37777342"
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "account_stop_blockers": [
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "valuation_scenario": "zero_mark_stress",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "valuation_scenario": "zero_mark_stress",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "valuation_scenario": "zero_mark_stress",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "valuation_scenario": "zero_mark_stress",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 10.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 100.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 200.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 10.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 100.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 200.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 10.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 100.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 200.0,
+      "valid_through": "2018-04-30",
+      "blocker": {
+        "date": "2018-04-30",
+        "kind": "signal_or_order",
+        "reason": "Ranking-changing signal dependencies remain unresolved; see grouped signal schedule blockers."
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 10.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 100.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 200.0,
+      "valid_through": "2018-06-20",
+      "blocker": {
+        "date": "2018-06-21",
+        "kind": null,
+        "symbol": "JUBLFOOD",
+        "canonical": "INE797F01012",
+        "event": "bonus",
+        "entity": "INE797F01012",
+        "input": "held_entitlement",
+        "reason": "held-position entitlement or share conversion is not modeled by the cash engine",
+        "source_subject": "Bonus 1:1"
+      }
+    }
+  ]
+}
