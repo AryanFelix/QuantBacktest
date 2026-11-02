@@ -28,4 +28,3 @@ The 2017-12-14 IDFCBANK vendor event is labeled “Interest Payment”, has reco
 ## Certification and stopping rule
 
 Recompute each affected A score from its source-corrected series and each affected B score from the complete corrected price path. Keep unresolved scores visible. Certify a selected set only when source-corrected scores or conservative bounds establish the same positive top-20 and any rank-25 retention decision. If a required B mark is absent, do not synthesize it; retain an exact score/status and stop only if its selection bound can change the target. Account orders use the certified target at the next source-calendar session, then raw opens/closes, integer shares, existing fee helper, 50 bp per-side slippage and zero cash yield.
-
