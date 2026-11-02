@@ -1,17 +1,24 @@
 # Indian Market Quant Research
 
-## Current decision — 2026-10-31
+## Current decision — 2026-11-02
 
-No current unlevered cash strategy has demonstrated the target of **20% annual CAGR after modeled trading costs**, before personal tax. The former 20% drawdown ceiling has been removed; actual close drawdown and the separate conservative OHLC envelope are reported. The reference account is ₹10 lakh.
+No unlevered cash strategy has demonstrated the **20% full-period annual CAGR after modeled costs** objective on ₹10 lakh. The former hard drawdown ceiling remains retired. The current NIFTY 200 work completed only short 2018 account prefixes; it does not establish a full-period CAGR or durable index excess.
 
-The leading research case is monthly NIFTY 50 12–1 momentum, top 15, chosen on 2021–2023 training data. It earned 23.88% in training, then 11.87% in 2024 and -4.94% in 2025–October 2026. Its corrected continuous full-period CAGR is 11.90% versus 9.66% for matched NIFTY 50 TRI. It is not a winner or deployment recommendation. See the [top-five leaderboard and full report](outputs/quant_research_report.md).
+The four frozen configurations remain unranked. At 50 bps per side, A-M returned −3.460% through 2018-04-30 versus −1.489% matched gross NIFTY 200 TRI; A-Q returned −0.125% through 2018-06-20 versus +3.930% TRI; B-M returned −1.325% versus −1.489%; and B-Q returned +4.132% versus +3.930%. A-M/B-M stop at ranking-changing signal dependencies on April 30; A-Q/B-Q stop before a held JUBLFOOD 1:1 bonus on June 21. See the [cycle 2 account checkpoint](outputs/nifty200_sequential_account_checkpoint_cycle2_2026-11-02.md) and its [actual results summary](outputs/nifty200_cycle2_actual_results_2026-11-02.json).
 
-The NIFTY 200 continuation produced a dated ISIN replay and matched 111 overlapping 2018–2020 XLS events, but 22 state-precondition checks still fail across 11 notice/date batches; its intervals remain uncertified. The separately specified L500-v1 fallback failed before universe selection because the raw feed lacks per-security session status and its rights/merger/demerger entitlements are unresolved. No broad-universe strategy result was calculated. Start with the [current cycle checkpoint](outputs/nifty200_cycle_checkpoint_2026-10-31.md), [machine-readable replay residuals](outputs/nifty200_membership_replay_summary_2026-10-31.json), and [L500 gate](outputs/l500_data_gate_2026-10-31.json). The earlier broad-stock audit remains in [its data-gate report](outputs/broad_stock_data_gate_2026-10-31.md).
+The earlier [top-five research overview](outputs/quant_research_report.md) remains dated 2026-10-31. Its NIFTY 50 momentum lead returned 11.90% full-period CAGR versus 9.66% matched TRI; it is not a current deployment recommendation. The NIFTY 200 membership replay now has zero failed batches, and the corrected 2,183-session cash calendar matches the official TRI date set. The finite candidate-specific signal and held-position dependencies are recorded in the [blocker ledger](outputs/nifty200_cycle2_dependency_blockers_2026-11-02.json) and [candidate audit](outputs/nifty200_candidate_dependency_audit_2026-11-02.json).
 
-The API token has not been rotated, so this cycle made no Upstox API requests. No live orders were placed, and the existing frozen paper paths were left unchanged.
+This cycle used no Upstox credentials, made no API requests, placed no live orders, and did not alter frozen paper paths.
 
 ## Cycle records
 
+- [Current four-configuration checkpoint](outputs/nifty200_sequential_account_checkpoint_cycle2_2026-11-02.md)
+- [Compact 20-case actual results and matched TRI](outputs/nifty200_cycle2_actual_results_2026-11-02.json)
+- Detailed order, daily equity, account-position, and event ledgers remain local; their hashes are recorded in the [source and output manifest](outputs/nifty200_cycle2_source_code_schema_manifest_2026-11-02.json).
+- [Grouped candidate-specific dependency blockers](outputs/nifty200_cycle2_dependency_blockers_2026-11-02.json)
+- [Source, code, schema, and result hash manifest](outputs/nifty200_cycle2_source_code_schema_manifest_2026-11-02.json)
+- [AGEL valuation protocol](outputs/nifty200_agel_valuation_protocol_2026-11-02.md)
+- [Archived April 4 pre-AGEL checkpoint](outputs/archive/nifty200_sequential_account_checkpoint_pre_agel_2026-11-02.md)
 - [24-hour governor checkpoint](outputs/24_hour_checkpoint_2026-10-31.md)
 - [NIFTY 200 replay and L500 gate checkpoint](outputs/nifty200_cycle_checkpoint_2026-10-31.md)
 - [Frozen universe and strategy protocol](outputs/next_cycle_spec_2026-10-31.md)
@@ -30,6 +37,8 @@ The API token has not been rotated, so this cycle made no Upstox API requests. N
 Run from the repository root:
 
 ```powershell
+python work/audit_strategy_dependencies.py
+python work/advance_nifty200_cash_prefixes.py
 python work/check_terminal_liquidation.py
 python work/audit_stored_position_gaps.py
 python work/attribute_stock_momentum_leader.py
