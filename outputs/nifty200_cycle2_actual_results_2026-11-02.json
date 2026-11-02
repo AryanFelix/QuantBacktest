@@ -1,0 +1,4187 @@
+{
+  "protocol_id": "NIFTY200-v1.6-AGEL-locked-claim-base-zero-stress",
+  "capital_inr": 1000000.0,
+  "cash_yield": "zero",
+  "performance_gate": "NO FULL-PERIOD CAGR; no short-prefix 20% claim; no ranking or deployment",
+  "accounts": [
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 66,
+      "actual_buy_count": 43,
+      "actual_sell_count": 23,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 965401.8304071043,
+      "ending_cash_inr": 1184.980407104377,
+      "ending_invested_inr": 963067.65,
+      "ending_cash_receivable_inr": 115.99999999999997,
+      "ending_locked_claim_inr": 1033.1999999999982,
+      "max_drawdown_pct": -11.48349113298609,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -11.48349113298609,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1774590.5159999994,
+      "fees_inr": 4149.1350928958045,
+      "fees_by_component_inr": {
+        "brokerage": 1320.0,
+        "stt": 1774.59,
+        "exchange": 54.48,
+        "stamp_duty": 207.76,
+        "sebi": 1.77,
+        "ipft": 0.0,
+        "dp": 460.0,
+        "gst": 330.53
+      },
+      "slippage_cost_inr": 8848.284499999869,
+      "cash_distributions_inr": 905.6,
+      "cash_distribution_entitlements_inr": 1021.6,
+      "max_nav_reconciliation_residual_inr": 4.6497916628140956e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 58,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 62906.799999999996,
+          "weight_of_invested_pct": 6.531919123230854
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 88,
+          "raw_close_inr": 641.0,
+          "market_value_inr": 56408.0,
+          "weight_of_invested_pct": 5.857117098679413
+        },
+        {
+          "canonical": "INE532F01054",
+          "quantity": 188,
+          "raw_close_inr": 286.8,
+          "market_value_inr": 53918.4,
+          "weight_of_invested_pct": 5.598609817285421
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 42,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 53558.4,
+          "weight_of_invested_pct": 5.561229265669966
+        },
+        {
+          "canonical": "INE093A01033",
+          "quantity": 119,
+          "raw_close_inr": 448.9,
+          "market_value_inr": 53419.1,
+          "weight_of_invested_pct": 5.546765068892097
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 205,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 51680.5,
+          "weight_of_invested_pct": 5.366237771562568
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 173,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 51476.15,
+          "weight_of_invested_pct": 5.345019116777518
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 156,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 50700.0,
+          "weight_of_invested_pct": 5.264427685843253
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 75,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 50070.0,
+          "weight_of_invested_pct": 5.199011720516206
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 223,
+          "raw_close_inr": 223.1,
+          "market_value_inr": 49751.299999999996,
+          "weight_of_invested_pct": 5.165919548849969
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 33,
+          "raw_close_inr": 1490.65,
+          "market_value_inr": 49191.450000000004,
+          "weight_of_invested_pct": 5.107787599344657
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 5.0115638293945395
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 72,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 48052.799999999996,
+          "weight_of_invested_pct": 4.98955602963094
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 154,
+          "raw_close_inr": 305.8,
+          "market_value_inr": 47093.200000000004,
+          "weight_of_invested_pct": 4.889916092602633
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 72,
+          "raw_close_inr": 642.5,
+          "market_value_inr": 46260.0,
+          "weight_of_invested_pct": 4.803400882585974
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 47,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 46144.6,
+          "weight_of_invested_pct": 4.791418339095908
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 34,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 43316.0,
+          "weight_of_invested_pct": 4.49771103826403
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 85,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 40417.5,
+          "weight_of_invested_pct": 4.196745680326818
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 287,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 40208.7,
+          "weight_of_invested_pct": 4.175064960389854
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 140,
+          "raw_close_inr": 144.5,
+          "market_value_inr": 20230.0,
+          "weight_of_invested_pct": 2.100579331057377
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.531919123230854,
+        "top_five_pct_of_invested": 29.095640373757753,
+        "hhi": 0.051453472191478423,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "zero_mark_stress",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 66,
+      "actual_buy_count": 43,
+      "actual_sell_count": 23,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 964368.6304071044,
+      "ending_cash_inr": 1184.980407104377,
+      "ending_invested_inr": 963067.65,
+      "ending_cash_receivable_inr": 115.99999999999997,
+      "ending_locked_claim_inr": 0.0,
+      "max_drawdown_pct": -11.48349113298609,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -11.48349113298609,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1774590.5159999994,
+      "fees_inr": 4149.1350928958045,
+      "fees_by_component_inr": {
+        "brokerage": 1320.0,
+        "stt": 1774.59,
+        "exchange": 54.48,
+        "stamp_duty": 207.76,
+        "sebi": 1.77,
+        "ipft": 0.0,
+        "dp": 460.0,
+        "gst": 330.53
+      },
+      "slippage_cost_inr": 8848.284499999869,
+      "cash_distributions_inr": 905.6,
+      "cash_distribution_entitlements_inr": 1021.6,
+      "max_nav_reconciliation_residual_inr": 4.6640025175292976e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 58,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 62906.799999999996,
+          "weight_of_invested_pct": 6.531919123230854
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 88,
+          "raw_close_inr": 641.0,
+          "market_value_inr": 56408.0,
+          "weight_of_invested_pct": 5.857117098679413
+        },
+        {
+          "canonical": "INE532F01054",
+          "quantity": 188,
+          "raw_close_inr": 286.8,
+          "market_value_inr": 53918.4,
+          "weight_of_invested_pct": 5.598609817285421
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 42,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 53558.4,
+          "weight_of_invested_pct": 5.561229265669966
+        },
+        {
+          "canonical": "INE093A01033",
+          "quantity": 119,
+          "raw_close_inr": 448.9,
+          "market_value_inr": 53419.1,
+          "weight_of_invested_pct": 5.546765068892097
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 205,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 51680.5,
+          "weight_of_invested_pct": 5.366237771562568
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 173,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 51476.15,
+          "weight_of_invested_pct": 5.345019116777518
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 156,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 50700.0,
+          "weight_of_invested_pct": 5.264427685843253
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 75,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 50070.0,
+          "weight_of_invested_pct": 5.199011720516206
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 223,
+          "raw_close_inr": 223.1,
+          "market_value_inr": 49751.299999999996,
+          "weight_of_invested_pct": 5.165919548849969
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 33,
+          "raw_close_inr": 1490.65,
+          "market_value_inr": 49191.450000000004,
+          "weight_of_invested_pct": 5.107787599344657
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 5.0115638293945395
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 72,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 48052.799999999996,
+          "weight_of_invested_pct": 4.98955602963094
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 154,
+          "raw_close_inr": 305.8,
+          "market_value_inr": 47093.200000000004,
+          "weight_of_invested_pct": 4.889916092602633
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 72,
+          "raw_close_inr": 642.5,
+          "market_value_inr": 46260.0,
+          "weight_of_invested_pct": 4.803400882585974
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 47,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 46144.6,
+          "weight_of_invested_pct": 4.791418339095908
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 34,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 43316.0,
+          "weight_of_invested_pct": 4.49771103826403
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 85,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 40417.5,
+          "weight_of_invested_pct": 4.196745680326818
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 287,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 40208.7,
+          "weight_of_invested_pct": 4.175064960389854
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 140,
+          "raw_close_inr": 144.5,
+          "market_value_inr": 20230.0,
+          "weight_of_invested_pct": 2.100579331057377
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.531919123230854,
+        "top_five_pct_of_invested": 29.095640373757753,
+        "hhi": 0.051453472191478423,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 998748.639864217,
+      "ending_cash_inr": 8739.981364216997,
+      "ending_invested_inr": 989257.25,
+      "ending_cash_receivable_inr": 727.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -9.248938180307197,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -9.248938180307197,
+        "peak_date": "2018-04-23",
+        "trough_date": "2018-06-05",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1005423.8182499999,
+      "fees_inr": 1711.866385783065,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1005.42,
+        "exchange": 30.87,
+        "stamp_duty": 149.63,
+        "sebi": 1.01,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.94
+      },
+      "slippage_cost_inr": 5002.502249999891,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 855.5,
+      "max_nav_reconciliation_residual_inr": 9.117684385273606e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE532F01054",
+          "quantity": 209,
+          "raw_close_inr": 307.45,
+          "market_value_inr": 64257.049999999996,
+          "weight_of_invested_pct": 6.495484364658434
+        },
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.444916122676887
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 98,
+          "raw_close_inr": 628.85,
+          "market_value_inr": 61627.3,
+          "weight_of_invested_pct": 6.229653611333149
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.861058890394788
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.780397363779745
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 37,
+          "raw_close_inr": 1483.75,
+          "market_value_inr": 54898.75,
+          "weight_of_invested_pct": 5.5494918030674025
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.310165783470377
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.296397878307184
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 5.089075667628416
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 248,
+          "raw_close_inr": 200.7,
+          "market_value_inr": 49773.6,
+          "weight_of_invested_pct": 5.031411192589188
+        },
+        {
+          "canonical": "INE361B01024",
+          "quantity": 45,
+          "raw_close_inr": 1083.05,
+          "market_value_inr": 48737.25,
+          "weight_of_invested_pct": 4.926650777641509
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.759383871081056
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.750129453183184
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 171,
+          "raw_close_inr": 273.8,
+          "market_value_inr": 46819.8,
+          "weight_of_invested_pct": 4.732823540085251
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.731226382217567
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.248465199522167
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 33,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 42012.299999999996,
+          "weight_of_invested_pct": 4.246852878763335
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 80,
+          "raw_close_inr": 523.2,
+          "market_value_inr": 41856.0,
+          "weight_of_invested_pct": 4.231053146186191
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.9372974016617013
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 156,
+          "raw_close_inr": 148.9,
+          "market_value_inr": 23228.4,
+          "weight_of_invested_pct": 2.348064671752469
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.495484364658434,
+        "top_five_pct_of_invested": 30.811510352843005,
+        "hhi": 0.05178364096859191,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "zero_mark_stress",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 998748.639864217,
+      "ending_cash_inr": 8739.981364216997,
+      "ending_invested_inr": 989257.25,
+      "ending_cash_receivable_inr": 727.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -9.258965068293467,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -9.258965068293467,
+        "peak_date": "2018-04-23",
+        "trough_date": "2018-06-05",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1005423.8182499999,
+      "fees_inr": 1711.866385783065,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1005.42,
+        "exchange": 30.87,
+        "stamp_duty": 149.63,
+        "sebi": 1.01,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.94
+      },
+      "slippage_cost_inr": 5002.502249999891,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 855.5,
+      "max_nav_reconciliation_residual_inr": 1.1641532182693481e-10,
+      "ending_positions": [
+        {
+          "canonical": "INE532F01054",
+          "quantity": 209,
+          "raw_close_inr": 307.45,
+          "market_value_inr": 64257.049999999996,
+          "weight_of_invested_pct": 6.495484364658434
+        },
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.444916122676887
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 98,
+          "raw_close_inr": 628.85,
+          "market_value_inr": 61627.3,
+          "weight_of_invested_pct": 6.229653611333149
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.861058890394788
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.780397363779745
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 37,
+          "raw_close_inr": 1483.75,
+          "market_value_inr": 54898.75,
+          "weight_of_invested_pct": 5.5494918030674025
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.310165783470377
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.296397878307184
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 5.089075667628416
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 248,
+          "raw_close_inr": 200.7,
+          "market_value_inr": 49773.6,
+          "weight_of_invested_pct": 5.031411192589188
+        },
+        {
+          "canonical": "INE361B01024",
+          "quantity": 45,
+          "raw_close_inr": 1083.05,
+          "market_value_inr": 48737.25,
+          "weight_of_invested_pct": 4.926650777641509
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.759383871081056
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.750129453183184
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 171,
+          "raw_close_inr": 273.8,
+          "market_value_inr": 46819.8,
+          "weight_of_invested_pct": 4.732823540085251
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.731226382217567
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.248465199522167
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 33,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 42012.299999999996,
+          "weight_of_invested_pct": 4.246852878763335
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 80,
+          "raw_close_inr": 523.2,
+          "market_value_inr": 41856.0,
+          "weight_of_invested_pct": 4.231053146186191
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.9372974016617013
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 156,
+          "raw_close_inr": 148.9,
+          "market_value_inr": 23228.4,
+          "weight_of_invested_pct": 2.348064671752469
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.495484364658434,
+        "top_five_pct_of_invested": 30.811510352843005,
+        "hhi": 0.05178364096859191,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 62,
+      "actual_buy_count": 39,
+      "actual_sell_count": 23,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 986752.4487172479,
+      "ending_cash_inr": 14359.048717247882,
+      "ending_invested_inr": 971217.0,
+      "ending_cash_receivable_inr": 117.99999999999999,
+      "ending_locked_claim_inr": 1058.3999999999983,
+      "max_drawdown_pct": -9.758990773851162,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -9.758990773851162,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 2036229.2022500006,
+      "fees_inr": 4344.744032752323,
+      "fees_by_component_inr": {
+        "brokerage": 1240.0,
+        "stt": 2036.23,
+        "exchange": 62.51,
+        "stamp_duty": 226.35,
+        "sebi": 2.04,
+        "ipft": 0.0,
+        "dp": 460.0,
+        "gst": 317.62
+      },
+      "slippage_cost_inr": 10156.857249999866,
+      "cash_distributions_inr": 411.1,
+      "cash_distribution_entitlements_inr": 529.1,
+      "max_nav_reconciliation_residual_inr": 4.6554760047001764e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 59,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 63991.399999999994,
+          "weight_of_invested_pct": 6.588784998615139
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 54,
+          "raw_close_inr": 1036.35,
+          "market_value_inr": 55962.899999999994,
+          "weight_of_invested_pct": 5.7621417252786955
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 43,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 54833.6,
+          "weight_of_invested_pct": 5.645864930288494
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 209,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 52688.9,
+          "weight_of_invested_pct": 5.425038894500405
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 177,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 52666.35,
+          "weight_of_invested_pct": 5.422717065290249
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 159,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 51675.0,
+          "weight_of_invested_pct": 5.320644099104525
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 77,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 51405.200000000004,
+          "weight_of_invested_pct": 5.292864519463725
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 34,
+          "raw_close_inr": 1508.9,
+          "market_value_inr": 51302.600000000006,
+          "weight_of_invested_pct": 5.282300453966519
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 9,
+          "raw_close_inr": 5513.2,
+          "market_value_inr": 49618.799999999996,
+          "weight_of_invested_pct": 5.108930342034787
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 74,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 49387.6,
+          "weight_of_invested_pct": 5.085125157405606
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 4.969512477644028
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 48,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 47126.399999999994,
+          "weight_of_invested_pct": 4.8523038620617225
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 24,
+          "raw_close_inr": 1944.3,
+          "market_value_inr": 46663.2,
+          "weight_of_invested_pct": 4.80461112192229
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 36,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 45864.0,
+          "weight_of_invested_pct": 4.722322611733526
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8814.95,
+          "market_value_inr": 44074.75,
+          "weight_of_invested_pct": 4.538094988040778
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 7,
+          "raw_close_inr": 6100.85,
+          "market_value_inr": 42705.950000000004,
+          "weight_of_invested_pct": 4.397158410530294
+        },
+        {
+          "canonical": "INE343B01030",
+          "quantity": 62,
+          "raw_close_inr": 681.95,
+          "market_value_inr": 42280.9,
+          "weight_of_invested_pct": 4.353393731781878
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 87,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 41368.5,
+          "weight_of_invested_pct": 4.259449741921733
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 294,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 41189.4,
+          "weight_of_invested_pct": 4.241008960922224
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 4,
+          "raw_close_inr": 9536.7,
+          "market_value_inr": 38146.8,
+          "weight_of_invested_pct": 3.9277319074933823
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.588784998615139,
+        "top_five_pct_of_invested": 28.844547613972985,
+        "hhi": 0.050757611500806425,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "zero_mark_stress",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 62,
+      "actual_buy_count": 39,
+      "actual_sell_count": 23,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 985694.0487172479,
+      "ending_cash_inr": 14359.048717247882,
+      "ending_invested_inr": 971217.0,
+      "ending_cash_receivable_inr": 117.99999999999999,
+      "ending_locked_claim_inr": 0.0,
+      "max_drawdown_pct": -9.758990773851162,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -9.758990773851162,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 2036229.2022500006,
+      "fees_inr": 4344.744032752323,
+      "fees_by_component_inr": {
+        "brokerage": 1240.0,
+        "stt": 2036.23,
+        "exchange": 62.51,
+        "stamp_duty": 226.35,
+        "sebi": 2.04,
+        "ipft": 0.0,
+        "dp": 460.0,
+        "gst": 317.62
+      },
+      "slippage_cost_inr": 10156.857249999866,
+      "cash_distributions_inr": 411.1,
+      "cash_distribution_entitlements_inr": 529.1,
+      "max_nav_reconciliation_residual_inr": 4.6554760047001764e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 59,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 63991.399999999994,
+          "weight_of_invested_pct": 6.588784998615139
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 54,
+          "raw_close_inr": 1036.35,
+          "market_value_inr": 55962.899999999994,
+          "weight_of_invested_pct": 5.7621417252786955
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 43,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 54833.6,
+          "weight_of_invested_pct": 5.645864930288494
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 209,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 52688.9,
+          "weight_of_invested_pct": 5.425038894500405
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 177,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 52666.35,
+          "weight_of_invested_pct": 5.422717065290249
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 159,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 51675.0,
+          "weight_of_invested_pct": 5.320644099104525
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 77,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 51405.200000000004,
+          "weight_of_invested_pct": 5.292864519463725
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 34,
+          "raw_close_inr": 1508.9,
+          "market_value_inr": 51302.600000000006,
+          "weight_of_invested_pct": 5.282300453966519
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 9,
+          "raw_close_inr": 5513.2,
+          "market_value_inr": 49618.799999999996,
+          "weight_of_invested_pct": 5.108930342034787
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 74,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 49387.6,
+          "weight_of_invested_pct": 5.085125157405606
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 4.969512477644028
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 48,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 47126.399999999994,
+          "weight_of_invested_pct": 4.8523038620617225
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 24,
+          "raw_close_inr": 1944.3,
+          "market_value_inr": 46663.2,
+          "weight_of_invested_pct": 4.80461112192229
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 36,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 45864.0,
+          "weight_of_invested_pct": 4.722322611733526
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8814.95,
+          "market_value_inr": 44074.75,
+          "weight_of_invested_pct": 4.538094988040778
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 7,
+          "raw_close_inr": 6100.85,
+          "market_value_inr": 42705.950000000004,
+          "weight_of_invested_pct": 4.397158410530294
+        },
+        {
+          "canonical": "INE343B01030",
+          "quantity": 62,
+          "raw_close_inr": 681.95,
+          "market_value_inr": 42280.9,
+          "weight_of_invested_pct": 4.353393731781878
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 87,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 41368.5,
+          "weight_of_invested_pct": 4.259449741921733
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 294,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 41189.4,
+          "weight_of_invested_pct": 4.241008960922224
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 4,
+          "raw_close_inr": 9536.7,
+          "market_value_inr": 38146.8,
+          "weight_of_invested_pct": 3.9277319074933823
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.588784998615139,
+        "top_five_pct_of_invested": 28.844547613972985,
+        "hhi": 0.050757611500806425,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 1041316.2187117386,
+      "ending_cash_inr": 11685.260211738489,
+      "ending_invested_inr": 1028786.55,
+      "ending_cash_receivable_inr": 820.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -5.644736734905143,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -5.644736734905143,
+        "peak_date": "2018-04-30",
+        "trough_date": "2018-05-21",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1002482.0324999999,
+      "fees_inr": 1708.3732882614934,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1002.48,
+        "exchange": 30.78,
+        "stamp_duty": 149.19,
+        "sebi": 1.0,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.92
+      },
+      "slippage_cost_inr": 4987.86649999989,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 948.5,
+      "max_nav_reconciliation_residual_inr": 2.0759216567967087e-10,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.19728164214433
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 59,
+          "raw_close_inr": 1060.55,
+          "market_value_inr": 62572.45,
+          "weight_of_invested_pct": 6.082160580345844
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 10,
+          "raw_close_inr": 5995.55,
+          "market_value_inr": 59955.5,
+          "weight_of_invested_pct": 5.82778808684853
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 37,
+          "raw_close_inr": 1602.4,
+          "market_value_inr": 59288.8,
+          "weight_of_invested_pct": 5.762983584884542
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.635858089318916
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.558295838918189
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 26,
+          "raw_close_inr": 2056.15,
+          "market_value_inr": 53459.9,
+          "weight_of_invested_pct": 5.1964034716433645
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.106132073752325
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.092893175945972
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 4.893536953802516
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 5,
+          "raw_close_inr": 9950.95,
+          "market_value_inr": 49754.75,
+          "weight_of_invested_pct": 4.836255878345221
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 39,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 49650.899999999994,
+          "weight_of_invested_pct": 4.8261614617726085
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 8,
+          "raw_close_inr": 6065.7,
+          "market_value_inr": 48525.6,
+          "weight_of_invested_pct": 4.716780171746996
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.576512980267871
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.56761414697733
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.549437393014129
+        },
+        {
+          "canonical": "INE465A01025",
+          "quantity": 71,
+          "raw_close_inr": 630.85,
+          "market_value_inr": 44790.35,
+          "weight_of_invested_pct": 4.353706801474027
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8948.3,
+          "market_value_inr": 44741.5,
+          "weight_of_invested_pct": 4.34895848900824
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.085225453229341
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.7860137265597027
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.19728164214433,
+        "top_five_pct_of_invested": 29.506071983542164,
+        "hhi": 0.050851641951787416,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "zero_mark_stress",
+      "slippage_bps_per_side": 50.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 1041316.2187117386,
+      "ending_cash_inr": 11685.260211738489,
+      "ending_invested_inr": 1028786.55,
+      "ending_cash_receivable_inr": 820.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -5.650775616204761,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -5.650775616204761,
+        "peak_date": "2018-04-30",
+        "trough_date": "2018-05-21",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1002482.0324999999,
+      "fees_inr": 1708.3732882614934,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1002.48,
+        "exchange": 30.78,
+        "stamp_duty": 149.19,
+        "sebi": 1.0,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.92
+      },
+      "slippage_cost_inr": 4987.86649999989,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 948.5,
+      "max_nav_reconciliation_residual_inr": 1.1641532182693481e-10,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.19728164214433
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 59,
+          "raw_close_inr": 1060.55,
+          "market_value_inr": 62572.45,
+          "weight_of_invested_pct": 6.082160580345844
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 10,
+          "raw_close_inr": 5995.55,
+          "market_value_inr": 59955.5,
+          "weight_of_invested_pct": 5.82778808684853
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 37,
+          "raw_close_inr": 1602.4,
+          "market_value_inr": 59288.8,
+          "weight_of_invested_pct": 5.762983584884542
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.635858089318916
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.558295838918189
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 26,
+          "raw_close_inr": 2056.15,
+          "market_value_inr": 53459.9,
+          "weight_of_invested_pct": 5.1964034716433645
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.106132073752325
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.092893175945972
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 4.893536953802516
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 5,
+          "raw_close_inr": 9950.95,
+          "market_value_inr": 49754.75,
+          "weight_of_invested_pct": 4.836255878345221
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 39,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 49650.899999999994,
+          "weight_of_invested_pct": 4.8261614617726085
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 8,
+          "raw_close_inr": 6065.7,
+          "market_value_inr": 48525.6,
+          "weight_of_invested_pct": 4.716780171746996
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.576512980267871
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.56761414697733
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.549437393014129
+        },
+        {
+          "canonical": "INE465A01025",
+          "quantity": 71,
+          "raw_close_inr": 630.85,
+          "market_value_inr": 44790.35,
+          "weight_of_invested_pct": 4.353706801474027
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8948.3,
+          "market_value_inr": 44741.5,
+          "weight_of_invested_pct": 4.34895848900824
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.085225453229341
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.7860137265597027
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.19728164214433,
+        "top_five_pct_of_invested": 29.506071983542164,
+        "hhi": 0.050851641951787416,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    }
+  ],
+  "cost_sensitivities": [
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 10.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 64,
+      "actual_buy_count": 43,
+      "actual_sell_count": 21,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 972926.1007024238,
+      "ending_cash_inr": 581.1507024237893,
+      "ending_invested_inr": 971188.55,
+      "ending_cash_receivable_inr": 116.0,
+      "ending_locked_claim_inr": 1040.3999999999983,
+      "max_drawdown_pct": -10.914161236317899,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -10.914161236317899,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1777675.1407500005,
+      "fees_inr": 4058.21864757656,
+      "fees_by_component_inr": {
+        "brokerage": 1280.0,
+        "stt": 1777.68,
+        "exchange": 54.57,
+        "stamp_duty": 208.05,
+        "sebi": 1.78,
+        "ipft": 0.0,
+        "dp": 420.0,
+        "gst": 316.14
+      },
+      "slippage_cost_inr": 1776.680649999821,
+      "cash_distributions_inr": 906.8,
+      "cash_distribution_entitlements_inr": 1022.8,
+      "max_nav_reconciliation_residual_inr": 2.5011104298755527e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 58,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 62906.799999999996,
+          "weight_of_invested_pct": 6.477300417102322
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 88,
+          "raw_close_inr": 641.0,
+          "market_value_inr": 56408.0,
+          "weight_of_invested_pct": 5.808140962946896
+        },
+        {
+          "canonical": "INE532F01054",
+          "quantity": 189,
+          "raw_close_inr": 286.8,
+          "market_value_inr": 54205.200000000004,
+          "weight_of_invested_pct": 5.581326097800473
+        },
+        {
+          "canonical": "INE093A01033",
+          "quantity": 120,
+          "raw_close_inr": 448.9,
+          "market_value_inr": 53868.0,
+          "weight_of_invested_pct": 5.546605754361498
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 42,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 53558.4,
+          "weight_of_invested_pct": 5.514727289566995
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 206,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 51932.6,
+          "weight_of_invested_pct": 5.34732416274883
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 174,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 51773.700000000004,
+          "weight_of_invested_pct": 5.330962767219609
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 157,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 51025.0,
+          "weight_of_invested_pct": 5.253871660657449
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 76,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 50737.6,
+          "weight_of_invested_pct": 5.224279054772628
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 34,
+          "raw_close_inr": 1490.65,
+          "market_value_inr": 50682.100000000006,
+          "weight_of_invested_pct": 5.2185644074984205
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 224,
+          "raw_close_inr": 223.1,
+          "market_value_inr": 49974.4,
+          "weight_of_invested_pct": 5.145694932255945
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 73,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 48720.2,
+          "weight_of_invested_pct": 5.016554200520589
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 4.969658054555935
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 155,
+          "raw_close_inr": 305.8,
+          "market_value_inr": 47399.0,
+          "weight_of_invested_pct": 4.88051470540916
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 48,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 47126.399999999994,
+          "weight_of_invested_pct": 4.852446005464129
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 72,
+          "raw_close_inr": 642.5,
+          "market_value_inr": 46260.0,
+          "weight_of_invested_pct": 4.763235728015944
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 35,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 44590.0,
+          "weight_of_invested_pct": 4.591281476701924
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 86,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 40893.0,
+          "weight_of_invested_pct": 4.21061389160735
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 289,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 40488.9,
+          "weight_of_invested_pct": 4.16900508145406
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 141,
+          "raw_close_inr": 144.5,
+          "market_value_inr": 20374.5,
+          "weight_of_invested_pct": 2.097893349339837
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.477300417102322,
+        "top_five_pct_of_invested": 28.928100521778184,
+        "hhi": 0.05141473478974817,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 100.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 66,
+      "actual_buy_count": 42,
+      "actual_sell_count": 24,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 956094.9826978028,
+      "ending_cash_inr": 950.0826978028501,
+      "ending_invested_inr": 954004.9,
+      "ending_cash_receivable_inr": 114.00000000000003,
+      "ending_locked_claim_inr": 1025.9999999999982,
+      "max_drawdown_pct": -12.178878201718945,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -12.178878201718945,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1776212.3915000006,
+      "fees_inr": 4174.554802197072,
+      "fees_by_component_inr": {
+        "brokerage": 1320.0,
+        "stt": 1776.21,
+        "exchange": 54.53,
+        "stamp_duty": 207.9,
+        "sebi": 1.78,
+        "ipft": 0.0,
+        "dp": 480.0,
+        "gst": 334.14
+      },
+      "slippage_cost_inr": 17664.312500000015,
+      "cash_distributions_inr": 903.1,
+      "cash_distribution_entitlements_inr": 1017.1,
+      "max_nav_reconciliation_residual_inr": 4.661160346586257e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 57,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 61822.2,
+          "weight_of_invested_pct": 6.480281180945716
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 87,
+          "raw_close_inr": 641.0,
+          "market_value_inr": 55767.0,
+          "weight_of_invested_pct": 5.845567459873633
+        },
+        {
+          "canonical": "INE532F01054",
+          "quantity": 187,
+          "raw_close_inr": 286.8,
+          "market_value_inr": 53631.6,
+          "weight_of_invested_pct": 5.6217321315645234
+        },
+        {
+          "canonical": "INE093A01033",
+          "quantity": 118,
+          "raw_close_inr": 448.9,
+          "market_value_inr": 52970.2,
+          "weight_of_invested_pct": 5.552403347194548
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 41,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 52283.200000000004,
+          "weight_of_invested_pct": 5.480391138452225
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 172,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 51178.6,
+          "weight_of_invested_pct": 5.3646055696359625
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 203,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 51176.299999999996,
+          "weight_of_invested_pct": 5.3643644807275095
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 75,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 50070.0,
+          "weight_of_invested_pct": 5.248400715761522
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 154,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 50050.0,
+          "weight_of_invested_pct": 5.246304290470626
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 221,
+          "raw_close_inr": 223.1,
+          "market_value_inr": 49305.1,
+          "weight_of_invested_pct": 5.168222930511153
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 33,
+          "raw_close_inr": 1490.65,
+          "market_value_inr": 49191.450000000004,
+          "weight_of_invested_pct": 5.15630999379563
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 5.0591721279419
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 72,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 48052.799999999996,
+          "weight_of_invested_pct": 5.036955260921616
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 152,
+          "raw_close_inr": 305.8,
+          "market_value_inr": 46481.6,
+          "weight_of_invested_pct": 4.872260090068719
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 47,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 46144.6,
+          "weight_of_invested_pct": 4.836935323917099
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 71,
+          "raw_close_inr": 642.5,
+          "market_value_inr": 45617.5,
+          "weight_of_invested_pct": 4.7816840353755
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 33,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 42042.0,
+          "weight_of_invested_pct": 4.406895603995325
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 84,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 39942.0,
+          "weight_of_invested_pct": 4.1867709484511035
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 285,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 39928.5,
+          "weight_of_invested_pct": 4.1853558613797475
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 139,
+          "raw_close_inr": 144.5,
+          "market_value_inr": 20085.5,
+          "weight_of_invested_pct": 2.105387509015939
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.480281180945716,
+        "top_five_pct_of_invested": 28.980375258030644,
+        "hhi": 0.051442046916101734,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 200.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 63,
+      "actual_buy_count": 41,
+      "actual_sell_count": 22,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 936447.4448624913,
+      "ending_cash_inr": 384.7448624913293,
+      "ending_invested_inr": 934942.7,
+      "ending_cash_receivable_inr": 112.0,
+      "ending_locked_claim_inr": 1007.9999999999984,
+      "max_drawdown_pct": -13.67060198565806,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -13.67060198565806,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1761420.265,
+      "fees_inr": 4040.1521375085035,
+      "fees_by_component_inr": {
+        "brokerage": 1260.0,
+        "stt": 1761.42,
+        "exchange": 54.08,
+        "stamp_duty": 206.84,
+        "sebi": 1.76,
+        "ipft": 0.0,
+        "dp": 440.0,
+        "gst": 316.05
+      },
+      "slippage_cost_inr": 34843.75300000003,
+      "cash_distributions_inr": 899.4,
+      "cash_distribution_entitlements_inr": 1011.4,
+      "max_nav_reconciliation_residual_inr": 4.6554760047001764e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 56,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 60737.59999999999,
+          "weight_of_invested_pct": 6.4963981215105475
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 85,
+          "raw_close_inr": 641.0,
+          "market_value_inr": 54485.0,
+          "weight_of_invested_pct": 5.827629864375647
+        },
+        {
+          "canonical": "INE532F01054",
+          "quantity": 184,
+          "raw_close_inr": 286.8,
+          "market_value_inr": 52771.200000000004,
+          "weight_of_invested_pct": 5.644324513149309
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 41,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 52283.200000000004,
+          "weight_of_invested_pct": 5.5921288010484504
+        },
+        {
+          "canonical": "INE093A01033",
+          "quantity": 116,
+          "raw_close_inr": 448.9,
+          "market_value_inr": 52072.399999999994,
+          "weight_of_invested_pct": 5.5695819647557006
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 200,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 50420.0,
+          "weight_of_invested_pct": 5.392843860912546
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 169,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 50285.950000000004,
+          "weight_of_invested_pct": 5.378506083848776
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 152,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 49400.0,
+          "weight_of_invested_pct": 5.283746265947635
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 33,
+          "raw_close_inr": 1490.65,
+          "market_value_inr": 49191.450000000004,
+          "weight_of_invested_pct": 5.261440086114369
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 73,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 48734.8,
+          "weight_of_invested_pct": 5.2125975206822845
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 218,
+          "raw_close_inr": 223.1,
+          "market_value_inr": 48635.799999999996,
+          "weight_of_invested_pct": 5.202008636465101
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 70,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 46718.0,
+          "weight_of_invested_pct": 4.996883766245782
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 18,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 45724.5,
+          "weight_of_invested_pct": 4.89062056958143
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 46,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 45162.799999999996,
+          "weight_of_invested_pct": 4.8305420214522234
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 70,
+          "raw_close_inr": 642.5,
+          "market_value_inr": 44975.0,
+          "weight_of_invested_pct": 4.810455228967508
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 140,
+          "raw_close_inr": 305.8,
+          "market_value_inr": 42812.0,
+          "weight_of_invested_pct": 4.579104152586036
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 33,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 42042.0,
+          "weight_of_invested_pct": 4.496746164230172
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 83,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 39466.5,
+          "weight_of_invested_pct": 4.221274736943773
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 280,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 39228.0,
+          "weight_of_invested_pct": 4.195765152238741
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 137,
+          "raw_close_inr": 144.5,
+          "market_value_inr": 19796.5,
+          "weight_of_invested_pct": 2.117402488943975
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.4963981215105475,
+        "top_five_pct_of_invested": 29.130063264839656,
+        "hhi": 0.051461644362339874,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 10.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 1002743.2061399685,
+      "ending_cash_inr": 8915.247639968395,
+      "ending_invested_inr": 993076.55,
+      "ending_cash_receivable_inr": 727.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -9.240752563241427,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -9.240752563241427,
+        "peak_date": "2018-04-23",
+        "trough_date": "2018-06-05",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1005311.9966999998,
+      "fees_inr": 1711.7288600317163,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1005.31,
+        "exchange": 30.86,
+        "stamp_duty": 149.61,
+        "sebi": 1.01,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.94
+      },
+      "slippage_cost_inr": 1004.3234999998989,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 855.5,
+      "max_nav_reconciliation_residual_inr": 9.117684385273606e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE532F01054",
+          "quantity": 209,
+          "raw_close_inr": 307.45,
+          "market_value_inr": 64257.049999999996,
+          "weight_of_invested_pct": 6.470503205417548
+        },
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.420129445207421
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 98,
+          "raw_close_inr": 628.85,
+          "market_value_inr": 61627.3,
+          "weight_of_invested_pct": 6.205694817786202
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.8385176852680685
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.75816637700286
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 37,
+          "raw_close_inr": 1483.75,
+          "market_value_inr": 54898.75,
+          "weight_of_invested_pct": 5.528148862240277
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.289743273063895
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.276028318260058
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 5.069503453686425
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 248,
+          "raw_close_inr": 200.7,
+          "market_value_inr": 49773.6,
+          "weight_of_invested_pct": 5.012060752013528
+        },
+        {
+          "canonical": "INE361B01024",
+          "quantity": 45,
+          "raw_close_inr": 1083.05,
+          "market_value_inr": 48737.25,
+          "weight_of_invested_pct": 4.9077032379830134
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.7410796277487375
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.731860801667303
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 171,
+          "raw_close_inr": 273.8,
+          "market_value_inr": 46819.8,
+          "weight_of_invested_pct": 4.714621445849265
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.713030430534283
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 36,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 45831.6,
+          "weight_of_invested_pct": 4.6151125006425735
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.23212591214645
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 80,
+          "raw_close_inr": 523.2,
+          "market_value_inr": 41856.0,
+          "weight_of_invested_pct": 4.214780824297986
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.9221548429474042
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 156,
+          "raw_close_inr": 148.9,
+          "market_value_inr": 23228.4,
+          "weight_of_invested_pct": 2.3390341862367006
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.470503205417548,
+        "top_five_pct_of_invested": 30.6930115306821,
+        "hhi": 0.05172629126194603,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 100.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 993802.37285261,
+      "ending_cash_inr": 8886.114352609962,
+      "ending_invested_inr": 984164.85,
+      "ending_cash_receivable_inr": 727.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -9.256642243459122,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -9.256642243459122,
+        "peak_date": "2018-04-23",
+        "trough_date": "2018-06-05",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1005198.8125,
+      "fees_inr": 1711.6051473899736,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1005.2,
+        "exchange": 30.86,
+        "stamp_duty": 149.6,
+        "sebi": 1.01,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.94
+      },
+      "slippage_cost_inr": 9954.03050000001,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 855.5,
+      "max_nav_reconciliation_residual_inr": 9.117684385273606e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE532F01054",
+          "quantity": 209,
+          "raw_close_inr": 307.45,
+          "market_value_inr": 64257.049999999996,
+          "weight_of_invested_pct": 6.529094185796211
+        },
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.4782642867198525
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 98,
+          "raw_close_inr": 628.85,
+          "market_value_inr": 61627.3,
+          "weight_of_invested_pct": 6.261887934729635
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.891385980712479
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.810307084224762
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 37,
+          "raw_close_inr": 1483.75,
+          "market_value_inr": 54898.75,
+          "weight_of_invested_pct": 5.578206740466294
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.337642367536293
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.32380322260036
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 5.115408257061812
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 248,
+          "raw_close_inr": 200.7,
+          "market_value_inr": 49773.6,
+          "weight_of_invested_pct": 5.057445406630809
+        },
+        {
+          "canonical": "INE361B01024",
+          "quantity": 45,
+          "raw_close_inr": 1083.05,
+          "market_value_inr": 48737.25,
+          "weight_of_invested_pct": 4.9521429260555285
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.7840105242531274
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.77470822088393
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 171,
+          "raw_close_inr": 273.8,
+          "market_value_inr": 46819.8,
+          "weight_of_invested_pct": 4.757312761170042
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.755707339070279
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.270448187618162
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 80,
+          "raw_close_inr": 523.2,
+          "market_value_inr": 41856.0,
+          "weight_of_invested_pct": 4.2529460384609346
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.957670302896918
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 29,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 36919.899999999994,
+          "weight_of_invested_pct": 3.7513938848760953
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 156,
+          "raw_close_inr": 148.9,
+          "market_value_inr": 23228.4,
+          "weight_of_invested_pct": 2.360214348236477
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.529094185796211,
+        "top_five_pct_of_invested": 30.97093947218294,
+        "hhi": 0.051905926132099996,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 200.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 984034.6619742903,
+      "ending_cash_inr": 8030.10347429019,
+      "ending_invested_inr": 975253.15,
+      "ending_cash_receivable_inr": 727.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -9.28177038151351,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -9.28177038151351,
+        "peak_date": "2018-04-26",
+        "trough_date": "2018-06-05",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1005895.7159999998,
+      "fees_inr": 1712.444525709641,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1005.9,
+        "exchange": 30.88,
+        "stamp_duty": 149.72,
+        "sebi": 1.01,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.94
+      },
+      "slippage_cost_inr": 19729.652000000042,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 855.5,
+      "max_nav_reconciliation_residual_inr": 2.523847797419876e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE532F01054",
+          "quantity": 209,
+          "raw_close_inr": 307.45,
+          "market_value_inr": 64257.049999999996,
+          "weight_of_invested_pct": 6.588755955312731
+        },
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.537461581128961
+        },
+        {
+          "canonical": "INE202B01012",
+          "quantity": 98,
+          "raw_close_inr": 628.85,
+          "market_value_inr": 61627.3,
+          "weight_of_invested_pct": 6.319108018261719
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.945220479421163
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.86340069755222
+        },
+        {
+          "canonical": "INE192R01011",
+          "quantity": 37,
+          "raw_close_inr": 1483.75,
+          "market_value_inr": 54898.75,
+          "weight_of_invested_pct": 5.629179459712589
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.386416849819967
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.3724512450946715
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 5.1621520012521875
+        },
+        {
+          "canonical": "INE271C01023",
+          "quantity": 248,
+          "raw_close_inr": 200.7,
+          "market_value_inr": 49773.6,
+          "weight_of_invested_pct": 5.103659495998551
+        },
+        {
+          "canonical": "INE361B01024",
+          "quantity": 45,
+          "raw_close_inr": 1083.05,
+          "market_value_inr": 48737.25,
+          "weight_of_invested_pct": 4.997394778986358
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.827726011446361
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.818338705186443
+        },
+        {
+          "canonical": "INE811K01011",
+          "quantity": 171,
+          "raw_close_inr": 273.8,
+          "market_value_inr": 46819.8,
+          "weight_of_invested_pct": 4.800784288674176
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.799164196496059
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.309470828163949
+        },
+        {
+          "canonical": "INE226A01021",
+          "quantity": 80,
+          "raw_close_inr": 523.2,
+          "market_value_inr": 41856.0,
+          "weight_of_invested_pct": 4.291808747298073
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.9938348314999033
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 22,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 28008.199999999997,
+          "weight_of_invested_pct": 2.871890236909257
+        },
+        {
+          "canonical": "INE785M01013",
+          "quantity": 156,
+          "raw_close_inr": 148.9,
+          "market_value_inr": 23228.4,
+          "weight_of_invested_pct": 2.381781591784656
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.588755955312731,
+        "top_five_pct_of_invested": 31.253946731676795,
+        "hhi": 0.05225051857397177,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 10.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 64,
+      "actual_buy_count": 40,
+      "actual_sell_count": 24,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 995096.5729635081,
+      "ending_cash_inr": 18795.37296350817,
+      "ending_invested_inr": 975117.6,
+      "ending_cash_receivable_inr": 117.99999999999999,
+      "ending_locked_claim_inr": 1065.5999999999983,
+      "max_drawdown_pct": -9.16244325209339,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -9.16244325209339,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 2037586.4624000008,
+      "fees_inr": 4416.71573649206,
+      "fees_by_component_inr": {
+        "brokerage": 1280.0,
+        "stt": 2037.59,
+        "exchange": 62.55,
+        "stamp_duty": 226.11,
+        "sebi": 2.04,
+        "ipft": 0.0,
+        "dp": 480.0,
+        "gst": 328.43
+      },
+      "slippage_cost_inr": 2036.6112999998177,
+      "cash_distributions_inr": 411.1,
+      "cash_distribution_entitlements_inr": 529.1,
+      "max_nav_reconciliation_residual_inr": 4.6554760047001764e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 59,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 63991.399999999994,
+          "weight_of_invested_pct": 6.562428982924725
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 55,
+          "raw_close_inr": 1036.35,
+          "market_value_inr": 56999.24999999999,
+          "weight_of_invested_pct": 5.84537188129924
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 43,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 54833.6,
+          "weight_of_invested_pct": 5.623280720192108
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 211,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 53193.1,
+          "weight_of_invested_pct": 5.455044601799823
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 178,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 52963.9,
+          "weight_of_invested_pct": 5.43153974453953
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 160,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 52000.0,
+          "weight_of_invested_pct": 5.332690128862406
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 77,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 51405.200000000004,
+          "weight_of_invested_pct": 5.271692357926881
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 34,
+          "raw_close_inr": 1508.9,
+          "market_value_inr": 51302.600000000006,
+          "weight_of_invested_pct": 5.261170550095702
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 9,
+          "raw_close_inr": 5513.2,
+          "market_value_inr": 49618.799999999996,
+          "weight_of_invested_pct": 5.088493941653806
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 74,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 49387.6,
+          "weight_of_invested_pct": 5.064783980927019
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 4.949633767250227
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 49,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 48108.2,
+          "weight_of_invested_pct": 4.933579293410354
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 24,
+          "raw_close_inr": 1944.3,
+          "market_value_inr": 46663.2,
+          "weight_of_invested_pct": 4.785392038867927
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 36,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 45864.0,
+          "weight_of_invested_pct": 4.703432693656643
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8814.95,
+          "market_value_inr": 44074.75,
+          "weight_of_invested_pct": 4.519942004943814
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 7,
+          "raw_close_inr": 6100.85,
+          "market_value_inr": 42705.950000000004,
+          "weight_of_invested_pct": 4.379569192474837
+        },
+        {
+          "canonical": "INE343B01030",
+          "quantity": 62,
+          "raw_close_inr": 681.95,
+          "market_value_inr": 42280.9,
+          "weight_of_invested_pct": 4.335979578258049
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 88,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 41844.0,
+          "weight_of_invested_pct": 4.2911747260022794
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 296,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 41469.6,
+          "weight_of_invested_pct": 4.25277935707447
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 4,
+          "raw_close_inr": 9536.7,
+          "market_value_inr": 38146.8,
+          "weight_of_invested_pct": 3.9120204578401623
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.562428982924725,
+        "top_five_pct_of_invested": 28.917665930755426,
+        "hhi": 0.050764408843891475,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 100.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 63,
+      "actual_buy_count": 39,
+      "actual_sell_count": 24,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 976143.2498315412,
+      "ending_cash_inr": 8823.24983154117,
+      "ending_invested_inr": 966154.4,
+      "ending_cash_receivable_inr": 117.99999999999997,
+      "ending_locked_claim_inr": 1047.5999999999983,
+      "max_drawdown_pct": -10.484847812085452,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -10.484847812085452,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 2043445.2839999998,
+      "fees_inr": 4400.382168458739,
+      "fees_by_component_inr": {
+        "brokerage": 1260.0,
+        "stt": 2043.45,
+        "exchange": 62.73,
+        "stamp_duty": 227.3,
+        "sebi": 2.04,
+        "ipft": 0.0,
+        "dp": 480.0,
+        "gst": 324.86
+      },
+      "slippage_cost_inr": 20337.76800000003,
+      "cash_distributions_inr": 409.8,
+      "cash_distribution_entitlements_inr": 527.8,
+      "max_nav_reconciliation_residual_inr": 2.3305801732931286e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 59,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 63991.399999999994,
+          "weight_of_invested_pct": 6.6233098974656635
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 54,
+          "raw_close_inr": 1036.35,
+          "market_value_inr": 55962.899999999994,
+          "weight_of_invested_pct": 5.792335055349331
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 42,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 53558.4,
+          "weight_of_invested_pct": 5.543461790372222
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 208,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 52436.799999999996,
+          "weight_of_invested_pct": 5.427372684945594
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 176,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 52368.8,
+          "weight_of_invested_pct": 5.4203344724197295
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 158,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 51350.0,
+          "weight_of_invested_pct": 5.314885488282204
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 34,
+          "raw_close_inr": 1508.9,
+          "market_value_inr": 51302.600000000006,
+          "weight_of_invested_pct": 5.309979440139175
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 76,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 50737.6,
+          "weight_of_invested_pct": 5.251500174299263
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 9,
+          "raw_close_inr": 5513.2,
+          "market_value_inr": 49618.799999999996,
+          "weight_of_invested_pct": 5.1357008776237
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 73,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 48720.2,
+          "weight_of_invested_pct": 5.042692969156897
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 4.995552470702405
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 48,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 47126.399999999994,
+          "weight_of_invested_pct": 4.877729687925656
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 24,
+          "raw_close_inr": 1944.3,
+          "market_value_inr": 46663.2,
+          "weight_of_invested_pct": 4.829787040249467
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 36,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 45864.0,
+          "weight_of_invested_pct": 4.747067342445472
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8814.95,
+          "market_value_inr": 44074.75,
+          "weight_of_invested_pct": 4.561874375358639
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 7,
+          "raw_close_inr": 6100.85,
+          "market_value_inr": 42705.950000000004,
+          "weight_of_invested_pct": 4.420199297337983
+        },
+        {
+          "canonical": "INE343B01030",
+          "quantity": 61,
+          "raw_close_inr": 681.95,
+          "market_value_inr": 41598.950000000004,
+          "weight_of_invested_pct": 4.305621337541909
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 86,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 40893.0,
+          "weight_of_invested_pct": 4.232553306179633
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 291,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 40769.1,
+          "weight_of_invested_pct": 4.219729268945005
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 4,
+          "raw_close_inr": 9536.7,
+          "market_value_inr": 38146.8,
+          "weight_of_invested_pct": 3.9483130232600505
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.6233098974656635,
+        "top_five_pct_of_invested": 28.80681390055254,
+        "hhi": 0.05076183831147469,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_UNRESOLVED_SIGNAL",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 200.0,
+      "valid_through": "2018-04-30",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 66,
+      "actual_buy_count": 39,
+      "actual_sell_count": 27,
+      "first_order_date": "2018-02-01",
+      "ending_nav_inr": 954542.1987806129,
+      "ending_cash_inr": 2416.3487806129215,
+      "ending_invested_inr": 950980.25,
+      "ending_cash_receivable_inr": 115.99999999999996,
+      "ending_locked_claim_inr": 1029.5999999999983,
+      "max_drawdown_pct": -12.000285034311464,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -12.000285034311464,
+        "peak_date": "2018-01-01",
+        "trough_date": "2018-03-07",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 2050025.4599999995,
+      "fees_inr": 4549.771219386804,
+      "fees_by_component_inr": {
+        "brokerage": 1320.0,
+        "stt": 2050.03,
+        "exchange": 62.94,
+        "stamp_duty": 228.26,
+        "sebi": 2.05,
+        "ipft": 0.0,
+        "dp": 540.0,
+        "gst": 346.5
+      },
+      "slippage_cost_inr": 40619.38000000005,
+      "cash_distributions_inr": 408.5,
+      "cash_distribution_entitlements_inr": 524.5,
+      "max_nav_reconciliation_residual_inr": 2.3305801732931286e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 58,
+          "raw_close_inr": 1084.6,
+          "market_value_inr": 62906.799999999996,
+          "weight_of_invested_pct": 6.614942844501765
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 53,
+          "raw_close_inr": 1036.35,
+          "market_value_inr": 54926.549999999996,
+          "weight_of_invested_pct": 5.775782409781907
+        },
+        {
+          "canonical": "INE787D01026",
+          "quantity": 41,
+          "raw_close_inr": 1275.2,
+          "market_value_inr": 52283.200000000004,
+          "weight_of_invested_pct": 5.497821852767185
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 173,
+          "raw_close_inr": 297.55,
+          "market_value_inr": 51476.15,
+          "weight_of_invested_pct": 5.412956788534777
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 204,
+          "raw_close_inr": 252.1,
+          "market_value_inr": 51428.4,
+          "weight_of_invested_pct": 5.407935653763577
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 155,
+          "raw_close_inr": 325.0,
+          "market_value_inr": 50375.0,
+          "weight_of_invested_pct": 5.297165740297972
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 75,
+          "raw_close_inr": 667.6,
+          "market_value_inr": 50070.0,
+          "weight_of_invested_pct": 5.265093570555225
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 33,
+          "raw_close_inr": 1508.9,
+          "market_value_inr": 49793.700000000004,
+          "weight_of_invested_pct": 5.2360393394079425
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 9,
+          "raw_close_inr": 5513.2,
+          "market_value_inr": 49618.799999999996,
+          "weight_of_invested_pct": 5.217647790266938
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 19,
+          "raw_close_inr": 2540.25,
+          "market_value_inr": 48264.75,
+          "weight_of_invested_pct": 5.075263129807375
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 72,
+          "raw_close_inr": 667.4,
+          "market_value_inr": 48052.799999999996,
+          "weight_of_invested_pct": 5.0529756007025375
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 47,
+          "raw_close_inr": 981.8,
+          "market_value_inr": 46144.6,
+          "weight_of_invested_pct": 4.852319488233325
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 23,
+          "raw_close_inr": 1944.3,
+          "market_value_inr": 44718.9,
+          "weight_of_invested_pct": 4.70240049675059
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 35,
+          "raw_close_inr": 1274.0,
+          "market_value_inr": 44590.0,
+          "weight_of_invested_pct": 4.688846061734721
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8814.95,
+          "market_value_inr": 44074.75,
+          "weight_of_invested_pct": 4.634665125800457
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 7,
+          "raw_close_inr": 6100.85,
+          "market_value_inr": 42705.950000000004,
+          "weight_of_invested_pct": 4.490729434181205
+        },
+        {
+          "canonical": "INE343B01030",
+          "quantity": 60,
+          "raw_close_inr": 681.95,
+          "market_value_inr": 40917.0,
+          "weight_of_invested_pct": 4.302613014308132
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 85,
+          "raw_close_inr": 475.5,
+          "market_value_inr": 40417.5,
+          "weight_of_invested_pct": 4.250088264188452
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 286,
+          "raw_close_inr": 140.1,
+          "market_value_inr": 40068.6,
+          "weight_of_invested_pct": 4.213399805095848
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 4,
+          "raw_close_inr": 9536.7,
+          "market_value_inr": 38146.8,
+          "weight_of_invested_pct": 4.011313589320073
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.614942844501765,
+        "top_five_pct_of_invested": 28.70943954934921,
+        "hhi": 0.05073097630592369,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 10.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 1045311.1795911508,
+      "ending_cash_inr": 15680.221091150743,
+      "ending_invested_inr": 1028786.55,
+      "ending_cash_receivable_inr": 820.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -5.623994217859307,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -5.623994217859307,
+        "peak_date": "2018-04-30",
+        "trough_date": "2018-05-21",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 998555.0464999998,
+      "fees_inr": 1703.7056088493337,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 998.56,
+        "exchange": 30.66,
+        "stamp_duty": 148.6,
+        "sebi": 1.0,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.9
+      },
+      "slippage_cost_inr": 997.573299999912,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 948.5,
+      "max_nav_reconciliation_residual_inr": 2.0759216567967087e-10,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.19728164214433
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 59,
+          "raw_close_inr": 1060.55,
+          "market_value_inr": 62572.45,
+          "weight_of_invested_pct": 6.082160580345844
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 10,
+          "raw_close_inr": 5995.55,
+          "market_value_inr": 59955.5,
+          "weight_of_invested_pct": 5.82778808684853
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 37,
+          "raw_close_inr": 1602.4,
+          "market_value_inr": 59288.8,
+          "weight_of_invested_pct": 5.762983584884542
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.635858089318916
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.558295838918189
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 26,
+          "raw_close_inr": 2056.15,
+          "market_value_inr": 53459.9,
+          "weight_of_invested_pct": 5.1964034716433645
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.106132073752325
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.092893175945972
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 4.893536953802516
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 5,
+          "raw_close_inr": 9950.95,
+          "market_value_inr": 49754.75,
+          "weight_of_invested_pct": 4.836255878345221
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 39,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 49650.899999999994,
+          "weight_of_invested_pct": 4.8261614617726085
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 8,
+          "raw_close_inr": 6065.7,
+          "market_value_inr": 48525.6,
+          "weight_of_invested_pct": 4.716780171746996
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.576512980267871
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.56761414697733
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.549437393014129
+        },
+        {
+          "canonical": "INE465A01025",
+          "quantity": 71,
+          "raw_close_inr": 630.85,
+          "market_value_inr": 44790.35,
+          "weight_of_invested_pct": 4.353706801474027
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8948.3,
+          "market_value_inr": 44741.5,
+          "weight_of_invested_pct": 4.34895848900824
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.085225453229341
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.7860137265597027
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.19728164214433,
+        "top_five_pct_of_invested": 29.506071983542164,
+        "hhi": 0.050851641951787416,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 100.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 1036338.0394165365,
+      "ending_cash_inr": 7980.180916536513,
+      "ending_invested_inr": 1027513.45,
+      "ending_cash_receivable_inr": 820.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -5.66575984241312,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -5.66575984241312,
+        "peak_date": "2018-04-30",
+        "trough_date": "2018-05-21",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1006103.6714999998,
+      "fees_inr": 1712.6795834634613,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1006.1,
+        "exchange": 30.89,
+        "stamp_duty": 149.74,
+        "sebi": 1.01,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.94
+      },
+      "slippage_cost_inr": 9962.989500000012,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 948.5,
+      "max_nav_reconciliation_residual_inr": 9.117684385273606e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.204960139451217
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 59,
+          "raw_close_inr": 1060.55,
+          "market_value_inr": 62572.45,
+          "weight_of_invested_pct": 6.089696441443175
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 10,
+          "raw_close_inr": 5995.55,
+          "market_value_inr": 59955.5,
+          "weight_of_invested_pct": 5.8350087777439805
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 37,
+          "raw_close_inr": 1602.4,
+          "market_value_inr": 59288.8,
+          "weight_of_invested_pct": 5.770123982318675
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.642840976923465
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.565182626076574
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 26,
+          "raw_close_inr": 2056.15,
+          "market_value_inr": 53459.9,
+          "weight_of_invested_pct": 5.202841870342428
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.112458625237461
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.099203324297117
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 4.899600097692152
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 5,
+          "raw_close_inr": 9950.95,
+          "market_value_inr": 49754.75,
+          "weight_of_invested_pct": 4.842248050378319
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 8,
+          "raw_close_inr": 6065.7,
+          "market_value_inr": 48525.6,
+          "weight_of_invested_pct": 4.72262431211971
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 38,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 48377.799999999996,
+          "weight_of_invested_pct": 4.708240072185916
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.58218332811118
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.573273469072352
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.555074193919311
+        },
+        {
+          "canonical": "INE465A01025",
+          "quantity": 71,
+          "raw_close_inr": 630.85,
+          "market_value_inr": 44790.35,
+          "weight_of_invested_pct": 4.359101090112251
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8948.3,
+          "market_value_inr": 44741.5,
+          "weight_of_invested_pct": 4.354346894437246
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.0902870906458695
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.790704637491607
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.204960139451217,
+        "top_five_pct_of_invested": 29.542630317880512,
+        "hhi": 0.050859525128671715,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "status": "ACTUAL_PREFIX_STOPPED_AT_FIRST_MATERIAL_GAP",
+      "valuation_scenario": "base",
+      "slippage_bps_per_side": 200.0,
+      "valid_through": "2018-06-20",
+      "starting_capital_inr": 1000000.0,
+      "actual_order_count": 21,
+      "actual_buy_count": 20,
+      "actual_sell_count": 1,
+      "first_order_date": "2018-04-02",
+      "ending_nav_inr": 1026589.6393360225,
+      "ending_cash_inr": 8416.580836022455,
+      "ending_invested_inr": 1017328.65,
+      "ending_cash_receivable_inr": 820.5,
+      "ending_locked_claim_inr": 23.9085,
+      "max_drawdown_pct": -5.676764778244792,
+      "drawdown_recovery": {
+        "max_drawdown_pct": -5.676764778244792,
+        "peak_date": "2018-04-30",
+        "trough_date": "2018-05-21",
+        "recovery_status": "NOT_RECOVERED_BY_PREFIX_END",
+        "recovery_date": null,
+        "trough_to_recovery_calendar_days": null
+      },
+      "turnover_inr": 1005509.6969999998,
+      "fees_inr": 1711.9861639774244,
+      "fees_by_component_inr": {
+        "brokerage": 420.0,
+        "stt": 1005.51,
+        "exchange": 30.87,
+        "stamp_duty": 149.66,
+        "sebi": 1.01,
+        "ipft": 0.0,
+        "dp": 20.0,
+        "gst": 84.94
+      },
+      "slippage_cost_inr": 19722.083000000017,
+      "cash_distributions_inr": 128.0,
+      "cash_distribution_entitlements_inr": 948.5,
+      "max_nav_reconciliation_residual_inr": 9.117684385273606e-11,
+      "ending_positions": [
+        {
+          "canonical": "INE018I01017",
+          "quantity": 64,
+          "raw_close_inr": 996.2,
+          "market_value_inr": 63756.8,
+          "weight_of_invested_pct": 6.267079964768514
+        },
+        {
+          "canonical": "INE356A01018",
+          "quantity": 59,
+          "raw_close_inr": 1060.55,
+          "market_value_inr": 62572.45,
+          "weight_of_invested_pct": 6.1506623252967465
+        },
+        {
+          "canonical": "INE216A01030",
+          "quantity": 10,
+          "raw_close_inr": 5995.55,
+          "market_value_inr": 59955.5,
+          "weight_of_invested_pct": 5.893424902562215
+        },
+        {
+          "canonical": "INE030A01027",
+          "quantity": 37,
+          "raw_close_inr": 1602.4,
+          "market_value_inr": 59288.8,
+          "weight_of_invested_pct": 5.827890524856446
+        },
+        {
+          "canonical": "INE019A01038",
+          "quantity": 173,
+          "raw_close_inr": 335.15,
+          "market_value_inr": 57980.95,
+          "weight_of_invested_pct": 5.699333248896509
+        },
+        {
+          "canonical": "INE797F01012",
+          "quantity": 21,
+          "raw_close_inr": 2723.0,
+          "market_value_inr": 57183.0,
+          "weight_of_invested_pct": 5.6208974356516945
+        },
+        {
+          "canonical": "INE040A01034",
+          "quantity": 26,
+          "raw_close_inr": 2056.15,
+          "market_value_inr": 53459.9,
+          "weight_of_invested_pct": 5.254929171610374
+        },
+        {
+          "canonical": "INE749A01030",
+          "quantity": 228,
+          "raw_close_inr": 230.4,
+          "market_value_inr": 52531.200000000004,
+          "weight_of_invested_pct": 5.163641071152376
+        },
+        {
+          "canonical": "INE376G01013",
+          "quantity": 84,
+          "raw_close_inr": 623.75,
+          "market_value_inr": 52395.0,
+          "weight_of_invested_pct": 5.150253067187284
+        },
+        {
+          "canonical": "INE192A01025",
+          "quantity": 193,
+          "raw_close_inr": 260.85,
+          "market_value_inr": 50344.05,
+          "weight_of_invested_pct": 4.948651549329708
+        },
+        {
+          "canonical": "INE179A01014",
+          "quantity": 5,
+          "raw_close_inr": 9950.95,
+          "market_value_inr": 49754.75,
+          "weight_of_invested_pct": 4.890725332467536
+        },
+        {
+          "canonical": "INE264A01014",
+          "quantity": 8,
+          "raw_close_inr": 6065.7,
+          "market_value_inr": 48525.6,
+          "weight_of_invested_pct": 4.769904002998441
+        },
+        {
+          "canonical": "INE280A01028",
+          "quantity": 53,
+          "raw_close_inr": 888.35,
+          "market_value_inr": 47082.55,
+          "weight_of_invested_pct": 4.628057019725141
+        },
+        {
+          "canonical": "INE208A01029",
+          "quantity": 343,
+          "raw_close_inr": 137.0,
+          "market_value_inr": 46991.0,
+          "weight_of_invested_pct": 4.619057961259618
+        },
+        {
+          "canonical": "INE494B01023",
+          "quantity": 80,
+          "raw_close_inr": 585.05,
+          "market_value_inr": 46804.0,
+          "weight_of_invested_pct": 4.600676487386844
+        },
+        {
+          "canonical": "INE465A01025",
+          "quantity": 71,
+          "raw_close_inr": 630.85,
+          "market_value_inr": 44790.35,
+          "weight_of_invested_pct": 4.402741434638649
+        },
+        {
+          "canonical": "INE585B01010",
+          "quantity": 5,
+          "raw_close_inr": 8948.3,
+          "market_value_inr": 44741.5,
+          "weight_of_invested_pct": 4.3979396432018305
+        },
+        {
+          "canonical": "INE423A01024",
+          "quantity": 319,
+          "raw_close_inr": 131.75,
+          "market_value_inr": 42028.25,
+          "weight_of_invested_pct": 4.131236252906079
+        },
+        {
+          "canonical": "INE169A01031",
+          "quantity": 95,
+          "raw_close_inr": 410.0,
+          "market_value_inr": 38950.0,
+          "weight_of_invested_pct": 3.828654584730313
+        },
+        {
+          "canonical": "INE913H01037",
+          "quantity": 30,
+          "raw_close_inr": 1273.1,
+          "market_value_inr": 38193.0,
+          "weight_of_invested_pct": 3.75424401937368
+        }
+      ],
+      "ending_concentration": {
+        "position_count": 20,
+        "largest_position_pct_of_invested": 6.267079964768514,
+        "top_five_pct_of_invested": 29.83839096638043,
+        "hhi": 0.0510310392517054,
+        "invested_reconciliation_residual_inr": 0.0
+      },
+      "cagr": "NOT REPORTED: stopped prefix, not a full-period result"
+    }
+  ],
+  "matched_tri_benchmark": {
+    "series": "official NIFTY 200 Gross TRI",
+    "source_sha256": "6e2ac7e8995c654c0a30f9683438356931c878afc85b8a47ecd1f20a272c495e",
+    "cash_waiting_time_included": true,
+    "results": [
+      {
+        "candidate_id": "NIFTY200-A-M",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 50.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -3.4598169592895633,
+        "excess_vs_gross_tri_pct_points": -1.9704158606522304,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-M",
+        "valuation_scenario": "zero_mark_stress",
+        "slippage_bps_per_side": 50.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -3.563136959289559,
+        "excess_vs_gross_tri_pct_points": -2.073735860652226,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-Q",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 50.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": -0.1251360135782975,
+        "excess_vs_gross_tri_pct_points": -4.05483985220746,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-Q",
+        "valuation_scenario": "zero_mark_stress",
+        "slippage_bps_per_side": 50.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": -0.1251360135782975,
+        "excess_vs_gross_tri_pct_points": -4.05483985220746,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-M",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 50.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -1.3247551282752124,
+        "excess_vs_gross_tri_pct_points": 0.16464597036212059,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-M",
+        "valuation_scenario": "zero_mark_stress",
+        "slippage_bps_per_side": 50.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -1.4305951282752138,
+        "excess_vs_gross_tri_pct_points": 0.0588059703621191,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-Q",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 50.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": 4.131621871173863,
+        "excess_vs_gross_tri_pct_points": 0.2019180325447012,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-Q",
+        "valuation_scenario": "zero_mark_stress",
+        "slippage_bps_per_side": 50.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": 4.131621871173863,
+        "excess_vs_gross_tri_pct_points": 0.2019180325447012,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-M",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 10.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -2.70738992975762,
+        "excess_vs_gross_tri_pct_points": -1.2179888311202869,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-M",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 100.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -4.39050173021972,
+        "excess_vs_gross_tri_pct_points": -2.9011006315823873,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-M",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 200.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -6.355255513750868,
+        "excess_vs_gross_tri_pct_points": -4.865854415113535,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-Q",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 10.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": 0.2743206139968368,
+        "excess_vs_gross_tri_pct_points": -3.655383224632325,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-Q",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 100.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": -0.6197627147390028,
+        "excess_vs_gross_tri_pct_points": -4.549466553368164,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-A-Q",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 200.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": -1.5965338025709763,
+        "excess_vs_gross_tri_pct_points": -5.526237641200138,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-M",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 10.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -0.49034270364919363,
+        "excess_vs_gross_tri_pct_points": 0.9990583949881393,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-M",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 100.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -2.3856750168458785,
+        "excess_vs_gross_tri_pct_points": -0.8962739182085455,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-M",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 200.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 31,
+        "tri_entry_date": "2018-02-01",
+        "matched_through": "2018-04-30",
+        "tri_start_value": 7290.85,
+        "tri_end_value": 7182.26,
+        "tri_gross_return_pct": -1.489401098637333,
+        "tri_reference_ending_nav_inr": 985105.9890136267,
+        "strategy_net_return_pct": -4.545780121938714,
+        "excess_vs_gross_tri_pct_points": -3.056379023301381,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-Q",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 10.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": 4.531117959115094,
+        "excess_vs_gross_tri_pct_points": 0.6014141204859325,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-Q",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 100.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": 3.633803941653646,
+        "excess_vs_gross_tri_pct_points": -0.29589989697551555,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      },
+      {
+        "candidate_id": "NIFTY200-B-Q",
+        "valuation_scenario": "base",
+        "slippage_bps_per_side": 200.0,
+        "status": "MATCHED_GROSS_TRI_WITH_CASH_WAIT",
+        "cash_wait_days": 91,
+        "tri_entry_date": "2018-04-02",
+        "matched_through": "2018-06-20",
+        "tri_start_value": 6818.58,
+        "tri_end_value": 7086.53,
+        "tri_gross_return_pct": 3.9297038386291616,
+        "tri_reference_ending_nav_inr": 1039297.0383862916,
+        "strategy_net_return_pct": 2.658963933602254,
+        "excess_vs_gross_tri_pct_points": -1.2707399050269075,
+        "tri_execution_assumption": "cash at zero yield from 2018-01-01 through first strategy fill date; index exposure begins at that date's official close; no ETF wrapper fee or tracking error"
+      }
+    ]
+  },
+  "research_limits": [
+    "IDFC event classification remains an evidence-supported inference, not a located exact original notice.",
+    "The AGEL prelisting value is an MSCI-inspired model convention using raw AEL cum/ex closes; it is not observed market price or proof of 2018 NIFTY index treatment.",
+    "AGEL fractional trustee sale date, fill, fees, and cash payment are not evidenced; residual fractions are nonspendable fixed-mark receivables.",
+    "Unobserved dividend pay dates use the registered 30-calendar-day delayed cash assumption; no interest is credited.",
+    "Costs remain uncalibrated. Zero-mark stress is not a proven final-wealth lower bound because sizing can change."
+  ],
+  "candidate_dependency_audit": "nifty200_candidate_dependency_audit_2026-11-02.json",
+  "dependency_blockers": "nifty200_cycle2_dependency_blockers_2026-11-02.json",
+  "actual_ledgers": "nifty200_cycle2_actual_ledgers_2026-11-02.json"
+}
