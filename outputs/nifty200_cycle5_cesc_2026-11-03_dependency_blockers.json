@@ -1,0 +1,407 @@
+{
+  "cycle_id": "2026-11-03-cycle5",
+  "protocol_id": "NIFTY200-v1.10-dated-eligibility-multichild-demergers-and-debenture-bound",
+  "signal_and_account_stops": [
+    {
+      "candidate_id": "NIFTY200-A-M",
+      "certified_signal_count": 21,
+      "first_signal_blocker": {
+        "date": "2019-10-31",
+        "kind": "signal_or_order",
+        "unresolved": [
+          {
+            "symbol": "BRITANNIA",
+            "method": "source_contractual_debenture_cashflow_upper_bound_not_decisive",
+            "score_status": "UNKNOWN_DATA",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "selection_bound": "MATERIAL_UNKNOWN",
+            "return_numerator": 0.1036137011332483
+          }
+        ]
+      },
+      "native_account_stop": {
+        "date": "2019-10-16",
+        "input": "locked_bonus_raw_close",
+        "reason": "owned bonus shares remain pending and require an observed raw close mark",
+        "symbol": "INE580B01029",
+        "identity": "GRUH Finance"
+      },
+      "valid_through": "2019-10-15"
+    },
+    {
+      "candidate_id": "NIFTY200-A-Q",
+      "certified_signal_count": 8,
+      "first_signal_blocker": {
+        "date": "2020-03-31",
+        "kind": "signal_or_order",
+        "unresolved": [
+          {
+            "symbol": "SIEMENS",
+            "reason": "unresolved_adjustment_factor; missing_or_invalid_adjusted_close; historical signal action unresolved under registered terms/factor policy",
+            "dependencies": [
+              {
+                "date": "2020-02-01",
+                "entity": "SIEMENS|INE003A01024",
+                "input": "signal_adjustment_factor",
+                "source": "NSE official EOD supplement plus TejHQ adjusted-price reference",
+                "reason": "unresolved adjusted-price factor on this exact required signal-session",
+                "resolution_attempt": "Compared the TejHQ factor series with adjacent official NSE EOD and the interval action feed; the factor interval remains unresolved, so no factor was imputed.",
+                "impact": "ranking-changing signal unknown"
+              },
+              {
+                "date": "2020-02-01",
+                "entity": "SIEMENS|INE003A01024",
+                "input": "signal_window",
+                "source": "TejHQ adjusted NSE price history",
+                "reason": "missing_or_invalid_adjusted_close; required window=2019-03-22..2020-02-28",
+                "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+                "impact": "ranking-changing signal unknown"
+              },
+              {
+                "date": "2020-02-03",
+                "entity": "SIEMENS|INE003A01024",
+                "input": "signal_dividend",
+                "source": "TejHQ NSE corporate-action feed",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE003A01024; vendor terms=cash_amount:7.0; support check=missing_or_invalid_adjacent_price_or_factor",
+                "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+                "impact": "ranking-changing signal may be misstated"
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCFIRSTB",
+            "method": "registered_source_TER P_and_dividend_factor",
+            "score_status": "VALID_SCORE",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "dependencies": [
+              {
+                "date": "2019-12-12",
+                "entity": "IDFCFIRSTB|INE092T01019",
+                "input": "signal_other",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved"
+              },
+              {
+                "date": "2020-02-27",
+                "entity": "IDFCFIRSTB|INE092T01019",
+                "input": "signal_other",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved"
+              }
+            ]
+          },
+          {
+            "symbol": "PEL",
+            "method": "registered_source_TER P_and_dividend_factor",
+            "score_status": "VALID_SCORE",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "dependencies": [
+              {
+                "date": "2019-12-30",
+                "entity": "PEL|INE140A01024",
+                "input": "signal_rights",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE140A01024; vendor terms=ratio_num:11.0,ratio_den:83.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved"
+              }
+            ]
+          },
+          {
+            "symbol": "NAM-INDIA",
+            "reason": "unresolved_adjustment_factor; missing_or_invalid_adjusted_close; historical signal action unresolved under registered terms/factor policy",
+            "dependencies": [
+              {
+                "date": "2020-02-01",
+                "entity": "NAM-INDIA|INE298J01013",
+                "input": "signal_adjustment_factor",
+                "source": "NSE official EOD supplement plus TejHQ adjusted-price reference",
+                "reason": "unresolved adjusted-price factor on this exact required signal-session",
+                "resolution_attempt": "Compared the TejHQ factor series with adjacent official NSE EOD and the interval action feed; the factor interval remains unresolved, so no factor was imputed.",
+                "impact": "ranking-changing signal unknown"
+              },
+              {
+                "date": "2020-02-01",
+                "entity": "NAM-INDIA|INE298J01013",
+                "input": "signal_window",
+                "source": "TejHQ adjusted NSE price history",
+                "reason": "missing_or_invalid_adjusted_close; required window=2019-03-22..2020-02-28",
+                "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+                "impact": "ranking-changing signal unknown"
+              },
+              {
+                "date": "2020-02-03",
+                "entity": "NAM-INDIA|INE298J01013",
+                "input": "signal_dividend",
+                "source": "TejHQ NSE corporate-action feed",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE298J01013; vendor terms=cash_amount:3.0; support check=missing_or_invalid_adjacent_price_or_factor",
+                "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+                "impact": "ranking-changing signal may be misstated"
+              }
+            ]
+          }
+        ]
+      },
+      "native_account_stop": {
+        "date": "2020-03-31",
+        "kind": "signal_or_order",
+        "unresolved": [
+          {
+            "symbol": "SIEMENS",
+            "reason": "unresolved_adjustment_factor; missing_or_invalid_adjusted_close; historical signal action unresolved under registered terms/factor policy",
+            "dependencies": [
+              {
+                "date": "2020-02-01",
+                "entity": "SIEMENS|INE003A01024",
+                "input": "signal_adjustment_factor",
+                "source": "NSE official EOD supplement plus TejHQ adjusted-price reference",
+                "reason": "unresolved adjusted-price factor on this exact required signal-session",
+                "resolution_attempt": "Compared the TejHQ factor series with adjacent official NSE EOD and the interval action feed; the factor interval remains unresolved, so no factor was imputed.",
+                "impact": "ranking-changing signal unknown"
+              },
+              {
+                "date": "2020-02-01",
+                "entity": "SIEMENS|INE003A01024",
+                "input": "signal_window",
+                "source": "TejHQ adjusted NSE price history",
+                "reason": "missing_or_invalid_adjusted_close; required window=2019-03-22..2020-02-28",
+                "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+                "impact": "ranking-changing signal unknown"
+              },
+              {
+                "date": "2020-02-03",
+                "entity": "SIEMENS|INE003A01024",
+                "input": "signal_dividend",
+                "source": "TejHQ NSE corporate-action feed",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE003A01024; vendor terms=cash_amount:7.0; support check=missing_or_invalid_adjacent_price_or_factor",
+                "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+                "impact": "ranking-changing signal may be misstated"
+              }
+            ]
+          },
+          {
+            "symbol": "IDFCFIRSTB",
+            "method": "registered_source_TER P_and_dividend_factor",
+            "score_status": "VALID_SCORE",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "dependencies": [
+              {
+                "date": "2019-12-12",
+                "entity": "IDFCFIRSTB|INE092T01019",
+                "input": "signal_other",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved"
+              },
+              {
+                "date": "2020-02-27",
+                "entity": "IDFCFIRSTB|INE092T01019",
+                "input": "signal_other",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE092T01019; vendor terms=; support check=other_signal_entitlement_or_adjusted_value_model_unresolved"
+              }
+            ]
+          },
+          {
+            "symbol": "PEL",
+            "method": "registered_source_TER P_and_dividend_factor",
+            "score_status": "VALID_SCORE",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "dependencies": [
+              {
+                "date": "2019-12-30",
+                "entity": "PEL|INE140A01024",
+                "input": "signal_rights",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE140A01024; vendor terms=ratio_num:11.0,ratio_den:83.0; support check=rights_signal_entitlement_or_adjusted_value_model_unresolved"
+              }
+            ]
+          },
+          {
+            "symbol": "NAM-INDIA",
+            "reason": "unresolved_adjustment_factor; missing_or_invalid_adjusted_close; historical signal action unresolved under registered terms/factor policy",
+            "dependencies": [
+              {
+                "date": "2020-02-01",
+                "entity": "NAM-INDIA|INE298J01013",
+                "input": "signal_adjustment_factor",
+                "source": "NSE official EOD supplement plus TejHQ adjusted-price reference",
+                "reason": "unresolved adjusted-price factor on this exact required signal-session",
+                "resolution_attempt": "Compared the TejHQ factor series with adjacent official NSE EOD and the interval action feed; the factor interval remains unresolved, so no factor was imputed.",
+                "impact": "ranking-changing signal unknown"
+              },
+              {
+                "date": "2020-02-01",
+                "entity": "NAM-INDIA|INE298J01013",
+                "input": "signal_window",
+                "source": "TejHQ adjusted NSE price history",
+                "reason": "missing_or_invalid_adjusted_close; required window=2019-03-22..2020-02-28",
+                "resolution_attempt": "Looked up each required adjusted close in TejHQ and the 18-date official NSE factor supplement; missing or invalid values remain missing.",
+                "impact": "ranking-changing signal unknown"
+              },
+              {
+                "date": "2020-02-03",
+                "entity": "NAM-INDIA|INE298J01013",
+                "input": "signal_dividend",
+                "source": "TejHQ NSE corporate-action feed",
+                "reason": "historical signal action unresolved under registered terms/factor policy; vendor action ISIN=INE298J01013; vendor terms=cash_amount:3.0; support check=missing_or_invalid_adjacent_price_or_factor",
+                "resolution_attempt": "Checked the date-valid vendor ISIN, exact reviewed action bridge, and exact vendor-symbol/date identity; routine terms also require adjacent raw/adjusted-factor agreement. No nearest-ISIN match or entitlement was assumed.",
+                "impact": "ranking-changing signal may be misstated"
+              }
+            ]
+          }
+        ]
+      },
+      "valid_through": "2020-03-31"
+    },
+    {
+      "candidate_id": "NIFTY200-B-M",
+      "certified_signal_count": 20,
+      "first_signal_blocker": {
+        "date": "2019-09-30",
+        "kind": "signal_or_order",
+        "unresolved": [
+          {
+            "symbol": "CESC",
+            "method": "B_source_total_return_numerator_volatility_unknown_prelisting_child_marks",
+            "score_status": "UNKNOWN_DATA",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "selection_bound": "MATERIAL_UNKNOWN",
+            "return_numerator": 0.8107313895403606,
+            "annualized_volatility_lower_bound": 0.37089314981067745,
+            "score_upper_bound": 2.185889359116497,
+            "bound_method": "minimum sample volatility: observed pre-ex and listed-child returns fixed; unobserved claim-period returns equalized subject to source-based total wealth over the exact 252-return volatility window",
+            "source_demerger": {
+              "ex_date": "2018-10-30",
+              "record_date": "2018-10-31",
+              "allotment_date": "2018-11-14",
+              "listing_date": "2019-01-25",
+              "children": [
+                {
+                  "child_symbol": "SPENCERS",
+                  "child_isin": "INE020801028",
+                  "ratio_num": 6,
+                  "ratio_den": 10
+                },
+                {
+                  "child_symbol": "CESCVENT",
+                  "child_isin": "INE425Y01011",
+                  "ratio_num": 2,
+                  "ratio_den": 10
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "native_account_stop": {
+        "date": "2019-09-30",
+        "kind": "signal_or_order",
+        "unresolved": [
+          {
+            "symbol": "CESC",
+            "method": "B_source_total_return_numerator_volatility_unknown_prelisting_child_marks",
+            "score_status": "UNKNOWN_DATA",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "selection_bound": "MATERIAL_UNKNOWN",
+            "return_numerator": 0.8107313895403606,
+            "annualized_volatility_lower_bound": 0.37089314981067745,
+            "score_upper_bound": 2.185889359116497,
+            "bound_method": "minimum sample volatility: observed pre-ex and listed-child returns fixed; unobserved claim-period returns equalized subject to source-based total wealth over the exact 252-return volatility window",
+            "source_demerger": {
+              "ex_date": "2018-10-30",
+              "record_date": "2018-10-31",
+              "allotment_date": "2018-11-14",
+              "listing_date": "2019-01-25",
+              "children": [
+                {
+                  "child_symbol": "SPENCERS",
+                  "child_isin": "INE020801028",
+                  "ratio_num": 6,
+                  "ratio_den": 10
+                },
+                {
+                  "child_symbol": "CESCVENT",
+                  "child_isin": "INE425Y01011",
+                  "ratio_num": 2,
+                  "ratio_den": 10
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "valid_through": "2019-09-30"
+    },
+    {
+      "candidate_id": "NIFTY200-B-Q",
+      "certified_signal_count": 6,
+      "first_signal_blocker": {
+        "date": "2019-09-30",
+        "kind": "signal_or_order",
+        "unresolved": [
+          {
+            "symbol": "CESC",
+            "method": "B_source_total_return_numerator_volatility_unknown_prelisting_child_marks",
+            "score_status": "UNKNOWN_DATA",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "selection_bound": "MATERIAL_UNKNOWN",
+            "return_numerator": 0.8107313895403606,
+            "annualized_volatility_lower_bound": 0.37089314981067745,
+            "score_upper_bound": 2.185889359116497,
+            "bound_method": "minimum sample volatility: observed pre-ex and listed-child returns fixed; unobserved claim-period returns equalized subject to source-based total wealth over the exact 252-return volatility window",
+            "source_demerger": {
+              "ex_date": "2018-10-30",
+              "record_date": "2018-10-31",
+              "allotment_date": "2018-11-14",
+              "listing_date": "2019-01-25",
+              "children": [
+                {
+                  "child_symbol": "SPENCERS",
+                  "child_isin": "INE020801028",
+                  "ratio_num": 6,
+                  "ratio_den": 10
+                },
+                {
+                  "child_symbol": "CESCVENT",
+                  "child_isin": "INE425Y01011",
+                  "ratio_num": 2,
+                  "ratio_den": 10
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "native_account_stop": {
+        "date": "2019-09-30",
+        "kind": "signal_or_order",
+        "unresolved": [
+          {
+            "symbol": "CESC",
+            "method": "B_source_total_return_numerator_volatility_unknown_prelisting_child_marks",
+            "score_status": "UNKNOWN_DATA",
+            "reason": "historical signal action unresolved under registered terms/factor policy",
+            "selection_bound": "MATERIAL_UNKNOWN",
+            "return_numerator": 0.8107313895403606,
+            "annualized_volatility_lower_bound": 0.37089314981067745,
+            "score_upper_bound": 2.185889359116497,
+            "bound_method": "minimum sample volatility: observed pre-ex and listed-child returns fixed; unobserved claim-period returns equalized subject to source-based total wealth over the exact 252-return volatility window",
+            "source_demerger": {
+              "ex_date": "2018-10-30",
+              "record_date": "2018-10-31",
+              "allotment_date": "2018-11-14",
+              "listing_date": "2019-01-25",
+              "children": [
+                {
+                  "child_symbol": "SPENCERS",
+                  "child_isin": "INE020801028",
+                  "ratio_num": 6,
+                  "ratio_den": 10
+                },
+                {
+                  "child_symbol": "CESCVENT",
+                  "child_isin": "INE425Y01011",
+                  "ratio_num": 2,
+                  "ratio_den": 10
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "valid_through": "2019-09-30"
+    }
+  ]
+}

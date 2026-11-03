@@ -1,0 +1,201 @@
+{
+  "schema_version": "nse-cholafin-eq-extraction-v1",
+  "generated_date": "2026-11-03",
+  "source": "NSE India Security-wise Archives; public EOD EQ and embedded corporate-action records",
+  "query": "CHOLAFIN, series EQ, 2018-05-21 through 2019-05-29; divided into bounded date windows below 70-row response limit",
+  "official_endpoint": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData",
+  "range": {
+    "from": "2018-05-21",
+    "to": "2019-05-29"
+  },
+  "source_files": [
+    {
+      "file": "nse_cholafin_20180521_20180719.json",
+      "sha256": "71693c31f3bbd62e696cdae08257a9baf7d8426487afddcc76a229a9f4b1e7e5",
+      "requested_from": "2018-05-21",
+      "requested_to": "2018-07-19",
+      "response_rows": 44,
+      "series_counts": {
+        "EQ": 44
+      },
+      "first_date": "2018-05-21",
+      "last_date": "2018-07-19",
+      "source_url": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData?from=21-05-2018&to=19-07-2018&symbol=CHOLAFIN&type=priceVolumeDeliverable&series=ALL"
+    },
+    {
+      "file": "nse_cholafin_20180720_20180917.json",
+      "sha256": "1482bd9d7eac481238117bf203f83557c2ed33408ecff782a8a25b3dccb62663",
+      "requested_from": "2018-07-20",
+      "requested_to": "2018-09-17",
+      "response_rows": 39,
+      "series_counts": {
+        "EQ": 39
+      },
+      "first_date": "2018-07-20",
+      "last_date": "2018-09-17",
+      "source_url": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData?from=20-07-2018&to=17-09-2018&symbol=CHOLAFIN&type=priceVolumeDeliverable&series=ALL"
+    },
+    {
+      "file": "nse_cholafin_20180918_20181116.json",
+      "sha256": "b347c601a42e252bc10b96bbf6fbcf9a74555ea961f2130f0c8dc4ac2f55133c",
+      "requested_from": "2018-09-18",
+      "requested_to": "2018-11-16",
+      "response_rows": 41,
+      "series_counts": {
+        "EQ": 40,
+        "BL": 1
+      },
+      "first_date": "2018-09-18",
+      "last_date": "2018-11-16",
+      "source_url": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData?from=18-09-2018&to=16-11-2018&symbol=CHOLAFIN&type=priceVolumeDeliverable&series=ALL"
+    },
+    {
+      "file": "nse_cholafin_20181117_20190115.json",
+      "sha256": "e235b9fc64f1e2d6eb8ba13a98ff3dfa469d6cb0a8fe57f3283ec340cc8ef219",
+      "requested_from": "2018-11-17",
+      "requested_to": "2019-01-15",
+      "response_rows": 40,
+      "series_counts": {
+        "EQ": 40
+      },
+      "first_date": "2018-11-19",
+      "last_date": "2019-01-15",
+      "source_url": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData?from=17-11-2018&to=15-01-2019&symbol=CHOLAFIN&type=priceVolumeDeliverable&series=ALL"
+    },
+    {
+      "file": "nse_cholafin_20190116_20190316.json",
+      "sha256": "80a489b30a74c9d7ddd06f345cc35b8c0dd4e4634ec598b0020bd4b5b3e3e3ab",
+      "requested_from": "2019-01-16",
+      "requested_to": "2019-03-16",
+      "response_rows": 42,
+      "series_counts": {
+        "EQ": 42
+      },
+      "first_date": "2019-01-16",
+      "last_date": "2019-03-15",
+      "source_url": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData?from=16-01-2019&to=16-03-2019&symbol=CHOLAFIN&type=priceVolumeDeliverable&series=ALL"
+    },
+    {
+      "file": "nse_cholafin_20190317_20190515.json",
+      "sha256": "54a67e3504f73972895541c93e471ceef004594ab276b2f216759258707b5aaa",
+      "requested_from": "2019-03-17",
+      "requested_to": "2019-05-15",
+      "response_rows": 38,
+      "series_counts": {
+        "EQ": 38
+      },
+      "first_date": "2019-03-18",
+      "last_date": "2019-05-15",
+      "source_url": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData?from=17-03-2019&to=15-05-2019&symbol=CHOLAFIN&type=priceVolumeDeliverable&series=ALL"
+    },
+    {
+      "file": "nse_cholafin_20190516_20190529.json",
+      "sha256": "c9f854b183f86ddc75290c366ca169da90406a99f16dde9ce0c84bb27c475205",
+      "requested_from": "2019-05-16",
+      "requested_to": "2019-05-29",
+      "response_rows": 10,
+      "series_counts": {
+        "EQ": 10
+      },
+      "first_date": "2019-05-16",
+      "last_date": "2019-05-29",
+      "source_url": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData?from=16-05-2019&to=29-05-2019&symbol=CHOLAFIN&type=priceVolumeDeliverable&series=ALL"
+    }
+  ],
+  "identity_source_file": {
+    "file": "nse_cholafin_20190612_20190618.json",
+    "sha256": "f1335546197dc586b8154cc96df4b519ec13d4657e49880a110edd22c8d9b792",
+    "requested_from": "2019-06-12",
+    "requested_to": "2019-06-18",
+    "response_rows": 5,
+    "EQ_rows": 5,
+    "source_url": "https://www.nseindia.com/api/historicalOR/generateSecurityWiseHistoricalData?from=12-06-2019&to=18-06-2019&symbol=CHOLAFIN&type=priceVolumeDeliverable&series=ALL"
+  },
+  "series_coverage": {
+    "rows_all_series": 254,
+    "rows_EQ": 253,
+    "rows_excluded_non_EQ": 1,
+    "unique_EQ_dates": 253,
+    "EQ_first_date": "2018-05-21",
+    "EQ_last_date": "2019-05-29"
+  },
+  "identity_and_prices": {
+    "dated_old_isin": "INE121A01016",
+    "economic_split_date": "2019-06-14",
+    "record_date": "2019-06-17",
+    "vendor_new_isin": "INE121A01024",
+    "vendor_old_valid_to": "2019-06-14",
+    "vendor_new_valid_from": "2019-06-17",
+    "official_pre_split_close": 1471.2,
+    "official_split_ex_close": 291.35,
+    "split_scaled_reference": 294.24,
+    "official_ex_open": 296.8,
+    "adjusted_factor_pre": 0.19591220587522779,
+    "adjusted_factor_ex": 0.9795610293761389,
+    "factor_ratio": 5.0,
+    "new_ISIN_trade_effective_date": "unverified; 2019-06-17 is vendor first observation"
+  },
+  "overlap_validation": {
+    "rows": 252,
+    "fields_checked": [
+      "open",
+      "high",
+      "low",
+      "close",
+      "turnover"
+    ],
+    "max_abs_difference": {
+      "open": 0.0,
+      "high": 0.0,
+      "low": 0.0,
+      "close": 0.0,
+      "turnover": 0.0
+    }
+  },
+  "raw_rows_added_dates": [
+    "2018-11-07"
+  ],
+  "factor_anchor_source": {
+    "file": "tejhq/prices_adjusted/nse_2019.parquet",
+    "sha256": "2805245de9cb639813a09927089e18d34141cbd61deb508adf54de5ca8584beb",
+    "anchor_date": "2019-02-07",
+    "anchor_factor": 0.19520779540306246
+  },
+  "dividend_factor_validation": {
+    "2018-07-18": {
+      "amount_per_share": 2.0,
+      "record_date": "not stated in NSE archive response",
+      "prior_close": 1578.85,
+      "expected_factor_change": 1.0012683514601897,
+      "factor_before_event": 0.19496051694671376,
+      "factor_after_event": 0.19520779540306246,
+      "source_file": "nse_cholafin_20180521_20180719.json",
+      "source_sha256": "71693c31f3bbd62e696cdae08257a9baf7d8426487afddcc76a229a9f4b1e7e5"
+    },
+    "2019-02-08": {
+      "amount_per_share": 4.5,
+      "record_date": "2019-02-11",
+      "factor_before_event": 0.19520779540306246,
+      "factor_after_event": 0.19591220587522779,
+      "observed_factor_change": 1.0036085160979913,
+      "expected_factor_change": 1.0036085160979913,
+      "validation": "exact match to observed vendor cumulative factor"
+    }
+  },
+  "supplemented_rows": {
+    "raw": 1,
+    "adjusted": 1,
+    "action_rows_added": 0
+  },
+  "local_outputs": {
+    "work\\data\\public_research\\nse_security_backfill\\cholafin_raw.parquet": "15b14ad1f87a3b471a3f394750749516faf508da64c22efd1de1c3b5aa16eefe",
+    "work\\data\\public_research\\nse_security_backfill\\cholafin_adjusted.parquet": "54eb703c48fc4c70f7fef48107c77f71814b1fc269b599db9fd302ce01f8fe90",
+    "work\\data\\public_research\\nse_security_backfill\\cholafin_actions.parquet": "8a8d4e7bb71d8c5a649b78ad17e0b087efcf6f086ec57dd3b1aa02f480d168cd"
+  },
+  "raw_source_rows_remain_local": true,
+  "limitations": [
+    "Official per-security response omits an ISIN on ordinary price rows; the dated CHOLAFIN symbol history maps the 2018\u20132019-05 EQ rows to INE121A01016.",
+    "NSE's 2018-07-18 embedded notice omits a record date; the ex-date and \u20b92/share term are explicit. The registered 30-calendar-day dividend cash delay remains an assumption.",
+    "No official notice assigning the new ISIN trade-effective date was located; 2019-06-17 is recorded as vendor first observation, not shifted onto the economic ex-date."
+  ]
+}

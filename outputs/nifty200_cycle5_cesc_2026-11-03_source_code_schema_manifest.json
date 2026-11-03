@@ -1,0 +1,33 @@
+{
+  "cycle_id": "2026-11-03-cycle5",
+  "protocol_id": "NIFTY200-v1.10-dated-eligibility-multichild-demergers-and-debenture-bound",
+  "generation_command": "python work/audit_strategy_dependencies.py; python work/advance_nifty200_cycle5.py",
+  "matched_tri_sha256": "6e2ac7e8995c654c0a30f9683438356931c878afc85b8a47ecd1f20a272c495e",
+  "native_accounts": 8,
+  "common_cost_cases": 16,
+  "common_cost_end": "2019-09-30",
+  "dependency_audit_sha256": "d5e8a8554ef7d3c516b0fe5e31df02a7d466d0d2f64f43ef5588a12454a8cac8",
+  "listing_evidence_sha256_local": "7ea9cbbc4393953bdcb48310454d850044133b69790501535cd2cb6240f1bed1",
+  "files_sha256": {
+    "outputs/nifty200_cycle5_cesc_2026-11-03_actual_results.json": "cce077a529902d642498d0887885e64656c260c5f4645259b9809b8fce397733",
+    "outputs/nifty200_cycle5_cesc_2026-11-03_dependency_blockers.json": "764103264a8d2bdd86c3a423d7fd5cd33645caee19ddd262b31b80ec4e3e51b1",
+    "outputs/nifty200_cycle5_cesc_2026-11-03_common_date_cost_comparison.csv": "dcb42fbea6efc9a1cca7a6d3c76abfebdf0f7d044986a74ba28b1857806a9940",
+    "outputs/nifty200_cycle5_cesc_2026-11-03_benchmark_timing.csv": "2feffbab3c466bd5ac38729cd9b9a9827900a39283aa19fe5f553697abf06a6c",
+    "outputs/experiment_register_cycle5_cesc_2026-11-03.csv": "f1f8534efdbe6fd83078982fd6239a87b97da13660c1e328242fcbe3541259cd",
+    "outputs/experiment_register_cumulative_cycle5_cesc_2026-11-03.csv": "f12671d20bd00c7ddabd9465a306e3cc0ee2ae2d80368dda57f8aa9c4b2defe8",
+    "outputs/nifty200_cycle5_cesc_2026-11-03_checkpoint.md": "622c7641c570036ea6ae7a012423da549b13a8619bc3a11b10fbba54ee9c62d0",
+    "outputs/nifty200_cycle5_cesc_2026-11-03_signal_cache_manifest.json": "d7cf15a64026da610a34dd6e6b7b3d741db90f58feaebcf2d8594f06ef6dca2b",
+    "work/advance_nifty200_cycle5.py": "bb7a465986113004dfb7098cd2c7db18374a30c68cdbb27f747b9215c6303ee7",
+    "work/advance_nifty200_cash_prefixes.py": "cd5ecef74c59b9d2bfa5c1cff366bc3ea0cbbcc95c9e34803689ff6c43c51008",
+    "work/audit_strategy_dependencies.py": "784b9333e480c5183fcd70699c2a00db8854fb0bb55359c47fce6bb4207fa53e",
+    "work/upstox_quant.py": "a9309740348dbc38a8276123ee9dd1926a5443a5a4c4d51ceedbb524a0dd0ad8",
+    "outputs/nifty200_benchmark_calendar_reconciliation_2026-11-01.json": "48699d6acee159dbaae4c2b211d2fad0b9de1bdd821ccd4303094a577dbe86bd",
+    "outputs/nifty200_replay_residual_delta_2026-11-01.json": "c2adcc3c5a30d0516cf250e33e977cd26f5037e03d0ad2343081851e1ed1bf07",
+    "outputs/nifty200_source_extraction_coverage_2026-10-31.csv": "839e734d9bc00f3d2bd683a5f786f6f331437f1aa673db643cdeb8622345d6ec",
+    "outputs/nifty200_cholafin_source_extraction_coverage_2026-11-03.json": "e3a0d20ca46418c50668c356d12ccc2c62700830b814845ce186bbd287b458b2",
+    "outputs/nifty200_britannia_debt_distribution_bound_2026-11-03.md": "bbab5d441c562d1b20afb24fb7740bf157a426b0017ef8c0dfeaff669ad4dd3a",
+    "outputs/nifty200_cesc_composite_scheme_2018-10-30.md": "21e20bd792be65cfc1d19e40fe24071df4c1ee11d7e4d7851f915b3a0314bc8c",
+    "outputs/nifty200_gruh_merger_position_mark_review_2026-11-03.md": "a758ef971386eb61f0b769f7e4154b9c45e32d5285763a87c21a17d1fc84023f",
+    "outputs/experiment_register_R1_2026-11-02.csv": "edc5596b09f4568d783f3860563a8399534190008b73fa983cdd01345c71867b"
+  }
+}

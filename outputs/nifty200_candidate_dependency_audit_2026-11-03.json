@@ -1,0 +1,581 @@
+{
+  "protocol_id": "NIFTY200-v1.4-eligibility",
+  "audit_type": "non-P&L candidate dependency audit",
+  "eligibility_status_policy": {
+    "RULE_INELIGIBLE": "Sourced listing date is later than the unchanged full-lookback start and no verified predecessor continuity extends before it; no score or fabricated prices.",
+    "VALID_SCORE": "Required observed scores and material signal inputs are complete and resolved.",
+    "UNKNOWN_DATA": "Eligible or unproven listing history, but a required bar, identity, adjustment, or event input remains unresolved.",
+    "source_first_bar_is_not_listing_evidence": true,
+    "listing_evidence": [
+      {
+        "symbol": "DMART",
+        "isin": "INE192R01011",
+        "listing_date": "2017-03-21",
+        "evidence_type": "NSE listing detail",
+        "source_url": "https://www.nseindia.com/get-quote/equity/DMART/Avenue-Supermarts-Limited",
+        "evidence": "Date of Listing 21-Mar-2017"
+      },
+      {
+        "symbol": "HUDCO",
+        "isin": "INE031A01017",
+        "listing_date": "2017-05-19",
+        "evidence_type": "NSE IPO listing table",
+        "source_url": "https://nsearchives.nseindia.com/content/us/ismr_full2019.pdf",
+        "evidence": "Table 2.6 lists HUDCO on 5/19/2017"
+      },
+      {
+        "symbol": "AUBANK",
+        "isin": "INE949L01017",
+        "listing_date": "2017-07-10",
+        "evidence_type": "NSE listing detail and issuer annual report",
+        "source_url": "https://www.nseindia.com/get-quote/equity/AUBANK/AU-Small-Finance-Bank-Limited",
+        "evidence": "Date of Listing 10-Jul-2017; issuer report confirms dealings effective 10-Jul-2017 at https://www.aubank.in/assets/Digital/pdf/AU%20Bank%20AR%202017-18.pdf"
+      },
+      {
+        "symbol": "ABCAPITAL",
+        "isin": "INE674K01013",
+        "listing_date": "2017-09-01",
+        "evidence_type": "NSE listing detail",
+        "source_url": "https://www.nseindia.com/get-quote/equity/ABCAPITAL/Aditya-Birla-Capital-Limited",
+        "evidence": "Date of Listing 01-Sep-2017; no predecessor continuity is registered for this ISIN."
+      },
+      {
+        "symbol": "GICRE",
+        "isin": "INE481Y01014",
+        "listing_date": "2017-10-25",
+        "evidence_type": "NSE listing detail and NSE Factbook 2018 Table 3-9",
+        "source_url": "https://www.nseindia.com/get-quote/equity/GICRE/General-Insurance-Corporation-of-India",
+        "evidence": "Date of Listing 25-Oct-2017; Factbook 2018 confirms 25-Oct. NSE Market Pulse Oct-2017 Table 6(b) lists 23-Oct; source conflict retained; listing date remains: https://nsearchives.nseindia.com/web/sites/default/files/inline-files/NSE_Market_Pulse_Oct2017.pdf"
+      },
+      {
+        "symbol": "GODREJAGRO",
+        "isin": "INE850D01014",
+        "listing_date": "2017-10-16",
+        "evidence_type": "NSE Factbook 2018 Table 3-9",
+        "source_url": "https://nsearchives.nseindia.com/research/dynaContent/NSE_Factbook-2018_Final.pdf",
+        "evidence": "NSE Factbook Table 3-9 lists 16-Oct-2017. NSE Market Pulse Oct-2017 Table 6(b) lists 12-Oct; retained as a source conflict: https://nsearchives.nseindia.com/web/sites/default/files/inline-files/NSE_Market_Pulse_Oct2017.pdf. No predecessor continuity is registered."
+      },
+      {
+        "symbol": "ICICIGI",
+        "isin": "INE765G01017",
+        "listing_date": "2017-09-27",
+        "evidence_type": "NSE listing detail and NSE Factbook 2018 Table 3-9",
+        "source_url": "https://www.nseindia.com/get-quote/equity/ICICIGI/ICICI-Lombard-General-Insurance-Company-Ltd",
+        "evidence": "Date of Listing 27-Sep-2017; Factbook 2018 confirms 27-Sep. NSE Market Pulse Sep-2017 Table 6(b) lists 23-Sep (Saturday); source conflict retained; listing date remains: https://nsearchives.nseindia.com/web/sites/default/files/inline-files/NSE_Market_Pulse_Sep2017.pdf"
+      },
+      {
+        "symbol": "SBILIFE",
+        "isin": "INE123W01016",
+        "listing_date": "2017-10-03",
+        "evidence_type": "NSE listing detail and issuer FY2022-23 annual report",
+        "source_url": "https://www.nseindia.com/get-quote/equity/SBILIFE/SBI-Life-Insurance-Company-Limited",
+        "evidence": "Date of Listing 03-Oct-2017; issuer filing confirms listing on NSE and BSE on 03-Oct-2017: https://nsearchives.nseindia.com/corporate/SBILIFE_04082023194755_ARN04082023.pdf"
+      },
+      {
+        "symbol": "BANDHANBNK",
+        "isin": "INE545U01014",
+        "listing_date": "2018-03-27",
+        "evidence_type": "NSE listing detail",
+        "source_url": "https://www.nseindia.com/get-quote/equity/BANDHANBNK/Bandhan-Bank-Limited",
+        "evidence": "Date of Listing 27-Mar-2018; no predecessor continuity is registered."
+      },
+      {
+        "symbol": "HDFCLIFE",
+        "isin": "INE795G01014",
+        "listing_date": "2017-11-17",
+        "evidence_type": "NSE listing detail and NSE November 2017 Market Pulse",
+        "source_url": "https://www.nseindia.com/get-quote/equity/HDFCLIFE/HDFC-Life-Insurance-Company-Limited",
+        "evidence": "Date of Listing 17-Nov-2017; Market Pulse corroborates; no predecessor continuity is registered."
+      },
+      {
+        "symbol": "NIACL",
+        "isin": "INE470Y01017",
+        "listing_date": "2017-11-13",
+        "evidence_type": "NSE November 2017 Market Pulse",
+        "source_url": "https://nsearchives.nseindia.com/web/sites/default/files/inline-files/NSE_Market_Pulse_Nov2017.pdf",
+        "evidence": "New Listings table lists 13-Nov-2017; no predecessor continuity is registered."
+      },
+      {
+        "symbol": "VARROC",
+        "isin": "INE665L01035",
+        "listing_date": "2018-07-06",
+        "evidence_type": "NSE IPO listing table",
+        "source_url": "https://archives.nseindia.com/content/equities/IPO_RHP_SWSL.pdf",
+        "evidence": "NSE IPO performance table lists Varroc Engineering on 06-Jul-2018; local first source bar is 06-Jul-2018; no predecessor continuity is registered."
+      },
+      {
+        "symbol": "HDFCAMC",
+        "isin": "INE127D01025",
+        "listing_date": "2018-08-06",
+        "evidence_type": "NSE IPO listing table",
+        "source_url": "https://archives.nseindia.com/content/equities/IPO_RHP_SWSL.pdf",
+        "evidence": "NSE IPO performance table lists HDFC Asset Management Company on 06-Aug-2018; local first source bar is 06-Aug-2018; no predecessor continuity is registered."
+      },
+      {
+        "symbol": "DALBHARAT",
+        "isin": "INE00R701025",
+        "listing_date": "2019-01-25",
+        "evidence_type": "issuer FY2018-19 annual report and NSE scheme memorandum",
+        "source_url": "https://www.bseindia.com/bseplus/AnnualReport/542216/5422160319.pdf",
+        "evidence": "Issuer report says shares issued to erstwhile Dalmia Bharat holders were allotted Jan 9 and trading permission took effect Jan 25, 2019. NSE scheme memorandum: https://nsearchives.nseindia.com/corporates/offerdocument/scheme/IM_OCLINDIA.pdf. TejHQ first bar/history begins Jan 22; retain conflict and use Jan 25 conservatively. OCL predecessor prices are not a verified continuous total-wealth history across the multi-company scheme and capitalization changes, so no predecessor bars are used."
+      }
+    ]
+  },
+  "schedule_sweep_semantics": "Signal dependencies cover all frozen decisions. Name-change opens and conditional holdings are hypothetical availability diagnostics; actual strategy accounts stop at each first unresolved signal before any order.",
+  "evaluation_start": "2018-01-01",
+  "evaluation_cutoff": "2026-10-23",
+  "working_calendar_sessions_with_warmup": 2683,
+  "evaluation_source_calendar_sessions": 2183,
+  "calendar_basis": "TejHQ raw source dates plus 18 primary NSE EOD sessions; not globally certified",
+  "membership_replay_certified": true,
+  "membership_replay_failed_batches": 0,
+  "membership_interval_isins": 376,
+  "loaded_point_in_time_identity_isins": 408,
+  "additional_identity_isins_loaded_for_symbol_and_bridge_closure": 32,
+  "membership_identity_resolution_method_counts": {
+    "date_valid_interval_isin": 56042,
+    "exact_membership_symbol_date_history": 68,
+    "unresolved_date_valid_membership_identity": 32
+  },
+  "membership_identity_fallback_pairs": [
+    {
+      "membership_interval_isin": "INE528G01035",
+      "active_date_valid_isin": "INE528G01027",
+      "symbol": "YESBANK"
+    }
+  ],
+  "manual_verified_identity_bridges": [
+    "VBL",
+    "IRCTC",
+    "IPCALAB",
+    "CESC",
+    "HDFCBANK",
+    "VBL",
+    "HAL",
+    "MAZDOCK",
+    "PERSISTENT",
+    "COFORGE",
+    "NAUKRI",
+    "NBCC",
+    "BRITANNIA",
+    "MCDOWELL-N",
+    "BAJFINANCE",
+    "KOTAKBANK",
+    "BEL",
+    "IGL",
+    "JSWSTEEL",
+    "YESBANK",
+    "CONCOR",
+    "AVANTIFEED",
+    "CHOLAFIN"
+  ],
+  "reviewed_bridge_date_discrepancies": [
+    {
+      "symbol": "IPCALAB",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2022-01-10",
+      "vendor_first_new_observation": "2022-01-11",
+      "discrepancy": "NSE circular says new ID trades from 2022-01-10 but official EOD first reports new ID 2022-01-11"
+    },
+    {
+      "symbol": "CESC",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2021-09-17",
+      "vendor_first_new_observation": "2021-09-20",
+      "discrepancy": "issuer share audit says new ID effective 2021-09-21; official NSE EOD first reports it on 2021-09-20"
+    },
+    {
+      "symbol": "E2E",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2026-06-05",
+      "vendor_first_new_observation": "2026-06-08",
+      "discrepancy": "TejHQ history first sees new ISIN 2026-06-08; official EOD uses new ISIN 2026-06-05"
+    },
+    {
+      "symbol": "HDFCBANK",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2019-09-19",
+      "vendor_first_new_observation": "2019-09-20",
+      "discrepancy": "economic ex-date=2019-09-19; old ID valid through 2019-09-19; successor ID begins 2019-09-20; first successor row=2019-09-20"
+    },
+    {
+      "symbol": "VBL",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2023-06-15",
+      "vendor_first_new_observation": "2023-06-15",
+      "discrepancy": "economic ex-date=2023-06-15; old ID valid through 2023-06-14; successor ID begins 2023-06-15; first successor row=2023-06-15"
+    },
+    {
+      "symbol": "HAL",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2023-09-28",
+      "vendor_first_new_observation": "2023-09-28",
+      "discrepancy": "economic ex-date=2023-09-28; old ID valid through 2023-09-27; successor ID begins 2023-09-28; first successor row=2023-09-28"
+    },
+    {
+      "symbol": "MAZDOCK",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2024-12-27",
+      "vendor_first_new_observation": "2024-12-27",
+      "discrepancy": "economic ex-date=2024-12-27; old ID valid through 2024-12-26; successor ID begins 2024-12-27; first successor row=2024-12-27"
+    },
+    {
+      "symbol": "PERSISTENT",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2024-03-28",
+      "vendor_first_new_observation": "2024-03-28",
+      "discrepancy": "economic ex-date=2024-03-28; old ID valid through 2024-03-27; successor ID begins 2024-03-28; first successor row=2024-03-28"
+    },
+    {
+      "symbol": "COFORGE",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2025-06-04",
+      "vendor_first_new_observation": "2025-06-04",
+      "discrepancy": "economic ex-date=2025-06-04; old ID valid through 2025-06-03; successor ID begins 2025-06-04; first successor row=2025-06-04"
+    },
+    {
+      "symbol": "NAUKRI",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2025-05-07",
+      "vendor_first_new_observation": "2025-05-07",
+      "discrepancy": "economic ex-date=2025-05-07; old ID valid through 2025-05-06; successor ID begins 2025-05-07; first successor row=2025-05-07"
+    },
+    {
+      "symbol": "NBCC",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2018-04-25",
+      "vendor_first_new_observation": "2018-04-26",
+      "discrepancy": "economic ex-date=2018-04-25; old ID valid through 2018-04-25; successor ID begins 2018-04-26; first successor row=2018-04-26"
+    },
+    {
+      "symbol": "BRITANNIA",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2018-11-29",
+      "vendor_first_new_observation": "2018-11-30",
+      "discrepancy": "economic ex-date=2018-11-29; old ID valid through 2018-11-29; successor ID begins 2018-11-30; first successor row=2018-11-30"
+    },
+    {
+      "symbol": "MCDOWELL-N",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2018-06-15",
+      "vendor_first_new_observation": "2018-06-18",
+      "discrepancy": "economic ex-date=2018-06-15; old ID valid through 2018-06-15; successor ID begins 2018-06-18; first successor row=2018-06-18"
+    },
+    {
+      "symbol": "BAJFINANCE",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2025-06-16",
+      "vendor_first_new_observation": "2025-06-16",
+      "discrepancy": "economic ex-date=2025-06-16; old ID valid through 2025-06-13; successor ID begins 2025-06-16; first successor row=2025-06-16"
+    },
+    {
+      "symbol": "KOTAKBANK",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2026-01-14",
+      "vendor_first_new_observation": "2026-01-14",
+      "discrepancy": "economic ex-date=2026-01-14; old ID valid through 2026-01-13; successor ID begins 2026-01-14; first successor row=2026-01-14"
+    },
+    {
+      "symbol": "BEL",
+      "official_trade_isin_effective_date": "2017-03-16",
+      "economic_ex_date": "2017-03-16",
+      "vendor_first_new_observation": "2017-03-17",
+      "discrepancy": "economic ex-date=2017-03-16; circular says new-ISIN trades start 2017-03-16; old vendor ID valid through 2017-03-16; successor history begins 2017-03-17; first successor row=2017-03-17"
+    },
+    {
+      "symbol": "IGL",
+      "official_trade_isin_effective_date": "2017-11-09",
+      "economic_ex_date": "2017-11-09",
+      "vendor_first_new_observation": "2017-11-10",
+      "discrepancy": "economic ex-date=2017-11-09; circular says new-ISIN trades start 2017-11-09; old vendor ID valid through 2017-11-09; successor history begins 2017-11-10; first successor row=2017-11-10"
+    },
+    {
+      "symbol": "JSWSTEEL",
+      "official_trade_isin_effective_date": "2017-01-04",
+      "economic_ex_date": "2017-01-04",
+      "vendor_first_new_observation": "2017-01-05",
+      "discrepancy": "economic ex-date=2017-01-04; circular says new-ISIN trades start 2017-01-04; old vendor ID valid through 2017-01-04; successor history begins 2017-01-05; first successor row=2017-01-05"
+    },
+    {
+      "symbol": "YESBANK",
+      "official_trade_isin_effective_date": "2017-09-21",
+      "economic_ex_date": "2017-09-21",
+      "vendor_first_new_observation": "2017-09-22",
+      "discrepancy": "economic ex-date=2017-09-21; circular says new-ISIN trades start 2017-09-21; old vendor ID valid through 2017-09-21; successor history begins 2017-09-22; first successor row=2017-09-22"
+    },
+    {
+      "symbol": "CONCOR",
+      "official_trade_isin_effective_date": "2018-06-26",
+      "economic_ex_date": "2018-06-26",
+      "vendor_first_new_observation": "2018-06-27",
+      "discrepancy": "Exchange notice makes the new ISIN effective on ex-date; vendor EOD reports old ISIN on ex-date and first reports the new ISIN on 2018-06-27."
+    },
+    {
+      "symbol": "AVANTIFEED",
+      "official_trade_isin_effective_date": "2018-06-26",
+      "economic_ex_date": "2018-06-26",
+      "vendor_first_new_observation": "2018-06-27",
+      "discrepancy": "Exchange circular: new ISIN trade-effective on 2018-06-26; symbol-history predecessor remains valid through 2018-06-26 and first successor row is 2018-06-27. Action feed retains older ISIN INE871C01012; no alias was inferred from that field."
+    },
+    {
+      "symbol": "CHOLAFIN",
+      "official_trade_isin_effective_date": "",
+      "economic_ex_date": "2019-06-14",
+      "vendor_first_new_observation": "2019-06-17",
+      "discrepancy": "NSE fixes the economic ex-date and record date; no NSE notice establishing the new ISIN trade-effective date was located. TejHQ history shows the old ISIN through ex-date and the new ISIN from 2019-06-17."
+    }
+  ],
+  "automatic_identity_bridges_not_independently_reviewed": 25,
+  "configurations": {
+    "NIFTY200-A-M": {
+      "scheduled_decisions": 105,
+      "total_member_signal_rows": 21057,
+      "score_status_counts": {
+        "VALID_SCORE": 20002,
+        "UNKNOWN_DATA": 988,
+        "RULE_INELIGIBLE": 67
+      },
+      "decisions_with_unresolved_member_signals": 105,
+      "conditional_target_name_changes": 868,
+      "conditional_target_expected_close_marks": 43220,
+      "conditional_target_observed_close_marks": 43220,
+      "conditional_target_missing_close_marks": 0,
+      "unreviewed_signal_action_path_incidences": 757,
+      "unreviewed_signal_action_unique_events": 85,
+      "conditional_target_held_action_path_incidences": 257,
+      "conditional_target_held_action_unique_events": 255,
+      "conditional_target_open_missing_count": 0,
+      "conditional_target_open_missing_unique_entity_dates": 0,
+      "conditional_target_close_gap_path_incidences": 0,
+      "conditional_target_close_gap_unique_entity_dates": 0,
+      "unreviewed_identity_signal_path_incidences": 153,
+      "unresolved_adjustment_factor_signal_windows": 31,
+      "ranking_changing_signal_dependencies": 44526,
+      "missing_adjusted_signal_windows": 43600,
+      "promotable": false
+    },
+    "NIFTY200-A-Q": {
+      "scheduled_decisions": 35,
+      "total_member_signal_rows": 7014,
+      "score_status_counts": {
+        "VALID_SCORE": 6649,
+        "UNKNOWN_DATA": 341,
+        "RULE_INELIGIBLE": 24
+      },
+      "decisions_with_unresolved_member_signals": 35,
+      "conditional_target_name_changes": 580,
+      "conditional_target_expected_close_marks": 42460,
+      "conditional_target_observed_close_marks": 42460,
+      "conditional_target_missing_close_marks": 0,
+      "unreviewed_signal_action_path_incidences": 248,
+      "unreviewed_signal_action_unique_events": 77,
+      "conditional_target_held_action_path_incidences": 243,
+      "conditional_target_held_action_unique_events": 242,
+      "conditional_target_open_missing_count": 0,
+      "conditional_target_open_missing_unique_entity_dates": 0,
+      "conditional_target_close_gap_path_incidences": 0,
+      "conditional_target_close_gap_unique_entity_dates": 0,
+      "unreviewed_identity_signal_path_incidences": 53,
+      "unresolved_adjustment_factor_signal_windows": 13,
+      "ranking_changing_signal_dependencies": 15330,
+      "missing_adjusted_signal_windows": 15017,
+      "promotable": false
+    },
+    "NIFTY200-B-M": {
+      "scheduled_decisions": 105,
+      "total_member_signal_rows": 21057,
+      "score_status_counts": {
+        "VALID_SCORE": 19891,
+        "UNKNOWN_DATA": 1083,
+        "RULE_INELIGIBLE": 83
+      },
+      "decisions_with_unresolved_member_signals": 105,
+      "conditional_target_name_changes": 980,
+      "conditional_target_expected_close_marks": 43220,
+      "conditional_target_observed_close_marks": 43220,
+      "conditional_target_missing_close_marks": 0,
+      "unreviewed_signal_action_path_incidences": 826,
+      "unreviewed_signal_action_unique_events": 85,
+      "conditional_target_held_action_path_incidences": 273,
+      "conditional_target_held_action_unique_events": 270,
+      "conditional_target_open_missing_count": 0,
+      "conditional_target_open_missing_unique_entity_dates": 0,
+      "conditional_target_close_gap_path_incidences": 0,
+      "conditional_target_close_gap_unique_entity_dates": 0,
+      "unreviewed_identity_signal_path_incidences": 167,
+      "unresolved_adjustment_factor_signal_windows": 33,
+      "ranking_changing_signal_dependencies": 54174,
+      "missing_adjusted_signal_windows": 53163,
+      "promotable": false
+    },
+    "NIFTY200-B-Q": {
+      "scheduled_decisions": 35,
+      "total_member_signal_rows": 7014,
+      "score_status_counts": {
+        "VALID_SCORE": 6620,
+        "UNKNOWN_DATA": 368,
+        "RULE_INELIGIBLE": 26
+      },
+      "decisions_with_unresolved_member_signals": 35,
+      "conditional_target_name_changes": 662,
+      "conditional_target_expected_close_marks": 42460,
+      "conditional_target_observed_close_marks": 42460,
+      "conditional_target_missing_close_marks": 0,
+      "unreviewed_signal_action_path_incidences": 273,
+      "unreviewed_signal_action_unique_events": 77,
+      "conditional_target_held_action_path_incidences": 257,
+      "conditional_target_held_action_unique_events": 256,
+      "conditional_target_open_missing_count": 0,
+      "conditional_target_open_missing_unique_entity_dates": 0,
+      "conditional_target_close_gap_path_incidences": 0,
+      "conditional_target_close_gap_unique_entity_dates": 0,
+      "unreviewed_identity_signal_path_incidences": 58,
+      "unresolved_adjustment_factor_signal_windows": 13,
+      "ranking_changing_signal_dependencies": 18713,
+      "missing_adjusted_signal_windows": 18370,
+      "promotable": false
+    }
+  },
+  "dependency_rows": 133805,
+  "dependency_path_incidence_counts": {
+    "signal_window": 130150,
+    "held_entitlement_dividend": 987,
+    "signal_rights": 610,
+    "signal_dividend": 459,
+    "signal_identity_bridge": 431,
+    "signal_other": 407,
+    "signal_split": 269,
+    "signal_demerger": 201,
+    "signal_bonus": 126,
+    "signal_adjustment_factor": 90,
+    "held_entitlement_bonus": 35,
+    "signal_identity": 32,
+    "held_entitlement_other": 4,
+    "held_entitlement_demerger": 4
+  },
+  "unique_source_entity_date_type_counts": {
+    "signal_rights": 21,
+    "signal_other": 16,
+    "signal_dividend": 16,
+    "signal_bonus": 4,
+    "signal_adjustment_factor": 5,
+    "signal_window": 10679,
+    "signal_demerger": 10,
+    "signal_identity_bridge": 16,
+    "signal_split": 10,
+    "signal_identity": 8,
+    "held_entitlement_dividend": 379,
+    "held_entitlement_other": 1,
+    "held_entitlement_bonus": 13,
+    "held_entitlement_demerger": 1
+  },
+  "routine_action_factor_validation": {
+    "dividend_events_checked": 14202,
+    "dividend_events_supported": 4069,
+    "dividend_events_unresolved": 10133,
+    "split_events_checked": 444,
+    "split_events_supported": 30,
+    "split_events_unresolved": 414,
+    "bonus_events_checked": 416,
+    "bonus_events_supported": 115,
+    "bonus_events_unresolved": 301,
+    "supported_with_stale_vendor_isin": 1159
+  },
+  "action_event_status_counts": {
+    "dividend": {
+      "supported_under_documented_source_assumptions": 4069,
+      "requires_exceptional_review": 10133,
+      "demonstrably_invalid": 0
+    },
+    "split": {
+      "supported_under_documented_source_assumptions": 30,
+      "requires_exceptional_review": 414,
+      "demonstrably_invalid": 0
+    },
+    "bonus": {
+      "supported_under_documented_source_assumptions": 115,
+      "requires_exceptional_review": 301,
+      "demonstrably_invalid": 0
+    }
+  },
+  "action_identity_resolution_counts": {
+    "date_valid_vendor_isin": 18440,
+    "exact_vendor_symbol_date_history": 4275,
+    "unresolved": 791,
+    "exact_reviewed_action_bridge": 15
+  },
+  "date_valid_action_symbol_corrections": 1240,
+  "date_valid_action_symbol_correction_examples": [
+    {
+      "vendor_symbol": "3PLAND",
+      "date_valid_symbol": "PDUMJEIND",
+      "ex_date": "2016-02-11",
+      "vendor_isin": "INE105C01023",
+      "type": "other"
+    },
+    {
+      "vendor_symbol": "3PLAND",
+      "date_valid_symbol": "PDUMJEIND",
+      "ex_date": "2016-09-09",
+      "vendor_isin": "INE105C01023",
+      "type": "agm"
+    },
+    {
+      "vendor_symbol": "63MOONS",
+      "date_valid_symbol": "FINANTECH",
+      "ex_date": "2016-09-19",
+      "vendor_isin": "INE111B01023",
+      "type": "agm"
+    },
+    {
+      "vendor_symbol": "ABREL",
+      "date_valid_symbol": "CENTURYTEX",
+      "ex_date": "2016-07-18",
+      "vendor_isin": "INE055A01016",
+      "type": "dividend"
+    },
+    {
+      "vendor_symbol": "ACLGATI",
+      "date_valid_symbol": "GATI",
+      "ex_date": "2016-07-26",
+      "vendor_isin": "INE152B01027",
+      "type": "dividend"
+    },
+    {
+      "vendor_symbol": "ADANIENSOL",
+      "date_valid_symbol": "ADANITRANS",
+      "ex_date": "2016-08-01",
+      "vendor_isin": "INE931S01010",
+      "type": "agm"
+    },
+    {
+      "vendor_symbol": "ADOR",
+      "date_valid_symbol": "ADORWELD",
+      "ex_date": "2016-07-21",
+      "vendor_isin": "INE045A01017",
+      "type": "dividend"
+    },
+    {
+      "vendor_symbol": "ADROITINFO",
+      "date_valid_symbol": "SPHEREGSL",
+      "ex_date": "2016-09-21",
+      "vendor_isin": "INE737B01033",
+      "type": "agm"
+    }
+  ],
+  "factor_validation_scope": "Counts cover formula-checked NSE dividend/split/bonus groups with a resolved event identity. Unsupported groups require exceptional review, are not presumed invalid, and are not NIFTY200 blocker totals; unresolved action identities are tracked separately.",
+  "conditional_target_close_gap_unique_entity_dates": 0,
+  "conditional_target_open_gap_unique_entity_dates": 0,
+  "performance_gate": "NOT RUN; this audit computes no NAV, return, CAGR, fees, or strategy ranking",
+  "strategy_study_authorized": false,
+  "signal_cache_manifest": {
+    "schema_version": "nifty200-signal-dependencies-v2",
+    "audit_code_sha256": "784b9333e480c5183fcd70699c2a00db8854fb0bb55359c47fce6bb4207fa53e",
+    "output_sha256": {
+      "signal_dependencies.csv": "298310e69883e99b80839d2651c52dbf723782cd03b466486ee70878ab6f2a10",
+      "unresolved_dependencies.csv": "5d9d90372e0e66ac5b1674b317aec841d40f27cbad0e2399c505ad728f619a61"
+    },
+    "source_file_count": 53,
+    "generation_command": "python work/audit_strategy_dependencies.py"
+  }
+}

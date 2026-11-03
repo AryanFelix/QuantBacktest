@@ -23,7 +23,16 @@ ADJ_DIR = PUBLIC / "tejhq" / "prices_adjusted"
 ACTION_DIR = PUBLIC / "tejhq" / "actions"
 BACKFILL = PUBLIC / "nse_calendar_backfill" / "nse_calendar_backfill.parquet"
 ADJ_BACKFILL = PUBLIC / "nse_calendar_backfill" / "nse_calendar_backfill_adjusted.parquet"
-LISTING_EVIDENCE = ROOT / "outputs" / "nifty200_listing_evidence_2026-11-02.csv"
+SECURITY_RAW = PUBLIC / "nse_security_backfill" / "cholafin_raw.parquet"
+SECURITY_ADJ = PUBLIC / "nse_security_backfill" / "cholafin_adjusted.parquet"
+SECURITY_ACTIONS = PUBLIC / "nse_security_backfill" / "cholafin_actions.parquet"
+SECURITY_COVERAGE = ROOT / "outputs" / "nifty200_cholafin_source_extraction_coverage_2026-11-03.json"
+SECURITY_SOURCE_FILES = [PUBLIC / name for name in (
+    "nse_cholafin_20180521_20180719.json", "nse_cholafin_20180720_20180917.json",
+    "nse_cholafin_20180918_20181116.json", "nse_cholafin_20181117_20190115.json",
+    "nse_cholafin_20190116_20190316.json", "nse_cholafin_20190317_20190515.json",
+    "nse_cholafin_20190516_20190529.json", "nse_cholafin_20190612_20190618.json")]
+LISTING_EVIDENCE = ROOT / "outputs" / "nifty200_listing_evidence_2026-11-03.csv"
 INTERVALS = PUBLIC / "membership" / "membership_intervals.csv"
 REPLAY_BRIDGES = PUBLIC / "membership" / "identity_bridges.csv"
 REVIEWED_BRIDGES = PUBLIC / "isin_bridges" / "reviewed_identity_bridges.csv"
@@ -35,12 +44,14 @@ SIGNAL_FIELDS = ["candidate_id", "signal_date", "symbol", "isin", "membership_in
                  "unresolved_reason", "unresolved_dependency_keys"]
 START, CUTOFF = pd.Timestamp("2018-01-01"), pd.Timestamp("2026-10-23")
 RELEVANT_ACTIONS = {"split", "bonus", "dividend", "rights", "merger", "demerger", "spinoff", "other"}
-DETACHED_CLAIM_CHILD_ISINS = {"INE364U01010"}
+DETACHED_CLAIM_CHILD_ISINS = {"INE364U01010", "INE674K01013", "INE546Y01022",
+                              "INE020801028", "INE425Y01011"}
 REVIEWED_ACTION_CASH = {
     ("ENGINERSIN", "INE510A01010", "2017-09-11", "dividend"): 0.50,
 }
 REVIEWED_DIVIDEND_NOTICE_GROUPS = {
     ("SRF", "INE647A01010", "2017-08-16", "2017-08-18", "dividend"): 6.0,
+    ("COLPAL", "INE259A01022", "2019-04-05", "2019-04-08", "dividend"): 7.0,
 }
 
 
@@ -58,7 +69,8 @@ def dependency_key(row: dict) -> str:
 
 
 def source_fingerprints() -> list[dict[str, str | int]]:
-    explicit = [BACKFILL, ADJ_BACKFILL, INTERVALS, REPLAY_BRIDGES, REVIEWED_BRIDGES,
+    explicit = [BACKFILL, ADJ_BACKFILL, SECURITY_RAW, SECURITY_ADJ, SECURITY_ACTIONS,
+                SECURITY_COVERAGE, *SECURITY_SOURCE_FILES, INTERVALS, REPLAY_BRIDGES, REVIEWED_BRIDGES,
                 LISTING_EVIDENCE, PUBLIC / "tejhq" / "symbol_history" / "nse.parquet",
                 PUBLIC / "membership" / "operative_events.csv"]
     files = set(path for folder in (RAW_DIR, ADJ_DIR, ACTION_DIR)
@@ -182,7 +194,8 @@ def normalize_action_records(actions: pd.DataFrame) -> pd.DataFrame:
         amount, _ = parse_dividend(str(row.get("raw_subject", "")), None)
         if pd.isna(row.get("cash_amount")) and amount is not None:
             actions.at[idx, "cash_amount"] = amount
-        if row["type"] == "other" and amount is not None and str(row.get("raw_subject", "")).lower().startswith("int div"):
+        subject = str(row.get("raw_subject", "")).strip().lower()
+        if row["type"] == "other" and amount is not None and subject.startswith(("int div", "interim div", "final div")):
             actions.at[idx, "type"] = "dividend"
     for (symbol, isin, ex_date, kind), amount in REVIEWED_ACTION_CASH.items():
         mask = (actions["symbol"].eq(symbol) & actions["isin"].eq(isin)
@@ -214,6 +227,15 @@ def routine_share_factor_check(kind: str, term_rows: pd.DataFrame, previous_clos
         if not np.isfinite(values).all() or min(values) <= 0:
             return False, "missing_or_invalid_split_face_value_terms"
         expected = float(values[0] / values[1])
+        if "raw_subject" in term_rows:
+            subjects = term_rows["raw_subject"].dropna().astype(str).unique()
+            if len(subjects) != 1:
+                return False, "conflicting_share_conversion_subjects"
+            if "bonus" in subjects[0].lower().split():
+                bonus_values = pd.to_numeric(pd.Series([term["ratio_num"], term["ratio_den"]]), errors="coerce").to_numpy()
+                if not np.isfinite(bonus_values).all() or min(bonus_values) <= 0:
+                    return False, "missing_or_invalid_combined_bonus_ratio_terms"
+                expected *= 1 + float(bonus_values[0] / bonus_values[1])
     elif kind == "bonus":
         values = pd.to_numeric(pd.Series([term["ratio_num"], term["ratio_den"]]), errors="coerce").to_numpy()
         if not np.isfinite(values).all() or min(values) <= 0:
@@ -441,6 +463,9 @@ def load_data() -> tuple[list[pd.Timestamp], pd.DataFrame, pd.DataFrame, pd.Data
     all_dates = {pd.Timestamp(x) for x in raw_ds.to_table(columns=["date"])["date"].to_pylist() if x}
     backfill_dates = pd.to_datetime(pd.read_parquet(BACKFILL, columns=["date"])["date"]).dropna()
     all_dates.update(pd.Timestamp(x) for x in backfill_dates)
+    if SECURITY_RAW.is_file():
+        all_dates.update(pd.Timestamp(x) for x in
+                         pd.to_datetime(pd.read_parquet(SECURITY_RAW, columns=["date"])["date"]).dropna())
     sessions = sorted(pd.Timestamp(x).normalize() for x in all_dates)
 
     raw = raw_ds.to_table(
@@ -452,6 +477,12 @@ def load_data() -> tuple[list[pd.Timestamp], pd.DataFrame, pd.DataFrame, pd.Data
     supplement = supplement[supplement["isin"].astype(str).str.upper().isin(data_isins)].copy()
     supplement["source"] = "NSE official EOD backfill"
     raw = pd.concat([raw, supplement[raw.columns]], ignore_index=True)
+    if SECURITY_RAW.is_file():
+        security_supplement = pd.read_parquet(SECURITY_RAW)
+        security_supplement = security_supplement[
+            security_supplement["isin"].astype(str).str.upper().isin(data_isins)].copy()
+        security_supplement["source"] = "NSE official security-wise EOD archive"
+        raw = pd.concat([raw, security_supplement[raw.columns]], ignore_index=True)
     raw["date"] = pd.to_datetime(raw["date"]).dt.normalize()
     raw["isin"] = raw["isin"].astype(str).str.upper()
     raw["symbol"] = raw["symbol"].astype(str).str.upper()
@@ -468,6 +499,10 @@ def load_data() -> tuple[list[pd.Timestamp], pd.DataFrame, pd.DataFrame, pd.Data
     adj_supplement = pd.read_parquet(ADJ_BACKFILL, columns=["date", "isin", "series", "adj_close", "adj_factor_cumulative", "factor_status"])
     adj_supplement = adj_supplement[adj_supplement["isin"].astype(str).str.upper().isin(data_isins)].copy()
     adj = pd.concat([adj, adj_supplement], ignore_index=True)
+    if SECURITY_ADJ.is_file():
+        security_adj = pd.read_parquet(SECURITY_ADJ)
+        security_adj = security_adj[security_adj["isin"].astype(str).str.upper().isin(data_isins)].copy()
+        adj = pd.concat([adj, security_adj[adj.columns]], ignore_index=True)
     adj["date"] = pd.to_datetime(adj["date"]).dt.normalize()
     adj["isin"] = adj["isin"].astype(str).str.upper()
     adj = adj.drop_duplicates(["date", "isin", "series"])
@@ -479,7 +514,10 @@ def load_data() -> tuple[list[pd.Timestamp], pd.DataFrame, pd.DataFrame, pd.Data
     data = data.merge(duplicate, on=["date", "canonical"], validate="many_to_one")
     data.loc[data["identity_rows"].gt(1), ["open", "close", "adj_close"]] = np.nan
 
-    actions = pd.concat([pd.read_parquet(p) for p in sorted(ACTION_DIR.glob("nse_*.parquet"))], ignore_index=True)
+    action_frames = [pd.read_parquet(p) for p in sorted(ACTION_DIR.glob("nse_*.parquet"))]
+    if SECURITY_ACTIONS.is_file():
+        action_frames.append(pd.read_parquet(SECURITY_ACTIONS))
+    actions = pd.concat(action_frames, ignore_index=True)
     actions["ex_date"] = pd.to_datetime(actions["ex_date"], errors="coerce").dt.normalize()
     actions["symbol"] = actions["symbol"].astype(str).str.upper()
     actions["isin"] = actions["isin"].astype(str).str.upper()
@@ -1025,7 +1063,7 @@ def audit() -> dict:
     result["signal_cache_manifest"] = {"schema_version": SIGNAL_SCHEMA_VERSION,
         "audit_code_sha256": cache_manifest["audit_code_sha256"], "output_sha256": output_hashes,
         "source_file_count": len(cache_manifest["sources"]), "generation_command": cache_manifest["generation_command"]}
-    (ROOT / "outputs" / "nifty200_candidate_dependency_audit_2026-11-02.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+    (ROOT / "outputs" / "nifty200_candidate_dependency_audit_2026-11-03.json").write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
     print(json.dumps(result, indent=2))
     return result
 
@@ -1050,6 +1088,12 @@ def self_check() -> None:
                                    required_start, True, False)[0] == "UNKNOWN_DATA"
     assert score_status_for_window(0.2, "", pd.Timestamp("2017-03-21"),
                                    required_start, True, True)[0] == "VALID_SCORE"
+    for listing_date in ("2017-09-01", "2017-10-25", "2017-10-16", "2017-09-27", "2017-10-03",
+                         "2017-11-13", "2017-11-17", "2018-03-27"):
+        assert score_status_for_window(None, "missing_or_invalid_adjusted_close", pd.Timestamp(listing_date),
+                                       required_start, True, True)[0] == "RULE_INELIGIBLE"
+    assert score_status_for_window(None, "missing_or_invalid_adjusted_close", pd.Timestamp("2019-01-25"),
+                                   pd.Timestamp("2018-09-18"), True, True)[0] == "RULE_INELIGIBLE"
     assert routine_dividend_factor_check([12.0], 1602.4, 0.871970, 0.878549)[0]
     assert routine_dividend_factor_check([2.0, 3.0], 100.0, 1.0, 100 / 95)[0]
     assert not routine_dividend_factor_check([12.0], 100.0, 1.0, 1.0)[0]
@@ -1075,12 +1119,75 @@ def self_check() -> None:
          "record_date": "2017-12-19", "type": "dividend", "ratio_num": np.nan,
          "ratio_den": np.nan, "cash_amount": 2.0, "face_value_from": np.nan,
          "face_value_to": np.nan, "raw_subject": "Special Dividend - Rs 2/- Per Share"},
+        {"symbol": "HINDPETRO", "isin": "INE094A01015", "ex_date": pd.Timestamp("2018-02-28"),
+         "record_date": None, "type": "dividend", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": np.nan, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Interim Dividend - 14.50 Per Share"},
+        {"symbol": "HCLTECH", "isin": "INE860A01027", "ex_date": pd.Timestamp("2018-08-02"),
+         "record_date": None, "type": "other", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": np.nan, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Int Div- 2 Per Share (Purpose Revised)"},
+        {"symbol": "TCS", "isin": "INE467B01029", "ex_date": pd.Timestamp("2018-10-23"),
+         "record_date": "2018-10-24", "type": "other", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": np.nan, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Int Div Rs 4 Per Sh"},
+        {"symbol": "MINDTREE", "isin": "INE018I01017", "ex_date": pd.Timestamp("2018-10-25"),
+         "record_date": "2018-10-26", "type": "other", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": np.nan, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Interim Div - Rs 3 Per Share"},
+        {"symbol": "VAKRANGEE", "isin": "INE051B01021", "ex_date": pd.Timestamp("2018-09-19"),
+         "record_date": None, "type": "dividend", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": 0.25, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Dividend Re 0.25 Per Share"},
+        {"symbol": "NHPC", "isin": "INE848E01016", "ex_date": pd.Timestamp("2019-02-18"),
+         "record_date": "2019-02-20", "type": "other", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": np.nan, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Int Div - Rs 0.71 Per Sh"},
+        {"symbol": "COLPAL", "isin": "INE259A01022", "ex_date": pd.Timestamp("2019-04-05"),
+         "record_date": "2019-04-08", "type": "dividend", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": 7.0, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Interim Dividend - Rs 7 Per Share"},
+        {"symbol": "COLPAL", "isin": "INE259A01022", "ex_date": pd.Timestamp("2019-04-05"),
+         "record_date": "2019-04-08", "type": "dividend", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": np.nan, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Interim Dividend"},
+        {"symbol": "VAKRANGEE", "isin": "INE051B01021", "ex_date": pd.Timestamp("2018-09-19"),
+         "record_date": None, "type": "dividend", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": 0.25, "face_value_from": np.nan, "face_value_to": np.nan,
+         "raw_subject": "Dividend Re 0.25 Per Share"},
+        {"symbol": "CONCOR", "isin": "INE111A01017", "ex_date": pd.Timestamp("2018-06-26"),
+         "record_date": "2018-06-27", "type": "split", "ratio_num": np.nan, "ratio_den": np.nan,
+         "cash_amount": np.nan, "face_value_from": 10.0, "face_value_to": 5.0,
+         "raw_subject": "Face Value Split (Sub-Division) - From Rs 10/- Per Share To Rs 5/- Per Share"},
     ]))
     assert len(reviewed_actions.loc[reviewed_actions["symbol"].eq("SRF")]) == 1
     assert reviewed_actions.loc[reviewed_actions["symbol"].eq("SRF"), "cash_amount"].iloc[0] == 6.0
     assert reviewed_actions.loc[reviewed_actions["symbol"].eq("ENGINERSIN"), "cash_amount"].iloc[0] == 0.5
-    colpal = reviewed_actions.loc[reviewed_actions["symbol"].eq("COLPAL")]
+    colpal = reviewed_actions.loc[reviewed_actions["symbol"].eq("COLPAL")
+                                  & reviewed_actions["ex_date"].eq(pd.Timestamp("2017-12-18"))]
     assert len(colpal) == 2 and colpal["cash_amount"].sum() == 6.0 and colpal["type"].eq("dividend").all()
+    hpcl = reviewed_actions.loc[reviewed_actions["symbol"].eq("HINDPETRO")]
+    assert len(hpcl) == 1 and hpcl["cash_amount"].iloc[0] == 14.5
+    hcl = reviewed_actions.loc[reviewed_actions["symbol"].eq("HCLTECH")]
+    assert len(hcl) == 1 and hcl["type"].iloc[0] == "dividend" and hcl["cash_amount"].iloc[0] == 2.0
+    tcs = reviewed_actions.loc[reviewed_actions["symbol"].eq("TCS")]
+    assert len(tcs) == 1 and tcs["type"].iloc[0] == "dividend" and tcs["cash_amount"].iloc[0] == 4.0
+    mindtree = reviewed_actions.loc[reviewed_actions["symbol"].eq("MINDTREE")]
+    assert len(mindtree) == 1 and mindtree["type"].iloc[0] == "dividend" and mindtree["cash_amount"].iloc[0] == 3.0
+    assert not routine_dividend_factor_check([3.0], 805.5, 0.9302495031, 0.9302495031)[0]
+    vakrangee = reviewed_actions.loc[reviewed_actions["symbol"].eq("VAKRANGEE")]
+    assert len(vakrangee) == 1 and vakrangee["type"].iloc[0] == "dividend" and vakrangee["cash_amount"].iloc[0] == 0.25
+    assert not routine_dividend_factor_check([0.25], 36.8, 0.960483, 0.973667)[0]
+    assert not routine_dividend_factor_check([4.0], 1903.0, 0.811582, 0.811582)[0]
+    nhpc = reviewed_actions.loc[reviewed_actions["symbol"].eq("NHPC")]
+    assert len(nhpc) == 1 and nhpc["type"].iloc[0] == "dividend" and nhpc["cash_amount"].iloc[0] == 0.71
+    colpal_2019 = reviewed_actions.loc[reviewed_actions["symbol"].eq("COLPAL")
+                                       & reviewed_actions["ex_date"].eq(pd.Timestamp("2019-04-05"))]
+    assert len(colpal_2019) == 1 and colpal_2019["cash_amount"].iloc[0] == 7.0
+    assert not routine_dividend_factor_check([0.71], 23.8, 0.719371, 0.719371)[0]
+    assert routine_dividend_factor_check([2.0], 100.0, 1.0, 100 / 98)[0]
+    concor = reviewed_actions.loc[reviewed_actions["symbol"].eq("CONCOR")]
+    assert len(concor) == 1 and pd.isna(concor["cash_amount"].iloc[0])
     split_terms = pd.DataFrame([{"ratio_num": np.nan, "ratio_den": np.nan,
                                  "face_value_from": 2.0, "face_value_to": 1.0}])
     bonus_terms = pd.DataFrame([{"ratio_num": 1.0, "ratio_den": 1.0,
@@ -1088,6 +1195,10 @@ def self_check() -> None:
     assert routine_share_factor_check("split", split_terms, 100.0, 49.0, 1.0, 2.0)[0]
     assert routine_share_factor_check("bonus", bonus_terms, 100.0, 51.0, 1.0, 2.0)[0]
     assert not routine_share_factor_check("split", split_terms, 100.0, 49.0, 1.0, 1.0)[0]
+    combined = pd.DataFrame([{"ratio_num": 1.0, "ratio_den": 2.0,
+                              "face_value_from": 2.0, "face_value_to": 1.0,
+                              "raw_subject": "Bonus 1:2/Face Value Split"}])
+    assert routine_share_factor_check("split", combined, 300.0, 100.0, 1.0, 3.0)[0]
     broken = prices.copy()
     broken[30] = np.nan
     assert score_at(broken, 280, "B")[1] == "missing_or_invalid_adjusted_close"

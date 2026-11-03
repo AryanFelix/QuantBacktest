@@ -439,6 +439,7 @@ def _simulate(
     cash_distributions: list[tuple[str, date, float]] | None = None,
     cash_distribution_payment_dates: dict[tuple[str, date], date] | None = None,
     detached_claim_events: list[dict] | None = None,
+    share_conversion_events: list[dict] | None = None,
     fee_product_by_symbol: dict[str, str] | None = None,
     cash_yield_series: pd.Series | None = None,
     liquidate_terminal: bool = True,
@@ -458,8 +459,42 @@ def _simulate(
         if payment_date is not None and payment_date < ex_date:
             raise ValueError("cash distribution payment date cannot precede its ex-date")
         distribution_by_date[ex_date].append((symbol, amount_per_share, payment_date))
+    conversion_by_date = defaultdict(list)
+    for event in share_conversion_events or []:
+        symbol = str(event["symbol"])
+        kind = str(event["kind"]).lower()
+        ex_date = event["ex_date"]
+        ratio = Decimal(str(event["share_multiplier"]))
+        credit_date, tradable_date = event.get("credit_date"), event.get("tradable_date")
+        if (symbol not in names or kind not in {"split", "bonus", "split_bonus"} or ex_date not in available_dates
+                or not ratio.is_finite() or ratio <= 1):
+            raise ValueError("share conversions require a known symbol, split/bonus type, session ex-date, and multiplier above one")
+        split_ratio = Decimal(str(event.get("split_multiplier", ratio if kind == "split" else 1)))
+        bonus_per_split_share = Decimal(str(event.get("bonus_per_split_share", 0)))
+        if kind == "split" and (credit_date not in {None, ex_date} or tradable_date not in {None, ex_date}):
+            raise ValueError("split shares must use ex-date credit and trading units")
+        if kind == "split_bonus" and (not split_ratio.is_finite() or split_ratio <= 1
+                or not bonus_per_split_share.is_finite() or bonus_per_split_share <= 0
+                or split_ratio * (1 + bonus_per_split_share) != ratio):
+            raise ValueError("combined conversions need validated split and post-split bonus terms matching the total multiplier")
+        if credit_date is not None and credit_date < ex_date:
+            raise ValueError("share conversion credit date cannot precede its ex-date")
+        if tradable_date is not None and tradable_date < ex_date:
+            raise ValueError("share conversion tradable date cannot precede its ex-date")
+        if credit_date is not None and tradable_date is not None and tradable_date < credit_date:
+            raise ValueError("share conversion cannot trade before it is credited")
+        if any(day is not None and day <= closes.index[-1].date() and day not in available_dates
+               for day in (credit_date, tradable_date)):
+            raise ValueError("share conversion credit/trading date is not a cached source session")
+        conversion_by_date[ex_date].append({**event, "symbol": symbol, "kind": kind,
+                                            "ratio_decimal": ratio, "split_ratio_decimal": split_ratio,
+                                            "bonus_per_split_share_decimal": bonus_per_split_share,
+                                            "credit_date": credit_date,
+                                            "tradable_date": tradable_date})
     claim_states = []
     claim_records = []
+    pending_share_lots = []
+    conversion_records = []
     for event in detached_claim_events or []:
         parent, child = event["parent_symbol"], event["child_symbol"]
         ratio = Decimal(str(event["ratio"]))
@@ -512,6 +547,7 @@ def _simulate(
     pending_distributions = []
     cash_receivable_balance = 0.0
     cash_receivable_balances = []
+    pending_share_values = []
     locked_claim_balances = []
     daily_distribution_entitlements = []
     daily_distribution_payments = []
@@ -524,6 +560,58 @@ def _simulate(
         open_prices = open_marks.loc[timestamp]
         close_prices = close_marks.loc[timestamp]
         executable_prices = opens.loc[timestamp]
+        remaining_lots = []
+        for lot in pending_share_lots:
+            if (lot["credit_date"] is not None and not lot["demat_credit_recorded"]
+                    and lot["credit_date"] <= timestamp.date()):
+                record = conversion_records[lot["record_index"]]
+                record["demat_credited_units_exact"] = str(lot["units"])
+                record["demat_credit_observed_date"] = timestamp.date().isoformat()
+                lot["demat_credit_recorded"] = True
+            if lot["tradable_date"] is not None and lot["tradable_date"] <= timestamp.date():
+                whole_units = int(lot["units"].to_integral_value(rounding=ROUND_FLOOR))
+                quantity[lot["symbol"]] += whole_units
+                lot["units"] -= whole_units
+                record = conversion_records[lot["record_index"]]
+                record["tradable_units_credited"] = record.get("tradable_units_credited", 0) + whole_units
+                record["tradable_observed_date"] = timestamp.date().isoformat()
+            if lot["units"] > 0:
+                remaining_lots.append(lot)
+        pending_share_lots = remaining_lots
+        for event in conversion_by_date.get(timestamp.date(), []):
+            name, ratio, kind = event["symbol"], event["ratio_decimal"], event["kind"]
+            pending_before = sum((lot["units"] for lot in pending_share_lots if lot["symbol"] == name), Decimal("0"))
+            owned_before = Decimal(quantity[name]) + pending_before
+            record = {key: (value.isoformat() if isinstance(value, date) else value)
+                      for key, value in event.items()
+                      if key not in {"ratio_decimal", "split_ratio_decimal", "bonus_per_split_share_decimal"}}
+            record.update({"ex_date": timestamp.date().isoformat(), "owned_units_before_ex_open": str(owned_before),
+                           "share_multiplier": str(ratio), "tradable_units_credited": 0})
+            if kind in {"split", "split_bonus"}:
+                split_ratio = event["split_ratio_decimal"]
+                exact_new_units = Decimal(quantity[name]) * split_ratio
+                quantity[name] = int(exact_new_units.to_integral_value(rounding=ROUND_FLOOR))
+                fractional = exact_new_units - quantity[name]
+                for lot in pending_share_lots:
+                    if lot["symbol"] == name:
+                        lot["units"] *= split_ratio
+                if fractional:
+                    record["fractional_units_exact"] = str(fractional)
+                    pending_share_lots.append({"symbol": name, "units": fractional, "credit_date": None,
+                                               "tradable_date": None, "demat_credit_recorded": False,
+                                               "record_index": len(conversion_records)})
+            if kind in {"bonus", "split_bonus"}:
+                entitlement = (owned_before * (ratio - Decimal("1")) if kind == "bonus" else
+                               owned_before * event["split_ratio_decimal"] * event["bonus_per_split_share_decimal"])
+                record.update({"entitlement_units_exact": str(entitlement),
+                               "availability_status": "pending_until_source_confirmed_trading_admission" if event.get("tradable_date") is None else "pending_until_tradable_date"})
+                if entitlement:
+                    pending_share_lots.append({"symbol": name, "units": entitlement,
+                                               "credit_date": event.get("credit_date"),
+                                               "tradable_date": event.get("tradable_date"),
+                                               "demat_credit_recorded": False,
+                                               "record_index": len(conversion_records)})
+            conversion_records.append(record)
         cash_yield = 0.0
         if cash_yields is not None and step:
             prior_timestamp = run_dates[step - 1]
@@ -603,6 +691,13 @@ def _simulate(
             elif total_weight > max_exposure:
                 weights = weights * (max_exposure / total_weight)
             reference_prices = close_marks.iloc[signal_i]
+            for event in conversion_by_date.get(timestamp.date(), []):
+                reference_prices[event["symbol"]] /= float(event["ratio_decimal"])
+            economic_quantity = {
+                name: Decimal(quantity[name]) + sum(
+                    (lot["units"] for lot in pending_share_lots if lot["symbol"] == name), Decimal("0"))
+                for name in names
+            }
             desired = {
                 name: int(math.floor(prior_close_nav * float(weights[name]) / float(reference_prices[name])))
                 if pd.notna(reference_prices[name]) and float(reference_prices[name]) > 0 else 0
@@ -611,7 +706,7 @@ def _simulate(
             for name in names:
                 if pd.isna(executable_prices[name]):
                     continue
-                amount = quantity[name] - desired[name]
+                amount = min(quantity[name], max(0, int((economic_quantity[name] - desired[name]).to_integral_value(rounding=ROUND_FLOOR))))
                 if amount <= 0:
                     continue
                 fill = float(open_prices[name]) * (1 - slip)
@@ -626,7 +721,7 @@ def _simulate(
             for name in names:
                 if pd.isna(executable_prices[name]):
                     continue
-                amount = desired[name] - quantity[name]
+                amount = max(0, int((Decimal(desired[name]) - economic_quantity[name]).to_integral_value(rounding=ROUND_FLOOR)))
                 if amount <= 0:
                     continue
                 fill = float(open_prices[name]) * (1 + slip)
@@ -680,9 +775,17 @@ def _simulate(
             claim["record"]["ending_mark_per_child_share_inr"] = unit_mark
             claim["record"]["ending_fractional_receivable_inr"] = float(claim["fractional_units"]) * unit_mark
             claim["record"]["ending_whole_units_unsold"] = claim["whole_units"]
-        nav_close = cash + sum(quantity[name] * float(close_prices[name]) for name in names if quantity[name] and pd.notna(close_prices[name])) + cash_receivable_balance + claim_value
+        pending_share_value = sum(float(lot["units"]) * float(close_prices[lot["symbol"]])
+                                  for lot in pending_share_lots
+                                  if lot["units"] and pd.notna(close_prices[lot["symbol"]]))
+        nav_close = (cash + sum(quantity[name] * float(close_prices[name]) for name in names
+                                if quantity[name] and pd.notna(close_prices[name]))
+                     + pending_share_value + cash_receivable_balance + claim_value)
         invested = sum(quantity[name] * float(close_prices[name]) for name in names if quantity[name] and pd.notna(close_prices[name]))
-        invested_risk = sum(quantity[name] * float(close_prices[name]) for name in risk_names if quantity[name] and pd.notna(close_prices[name]))
+        pending_risk = sum(float(lot["units"]) * float(close_prices[lot["symbol"]])
+                           for lot in pending_share_lots
+                           if lot["units"] and lot["symbol"] in risk_names and pd.notna(close_prices[lot["symbol"]]))
+        invested_risk = sum(quantity[name] * float(close_prices[name]) for name in risk_names if quantity[name] and pd.notna(close_prices[name])) + pending_risk
         equity.append(nav_close)
         cash_balances.append(cash)
         invested_balances.append(invested)
@@ -690,15 +793,17 @@ def _simulate(
         daily_distribution_entitlements.append(distribution_entitlement)
         daily_distribution_payments.append(distribution_cash + paid_today)
         cash_receivable_balances.append(cash_receivable_balance)
+        pending_share_values.append(pending_share_value)
         locked_claim_balances.append(claim_value)
         daily_cash_yields.append(cash_yield)
         risky_exposures.append(invested_risk / nav_close if nav_close > 0 else 0.0)
-        gross_exposures.append(invested / nav_close if nav_close > 0 else 0.0)
+        gross_exposures.append((invested + pending_share_value) / nav_close if nav_close > 0 else 0.0)
         prior_close_nav = nav_close
 
     terminal_date = run_dates[-1]
+    pending_names = {lot["symbol"] for lot in pending_share_lots if lot["units"] > 0}
     missing_terminal_quotes = [
-        name for name in names if quantity[name] > 0 and pd.isna(closes.at[terminal_date, name])
+        name for name in names if (quantity[name] > 0 or name in pending_names) and pd.isna(closes.at[terminal_date, name])
     ]
     if missing_terminal_quotes:
         raise ValueError(
@@ -719,13 +824,15 @@ def _simulate(
             for component in FEE_COMPONENTS:
                 totals[component] += charges[component]
             orders.append({"time": last_trade_time, "symbol": name, "side": "sell", "quantity": amount, "fill_price": fill, "notional": notional, "terminal_liquidation": True, **charges})
-        equity[-1] = cash + cash_receivable_balances[-1] + locked_claim_balances[-1]
+            quantity[name] = 0
+        equity[-1] = cash + cash_receivable_balances[-1] + locked_claim_balances[-1] + pending_share_values[-1]
         cash_balances[-1] = cash
         invested_balances[-1] = 0.0
-        risky_exposures[-1] = 0.0
-        gross_exposures[-1] = 0.0
+        risky_exposures[-1] = pending_share_values[-1] / equity[-1] if equity[-1] > 0 else 0.0
+        gross_exposures[-1] = risky_exposures[-1]
     equity_frame = pd.DataFrame({"nav": equity, "risky_exposure": risky_exposures, "gross_exposure": gross_exposures,
                                  "cash_inr": cash_balances, "invested_inr": invested_balances,
+                                 "pending_share_value_inr": pending_share_values,
                                  "cash_distribution_inr": daily_distributions,
                                  "cash_distribution_entitlement_inr": daily_distribution_entitlements,
                                  "cash_distribution_paid_inr": daily_distribution_payments,
@@ -743,11 +850,25 @@ def _simulate(
     full_nav = pd.concat([pd.Series([starting_balance]), equity_frame["nav"].reset_index(drop=True)], ignore_index=True)
     drawdown = full_nav / full_nav.cummax() - 1
     max_drawdown_pct = float(drawdown.min() * 100)
+    ending_positions = []
+    for name in names:
+        pending_units = sum((lot["units"] for lot in pending_share_lots if lot["symbol"] == name), Decimal("0"))
+        if quantity[name] or pending_units:
+            mark = float(closes.at[terminal_date, name])
+            tradable_value = quantity[name] * mark
+            pending_value = float(pending_units) * mark
+            ending_positions.append({"symbol": name, "tradable_quantity": quantity[name],
+                                     "pending_shares_exact": str(pending_units), "raw_close_inr": mark,
+                                     "tradable_market_value_inr": tradable_value,
+                                     "pending_share_value_inr": pending_value,
+                                     "economic_market_value_inr": tradable_value + pending_value})
     stats = {
         "starting_balance_inr": starting_balance,
         "ending_balance_inr": float(equity_frame["nav"].iloc[-1]),
         "ending_cash_inr": float(equity_frame["cash_inr"].iloc[-1]),
         "ending_invested_inr": float(equity_frame["invested_inr"].iloc[-1]),
+        "ending_pending_share_value_inr": float(equity_frame["pending_share_value_inr"].iloc[-1]),
+        "ending_positions": ending_positions,
         "total_return_pct": float(total_return * 100),
         "cagr_pct": cagr_pct,
         "annualized_volatility_pct": float(stdev * math.sqrt(252) * 100),
@@ -769,6 +890,7 @@ def _simulate(
         "ending_cash_receivable_inr": float(cash_receivable_balances[-1]),
         "ending_locked_claim_inr": float(locked_claim_balances[-1]),
         "detached_claim_events": claim_records,
+        "share_conversion_events": conversion_records,
         "cash_yield_inr": float(sum(daily_cash_yields)),
         "cash_distribution_events": applied_distributions,
         "fees_by_component_inr": {key: round(value, 2) for key, value in totals.items()},
@@ -1361,6 +1483,118 @@ def _self_check() -> None:
     _, holdout_orders, holdout = _simulate(panels, targets, rebalance, 10_000, 0.95, 0, start=holdout_start)
     assert holdout_orders.iloc[0]["time"] == index[260]
     assert holdout["first_bar"] == str(index[260])
+
+    conversion_days = pd.to_datetime(["2018-06-19", "2018-06-20", "2018-06-21", "2018-06-22", "2018-06-25"])
+    conversion_prices = [100.0, 100.0, 50.0, 50.0, 50.0]
+    conversion_panels = {key: pd.DataFrame({"TEST": conversion_prices}, index=conversion_days)
+                         for key in ("open", "close")}
+    conversion_targets = pd.DataFrame({"TEST": [0.5, 0.5, 0.5, 0.5, 0.5]}, index=conversion_days)
+    conversion_rebalance = pd.Series([True, False, False, False, False], index=conversion_days)
+    bonus = {"symbol": "TEST", "kind": "bonus", "ex_date": conversion_days[2].date(),
+             "credit_date": conversion_days[3].date(), "tradable_date": conversion_days[4].date(),
+             "share_multiplier": 2.0}
+    bonus_equity, _, bonus_stats = _simulate(
+        conversion_panels, conversion_targets, conversion_rebalance, 10_000, 1.0, 0,
+        start=conversion_days[1].date(), end=conversion_days[4].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[bonus], liquidate_terminal=False)
+    assert np.allclose(bonus_equity["nav"].to_numpy(), bonus_equity["nav"].iloc[0], atol=0.05)
+    assert bonus_equity.loc[conversion_days[2], "pending_share_value_inr"] > 0
+    assert bonus_equity.loc[conversion_days[3], "pending_share_value_inr"] > 0
+    assert bonus_equity.loc[conversion_days[4], "pending_share_value_inr"] == 0
+    assert bonus_stats["share_conversion_events"][0]["tradable_units_credited"] == 50
+    assert bonus_stats["ending_positions"][0]["tradable_quantity"] == 100
+
+    conversion_rebalance.iloc[1] = True
+    same_day_equity, same_day_orders, same_day_stats = _simulate(
+        conversion_panels, conversion_targets, conversion_rebalance, 10_000, 1.0, 0,
+        start=conversion_days[1].date(), end=conversion_days[2].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[{**bonus, "credit_date": None, "tradable_date": None}], liquidate_terminal=False)
+    ex_orders = same_day_orders.loc[same_day_orders["time"].eq(conversion_days[2])]
+    assert ex_orders.empty or (ex_orders["side"].eq("sell").all()
+                               and int(ex_orders["quantity"].sum()) <= 50)
+    assert same_day_stats["ending_pending_share_value_inr"] > 0
+    assert np.isfinite(same_day_equity["nav"]).all()
+
+    exit_targets = pd.DataFrame({"TEST": [0.5, 0.0, 0.0, 0.0, 0.0]}, index=conversion_days)
+    exit_rebalance = pd.Series([True, True, False, False, False], index=conversion_days)
+    exit_equity, exit_orders, _ = _simulate(
+        conversion_panels, exit_targets, exit_rebalance, 10_000, 1.0, 0,
+        start=conversion_days[1].date(), end=conversion_days[2].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[{**bonus, "credit_date": None, "tradable_date": None}], liquidate_terminal=False)
+    exit_day_orders = exit_orders.loc[exit_orders["time"].eq(conversion_days[2])]
+    assert int(exit_day_orders["quantity"].sum()) == 50 and exit_day_orders["side"].eq("sell").all()
+    assert exit_equity.loc[conversion_days[2], "pending_share_value_inr"] > 0
+
+    entry_targets = pd.DataFrame({"TEST": [0.0, 0.5, 0.5, 0.5, 0.5]}, index=conversion_days)
+    entry_rebalance = pd.Series([False, True, False, False, False], index=conversion_days)
+    entry_equity, _, entry_stats = _simulate(
+        conversion_panels, entry_targets, entry_rebalance, 10_000, 1.0, 0,
+        start=conversion_days[2].date(), end=conversion_days[2].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[{**bonus, "credit_date": None, "tradable_date": None}], liquidate_terminal=False)
+    assert entry_stats["share_conversion_events"][0]["owned_units_before_ex_open"] == "0"
+    assert Decimal(entry_stats["share_conversion_events"][0]["entitlement_units_exact"]) == 0
+    assert entry_equity.loc[conversion_days[2], "pending_share_value_inr"] == 0
+
+    split = {"symbol": "TEST", "kind": "split", "ex_date": conversion_days[2].date(),
+             "credit_date": conversion_days[2].date(), "tradable_date": conversion_days[2].date(),
+             "share_multiplier": 2.0}
+    split_equity, _, split_stats = _simulate(
+        conversion_panels, conversion_targets, conversion_rebalance * False, 10_000, 1.0, 0,
+        start=conversion_days[1].date(), end=conversion_days[2].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[split], liquidate_terminal=False)
+    assert np.isclose(split_equity["nav"].iloc[-1], split_equity["nav"].iloc[0], atol=0.05)
+    assert split_stats["ending_pending_share_value_inr"] == 0
+    assert split_stats["ending_positions"][0]["tradable_quantity"] == 100
+
+    fractional_prices = [100.0, 100.0, 80.0, 80.0, 80.0]
+    fractional_panels = {key: pd.DataFrame({"TEST": fractional_prices}, index=conversion_days)
+                         for key in ("open", "close")}
+    fractional_bonus = {**bonus, "share_multiplier": 1.25}
+    fractional_equity, _, fractional_stats = _simulate(
+        fractional_panels, conversion_targets, conversion_rebalance, 10_000, 1.0, 0,
+        start=conversion_days[1].date(), end=conversion_days[4].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[fractional_bonus], liquidate_terminal=False)
+    assert np.allclose(fractional_equity["nav"].to_numpy(), fractional_equity["nav"].iloc[0], atol=0.05)
+    assert Decimal(fractional_stats["ending_positions"][0]["pending_shares_exact"]) == Decimal("0.5")
+    assert fractional_stats["share_conversion_events"][0]["tradable_units_credited"] == 12
+
+    combined_prices = [100.0, 100.0, 100 / 3, 100 / 3, 100 / 3]
+    combined_panels = {key: pd.DataFrame({"TEST": combined_prices}, index=conversion_days)
+                       for key in ("open", "close")}
+    combined = {"symbol": "TEST", "kind": "split_bonus", "ex_date": conversion_days[2].date(),
+                "credit_date": None, "tradable_date": conversion_days[4].date(), "share_multiplier": 3,
+                "split_multiplier": 2, "bonus_per_split_share": 0.5}
+    combined_rebalance = pd.Series([True, False, False, False, False], index=conversion_days)
+    combined_equity, combined_orders, combined_stats = _simulate(
+        combined_panels, conversion_targets, combined_rebalance, 10_000, 1.0, 0,
+        start=conversion_days[1].date(), end=conversion_days[4].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[combined], liquidate_terminal=False)
+    assert np.allclose(combined_equity["nav"].to_numpy(), combined_equity["nav"].iloc[0], atol=0.05)
+    assert Decimal(combined_stats["share_conversion_events"][0]["entitlement_units_exact"]) == 50
+    assert combined_equity.loc[conversion_days[2], "pending_share_value_inr"] > 0
+    assert combined_equity.loc[conversion_days[4], "pending_share_value_inr"] == 0
+    assert combined_stats["ending_positions"][0]["tradable_quantity"] == 150
+    assert combined_orders.loc[combined_orders["time"].eq(conversion_days[2])].empty
+
+    combined_exit_targets = pd.DataFrame({"TEST": [0.5, 0.0, 0.0, 0.0, 0.0]}, index=conversion_days)
+    combined_exit_rebalance = pd.Series([True, True, False, False, False], index=conversion_days)
+    _, combined_exit_orders, combined_exit_stats = _simulate(
+        combined_panels, combined_exit_targets, combined_exit_rebalance, 10_000, 1.0, 0,
+        start=conversion_days[1].date(), end=conversion_days[2].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[combined], liquidate_terminal=False)
+    combined_exit_day = combined_exit_orders.loc[combined_exit_orders["time"].eq(conversion_days[2])]
+    assert int(combined_exit_day["quantity"].sum()) == 100
+    assert Decimal(combined_exit_stats["ending_positions"][0]["pending_shares_exact"]) == 50
+
+    combined_entry_targets = pd.DataFrame({"TEST": [0.0, 0.5, 0.5, 0.5, 0.5]}, index=conversion_days)
+    combined_entry_rebalance = pd.Series([False, True, False, False, False], index=conversion_days)
+    _, combined_entry_orders, combined_entry_stats = _simulate(
+        combined_panels, combined_entry_targets, combined_entry_rebalance, 10_000, 1.0, 0,
+        start=conversion_days[2].date(), end=conversion_days[2].date(), drawdown_limit_pct=1000,
+        share_conversion_events=[combined], liquidate_terminal=False)
+    assert combined_entry_stats["share_conversion_events"][0]["owned_units_before_ex_open"] == "0"
+    assert Decimal(combined_entry_stats["share_conversion_events"][0]["entitlement_units_exact"]) == 0
+    assert int(combined_entry_orders.loc[combined_entry_orders["side"].eq("buy"), "quantity"].sum()) == 150
 
 
 def main() -> None:
